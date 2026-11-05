@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { CHILD, CRITIQUE, GENERATIONS, GENOME, LIVE_IMAGE, PARENTS } from '../data/lineage'
+import { CHILD, CRITIQUE, GENERATIONS, GENOME, PARENTS } from '../data/lineage'
 import { useGrokMedia } from '../data/grokMedia'
 import { MediaFrame } from '../components/MediaFrame'
 import { Badge, Panel } from '../components/ui'
@@ -16,10 +16,11 @@ const GENE_COLOR: Record<string, string> = {
   structure: '#7ab8ff',
 }
 
-function Thumb({ gen, id, live }: { gen: string; id: string; live?: boolean }) {
+function Thumb({ gen, id }: { gen: string; id: string }) {
   const lib = useGrokMedia()
-  const m = lib.byNode(gen, 'video') ?? lib.byNode(gen)
-  return <MediaFrame src={live ? LIVE_IMAGE : m?.url} kind={live ? 'image' : m?.kind} alt={id} width={54} height={96} reveal={false} />
+  const m = lib.items.find((x) => x.ugc && x.node === gen && x.kind === 'video' && x.captionBaked !== true && !/krasnal|scientists-reveal|brandrot/i.test(x.id))
+  if (!m) return null
+  return <MediaFrame src={m.url} kind="video" alt={id} width={54} height={96} reveal={false} />
 }
 
 function GenomeTable() {
@@ -129,7 +130,7 @@ function Tree() {
                 </div>
                 <div className="ml-3 h-3 w-px bg-line-strong" />
                 <div className={`flex items-center gap-4 rounded-lg border p-3 ${i === GENERATIONS.length - 1 ? 'glow-acid border-accent/50 bg-raised' : 'border-line bg-raised/60'}`}>
-                  <Thumb gen={g.gen} id={g.id} live={g.live} />
+                  <Thumb gen={g.gen} id={g.id} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 text-[15px] font-medium text-text">{g.name}{g.live && <Badge tone="accent">live · grok-4.7</Badge>}</div>
                     <div className="font-mono text-[12px] text-faint">{g.id}</div>

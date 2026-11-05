@@ -27,14 +27,14 @@ export function BriefPicker({ onOpen }: { onOpen: (id: string) => void }) {
   )
 }
 
-export function Swarm({ runKey = 0, onOpen }: { runKey?: number; onOpen: (id: string) => void }) {
+export function Swarm({ runKey = 0, onOpen, embedded = false }: { runKey?: number; onOpen: (id: string) => void; embedded?: boolean }) {
   const { campaign: c } = useCampaign()
   const run = c.run
   const t = useClock(`${runKey}-${c.id}`, run.runMs)
   const shown = run.spans.filter((s) => t >= s.start)
 
   return (
-    <div className="flex h-full flex-col gap-8 px-16 pb-8 pt-6">
+    <div className={`flex flex-col px-16 pb-6 pt-5 ${embedded ? 'h-full gap-5 overflow-hidden' : 'h-full gap-8'}`}>
       <div className="flex items-end justify-between gap-10">
         <div>
           <div className="flex items-center gap-2 text-[14px] text-muted">

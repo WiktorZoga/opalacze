@@ -16,6 +16,7 @@ export interface GrokMedia {
   tone?: string
   hook?: string
   persona?: string
+  brand?: string
   poster?: string
   variant?: string
   ugc?: boolean

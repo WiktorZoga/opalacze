@@ -13,7 +13,7 @@ function pickVariants(lib: GrokLibrary, c: Campaign, tone: Tone): (GrokMedia | u
   return [list[0], list[1] ?? list[0]]
 }
 
-function Phone({ media, label, caption, tone, width = 232 }: { media?: GrokMedia; label: string; caption?: string; tone: Tone; width?: number }) {
+function Phone({ media, label, width = 232 }: { media?: GrokMedia; label: string; width?: number }) {
   return (
     <div className="relative rounded-[30px] border border-line-strong bg-black p-2 shadow-2xl shadow-black/60">
       <div className="absolute left-1/2 top-3.5 z-10 h-4 w-20 -translate-x-1/2 rounded-full bg-black" />
@@ -25,11 +25,8 @@ function Phone({ media, label, caption, tone, width = 232 }: { media?: GrokMedia
         width={width}
         height={Math.round((width * 16) / 9)}
         className="!rounded-[22px]"
-        caption={media && !media.captionBaked ? caption : undefined}
-        captionStyle={tone === 'brainrot' ? 'meme' : 'tiktok'}
         pendingLabel="UGC render queued · grok-imagine-video"
       />
-      <span className="absolute bottom-5 left-5 z-10 rounded bg-black/70 px-1.5 py-0.5 font-mono text-[10px] text-white/85">#ad · AI-generated</span>
     </div>
   )
 }
@@ -109,7 +106,7 @@ export function Creative() {
                   <span className="text-[13px] font-medium text-text">Variant C</span>
                   <Badge tone="accent">live run</Badge>
                 </div>
-                <Phone media={liveMedia} tone={tone} label="live-C" width={180} />
+                <Phone media={liveMedia} label="live-C" width={180} />
                 <div className="mt-3 text-[13px] text-text">“Why would I deceive you?”</div>
                 <div className="mt-1 text-[12px] text-muted">{c.live!.persona} (AI) · grok-imagine · 7 s</div>
               </motion.div>
@@ -120,7 +117,7 @@ export function Creative() {
                   <span className="text-[13px] font-medium text-text">Variant {v}</span>
                   {v === winner && <Badge tone="accent">leading · CTR</Badge>}
                 </div>
-                <Phone media={variants[i]} tone={tone} width={showC ? 180 : 232} label={`${c.id}-${v}`} caption={i === 0 ? script.hook : (tone === 'ugc' && variants[1]?.hook && variants[1] !== variants[0] ? variants[1].hook : script.caption.replace(' #ad', ''))} />
+                <Phone media={variants[i]} width={showC ? 180 : 232} label={`${c.id}-${v}`} />
                 <div className="mt-3 text-[13px] text-text">“{i === 0 ? script.hook : script.beats[0]}”</div>
                 <ol className="mt-1 space-y-0.5 text-[12px] text-muted">
                   {script.beats.map((b, j) => (

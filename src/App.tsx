@@ -7,8 +7,8 @@ import { useElapsed } from './components/hooks'
 import { Avatar } from './components/ui'
 import { Logo, WaveMark } from './components/Logo'
 import { Lineage } from './screens/Lineage'
-import { Swarm } from './screens/Swarm'
-import { Ads } from './screens/Ads'
+import { Portfolio, type PortfolioSection } from './screens/Portfolio'
+import { Work } from './screens/Ads'
 import { CAMPAIGNS, CampaignContext, type Tone } from './data/campaigns'
 import { DEMO_STEPS } from './demo'
 
@@ -18,12 +18,12 @@ const TABS: { id: ScreenId; label: string; stage: number }[] = [
   { id: 'history', label: 'History', stage: 1 },
 ]
 
-function ScreenView({ id, runKey, onOpen = () => {} }: { id: ScreenId; demo?: boolean; runKey: number; onOpen?: (id: string) => void }) {
+function ScreenView({ id, runKey, onOpen = () => {}, section }: { id: ScreenId; demo?: boolean; runKey: number; onOpen?: (id: string) => void; section?: PortfolioSection }) {
   switch (id) {
     case 'campaign':
-      return <Swarm runKey={runKey} onOpen={onOpen} />
+      return <Portfolio runKey={runKey} onOpen={onOpen} section={section} />
     case 'creative':
-      return <Ads onOpen={onOpen} />
+      return <Work />
     case 'history':
       return <Lineage />
   }
@@ -56,6 +56,8 @@ const params = new URLSearchParams(window.location.search)
 const initialDemo = params.has('demo')
 const initialScreen = (TABS.find((t) => t.id === params.get('screen'))?.id ?? 'campaign') as ScreenId
 const initialCampaign = CAMPAIGNS.find((c) => c.id === params.get('campaign')) ?? CAMPAIGNS[0]
+const SECTIONS = ['hero', 'swarm', 'work'] as const
+const initialSection = SECTIONS.find((s) => s === params.get('section'))
 
 export default function App() {
   const [screen, setScreen] = useState<ScreenId>(initialScreen)
@@ -178,7 +180,7 @@ export default function App() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ScreenView id={screen} demo={demo} runKey={runKey} onOpen={(id) => !demo && openCampaign(id)} />
+              <ScreenView id={screen} demo={demo} runKey={runKey} section={demo ? DEMO_STEPS[step].section : initialSection} onOpen={(id) => !demo && openCampaign(id)} />
             </motion.div>
           </AnimatePresence>
           <AnimatePresence>
