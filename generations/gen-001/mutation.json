@@ -26,12 +26,12 @@
       "dominance": 0.7
     },
     "hero": {
-      "allele": "wide-eyed orange cat staring straight into the lens",
-      "dominance": 0.95
+      "allele": "orange cat news anchor with human hands, applauding its own headline",
+      "dominance": 0.9
     },
     "setting": {
-      "allele": "fake broadcast news frame with a lower-third",
-      "dominance": 0.6
+      "allele": "press conference at the Institute of Cat Sciences",
+      "dominance": 0.65
     },
     "humor": {
       "allele": "anticlimax: grand scientific announcement, two-letter result",
@@ -62,6 +62,18 @@
       "from": "Scientists reveal the hi",
       "to": "Scientists reveal the clap",
       "reason": "one-word mutation keeps the mother's cadence and smuggles in the father's act"
+    },
+    {
+      "gene": "hero",
+      "from": "wide-eyed orange cat staring straight into the lens",
+      "to": "orange cat news anchor with human hands, applauding its own headline",
+      "reason": "Critic: 'a parent in a hat'. fuse both heroes into one creature"
+    },
+    {
+      "gene": "setting",
+      "from": "fake broadcast news frame with a lower-third",
+      "to": "press conference at the Institute of Cat Sciences",
+      "reason": "a press conference needs applause; the joke now has a place to happen"
     }
   ],
   "fitness": null
