@@ -1,0 +1,20 @@
+{
+  "generation": 4,
+  "genomeId": "krasnal-night-check",
+  "final": "absolutely not",
+  "rounds": [
+    {
+      "round": 1,
+      "genome": "krasnal-night-check",
+      "verdict": "absolutely not",
+      "scores": {
+        "funny": 8,
+        "fresh": 7,
+        "loopable": 8,
+        "brandSafe": 9
+      },
+      "reroll": "hook",
+      "note": "the creep is a nose-exhale. the hook still stops a thumb the statue does not have. that is the night-check father in a pointed hat."
+    }
+  ]
+}
