@@ -31,13 +31,14 @@ Our first lineage went from an orange cat to **Krasnal CEO**, a Wrocław bronze 
 
 ## Demo
 
-<!-- MEDIA SLOTS: uncomment when the files land in docs/media/
-https://github.com/WiktorZoga/opalacze/raw/main/docs/media/demo.mp4
+<p align="center">
+  <a href="docs/media/rotbot-demo-45s.mp4"><img src="docs/media/rotbot-agent-flow.gif" alt="The ROT BOT swarm passing a meme from agent to agent" width="80%"></a><br>
+  <b><a href="docs/media/rotbot-demo-45s.mp4">▶ Watch the 45-second demo (mp4)</a></b>
+</p>
 
-| Trend Radar | Meme Breeding | Family Tree |
-| --- | --- | --- |
-| <img src="docs/media/radar.gif" width="260"> | <img src="docs/media/breeding.gif" width="260"> | <img src="docs/media/family-tree.gif" width="260"> |
--->
+| 🐦 Trend Radar: real TikTok + X sources | 🐊 Breeding: the hatch | 🦜 Publish + 🦉 Metrics |
+| :---: | :---: | :---: |
+| <img src="docs/media/rotbot-radar-sources.gif" alt="Trend Radar with real TikTok and X sources" width="100%"> | <img src="docs/media/rotbot-breeding-hatch.gif" alt="Two memes cross and a new meme hatches" width="100%"> | <img src="docs/media/rotbot-publish-metrics.gif" alt="Publisher queues posts, Analyst scores fitness" width="100%"> |
 
 The lab UI (Trend Radar → Genome Lab → Breeding → Studio → Publish → Family Tree → BRANDROT) runs locally:
 
