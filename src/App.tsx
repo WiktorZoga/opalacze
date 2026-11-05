@@ -154,12 +154,14 @@ export default function App() {
           <div className="ml-auto flex items-center gap-5 text-[13px] text-muted">
 
             {demo ? (
-              <span className="tabular font-mono text-[12px] text-faint">
-                walkthrough {step + 1}/{DEMO_STEPS.length}
+              <span className="flex gap-1.5">
+                {DEMO_STEPS.map((_, i) => (
+                  <span key={i} className={`h-1.5 rounded-full transition-all duration-500 ${i === step ? 'w-5 bg-text' : 'w-1.5 bg-line-strong'}`} />
+                ))}
               </span>
             ) : (
-              <span className="flex items-center gap-1.5 text-faint">
-                <kbd className="rounded border border-line-strong px-1.5 font-mono text-[11px] text-muted">D</kbd> walkthrough
+              <span className="rounded-full bg-text px-4 py-2 text-[14px] font-medium text-white shadow-[0_10px_24px_-12px_rgba(12,17,22,.6)]" title="Press D for the walkthrough">
+                Send a brief →
               </span>
             )}
           </div>
