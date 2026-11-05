@@ -16,8 +16,8 @@ gif() { # name start duration
     -vf "fps=12,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle" \
     "$OUT/$1.gif"
 }
-gif rotbot-radar-sources 0.3 5.5
-gif rotbot-agent-flow 6.2 4.6
-gif rotbot-breeding-hatch 11.2 10
-gif rotbot-publish-metrics 26.7 6.8
+gif rotbot-radar-sources 0.4 4.2
+gif rotbot-agent-flow 3.6 6
+gif rotbot-breeding-hatch 7.4 8.6
+gif rotbot-publish-metrics 29.8 7.5
 ls -la "$OUT"
