@@ -1,7 +1,7 @@
 {
   "generation": 4,
   "genomeId": "krasnal-night-check",
-  "final": "absolutely not",
+  "final": "fine. ship it.",
   "rounds": [
     {
       "round": 1,
@@ -15,6 +15,18 @@
       },
       "reroll": "hook",
       "note": "the creep is a nose-exhale. the hook still stops a thumb the statue does not have. that is the night-check father in a pointed hat."
+    },
+    {
+      "round": 2,
+      "genome": "krasnal-night-check",
+      "verdict": "fine. ship it.",
+      "scores": {
+        "funny": 8,
+        "fresh": 8,
+        "loopable": 8,
+        "brandSafe": 9
+      },
+      "note": "the thumb is gone. a hat tilt toward a dark doorway is a loop i will tolerate."
     }
   ]
 }
