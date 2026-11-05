@@ -13,26 +13,34 @@ export interface GrokMedia {
   prompt?: string
   model?: string
   generatedAt?: string
+  tone?: string
+  variant?: string
+  ugc?: boolean
   /** resolved URL under the app's base path */
   url: string
 }
 
 const INDEX_URL = `${import.meta.env.BASE_URL}memes/grok/index.json`
+const UGC_INDEX_URL = `${import.meta.env.BASE_URL}memes/grok/ugc/index.json`
 
 let cache: Promise<GrokMedia[]> | null = null
 
 function load(): Promise<GrokMedia[]> {
-  cache ??= fetch(INDEX_URL, { cache: 'no-cache' })
+  cache ??= Promise.all([loadIndex(INDEX_URL, '/memes/grok/', false), loadIndex(UGC_INDEX_URL, '/memes/grok/ugc/', true)]).then(([a, b]) => [...b, ...a])
+  return cache
+}
+
+function loadIndex(url: string, dir: string, ugc: boolean): Promise<GrokMedia[]> {
+  return fetch(url, { cache: 'no-cache' })
     .then((r) => (r.ok ? r.json() : { items: [] }))
     .then((raw: { items?: Omit<GrokMedia, 'url'>[] } | Omit<GrokMedia, 'url'>[]) => {
       const list = Array.isArray(raw) ? raw : (raw.items ?? [])
       return list.map((m) => {
-        const file = m.file.startsWith('/') ? m.file : `/memes/grok/${m.file}`
-        return { ...m, kind: m.kind ?? (/\.(mp4|webm|mov)$/i.test(file) ? 'video' : 'image'), url: assetUrl(file) }
+        const file = m.file.startsWith('/') ? m.file : `${dir}${m.file}`
+        return { ...m, ugc, kind: m.kind ?? (/\.(mp4|webm|mov)$/i.test(file) ? 'video' : 'image'), url: assetUrl(file) }
       })
     })
     .catch(() => [])
-  return cache
 }
 
 export interface GrokLibrary {
