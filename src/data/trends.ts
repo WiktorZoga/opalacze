@@ -1,3 +1,5 @@
+import sources from '../../generations/sources.json'
+
 export type TrendStatus = 'EARLY SIGNAL' | 'PEAKING' | 'MAINSTREAM' | 'DYING'
 export type Platform = 'tiktok' | 'x'
 
@@ -9,13 +11,22 @@ export interface Trend {
   growth: number
   status: TrendStatus
   platform: Platform
-  /** short human description of the format */
   caption: string
   views: string
   stat: string
   url: string
   source: string
   spark: number[]
+}
+
+interface SourceTrend {
+  id: string
+  title: string
+  platform: string
+  url: string
+  views: number | null
+  velocity: number
+  description: string
 }
 
 const curve = (seed: number, up: boolean, n = 24) =>
@@ -26,110 +37,56 @@ const curve = (seed: number, up: boolean, n = 24) =>
     return Math.max(2, base + noise + 8)
   })
 
-/**
- * Real trends from the week of 2–5 Nov 2026 (titles, approx. views, links).
- * Cards are our own renders — no creator media is embedded. Growth curves are illustrative.
- */
-export const TRENDS: Trend[] = [
-  {
-    id: 't1',
-    memeId: 'doorPrank',
-    ticker: '$DOOR',
-    name: 'Closing the Door Prank',
-    growth: 522,
-    status: 'EARLY SIGNAL',
-    platform: 'tiktok',
-    caption: 'tell them to sprint through the doorway, fake-slam the door',
-    views: '7M',
-    stat: '199 creators/wk',
-    url: 'https://virlo.ai/trends/',
-    source: 'virlo.ai',
-    spark: curve(1, true),
-  },
-  {
-    id: 't2',
-    memeId: 'never25',
-    ticker: '$NEVER25',
-    name: "You'll Never Look 25 Again",
-    growth: 7400,
-    status: 'EARLY SIGNAL',
-    platform: 'tiktok',
-    caption: '"you\'ll never look 25 again" → glow-up → "thank god"',
-    views: '1.7M',
-    stat: '150 creators/wk',
-    url: 'https://virlo.ai/trends/',
-    source: 'virlo.ai',
-    spark: curve(2, true),
-  },
-  {
-    id: 't3',
-    memeId: 'scientistsHi',
-    ticker: '$HI',
-    name: 'Scientists Reveal the Hi',
-    growth: 186,
-    status: 'PEAKING',
-    platform: 'x',
-    caption: 'an orange cat, captioned "scientists reveal the hi"',
-    views: '#2 MotM',
-    stat: 'Oct 2026 · KYM',
-    url: 'https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month',
-    source: 'Know Your Meme',
-    spark: curve(3, true),
-  },
-  {
-    id: 't4',
-    memeId: 'candyMatch',
-    ticker: '$DING',
-    name: 'Ding Ding Ding Match-3',
-    growth: 263,
-    status: 'EARLY SIGNAL',
-    platform: 'tiktok',
-    caption: 'move candy in a grid to phonk like a match-3 game',
-    views: '3.9M',
-    stat: '263 creators/wk',
-    url: 'https://virlo.ai/trends/',
-    source: 'virlo.ai',
-    spark: curve(4, true),
-  },
-  {
-    id: 't5',
-    memeId: 'memeWar',
-    ticker: '$TWW1',
-    name: 'First Twitter World War',
-    growth: 94,
-    status: 'MAINSTREAM',
-    platform: 'x',
-    caption: 'a cat meme sparks a China–Türkiye meme war on X',
-    views: '17.4M',
-    stat: '167K likes',
-    url: 'https://ccs.tw/life/x-china-turkey-meme-war?lang=en',
-    source: 'CCS',
-    spark: curve(5, true),
-  },
-  {
-    id: 't6',
-    memeId: 'blackCat',
-    ticker: '$CLAP',
-    name: 'Black Cat Clapping',
-    growth: -24,
-    status: 'DYING',
-    platform: 'x',
-    caption: 'AI black cat smiling and clapping with human hands',
-    views: '#4 MotM',
-    stat: 'Oct 2026 · KYM',
-    url: 'https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month',
-    source: 'Know Your Meme',
-    spark: curve(6, false),
-  },
-]
+/** card art + display overlay for the trends the Scout captured in generations/sources.json */
+const OVERLAY: Record<string, { memeId: string; ticker: string; stat: string; growth?: number }> = {
+  'closing-the-door-prank': { memeId: 'doorPrank', ticker: '$DOOR', stat: '199 creators/wk', growth: 522 },
+  'ding-ding-ding-candy-match-3': { memeId: 'candyMatch', ticker: '$DING', stat: '263 creators/wk' },
+  'permission-to-cry-soldier': { memeId: 'soldier', ticker: '$SOLDIER', stat: 'new · 4 Nov' },
+  'data-centers-in-space': { memeId: 'dataCenter', ticker: '$DATACTR', stat: 'flooded X · 4 Nov' },
+  'scientists-reveal-the-hi': { memeId: 'scientistsHi', ticker: '$HI', stat: 'KYM MotM #2' },
+  malfoid: { memeId: 'malfoid', ticker: '$MALFOID', stat: 'KYM MotM #1' },
+}
+
+const fmtViews = (v: number | null) =>
+  v == null ? '—' : v >= 1e6 ? `${(v / 1e6).toFixed(1).replace(/\.0$/, '')}M` : `${Math.round(v / 1e3)}K`
+
+const statusOf = (velocity: number): TrendStatus =>
+  velocity >= 4 ? 'EARLY SIGNAL' : velocity >= 2.5 ? 'PEAKING' : velocity >= 2 ? 'MAINSTREAM' : 'DYING'
+
+const hostOf = (url: string) => new URL(url).hostname.replace(/^www\./, '')
+
+const ALL = (sources.trends as SourceTrend[]).filter((s) => OVERLAY[s.id])
+
+/** real trends (titles, links, public signals) — cards are our own renders, growth curves illustrative */
+export const TRENDS: Trend[] = Object.keys(OVERLAY)
+  .map((id) => ALL.find((s) => s.id === id))
+  .filter((s): s is SourceTrend => Boolean(s))
+  .map((s, i) => {
+    const o = OVERLAY[s.id]
+    const status = statusOf(s.velocity)
+    return {
+      id: `t${i + 1}`,
+      memeId: o.memeId,
+      ticker: o.ticker,
+      name: s.title,
+      growth: o.growth ?? (status === 'DYING' ? -Math.round((2 - s.velocity) * 60) : Math.round((s.velocity - 1) * 100)),
+      status,
+      platform: s.platform === 'x' ? 'x' : 'tiktok',
+      caption: s.description,
+      views: fmtViews(s.views),
+      stat: o.stat,
+      url: s.url,
+      source: hostOf(s.url),
+      spark: curve(i + 1, status !== 'DYING'),
+    }
+  })
+
+export const SOURCES_CAPTURED_AT = sources.capturedAt
 
 export const TICKER_EXTRA = [
-  { ticker: '$MALFOID', growth: 28 },
-  { ticker: '$STARK', growth: 33.1 },
-  { ticker: '$SOLDIER', growth: 145 },
-  { ticker: '$FANCYCAFE', growth: 78 },
-  { ticker: '$SPONGEBOB', growth: 12.4 },
-  { ticker: '$HOMBRO', growth: 61 },
+  ...(sources.trends as SourceTrend[])
+    .filter((s) => !OVERLAY[s.id])
+    .map((s) => ({ ticker: `$${s.id.split('-')[0].toUpperCase()}`, growth: Math.round((s.velocity - 1) * 100) })),
   { ticker: '$KRASNAL', growth: 999 },
   { ticker: '$OHIO', growth: -41 },
   { ticker: '$SKIBIDI', growth: -68 },

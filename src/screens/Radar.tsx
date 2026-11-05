@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { MEMES } from '../data/memes'
-import { TRENDS, type Platform, type Trend } from '../data/trends'
+import { SOURCES_CAPTURED_AT, TRENDS, type Platform, type Trend } from '../data/trends'
 import { MemeCard } from '../components/MemeCard'
 import { Mascot, SpeechBubble } from '../components/Mascot'
 import { Sparkline } from '../components/Sparkline'
@@ -96,7 +96,7 @@ function TrendCard({ trend, spotted, index }: { trend: Trend; spotted: boolean; 
         </div>
       </div>
       <div className="flex justify-between font-mono text-[13px] text-white/70">
-        <span>▶ {trend.views}</span>
+        <span>{trend.views !== "—" ? `▶ ${trend.views} views` : trend.source}</span>
         <span>{trend.stat}</span>
       </div>
       <div className="flex items-end justify-between">
@@ -145,7 +145,7 @@ export function Radar() {
             TREND <span className="text-acid glow-acid">RADAR</span>
           </h1>
           <p className="mt-2 font-mono text-[15px] text-white/55">Scout watches TikTok + X and catches memes before they're memes</p>
-          <p className="mt-2 font-mono text-[12px] tracking-widest text-cyan">FEED · WEEK OF 2–5 NOV 2026</p>        </div>
+          <p className="mt-2 font-mono text-[12px] tracking-widest text-cyan">SCOUT RUN · {SOURCES_CAPTURED_AT.slice(0, 16).replace("T", " ")} UTC</p>        </div>
         <RadarSweep />
         <div className="space-y-3 font-mono">
           {[

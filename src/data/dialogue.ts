@@ -15,7 +15,7 @@ export const DIALOGUE: Record<ScreenId, Line[]> = {
     { agent: 'scout', at: 300, text: 'scanning TikTok + X… 14,000 posts/min. coo.' },
     { agent: 'scout', at: 1700, text: '🚨 Closing the Door Prank +522% this week on TikTok.' },
     { agent: 'critic', at: 3000, text: 'a door. groundbreaking.' },
-    { agent: 'scout', at: 4200, text: '"never look 25 again" +7400%. hooks are spiking everywhere.' },
+    { agent: 'scout', at: 4200, text: 'Permission to Cry Soldier: brand new. Malfoid is fading.' },
     { agent: 'scout', at: 5200, text: '→ @geneticist 📦 trend DNA incoming', tone: 'handoff' },
   ],
   genome: [
