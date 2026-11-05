@@ -12,6 +12,14 @@ Read the child genome in `mutation.json` and score, 0–10:
 - `loopable` — does the end make you watch the start again?
 - `brandSafe` — could a marketing intern post it without HR?
 
+In brief mode, also score:
+
+- `trendFidelity` — would someone who knows the trend recognise it in 1 second?
+- `claims` — no promise the brand can't prove ("lasts 48 h", "clinically", "#1").
+
+And check the **disclosure**: the caption and the first frame must carry
+`#ad · AI-generated`. A missing disclosure is a hard veto, like `brandSafe` < 6.
+
 Verdict:
 
 - any score < 6 → `"absolutely not"`, name the one gene to reroll, and say why
