@@ -1,0 +1,14 @@
+{
+  "generation": 2,
+  "mode": "brandrot",
+  "client": "Wrocław (city tourism, demo brief)",
+  "brandSeed": "krasnal-wroclaw",
+  "elite": {
+    "id": "scientists-reveal-the-clap",
+    "fitness": 0.48
+  },
+  "goal": "turn 600+ bronze dwarfs into an AI-startup meme",
+  "constraints": {
+    "brandSafeMin": 8
+  }
+}
