@@ -34,6 +34,7 @@ approvals) takes two weeks. By the time a brand posts the "relatable" video, the
 
 ## Proof in the repo
 
+- `generations/gen-live-001/`: a real live run on `grok-4.7` (live x_search trend, 7 subagent handoffs, Critic rejection then approval, Grok Imagine render, 2,552-event trace).
 - `agents/`: a real `@grok/agent-sdk` project (orchestrator + 6 subagents, 5 tools, schedule, skill, eval).
 - `generations/`: three generations bred from real trends of the week, each artifact committed by the agent that made it.
 - `git log --graph`: the meme family tree. Crossovers are merges.
