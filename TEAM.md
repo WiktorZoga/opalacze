@@ -81,7 +81,7 @@ git pull --rebase origin main, push, PR do main (merge commit).
 Prompt dla agenta Cursor:
 ```
 Repo opalacze (ROT Studio). git checkout main && git pull --rebase origin main && git checkout -b feat/arena.
-Zbuduj ekran "A/B Arena" w samodzielnym folderze src/screens/arena/:
+Zbuduj ekran "A/B Arena" (4. zakładka obok Campaign / Creative / History) w samodzielnym folderze src/screens/arena/:
 - src/screens/arena/Arena.tsx (export function Arena) + src/screens/arena/arenaData.ts (własne dane:
   2+ pary wariantów reklamy, np. NOIR/05 wariant A "unboxing" vs B "spray reaction", każdy z hookiem, tonem,
   personą AI-twórcy i etykietą "#ad · AI-generated"; obrazy z public/memes/grok/ lub public/memes/ugc/ jeśli już są).
@@ -89,11 +89,16 @@ Zbuduj ekran "A/B Arena" w samodzielnym folderze src/screens/arena/:
   po N głosach / timerze wygrywa jeden.
 - Zwycięzca "idzie do Publishera": animacja framer-motion (przesunięcie do slotu "Publisher → scheduled"),
   potem nowa para. Pętla działa bez końca.
-- Styl jak reszta konsoli: zobacz src/index.css, src/components/ui.tsx, src/screens/Output.tsx. Bez emoji-maskotek.
+- Styl jak reszta konsoli: zobacz src/index.css, src/components/ui.tsx, src/screens/Creative.tsx. Bez emoji-maskotek.
+  Dane kampanii możesz tylko importować z src/data/campaigns.ts (nie edytuj).
 Rejestracja (tylko to poza swoim folderem, jeden osobny commit "arena: register screen"):
-- src/data/dialogue.ts: dodaj 'arena' do typu ScreenId oraz wpis arena w DIALOGUE (1-2 linie, np. Critic/Analyst).
-- src/App.tsx: import { Arena } from './screens/arena/Arena', wpis w TABS { id: 'arena', label: 'A/B Arena', stage: 4 },
-  case 'arena': return <Arena />.
+- src/data/dialogue.ts: rozszerz typ na
+  export type ScreenId = 'campaign' | 'creative' | 'history' | 'arena'
+  i dodaj wpis arena: [...] w DIALOGUE (1-2 linie, np. { agent: 'critic', at: 300, text: '...' }, agent: 'analyst').
+- src/App.tsx:
+  - import { Arena } from './screens/arena/Arena'   (obok import { Creative } from './screens/Creative')
+  - w TABS dodaj na końcu: { id: 'arena', label: 'A/B Arena', stage: 2 }
+  - w switch w ScreenView dodaj: case 'arena': return <Arena />
 Nie zmieniaj src/demo.ts, innych ekranów, komponentów ani package.json.
 Małe commity (szkielet → głosowanie → animacja → rejestracja). npm run build musi przejść.
 git pull --rebase origin main, push, PR do main od razu jako draft, merge commit.
