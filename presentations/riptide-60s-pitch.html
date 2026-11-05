@@ -719,7 +719,7 @@
 
     .close-visual {
       display: grid;
-      gap: 1rem;
+      gap: 0.9rem;
       justify-items: start;
       align-content: center;
     }
@@ -737,6 +737,46 @@
       line-height: 1.08;
       color: var(--tide);
       max-width: 12ch;
+    }
+
+    .qr-card {
+      display: grid;
+      gap: 0.65rem;
+      justify-items: start;
+    }
+
+    .qr-card img {
+      width: min(100%, 220px);
+      aspect-ratio: 1;
+      border-radius: 18px;
+      border: 1px solid rgba(238, 248, 245, 0.14);
+      background: #eef8f5;
+      padding: 0.65rem;
+      box-sizing: border-box;
+      display: block;
+    }
+
+    .qr-card .scan {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--spray);
+      font-weight: 600;
+    }
+
+    .qr-card .url {
+      font-family: Sora, sans-serif;
+      font-size: 0.88rem;
+      color: var(--mist);
+      line-height: 1.3;
+      max-width: 22ch;
+      word-break: break-all;
+    }
+
+    .qr-card .url b {
+      color: var(--foam);
+      font-weight: 600;
     }
 
     .mono {
@@ -1102,10 +1142,11 @@
           </div>
         </div>
         <div class="close-visual reveal reveal-d3">
-          <figure class="phone">
-            <img src="../docs/media/ugc/noir05-brainrot-capybara.gif" alt="Riptide client cut" />
-            <figcaption>Client cut</figcaption>
-          </figure>
+          <div class="qr-card">
+            <span class="scan">Scan the demo</span>
+            <img src="media/riptide-qr.png" alt="QR code to wiktorzoga.github.io/opalacze" width="220" height="220" />
+            <p class="url"><b>wiktorzoga.github.io/opalacze</b></p>
+          </div>
           <p class="punch">Today perfume.<br />Tomorrow your desk.</p>
         </div>
       </div>

@@ -51,9 +51,9 @@ Mów **po angielsku** (slajdy są EN). Poniżej: co widać → **co mówisz**. K
 ### 7 · Close
 **Mówisz:**  
 “**Riptide.** Ride the trend — don’t chase it. We don’t follow trends. We mutate them.  
-Today: brainrot perfume. Tomorrow: your performance desk.”
+Scan the QR for the live demo — wiktorzoga.github.io/opalacze.”
 
-*(pauza, uśmiech, gotowość na pytania)*
+*(wskaż QR, pauza, gotowość na pytania)*
 
 ---
 
