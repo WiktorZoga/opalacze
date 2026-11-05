@@ -34,15 +34,15 @@ export const DEMO_STEPS: DemoStep[] = [
     en: 'Mutator renders a frame with grok-imagine. Every step is an agent commit.',
   },
   {
-    screen: 'lineage',
-    ms: 11000,
-    pl: 'Geny dziecka pochodzą od matki, ojca albo mutacji. Repozytorium jest drzewem genealogicznym.',
-    en: 'Each gene comes from the mother, the father, or a mutation. The repo is the family tree.',
+    screen: 'output',
+    ms: 14000,
+    pl: 'Wykluwa się mem: grok-imagine renderuje go na żywo, Publisher i Analyst go wypuszczają i mierzą.',
+    en: 'A meme hatches: rendered live by grok-imagine, then published and measured.',
   },
   {
-    screen: 'output',
-    ms: 15500,
-    pl: 'Na końcu: gotowy mem wyrenderowany przez grok-imagine. Turn any brand into brainrot.',
-    en: 'The output: a finished meme rendered by grok-imagine. Turn any brand into brainrot.',
+    screen: 'lineage',
+    ms: 12500,
+    pl: 'Każdy gen ma rodzica albo mutację, a każde pokolenie to commit. Turn any brand into brainrot.',
+    en: 'Every gene has a parent or a mutation; every generation is a commit. Turn any brand into brainrot.',
   },
 ]

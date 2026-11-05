@@ -16,14 +16,14 @@ const TABS: { id: ScreenId; label: string; stage: number }[] = [
   { id: 'output', label: 'Output', stage: 4 },
 ]
 
-function ScreenView({ id, demo, runKey }: { id: ScreenId; demo: boolean; runKey: number }) {
+function ScreenView({ id, runKey }: { id: ScreenId; demo?: boolean; runKey: number }) {
   switch (id) {
     case 'workflow':
       return <Workflow runKey={runKey} />
     case 'lineage':
       return <Lineage />
     case 'output':
-      return <Output finaleAt={demo ? 11500 : undefined} />
+      return <Output />
   }
 }
 
@@ -110,13 +110,20 @@ export default function App() {
   }, [demo, step, screen, go, goStep])
 
   const caption = demo ? DEMO_STEPS[step] : null
+  const [finale, setFinale] = useState(false)
+  useEffect(() => {
+    setFinale(false)
+    if (!demo || step !== DEMO_STEPS.length - 1) return
+    const id = setTimeout(() => setFinale(true), DEMO_STEPS[step].ms - 5000)
+    return () => clearTimeout(id)
+  }, [demo, step])
 
   return (
     <Stage>
       <div className="flex h-full flex-col">
         <header className="flex h-14 shrink-0 items-center gap-8 border-b border-line px-6">
           <div className="flex items-baseline gap-3">
-            <span className="text-[16px] font-semibold tracking-tight text-text">ROT BOT</span>
+            <span className="wordmark text-[18px] font-semibold tracking-tight">ROT BOT</span>
             <span className="text-[13px] text-faint">Meme Genome Lab</span>
           </div>
           <nav className="flex h-full items-stretch gap-6">
@@ -124,7 +131,7 @@ export default function App() {
               <button
                 key={t.id}
                 onClick={() => !demo && go(t.id)}
-                className={`border-b-2 text-[14px] transition-colors ${screen === t.id ? 'border-accent text-text' : 'border-transparent text-muted hover:text-text'}`}
+                className={`border-b-2 text-[14px] transition-colors ${screen === t.id ? 'border-accent text-text [text-shadow:0_0_12px_#b6ff0055]' : 'border-transparent text-muted hover:text-text'}`}
               >
                 {t.label}
               </button>
@@ -161,8 +168,32 @@ export default function App() {
               <ScreenView id={screen} demo={demo} runKey={runKey} />
             </motion.div>
           </AnimatePresence>
+          <AnimatePresence>
+            {finale && (
+              <motion.div
+                className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-bg"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(600px_300px_at_50%_45%,#b6ff0014,transparent_70%),radial-gradient(700px_300px_at_55%_60%,#ff2bd612,transparent_70%)]" />
+                <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 120, damping: 14 }} className="relative text-center">
+                  <div className="text-[120px] font-semibold leading-none tracking-tight text-text">
+                    BRAND<span className="wordmark">ROT</span>
+                  </div>
+                  <div className="mt-6 text-[32px] text-muted">Turn any brand into brainrot.</div>
+                  <div className="mt-10 flex items-center justify-center gap-2">
+                    {(['scout', 'geneticist', 'mutator', 'critic', 'publisher', 'analyst'] as const).map((a) => (
+                      <Avatar key={a} id={a} size={40} />
+                    ))}
+                  </div>
+                  <div className="mt-6 font-mono text-[14px] text-faint">ROT BOT · six Grok agents · one git repo · every step a commit</div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
           <AnimatePresence mode="wait">
-            {caption && (
+            {caption && !finale && (
               <motion.div
                 key={step}
                 className="pointer-events-none absolute bottom-5 left-1/2 z-40 w-[980px] -translate-x-1/2 rounded-lg border border-line-strong bg-raised/95 px-6 py-3.5 shadow-2xl shadow-black/60"
