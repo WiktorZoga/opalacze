@@ -1,16 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
-import { DIALOGUE } from '../data/dialogue'
+import { useCampaign, type Campaign } from '../data/campaigns'
 import { AGENTS, PIPELINE, type AgentId } from '../data/agents'
 import type { Run, Span } from '../data/run'
-import { LIVE_META, RUNS } from '../data/runs'
-import { TIKTOK_SOURCES } from '../data/tiktokSources'
 import { TikTokEmbed } from '../components/TikTokEmbed'
 import { useClock } from '../components/hooks'
 import { AgentName, Avatar, Badge, Json, Panel, StatusDot, fmtMs } from '../components/ui'
 
-const GRAPH_W = 1872
-const NODE_W = 216
+const GRAPH_W = 1572
+const NODE_W = 200
 const NODE_H = 116
 const NODE_Y = 104
 const GRAPH_H = 290
@@ -91,10 +89,10 @@ function Graph({ run, t }: { run: Run; t: number }) {
         />
       </svg>
       <div className="absolute font-mono text-[11px] text-faint" style={{ left: (xm + xc) / 2 - 50, top: NODE_Y - 50 }}>
-        <span className={rerollSeen ? 'text-hot' : ''}>↺ reroll · {reject?.packet.replace('reroll: ', '') ?? 'gene'}</span>
+        <span className={rerollSeen ? 'text-hot' : ''}>↺ reroll · {reject?.packet.replace(/^(reroll|fix): /, '') ?? 'gene'}</span>
       </div>
       <div className="absolute font-mono text-[11px] text-faint" style={{ left: GRAPH_W / 2 - 110, top: GRAPH_H - 22 }}>
-        <span className={loopSeen ? 'text-accent' : ''}>fitness → next generation</span>
+        <span className={loopSeen ? 'text-accent' : ''}>metrics → next variant</span>
       </div>
 
       {PIPELINE.map((p, i) => {
@@ -102,11 +100,12 @@ function Graph({ run, t }: { run: Run; t: number }) {
         const a = AGENTS[p.agent]
         const live = state === 'running' || state === 'rejected'
         const ring = state === 'rejected' ? 'glow-danger border-danger/70' : state === 'running' ? 'glow-acid border-accent/70' : state === 'done' ? 'border-accent/25' : 'border-line-strong'
-        const line = [...(DIALOGUE.workflow ?? [])].reverse().find((l) => l.agent === p.agent && t >= l.at && t < l.at + 2600)
+        const said = [...run.spans].reverse().find((sp) => sp.agent === p.agent && t >= sp.start && t < sp.end + 900)
+        const line = said?.quote ? { at: said.start, text: said.quote } : undefined
         return (
           <div key={p.agent}>
             <AnimatePresence>
-              {line && !run.skipped.includes(p.agent) && run.id.startsWith('gen-live') && (
+              {line && !run.skipped.includes(p.agent) && (
                 <motion.div
                   key={line.at}
                   className="absolute z-20 w-[250px] -translate-x-1/2 rounded-xl border bg-bg/95 px-3 py-2 text-[13px] leading-snug text-text shadow-lg shadow-black/50"
@@ -127,21 +126,22 @@ function Graph({ run, t }: { run: Run; t: number }) {
             >
               <div className="flex items-center gap-3">
                 <motion.span
-                  className="flex shrink-0 items-center justify-center rounded-full"
+                  className="flex shrink-0 items-center justify-center rounded-lg font-semibold"
                   style={{
-                    width: 56,
-                    height: 56,
-                    fontSize: 32,
-                    background: `radial-gradient(circle at 35% 30%, ${a.color}40, #111113 72%)`,
+                    width: 48,
+                    height: 48,
+                    fontSize: 18,
+                    color: a.color,
+                    background: `linear-gradient(135deg, ${a.color}33, #111113 80%)`,
                     boxShadow: live ? `0 0 0 2px ${state === 'rejected' ? '#ff3d5a' : a.color}, 0 0 22px ${state === 'rejected' ? '#ff3d5a' : a.color}88` : `0 0 0 1px ${a.color}44`,
                   }}
                   animate={live ? { scale: [1, 1.04, 1] } : { scale: 1 }}
                   transition={{ duration: 1.4, repeat: live ? Infinity : 0, ease: 'easeInOut' }}
                 >
-                  {a.emoji}
+                  {a.mono}
                 </motion.span>
                 <div className="min-w-0">
-                  <div className="text-[15px] font-semibold capitalize text-text">{p.agent}</div>
+                  <div className="text-[15px] font-semibold text-text">{a.label}</div>
                   <div className="truncate text-[12px] text-muted">{a.role}</div>
                 </div>
               </div>
@@ -172,8 +172,8 @@ function Graph({ run, t }: { run: Run; t: number }) {
 }
 
 function Trace({ run, t, selected, onSelect }: { run: Run; t: number; selected?: Span; onSelect: (s: Span) => void }) {
-  const LABEL_W = 290
-  const TRACK_W = 860 - LABEL_W - 150
+  const LABEL_W = 270
+  const TRACK_W = 720 - LABEL_W - 150
   const scale = (ms: number) => (ms / run.runMs) * TRACK_W
   const rows = run.spans.filter((s) => t >= s.start)
   const ticks = [0, 0.25, 0.5, 0.75, 1].map((f) => f * run.runMs)
@@ -201,7 +201,7 @@ function Trace({ run, t, selected, onSelect }: { run: Run; t: number; selected?:
             >
               <div className="flex shrink-0 items-center gap-2.5 pl-2" style={{ width: LABEL_W }}>
                 <Avatar id={s.agent} size={20} />
-                <span className="w-[82px] text-[13px] capitalize text-muted">{s.agent}</span>
+                <span className="w-[78px] text-[13px] text-muted">{AGENTS[s.agent].label}</span>
                 <span className="truncate font-mono text-[12px] text-text">{s.name}</span>
                 {s.status === 'rejected' && done && <Badge tone="danger">rejected</Badge>}
               </div>
@@ -235,34 +235,38 @@ function Trace({ run, t, selected, onSelect }: { run: Run; t: number; selected?:
   )
 }
 
-function ScoutFeed({ span }: { span: Span }) {
-  const picked = span.quote?.match(/Pick:\s*(\S+)\s*—\s*([^—]+)—\s*(https:\/\/x\.com\/\S+)\s*—\s*@(\S+)\s*—\s*(\d+) views/)
+function ScoutFeed({ campaign }: { campaign: Campaign }) {
+  const tr = campaign.trend
   return (
-    <div className="flex flex-col gap-3">
-      <div className="text-[11px] font-medium uppercase tracking-wider text-faint">Scanned · TikTok</div>
-      <div className="flex gap-4">
-        {TIKTOK_SOURCES.slice(0, 2).map((s) => (
-          <div key={s.id} className="w-[196px]">
-            <TikTokEmbed source={s} width={196} showMeta={false} loadTimeoutMs={6000} />
-            <div className="mt-1.5 truncate text-[12px] text-text">{s.trendName}</div>
-            <div className="font-mono text-[11px] text-faint">
-              @{s.author} · {Intl.NumberFormat('en', { notation: 'compact' }).format(s.views)} views
-            </div>
+    <div className="flex gap-4">
+      <TikTokEmbed source={tr} width={196} showMeta={false} loadTimeoutMs={6000} />
+      <div className="min-w-0 flex-1">
+        <div className="text-[11px] font-medium uppercase tracking-wider text-faint">Trend match</div>
+        <div className="mt-1 text-[15px] font-medium text-text">{tr.trendName}</div>
+        <div className="font-mono text-[11px] text-muted">
+          @{tr.author} · {Intl.NumberFormat('en', { notation: 'compact' }).format(tr.views)} views · TikTok
+        </div>
+        <div className="mt-3 flex items-baseline gap-2">
+          <span className="tabular font-mono text-[34px] leading-none text-accent [text-shadow:0_0_16px_#b6ff0066]">{campaign.fit}%</span>
+          <span className="text-[12px] text-muted">brand fit</span>
+        </div>
+        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line">
+          <div className="h-full bg-gradient-to-r from-accent to-hot" style={{ width: `${campaign.fit}%` }} />
+        </div>
+        <div className="mt-4 text-[11px] font-medium uppercase tracking-wider text-faint">Runners-up</div>
+        {campaign.runnersUp.map((r) => (
+          <div key={r.name} className="mt-1.5 flex justify-between text-[12px]">
+            <span className="truncate text-muted">{r.name}</span>
+            <span className="tabular font-mono text-faint">{r.fit}%</span>
           </div>
         ))}
-      </div>
-      <div className="text-[11px] font-medium uppercase tracking-wider text-faint">Picked · X via x_trends (live)</div>
-      <div className="rounded-md border border-accent/40 bg-bg p-3">
-        <div className="text-[14px] text-text">{picked ? picked[2].trim() : 'midnight-vape-sound-check'}</div>
-        <div className="mt-0.5 font-mono text-[11px] text-muted">
-          {picked ? `@${picked[4]} · ${Intl.NumberFormat('en', { notation: 'compact' }).format(Number(picked[5]))} views · ` : ''}velocity 3.4
-        </div>
+        <p className="mt-4 line-clamp-4 text-[12px] leading-relaxed text-faint">{tr.whyViral}</p>
       </div>
     </div>
   )
 }
 
-function Handoff({ span }: { span?: Span }) {
+function Handoff({ span, campaign }: { span?: Span; campaign: Campaign }) {
   if (!span)
     return (
       <Panel title="Handoff" className="h-full">
@@ -287,10 +291,10 @@ function Handoff({ span }: { span?: Span }) {
             <span className="ml-2 font-mono text-[12px] text-faint">{fmtMs(span.realMs ?? 0)}</span>
           </div>
         )}
-        {span.tools ? (
-          span.agent === 'scout' ? (
-            <ScoutFeed span={span} />
-          ) : (
+        {span.agent === 'scout' ? (
+          <ScoutFeed campaign={campaign} />
+        ) : span.tools ? (
+          (
             <>
               <div className="space-y-2">
                 {span.tools.slice(0, 3).map((tc, i) => (
@@ -353,7 +357,7 @@ function Commits({ run, t }: { run: Run; t: number }) {
                 <span className="text-muted">{c.agent}:</span> {c.message}
               </div>
               <div className="mt-0.5 flex gap-2 font-mono text-[11px] text-faint">
-                <span className="text-muted">{c.hash}</span>
+                <span className="text-muted">{c.hash || 'sim'}</span>
                 <span className="truncate">{c.path}</span>
               </div>
             </div>
@@ -366,63 +370,42 @@ function Commits({ run, t }: { run: Run; t: number }) {
 }
 
 export function Workflow({ runKey = 0 }: { runKey?: number }) {
-  const [runIdx, setRunIdx] = useState(0)
+  const { campaign } = useCampaign()
   const [replay, setReplay] = useState(0)
-  const run = RUNS[runIdx]
-  const t = useClock(`${runKey}-${replay}-${runIdx}`, run.runMs)
+  const run = campaign.run
+  const t = useClock(`${runKey}-${replay}-${campaign.id}`, run.runMs)
   const [pinned, setPinned] = useState<string | null>(null)
   const active = [...run.spans].reverse().find((s) => t >= s.start)
   const selected = (pinned && run.spans.find((s) => s.id === pinned && t >= s.start)) || active
   const running = t < run.runMs
-  const isLive = run.id.startsWith('gen-live')
 
   return (
     <div className="flex h-full flex-col gap-4 p-6">
       <div className="flex items-center gap-4">
-        <h1 className="text-[22px] font-semibold tracking-tight text-text">{run.label}</h1>
-        <span className="font-mono text-[13px] text-muted">{run.genome}</span>
+        <h1 className="text-[22px] font-semibold tracking-tight text-text">{campaign.brand}</h1>
+        <span className="text-[14px] text-muted">{campaign.product}</span>
         <span className="flex items-center gap-2 rounded-full border border-line-strong px-2.5 py-0.5 text-[12px] text-muted">
           <StatusDot state={running ? 'running' : 'done'} />
-          {running ? 'Replaying' : 'Completed'}
+          {running ? 'Agents working' : 'Campaign ready'}
           <span className="tabular font-mono text-faint">{fmtMs(t)}</span>
         </span>
-        {isLive && (
-          <span className="font-mono text-[12px] text-faint">
-            {LIVE_META.session} · {LIVE_META.events.toLocaleString('en')} SDK events · {fmtMs(LIVE_META.realMs)} real
-          </span>
-        )}
-        <div className="ml-auto flex items-center gap-2">
-          <div className="flex rounded-md border border-line-strong p-0.5">
-            {RUNS.map((r, i) => (
-              <button
-                key={r.id}
-                onClick={() => {
-                  setPinned(null)
-                  setRunIdx(i)
-                }}
-                className={`rounded px-2.5 py-1 font-mono text-[12px] ${i === runIdx ? 'bg-raised text-text' : 'text-muted hover:text-text'}`}
-              >
-                {r.id}
-              </button>
-            ))}
-          </div>
-          <button
-            onClick={() => {
-              setPinned(null)
-              setReplay((r) => r + 1)
-            }}
-            className="rounded-md border border-line-strong px-3 py-1 text-[13px] text-muted hover:border-faint hover:text-text"
-          >
-            Replay
-          </button>
-        </div>
+        <span className="font-mono text-[12px] text-faint">goal · {campaign.goal}</span>
+        <button
+          onClick={() => {
+            setPinned(null)
+            setReplay((r) => r + 1)
+          }}
+          className="ml-auto rounded-md border border-line-strong px-3 py-1 text-[13px] text-muted hover:border-faint hover:text-text"
+        >
+          Replay
+        </button>
       </div>
       <div className="panel-sheen rounded-lg border border-line">
         <Graph run={run} t={t} />
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-[860px_1fr_420px] gap-4">
+      <div className="grid min-h-0 flex-1 grid-cols-[720px_1fr_340px] gap-4">
         <Trace run={run} t={t} selected={selected} onSelect={(s) => setPinned(s.id)} />
-        <Handoff span={selected} />
+        <Handoff span={selected} campaign={campaign} />
         <Commits run={run} t={t} />
       </div>
     </div>
