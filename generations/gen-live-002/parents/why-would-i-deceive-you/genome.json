@@ -1,0 +1,51 @@
+{
+  "id": "why-would-i-deceive-you",
+  "name": "Why Would I Deceive You?",
+  "generation": 5,
+  "parents": [],
+  "sources": [
+    {
+      "platform": "tiktok",
+      "url": "https://newengen.com/insights/tiktok-trends/",
+      "signal": "NewEngen TikTok trends Nov 2026; velocity 3.6"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "In the first second a flat voice starts talking while one white caption locks onto the frame",
+      "dominance": 0.55
+    },
+    "hero": {
+      "allele": "The format itself: one on-screen text line plus one object held still for the punchline, no face and no named person",
+      "dominance": 0.7
+    },
+    "setting": {
+      "allele": "Tight vertical phone crop against a plain indoor wall, the held object centered",
+      "dominance": 0.4
+    },
+    "humor": {
+      "allele": "Deadpan assurance that nothing is hidden, then the held object is the whole joke",
+      "dominance": 0.66
+    },
+    "audio": {
+      "allele": "Deadpan spoken line, flat and unhurried: Why would I deceive you?",
+      "dominance": 0.95
+    },
+    "visual": {
+      "allele": "One caption line only, then the held object frozen on the punchline beat for the rest of the loop",
+      "dominance": 0.58
+    },
+    "catchphrase": {
+      "allele": "Why would I deceive you?",
+      "dominance": 0.8
+    },
+    "structure": {
+      "allele": "6–10s loop: deadpan line, one text line, then the held punchline. The black NOIR/05 bottle enters at second 4.0, on the held punchline beat after the deadpan line.",
+      "dominance": 0.78
+    }
+  },
+  "absurdity": 4,
+  "brandSafety": 8.5,
+  "mutations": [],
+  "fitness": null
+}
