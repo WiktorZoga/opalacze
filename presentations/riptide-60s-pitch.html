@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ROT BOT — 60s pitch</title>
+  <title>Riptide — 60s pitch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --void: #04121f;
-      --panel: #0a1c2c;
       --fog: #e7f4f2;
       --mist: #8fb3b0;
       --acid: #2dd4bf;
       --hot: #38bdf8;
-      --warn: #fb7185;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
@@ -39,13 +37,7 @@
         linear-gradient(165deg, #031018 0%, #061a28 48%, #04121f 100%);
     }
 
-    .stage {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
+    .stage { position: relative; z-index: 1; height: 100%; width: 100%; overflow: hidden; }
 
     .scene {
       position: absolute;
@@ -54,10 +46,7 @@
       visibility: hidden;
       pointer-events: none;
       transform: translateY(14px) scale(0.985);
-      transition:
-        opacity 0.45s var(--ease),
-        transform 0.45s var(--ease),
-        visibility 0.45s;
+      transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), visibility 0.45s;
     }
 
     .scene.on {
@@ -72,8 +61,7 @@
       inset: clamp(0.75rem, 2vw, 1.4rem);
       border: 1px solid rgba(232, 244, 242, 0.12);
       border-radius: 18px;
-      background:
-        linear-gradient(180deg, rgba(10, 28, 44, 0.72), rgba(4, 18, 31, 0.55));
+      background: linear-gradient(180deg, rgba(10, 28, 44, 0.72), rgba(4, 18, 31, 0.55));
       backdrop-filter: blur(10px);
       overflow: hidden;
       box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
@@ -115,13 +103,49 @@
       overflow: hidden;
     }
 
-    .media-fill,
-    .media-fill video,
-    .media-fill img {
+    .media-fill, .media-fill video, .media-fill img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .wall {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(232, 244, 242, 0.08);
+    }
+
+    .wall figure {
+      position: relative;
+      overflow: hidden;
+      background: #061018;
+      margin: 0;
+    }
+
+    .wall img, .wall video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .wall figcaption {
+      position: absolute;
+      left: 0.55rem;
+      bottom: 0.55rem;
+      z-index: 2;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--void);
+      background: var(--acid);
+      padding: 0.22rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
     }
 
     .phone {
@@ -132,7 +156,6 @@
       border: 1px solid rgba(232, 244, 242, 0.18);
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
       background: #000;
-      transform: translateY(8px);
     }
 
     .phone img, .phone video {
@@ -254,10 +277,7 @@
       max-width: 18ch;
     }
 
-    .line em {
-      font-style: normal;
-      color: var(--acid);
-    }
+    .line em { font-style: normal; color: var(--acid); }
 
     .subline {
       margin-top: 0.7rem;
@@ -266,14 +286,6 @@
       max-width: 38ch;
       line-height: 1.4;
       text-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .tag {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.8rem, 5vw, 3.6rem);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      max-width: 16ch;
     }
 
     .money {
@@ -318,8 +330,7 @@
     .scrim {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(180deg, rgba(4, 18, 31, 0.15) 0%, rgba(4, 18, 31, 0.2) 40%, rgba(4, 18, 31, 0.88) 100%);
+      background: linear-gradient(180deg, rgba(4, 18, 31, 0.15) 0%, rgba(4, 18, 31, 0.2) 40%, rgba(4, 18, 31, 0.88) 100%);
       pointer-events: none;
     }
 
@@ -456,6 +467,7 @@
       place-items: center;
       text-align: center;
       padding: 2rem;
+      pointer-events: none;
     }
 
     .endmark .brand-big {
@@ -481,7 +493,8 @@
       font-size: 0.95rem;
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
+      .wall { grid-template-columns: repeat(2, 1fr); }
       .agent-rail { grid-template-columns: 1fr 1fr; }
       .phone { width: min(42vw, 220px); }
       .money { grid-template-columns: 1fr; }
@@ -496,31 +509,31 @@
 </head>
 <body>
   <div class="hud">
-    <span>ROT BOT · 60s pitch</span>
+    <span>Riptide · 60s pitch</span>
     <span id="clock">00.0s</span>
   </div>
 
   <div class="stage" id="stage">
-    <!-- 0–5s · absurd hook -->
-    <section class="scene" data-start="0" data-end="5" data-vo="Yes — that's a sacred kebab at three in the morning. And it was made by a team of AI agents.">
+    <!-- 0–5s · absurd entertainment hook (Brainrot tone; real UGC) -->
+    <section class="scene" data-start="0" data-end="5" data-vo="Yes — that's a capybara in a robe, spritzing perfume. And a swarm of Grok Bot agents made it.">
       <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> live creative · brandrot-kebab-u-mustafy</div>
+        <div class="chrome-bar"><span class="dot"></span> the ads · tone Brainrot · noir05-brainrot-capybara</div>
         <div class="chrome-body">
           <div class="phone">
-            <img src="../public/memes/grok/brandrot-kebab-u-mustafy.jpg" alt="3 AM. THE PROPHECY WAS GARLIC SAUCE. — Kebab u Mustafy Grok Imagine still" />
+            <video src="../public/memes/grok/ugc/noir05-brainrot-capybara.mp4" muted loop playsinline poster="../public/memes/grok/ugc/noir05-brainrot-capybara.poster.jpg"></video>
           </div>
         </div>
       </div>
       <div class="copy">
-        <p class="brand">Hook</p>
-        <p class="line">Sacred kebab.<br /><em>Agent-made.</em></p>
+        <p class="brand">Entertainment</p>
+        <p class="line">Absurd on purpose.<br /><em>Agent-made.</em></p>
       </div>
     </section>
 
-    <!-- 5–15s · problem + ROT BOT -->
-    <section class="scene" data-start="5" data-end="15" data-vo="Trends peak in three days. Agencies still take a week. So we built ROT BOT — the swarm behind Riptide, the AI ad agency that rides virals.">
+    <!-- 5–15s · problem + Riptide -->
+    <section class="scene" data-start="5" data-end="15" data-vo="Agencies need a week to ride a trend. Trends live three days. Riptide is the AI ad agency that ships trend-native UGC in minutes.">
       <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> trend radar · docs/media/rotbot-radar-sources.gif</div>
+        <div class="chrome-bar"><span class="dot"></span> trend radar · rising TikTok / X</div>
         <div class="chrome-body media-fill">
           <img src="../docs/media/rotbot-radar-sources.gif" alt="Riptide trend radar scanning rising sources" />
           <div class="scrim"></div>
@@ -529,14 +542,14 @@
       <div class="copy">
         <p class="brand">Problem</p>
         <p class="line">Trends live <em>3 days</em>. Agencies take a week.</p>
-        <p class="subline">ROT BOT is the R&amp;D swarm that runs Riptide — the AI ad agency that rides virals.</p>
+        <p class="subline">Riptide: brands send a brief; a Grok Bot swarm finds the rising viral and ships the ad while it still climbs.</p>
       </div>
     </section>
 
-    <!-- 15–35s · Scout → Geneticist → Mutator → Critic -->
-    <section class="scene" data-start="15" data-end="35" data-vo="Scout hunts TikTok and X trends and scores brand fit. Geneticist extracts the DNA — hook, pacing, product insert. Mutator casts a persona, writes the script, renders 9:16 with Grok Imagine. Critic kills bad drafts — rejections are git commits." id="pipeline">
+    <!-- 15–35s · Scout → Geneticist → Creator → Critic -->
+    <section class="scene" data-start="15" data-end="35" data-vo="Scout finds the rising trend and scores brand fit. Geneticist extracts the viral DNA. Creator writes the script and renders 9:16 with Grok Imagine. Critic kills weak drafts — rejections are real git commits." id="pipeline">
       <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> campaign console · Scout → Geneticist → Mutator → Critic</div>
+        <div class="chrome-bar"><span class="dot"></span> watch the swarm · Scout → Geneticist → Creator → Critic</div>
         <div class="chrome-body media-fill">
           <img id="pipeMedia" src="../docs/media/rotbot-screen-workflow.png" alt="Riptide campaign workflow screen" />
           <div class="scrim"></div>
@@ -544,17 +557,17 @@
             <div class="agent" data-lit-at="16">
               <div class="who">🐦 Scout</div>
               <div class="job">Trend + brand fit</div>
-              <div class="sub">x_trends · TikTok / X</div>
+              <div class="sub">TikTok / X · e.g. 87% fit</div>
             </div>
             <div class="agent" data-lit-at="21">
               <div class="who">🦫 Geneticist</div>
-              <div class="job">Trend DNA</div>
+              <div class="job">Viral DNA</div>
               <div class="sub">hook · pacing · insert</div>
             </div>
             <div class="agent" data-lit-at="26">
-              <div class="who">🐊 Mutator</div>
-              <div class="job">Creator · render</div>
-              <div class="sub">persona · script · 9:16</div>
+              <div class="who">🐊 Creator</div>
+              <div class="job">Persona + render</div>
+              <div class="sub">script · 9:16 A/B</div>
             </div>
             <div class="agent" data-lit-at="31">
               <div class="who">🐱 Critic</div>
@@ -566,22 +579,27 @@
       </div>
       <div class="copy">
         <p class="brand">Technology</p>
-        <p class="line">Four agents.<br /><em>One generation.</em></p>
+        <p class="line">Four agents.<br /><em>One campaign.</em></p>
       </div>
     </section>
 
-    <!-- 35–48s · payoff: trend vs generated -->
-    <section class="scene" data-start="35" data-end="48" data-vo="Rising trend in. Trend-native creative out. gen-live-002: NOIR/05, real grok-4.7 run — Critic nine, nine, ten, ten.">
+    <!-- 35–48s · payoff: wall + live run -->
+    <section class="scene" data-start="35" data-end="48" data-vo="Same swarm, any tone — UGC, polished, or brainrot. This is gen-live-002: NOIR/05, Ren Hale, real grok-4.7 — Critic nine, nine, ten, ten.">
       <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> payoff · trend DNA → gen-live-002 noir-05-deceive</div>
+        <div class="chrome-bar"><span class="dot"></span> the ads · NOIR/05 UGC + live run</div>
         <div class="chrome-body">
           <div class="split">
             <div>
-              <label>trend DNA</label>
-              <img src="../docs/media/rotbot-breeding-hatch.gif" alt="Breeding / hatch visual from the ROT BOT console" />
+              <label>ads wall</label>
+              <div class="wall" style="height:100%">
+                <figure><img src="../docs/media/ugc/noir05-unboxing.gif" alt="Maja unboxing NOIR/05" /><figcaption>Maja · unboxing</figcaption></figure>
+                <figure><img src="../docs/media/ugc/noir05-grwm.gif" alt="Maja GRWM" /><figcaption>GRWM</figcaption></figure>
+                <figure><img src="../docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale live deceive" /><figcaption>Ren Hale · live</figcaption></figure>
+                <figure><img src="../docs/media/ugc/cafe-first-time-fancy.gif" alt="Fancy café UGC" /><figcaption>Café · 10.8M trend</figcaption></figure>
+              </div>
             </div>
             <div>
-              <label>generated</label>
+              <label>gen-live-002</label>
               <video src="../generations/gen-live-002/media/noir-05-deceive.mp4" muted loop playsinline poster="../docs/live-002-poster.jpg"></video>
             </div>
           </div>
@@ -590,12 +608,11 @@
       <div class="copy">
         <p class="brand">Payoff</p>
         <p class="line">Trend in.<br /><em>Creative out.</em></p>
-        <p class="subline">gen-live-002 · grok-4.7 · Critic 9 · 9 · 10 · 10</p>
       </div>
     </section>
 
     <!-- 48–60s · money + motto -->
-    <section class="scene" data-start="48" data-end="60" data-vo="For agencies and brands that can't wait a week: minutes to an on-trend ad, A/B while it still rises. We don't follow trends. We mutate them.">
+    <section class="scene" data-start="48" data-end="60" data-vo="For agencies and brands that can't wait a week: minutes to an on-trend ad. We don't follow trends. We mutate them.">
       <div class="chrome">
         <div class="chrome-bar"><span class="dot"></span> business · time to on-trend ad</div>
         <div class="chrome-body" style="padding: 2rem;">
@@ -606,30 +623,30 @@
               <div class="d">Brief → shoot → approvals</div>
             </article>
             <article class="win">
-              <div class="k">Riptide / ROT BOT</div>
+              <div class="k">Riptide</div>
               <div class="v">minutes</div>
-              <div class="d">A/B variants · while the trend still rises</div>
+              <div class="d">A/B variants while the trend still rises</div>
             </article>
           </div>
         </div>
       </div>
       <div class="endmark">
         <div>
-          <div class="brand-big">ROT BOT</div>
+          <div class="brand-big">Riptide</div>
           <p class="motto">We don't follow trends.<br />We mutate them.</p>
-          <p class="product">Riptide · the AI ad agency that rides virals</p>
+          <p class="product">the AI ad agency that rides virals · Grok Bot swarm</p>
         </div>
       </div>
     </section>
   </div>
 
-  <div class="vo"><div class="vo-pill" id="vo"><b>VO</b> Press play — ~60 seconds · ~125 words</div></div>
+  <div class="vo"><div class="vo-pill" id="vo"><b>VO</b> Press play — ~60 seconds</div></div>
   <div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
   <div class="gate" id="gate">
     <div>
-      <h1>ROT BOT</h1>
-      <p>One-minute hackathon pitch. Real media from this repo. Auto-timed interface commentary.</p>
+      <h1>Riptide</h1>
+      <p>One-minute pitch. Real media from this repo. Auto-timed interface commentary — entertainment → technology → money.</p>
       <div class="cta">▶ Play 60s</div>
       <p class="meta">Space / click · R restart · F fullscreen</p>
     </div>
@@ -711,7 +728,7 @@
         if (t >= DURATION) {
           setScene(DURATION - 0.001);
           playing = false;
-          vo.innerHTML = "<b>END</b>Press R to restart · motto from agents/bot/instructions.md";
+          vo.innerHTML = "<b>END</b>Press R to restart · motto from Overlord / gen-live-002";
           return;
         }
         setScene(t);
@@ -736,7 +753,7 @@
         lastScene = -1;
         bar.style.width = "0%";
         clock.textContent = "00.0s";
-        vo.innerHTML = "<b>VO</b>Press play — ~60 seconds · ~125 words";
+        vo.innerHTML = "<b>VO</b>Press play — ~60 seconds";
       }
 
       gate.addEventListener("click", (e) => {
@@ -745,7 +762,7 @@
       });
 
       document.body.addEventListener("click", () => {
-        if (!playing && gate.classList.contains("gone") === false) play();
+        if (!playing && !gate.classList.contains("gone")) play();
       });
 
       window.addEventListener("keydown", (e) => {
