@@ -10,7 +10,7 @@ export default defineTool({
   description: prompt`
     Validate a meme genome against the ROT BOT genome schema and write it into
     generations/gen-NNN/. Use kind "parent" for a sequenced wild or elite meme
-    (written to parents/<id>/genome.json) and kind "mutation" for the Mutator's
+    (written to gen-<generation+1>/parents/<id>/genome.json) and kind "mutation" for the Mutator's
     crossover child (written to mutation.json). Fails loudly on a bad genome:
     fix the genes, do not drop them. Commit the file afterwards with commit_artifact.
   `,
@@ -24,7 +24,8 @@ export default defineTool({
     if (kind === "mutation" && genome.parents.length !== 2) {
       throw new Error("A mutation must have exactly two parents. Crossover needs a mother and a father.");
     }
-    const dir = generationDir(genome.generation);
+    // A parent of generation N was born in N-1, so it is filed under the generation it parents.
+    const dir = generationDir(kind === "parent" ? genome.generation + 1 : genome.generation);
     const file =
       kind === "parent" ? resolve(dir, "parents", genome.id, "genome.json") : resolve(dir, "mutation.json");
     await mkdir(dirname(file), { recursive: true });
