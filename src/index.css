@@ -9,8 +9,9 @@
   --color-text: #ececee;
   --color-muted: #8d8f99;
   --color-faint: #5c5e68;
-  --color-accent: #c8f04a;
-  --color-danger: #f0605d;
+  --color-accent: #b6ff00;
+  --color-hot: #ff2bd6;
+  --color-danger: #ff3d5a;
   --font-sans: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   --font-meme: Impact, "Anton", "Haettenschweiler", sans-serif;
@@ -30,6 +31,40 @@ body,
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+.wordmark {
+  background: linear-gradient(90deg, #b6ff00, #ff2bd6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-acid {
+  box-shadow: 0 0 0 1px #b6ff0080, 0 0 24px #b6ff0040;
+}
+.glow-hot {
+  box-shadow: 0 0 0 1px #ff2bd680, 0 0 24px #ff2bd640;
+}
+.glow-danger {
+  box-shadow: 0 0 0 1px #ff3d5a99, 0 0 28px #ff3d5a55;
+}
+
+.panel-sheen {
+  background:
+    radial-gradient(900px 220px at 20% 0%, #b6ff000d, transparent 70%),
+    radial-gradient(900px 220px at 85% 100%, #ff2bd60f, transparent 70%),
+    var(--color-surface);
+}
+
+@keyframes shimmer {
+  from { background-position: 0 0; }
+  to { background-position: 40px 0; }
+}
+.bar-running {
+  background-image: repeating-linear-gradient(90deg, #b6ff00aa 0 10px, #b6ff0055 10px 20px);
+  background-size: 40px 100%;
+  animation: shimmer 0.6s linear infinite;
 }
 
 /* meme artifacts keep the classic caption style */
