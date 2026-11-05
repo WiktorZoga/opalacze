@@ -1,0 +1,8 @@
+{
+  "genomeId": "krasnal-ceo-series-a",
+  "kind": "video",
+  "model": "grok-imagine-video",
+  "aspectRatio": "9:16",
+  "durationSeconds": 8,
+  "prompt": "8s vertical loop. Beat 1 (0-3s): pitch-deck slide on a tiny projector on the Rynek: 'KRASNAL AI: we are not a dwarf, we are a Small Language Model'. Beat 2 (3-6s): bronze krasnal CEO in a fleece vest turns to camera, deadpan, caption 'Why would a dwarf deceive you?'. Beat 3 (6-8s): black cat with human hands claps once; hard cut back to the slide. Audio: deadpan voice line, one clap."
+}
