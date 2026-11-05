@@ -7,7 +7,7 @@
 
 <p align="center">
   <img alt="built with @grok/agent-sdk" src="https://img.shields.io/badge/built%20with-%40grok%2Fagent--sdk%200.6-b6ff00?style=for-the-badge&labelColor=05060a">
-  <a href="generations/gen-live-001/RUN.md"><img alt="live run" src="https://img.shields.io/badge/live%20run-grok--4.7%20%C2%B7%202%2C552%20events-ff2bd6?style=for-the-badge&labelColor=05060a"></a>
+  <a href="#-live-runs-real-not-simulated"><img alt="2 live runs" src="https://img.shields.io/badge/live%20runs-2%20%C2%B7%20grok--4.7-ff2bd6?style=for-the-badge&labelColor=05060a"></a>
   <a href="https://wiktorzoga.github.io/opalacze/"><img alt="try it live" src="https://img.shields.io/badge/try%20it-live-b6ff00?style=for-the-badge&labelColor=05060a"></a>
 </p>
 
@@ -60,6 +60,31 @@ Roadmap: Higgsfield (AI video / UGC avatars), TikTok Creative Center, Meta + Tik
 <table>
 <tr>
 <td width="30%" valign="top">
+  <a href="generations/gen-live-002/media/noir-05-deceive.mp4"><img src="docs/live-002-poster.jpg" alt="Grok Imagine video frame: AI creator Ren Hale holds up the black NOIR/05 bottle, deadpan" width="100%"></a><br>
+  <sub><a href="generations/gen-live-002/media/noir-05-deceive.mp4">▶ Play the clip</a> · Grok Imagine video, 9:16 · <code>#ad · AI-generated</code></sub>
+</td>
+<td valign="top">
+
+**gen-live-002: NOIR/05 eau de parfum, UGC brief.** `grok-4.7` · 7 min · 5 subagent handoffs · 4,167 events.
+Trend *"Why Would I Deceive You?"* at **84% brand fit** (picked from the Scout's recorded snapshot of real trends;
+live X search returned nothing usable). AI creator persona **Ren Hale**. Critic approved on the first round:
+trend fidelity 9 · brand safety 9 · claims 10 · disclosure 10.
+
+> 🐦 *"Deadpan letdown text already fits a 7-second phone caption, and the black bottle can be the only thing in frame that refuses to disappoint."*
+>
+> 🐱 *"The script hits the deadpan line, the late bottle, scent notes only, and the exact disclosure on screen and in the caption. All four scores clear 8, so I'm committing the approval."*
+>
+> 🐙 *"Eight arms, one bottle, zero polish. We don't follow trends. We mutate them."*
+
+📄 [RUN.md](generations/gen-live-002/RUN.md) · 🧾 [trace.ndjson](generations/gen-live-002/trace.ndjson) · 📝 [brief](generations/gen-live-002/brief.json) · 🎬 [script](generations/gen-live-002/script.json) · 🌱 [agent commits](https://github.com/WiktorZoga/opalacze/compare/2d31370~1...93a7265)
+
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td width="30%" valign="top">
   <img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Grok Imagine render from the first live run: a bronze Wrocław dwarf crossing night cobblestones" width="100%">
 </td>
 <td valign="top">
@@ -79,7 +104,6 @@ Roadmap: Higgsfield (AI video / UGC avatars), TikTok Creative Center, Meta + Tik
 </tr>
 </table>
 
-<!-- GEN-LIVE-002 (perfume brief): add a row here when generations/gen-live-002/ lands -->
 
 <details>
 <summary><b>🔍 Inside Grok Bot: playground and trace</b></summary>
@@ -223,4 +247,4 @@ npx agent-sdk dev                  # Grok Bot playground
 npm install && npm run dev         # ROT Studio: Briefs inbox → Campaign / Creative / History
 ```
 
-<sub>ROT Studio is run by the ROT BOT swarm. `gen-live-001` is a real end-to-end run; generations 001–003 are recorded agent runs over real, linked trends; publishing and ad metrics are simulated and labeled. All creators are AI personas, labeled AI-generated. Team: [TEAM.md](TEAM.md).</sub>
+<sub>ROT Studio is run by the ROT BOT swarm. `gen-live-002` and `gen-live-001` are real end-to-end runs; generations 001–003 are recorded agent runs over real, linked trends; publishing and ad metrics are simulated and labeled. All creators are AI personas, labeled AI-generated. Team: [TEAM.md](TEAM.md).</sub>
