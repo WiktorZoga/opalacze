@@ -39,6 +39,34 @@
 </tr>
 </table>
 
+## From a trend to a client's ad
+
+<table>
+<tr align="center">
+<td width="14%">
+<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="TikTok"><path d="M21 7v15.2a5.2 5.2 0 1 1-3.4-4.9V13.2" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><path d="M21 9.2c1.2 2.4 3.4 3.8 6 4" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/></svg><br><sub>TikTok</sub>
+</td>
+<td width="14%">
+<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="X"><path d="M9 9l18 18M27 9L9 27" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round"/></svg><br><sub>X</sub>
+</td>
+<td width="14%">
+<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="Instagram"><rect x="8" y="8" width="20" height="20" rx="6" fill="none" stroke="#111" stroke-width="2.2"/><circle cx="18" cy="18" r="4.5" fill="none" stroke="#111" stroke-width="2.2"/><circle cx="24.2" cy="11.8" r="1.2" fill="#111"/></svg><br><sub>Instagram</sub>
+</td>
+<td width="8%"><b>→</b></td>
+<td width="22%">
+<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="the swarm"><path d="M4 24c6-8 10-8 14 0s8 8 14 0" fill="none" stroke="#0d9488" stroke-width="2.4" stroke-linecap="round"/><path d="M4 18c6-8 10-8 14 0s8 8 14 0" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/></svg><br><sub><b>the swarm</b></sub>
+</td>
+<td width="8%"><b>→</b></td>
+<td width="20%">
+<svg width="28" height="44" viewBox="0 0 28 44" role="img" aria-label="client UGC"><rect x="2" y="2" width="24" height="40" rx="4" fill="none" stroke="#111" stroke-width="2"/><rect x="8" y="16" width="12" height="16" rx="1" fill="none" stroke="#0d9488" stroke-width="1.6"/></svg><br><sub><b>NOIR/05</b> · UGC</sub>
+</td>
+</tr>
+</table>
+
+Scout watches TikTok, X and Instagram until a format starts to climb. This week it was a deadpan phone clip: one confident line, then the one object that refuses to disappoint. Geneticist lifts the DNA: the hook, the pause, the late reveal. The brief hits the desk. NOIR/05, a perfume, Gen Z, tone UGC. Creator keeps the format, casts Ren Hale, and Grok Imagine films the bottle. Critic holds the cut until the claim is safe and the caption carries `#ad · AI-generated`. Then the ad is ready to ship.
+
+<sub>Live today: Grok Bot, Grok Imagine, and X search. TikTok and Instagram are the distribution layer we're wiring next. We don't post yet.</sub>
+
 ## How it works
 
 **One [Overlord](agents/bot/instructions.md) on `grok-4.7` delegates to six subagents. Every handoff is a real SDK `task` event in the [trace](generations/gen-live-002/trace.ndjson).**
