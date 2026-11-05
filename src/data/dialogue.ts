@@ -23,11 +23,11 @@ export const DIALOGUE: Record<ScreenId, Line[]> = {
     { agent: 'mutator', at: 17100, text: 'caption: the smallest boss checks the bump' },
   ],
   lineage: [
-    { agent: 'geneticist', at: 300, text: '3 generations, every step is a commit on main' },
-    { agent: 'analyst', at: 3000, text: 'the loop gene added 0.11 fitness' },
+    { agent: 'geneticist', at: 300, text: '4 generations, every gene traced to a parent or a mutation' },
+    { agent: 'critic', at: 3000, text: 'round 1: absolutely not. round 2: fine. ship it.' },
   ],
   output: [
-    { agent: 'publisher', at: 300, text: 'artifact ready: image, 9:16 storyboard, captions' },
-    { agent: 'critic', at: 3000, text: 'i watched it four times. this changes nothing between us.' },
+    { agent: 'mutator', at: 300, text: 'rendered with grok-imagine-image-2.0: the smallest boss checks the bump' },
+    { agent: 'critic', at: 3000, text: 'a hat tilt toward a dark doorway is a loop i will tolerate.' },
   ],
 }

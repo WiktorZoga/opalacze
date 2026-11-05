@@ -2,44 +2,37 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import post from '../../generations/gen-003/post.json'
 import metrics from '../../generations/gen-003/metrics.json'
-import storyboard from '../../generations/gen-003/media/storyboard.json'
+import liveStoryboard from '../../generations/gen-live-001/media/storyboard.json'
+import { LIVE_IMAGE } from '../data/lineage'
+import { LIVE_RUN } from '../data/runs'
 import { BRANDS, type BrandPreset } from '../data/brands'
-import { MEMES, type Meme } from '../data/memes'
 import { MemeCard } from '../components/MemeCard'
 import { Badge, Panel } from '../components/ui'
 
-const ARTIFACT: Meme = {
-  ...MEMES.krasnalAlt,
-  top: post.tiktok.hookText,
-  bottom: 'why would a dwarf deceive you?',
-}
+const RENDER_COMMIT = LIVE_RUN.spans[LIVE_RUN.spans.length - 1].commit?.hash ?? ''
 
-const BEATS = [...storyboard.prompt.matchAll(/Beat \d \(([^)]+)\):\s*([^.]+(?:\.[^B.][^.]*)?)\./g)].map((m) => ({ t: m[1], text: m[2] }))
 
 const n = (v: number) => (v >= 1e6 ? `${(v / 1e6).toFixed(1)}M` : `${Math.round(v / 1e3)}K`)
 const pct = (v: number) => `${Math.round(v * 100)}%`
 
 function Artifact() {
   return (
-    <Panel title="Artifact" meta={storyboard.genomeId}>
+    <Panel title="Artifact" meta={liveStoryboard.genomeId}>
       <div className="flex gap-5 p-5">
-        <div>
-          <MemeCard meme={ARTIFACT} width={500} />
-          <div className="mt-2 font-mono text-[11px] text-faint">rendered by Mutator · {storyboard.genomeId}</div>
+        <img src={LIVE_IMAGE} alt={liveStoryboard.genomeId} className="h-[480px] w-[270px] shrink-0 rounded-md border border-line object-cover" />
+        <div className="flex min-w-0 flex-col gap-3">
+          <div className="flex flex-wrap gap-1.5">
+            <Badge tone="accent">{liveStoryboard.model}</Badge>
+            <Badge>{liveStoryboard.aspectRatio}</Badge>
+            <Badge>live run</Badge>
+          </div>
+          <div className="text-[13px] text-muted">
+            Rendered by <span className="text-text">Mutator</span> after the Critic approved round 2. Committed as{' '}
+            <span className="font-mono text-text">{RENDER_COMMIT}</span>.
+          </div>
+          <div className="text-[11px] font-medium uppercase tracking-wider text-faint">Prompt</div>
+          <p className="text-[13px] leading-relaxed text-muted">{liveStoryboard.prompt}</p>
         </div>
-      </div>
-      <div className="border-t border-line px-5 py-4">
-        <div className="mb-1.5 flex items-center gap-2 text-[11px] font-medium uppercase tracking-wider text-faint">
-          Video storyboard <Badge>{storyboard.model}</Badge> <Badge>{storyboard.aspectRatio} · {storyboard.durationSeconds}s</Badge>
-        </div>
-        <ol className="space-y-1.5">
-          {BEATS.map((b) => (
-            <li key={b.t} className="grid grid-cols-[56px_1fr] gap-3 text-[13px] leading-snug">
-              <span className="font-mono text-faint">{b.t}</span>
-              <span className="text-muted">{b.text}</span>
-            </li>
-          ))}
-        </ol>
       </div>
     </Panel>
   )
@@ -48,8 +41,9 @@ function Artifact() {
 function Distribution() {
   const rows = (['tiktok', 'x'] as const).map((p) => ({ p, m: metrics.platforms[p] }))
   return (
-    <Panel title="Distribution" meta={post.status}>
+    <Panel title="Distribution" meta={`gen-003 · ${post.status}`}>
       <div className="divide-y divide-line">
+        <div className="px-5 py-3 text-[12px] text-faint">Publishing and analytics were not part of the live run. Shown: the last distributed generation, gen-003.</div>
         <div className="px-5 py-4">
           <div className="flex items-center gap-2">
             <span className="text-[14px] font-medium text-text">TikTok</span>
@@ -200,9 +194,9 @@ export function Output({ finaleAt }: { finaleAt?: number }) {
     <div className="relative flex h-full flex-col gap-4 p-6">
       <div className="flex items-baseline gap-4">
         <h1 className="text-[22px] font-semibold tracking-tight text-text">Output</h1>
-        <span className="text-[13px] text-muted">The meme is the artifact at the end of the run</span>
+        <span className="text-[13px] text-muted">The meme is the artifact at the end of the run. This one was rendered live by grok-imagine.</span>
       </div>
-      <div className="grid min-h-0 flex-1 grid-cols-[540px_1fr_520px] gap-4">
+      <div className="grid min-h-0 flex-1 grid-cols-[640px_1fr_480px] gap-4">
         <Artifact />
         <Distribution />
         <Brandrot />

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { CHILD, CRITIQUE, GENERATIONS, GENOME, PARENTS } from '../data/lineage'
+import { CHILD, CRITIQUE, GENERATIONS, GENOME, LIVE_IMAGE, PARENTS } from '../data/lineage'
 import { MEMES } from '../data/memes'
 import { MemeCard } from '../components/MemeCard'
 import { Badge, Panel } from '../components/ui'
@@ -8,6 +8,11 @@ const CHILD_MEME: Record<string, string> = {
   'scientists-reveal-the-clap': 'scientistsHi',
   'krasnal-ceo': 'krasnal',
   'krasnal-ceo-series-a': 'krasnalAlt',
+}
+
+function Thumb({ id, live }: { id: string; live?: boolean }) {
+  if (live) return <img src={LIVE_IMAGE} alt={id} className="h-[72px] w-[40px] rounded object-cover" />
+  return <MemeCard meme={MEMES[CHILD_MEME[id]]} width={64} />
 }
 
 function GenomeTable() {
@@ -79,7 +84,7 @@ function CritiqueTable() {
 
 function Tree() {
   return (
-    <Panel title="Lineage" meta="main · 3 generations">
+    <Panel title="Lineage" meta={`main · ${GENERATIONS.length} generations`}>
       <div className="flex flex-col gap-0 p-5">
         {GENERATIONS.map((g, i) => (
           <motion.div
@@ -90,7 +95,7 @@ function Tree() {
             className="relative"
           >
             <div className="flex items-start gap-5">
-              <div className="w-16 pt-2 font-mono text-[12px] text-faint">gen-00{g.gen}</div>
+              <div className="w-24 pt-2 font-mono text-[12px] text-faint">{g.gen}</div>
               <div className="flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   {g.parents.map((p, j) => (
@@ -102,32 +107,32 @@ function Tree() {
                     </span>
                   ))}
                 </div>
-                <div className="ml-3 h-5 w-px bg-line-strong" />
+                <div className="ml-3 h-3 w-px bg-line-strong" />
                 <div className={`flex items-center gap-4 rounded-lg border p-3 ${i === GENERATIONS.length - 1 ? 'border-accent/50 bg-raised' : 'border-line bg-raised/60'}`}>
-                  <MemeCard meme={MEMES[CHILD_MEME[g.id]]} width={64} />
+                  <Thumb id={g.id} live={g.live} />
                   <div className="min-w-0 flex-1">
-                    <div className="text-[15px] font-medium text-text">{g.name}</div>
+                    <div className="flex items-center gap-2 text-[15px] font-medium text-text">{g.name}{g.live && <Badge tone="accent">live · grok-4.7</Badge>}</div>
                     <div className="font-mono text-[12px] text-faint">{g.id}</div>
                   </div>
                   <div className="text-right">
-                    <div className="tabular font-mono text-[20px] text-text">{g.fitness.toFixed(2)}</div>
+                    <div className="tabular font-mono text-[20px] text-text">{g.fitness === null ? '—' : g.fitness.toFixed(2)}</div>
                     <div className="text-[11px] text-faint">fitness · {g.carriedBy}</div>
                   </div>
                 </div>
               </div>
             </div>
-            {i < GENERATIONS.length - 1 && <div className="ml-[100px] h-6 w-px bg-line-strong" />}
+            {i < GENERATIONS.length - 1 && <div className="ml-[132px] h-4 w-px bg-line-strong" />}
           </motion.div>
         ))}
         <div className="mt-6 flex items-end gap-6 border-t border-line pt-5">
-          <div className="text-[12px] text-muted">Fitness by generation</div>
+          <div className="text-[12px] text-muted">Fitness by generation<div className="text-faint">live run not scored yet</div></div>
           <div className="flex h-16 flex-1 items-end gap-3">
-            {GENERATIONS.map((g, i) => (
+            {GENERATIONS.filter((g) => g.fitness !== null).map((g, i, arr) => (
               <div key={g.id} className="flex flex-1 flex-col items-center gap-1">
                 <motion.div
-                  className={`w-full rounded-sm ${i === GENERATIONS.length - 1 ? 'bg-accent' : 'bg-line-strong'}`}
+                  className={`w-full rounded-sm ${i === arr.length - 1 ? 'bg-accent' : 'bg-line-strong'}`}
                   initial={{ height: 0 }}
-                  animate={{ height: g.fitness * 64 }}
+                  animate={{ height: (g.fitness ?? 0) * 64 }}
                   transition={{ delay: 0.8 + i * 0.2, duration: 0.5 }}
                 />
                 <span className="font-mono text-[11px] text-faint">{g.gen}</span>
@@ -145,7 +150,7 @@ export function Lineage() {
     <div className="flex h-full flex-col gap-4 p-6">
       <div className="flex items-baseline gap-4">
         <h1 className="text-[22px] font-semibold tracking-tight text-text">Genome & Lineage</h1>
-        <span className="text-[13px] text-muted">How {CHILD.name} inherited its genes, and what the Critic said</span>
+        <span className="text-[13px] text-muted">How {CHILD.name} (live run) inherited its genes, and what the Critic said</span>
       </div>
       <div className="grid min-h-0 flex-1 grid-cols-[1fr_720px] gap-4">
         <div className="flex min-h-0 flex-col gap-4">

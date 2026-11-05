@@ -185,4 +185,4 @@ export const MEMES: Record<string, Meme> = {
 }
 
 /** `img: '/memes/x.png'` → URL that also works under the GitHub Pages base path */
-export const assetUrl = (p: string) => (p.startsWith('/') ? `${import.meta.env.BASE_URL}${p.slice(1)}` : p)
+export const assetUrl = (p: string) => (p.startsWith('/memes/') ? `${import.meta.env.BASE_URL}${p.slice(1)}` : p)
