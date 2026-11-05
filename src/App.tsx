@@ -6,25 +6,24 @@ import { Stage } from './components/Stage'
 import { useElapsed } from './components/hooks'
 import { Avatar } from './components/ui'
 import { Logo, WaveMark } from './components/Logo'
-import { Workflow } from './screens/Workflow'
 import { Lineage } from './screens/Lineage'
-import { Creative } from './screens/Creative'
-import { Sidebar } from './screens/Sidebar'
+import { Swarm } from './screens/Swarm'
+import { Ads } from './screens/Ads'
 import { CAMPAIGNS, CampaignContext, type Tone } from './data/campaigns'
 import { DEMO_STEPS } from './demo'
 
 const TABS: { id: ScreenId; label: string; stage: number }[] = [
-  { id: 'campaign', label: 'Campaign', stage: 0 },
-  { id: 'creative', label: 'Creative', stage: 2 },
+  { id: 'campaign', label: 'Watch the swarm', stage: 0 },
+  { id: 'creative', label: 'The ads', stage: 2 },
   { id: 'history', label: 'History', stage: 1 },
 ]
 
-function ScreenView({ id, runKey }: { id: ScreenId; demo?: boolean; runKey: number }) {
+function ScreenView({ id, runKey, onOpen = () => {} }: { id: ScreenId; demo?: boolean; runKey: number; onOpen?: (id: string) => void }) {
   switch (id) {
     case 'campaign':
-      return <Workflow runKey={runKey} />
+      return <Swarm runKey={runKey} onOpen={onOpen} />
     case 'creative':
-      return <Creative />
+      return <Ads onOpen={onOpen} />
     case 'history':
       return <Lineage />
   }
@@ -139,25 +138,21 @@ export default function App() {
     <Stage>
       <CampaignContext.Provider value={{ campaign, tone, setTone }}>
       <div className="flex h-full flex-col">
-        <header className="flex h-14 shrink-0 items-center gap-8 border-b border-line px-6">
+        <header className="relative z-10 flex h-[72px] shrink-0 items-center gap-10 px-16">
           <Logo />
           <nav className="flex h-full items-stretch gap-6">
             {TABS.map((t) => (
               <button
                 key={t.id}
                 onClick={() => !demo && go(t.id)}
-                className={`border-b-2 text-[14px] transition-colors ${screen === t.id ? 'border-accent text-text [text-shadow:0_0_12px_#2dd4bf55]' : 'border-transparent text-muted hover:text-text'}`}
+                className={`border-b-2 text-[15px] transition-colors ${t.id === 'history' ? 'ml-6 text-[13px] ' : ''}${screen === t.id ? 'border-text text-text' : 'border-transparent text-muted hover:text-text'}`}
               >
                 {t.label}
               </button>
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-5 text-[13px] text-muted">
-            <span className="flex items-center gap-1.5">
-              {(['scout', 'geneticist', 'mutator', 'critic', 'publisher', 'analyst'] as const).map((a) => (
-                <Avatar key={a} id={a} size={22} />
-              ))}
-            </span>
+
             {demo ? (
               <span className="tabular font-mono text-[12px] text-faint">
                 walkthrough {step + 1}/{DEMO_STEPS.length}
@@ -171,7 +166,6 @@ export default function App() {
         </header>
 
         <div className="flex min-h-0 flex-1">
-        <Sidebar selected={campaign.id} onOpen={(id) => !demo && openCampaign(id)} />
         <main className="relative min-h-0 flex-1">
           <AnimatePresence mode="wait">
             <motion.div
@@ -182,13 +176,13 @@ export default function App() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <ScreenView id={screen} demo={demo} runKey={runKey} />
+              <ScreenView id={screen} demo={demo} runKey={runKey} onOpen={(id) => !demo && openCampaign(id)} />
             </motion.div>
           </AnimatePresence>
           <AnimatePresence>
             {finale && (
               <motion.div
-                className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-bg"
+                className="mesh-bg absolute inset-0 z-50 flex flex-col items-center justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
@@ -214,7 +208,7 @@ export default function App() {
             {caption && !finale && (
               <motion.div
                 key={step}
-                className="pointer-events-none absolute bottom-5 left-1/2 z-40 w-[980px] -translate-x-1/2 rounded-lg border border-line-strong bg-raised/95 px-6 py-3.5 shadow-2xl shadow-black/60"
+                className="pointer-events-none absolute bottom-6 left-1/2 z-40 w-[980px] -translate-x-1/2 rounded-2xl border border-line bg-white/95 px-7 py-4 shadow-[0_24px_60px_-24px_rgba(16,24,40,.45)]"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
@@ -235,7 +229,7 @@ export default function App() {
         </main>
         </div>
 
-        <footer className="flex h-9 shrink-0 items-center justify-between border-t border-line px-6 text-[12px]">
+        <footer className="relative z-10 flex h-9 shrink-0 items-center justify-between px-16 text-[12px]">
           <AgentNotes screen={screen} runKey={runKey} />
           <span className="font-mono text-faint">AI-generated creators · metrics simulated · no API keys needed</span>
         </footer>
