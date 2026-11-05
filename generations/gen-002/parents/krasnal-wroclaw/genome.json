@@ -1,0 +1,45 @@
+{
+  "id": "krasnal-wroclaw",
+  "name": "Wrocław Krasnal (brand seed)",
+  "generation": 1,
+  "parents": [],
+  "sources": [],
+  "genes": {
+    "hook": {
+      "allele": "camera finds a tiny bronze figure doing a human job",
+      "dominance": 0.6
+    },
+    "hero": {
+      "allele": "Wrocław bronze dwarf (krasnal), 30 cm tall, extremely serious",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "Wrocław Rynek cobblestones, tourists for scale",
+      "dominance": 0.7
+    },
+    "humor": {
+      "allele": "tiny thing, enormous dignity",
+      "dominance": 0.7
+    },
+    "audio": {
+      "allele": "tram bell and pigeons",
+      "dominance": 0.3
+    },
+    "visual": {
+      "allele": "golden-hour bronze, low-angle hero shot",
+      "dominance": 0.6
+    },
+    "catchphrase": {
+      "allele": "there are 600+ of us. we are organised.",
+      "dominance": 0.5
+    },
+    "structure": {
+      "allele": "tourist-POV discovery reveal",
+      "dominance": 0.5
+    }
+  },
+  "absurdity": 6,
+  "brandSafety": 10,
+  "mutations": [],
+  "fitness": null
+}
