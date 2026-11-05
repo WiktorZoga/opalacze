@@ -29,7 +29,7 @@ export function AgentSwarm({ screen, runKey }: { screen: ScreenId; runKey: numbe
       <div className="flex items-center justify-between border-b border-line px-5 py-3">
         <div className="font-mono text-[13px] font-bold tracking-[0.25em] text-acid glow-acid">AGENT SWARM</div>
         <div className="flex items-center gap-2 font-mono text-[12px] text-white/60">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-acid" /> 4 GROK BOTS LIVE
+          <span className="h-2 w-2 animate-pulse rounded-full bg-acid" /> 6 GROK BOTS LIVE
         </div>
       </div>
       <div className="flex justify-around border-b border-line px-3 py-4">

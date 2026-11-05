@@ -169,13 +169,13 @@ export default function App() {
                 {caption && (
                   <motion.div
                     key={step}
-                    className="pointer-events-none absolute inset-x-10 bottom-6 z-40 rounded-2xl border border-white/15 bg-black/85 px-8 py-4 text-center backdrop-blur"
+                    className="pointer-events-none absolute inset-x-24 bottom-3 z-40 rounded-2xl border border-white/15 bg-black/80 px-6 py-2.5 text-center backdrop-blur"
                     initial={{ y: 40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -20, opacity: 0 }}
                   >
-                    <div className="font-display text-[40px] font-bold leading-tight text-white">{caption.pl}</div>
-                    <div className="mt-1 font-mono text-[20px] text-acid">{caption.en}</div>
+                    <div className="font-display text-[32px] font-bold leading-tight text-white">{caption.pl}</div>
+                    <div className="font-mono text-[17px] text-acid">{caption.en}</div>
                   </motion.div>
                 )}
               </AnimatePresence>

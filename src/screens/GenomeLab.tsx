@@ -11,7 +11,7 @@ const NARRATION: Record<string, string> = {
   capybara: 'Pure aura. Payoff gene is dominant. Mmm.',
 }
 
-export function GenomeLab({ switchAt = 3200 }: { switchAt?: number }) {
+export function GenomeLab({ switchAt = 2600 }: { switchAt?: number }) {
   const [specimen, setSpecimen] = useState<'pigeon' | 'capybara'>('pigeon')
   useEffect(() => {
     const id = setTimeout(() => setSpecimen('capybara'), switchAt)
