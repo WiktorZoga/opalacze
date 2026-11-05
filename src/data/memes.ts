@@ -1,3 +1,5 @@
+import media from './media.json'
+
 export interface Meme {
   id: string
   name: string
@@ -155,4 +157,9 @@ export const MEMES: Record<string, Meme> = {
     art: 'krasnal',
     bg: 'radial-gradient(circle at 50% 35%,#b6ff00 0%,#2b6b0b 45%,#021b08 100%)',
   },
+}
+
+/** real images: src/data/media.json maps meme id → filename in public/memes/ */
+for (const [id, file] of Object.entries(media as Record<string, string>)) {
+  if (MEMES[id]) MEMES[id].img = `${import.meta.env.BASE_URL}memes/${file}`
 }

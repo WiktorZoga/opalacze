@@ -5,46 +5,12 @@ import { AgentSwarm } from './components/AgentSwarm'
 import { Pipeline } from './components/Pipeline'
 import { Stage } from './components/Stage'
 import { Ticker } from './components/Ticker'
-import { Radar } from './screens/Radar'
-import { GenomeLab } from './screens/GenomeLab'
-import { Breeding } from './screens/Breeding'
-import { Studio } from './screens/Studio'
-import { Publish } from './screens/Publish'
-import { FamilyTree } from './screens/FamilyTree'
-import { Brandrot } from './screens/Brandrot'
+import { SCREENS as TABS } from './screens/registry'
 import { DEMO_STEPS } from './demo'
 
-const TABS: { id: ScreenId; label: string; stage: number }[] = [
-  { id: 'radar', label: 'RADAR', stage: 0 },
-  { id: 'genome', label: 'GENOME', stage: 1 },
-  { id: 'breed', label: 'BREED', stage: 2 },
-  { id: 'studio', label: 'STUDIO', stage: 3 },
-  { id: 'publish', label: 'PUBLISH', stage: 4 },
-  { id: 'tree', label: 'TREE', stage: 5 },
-  { id: 'brand', label: 'BRANDROT', stage: 2 },
-]
-
-function ScreenView({ id, demo }: { id: ScreenId; demo: boolean }) {
-  switch (id) {
-    case 'radar':
-      return <Radar />
-    case 'genome':
-      return <GenomeLab />
-    case 'breed':
-      return <Breeding />
-    case 'studio':
-      return <Studio />
-    case 'publish':
-      return <Publish />
-    case 'tree':
-      return <FamilyTree />
-    case 'brand':
-      return <Brandrot finaleAt={demo ? 2600 : undefined} />
-  }
-}
-
 const initialDemo = new URLSearchParams(window.location.search).has('demo')
-const initialScreen = (new URLSearchParams(window.location.search).get('screen') as ScreenId) || 'radar'
+const requested = new URLSearchParams(window.location.search).get('screen')
+const initialScreen: ScreenId = TABS.some((t) => t.id === requested) ? requested! : 'radar'
 
 export default function App() {
   const [screen, setScreen] = useState<ScreenId>(initialScreen)
@@ -89,7 +55,7 @@ export default function App() {
         e.preventDefault()
         goStep(step + 1)
       } else if (demo && e.key === 'ArrowLeft') goStep(step - 1)
-      else if (!demo && /^[1-7]$/.test(e.key)) go(TABS[Number(e.key) - 1].id)
+      else if (!demo && /^[1-9]$/.test(e.key) && TABS[Number(e.key) - 1]) go(TABS[Number(e.key) - 1].id)
       else if (!demo && e.key === 'ArrowRight') go(TABS[(TABS.findIndex((t) => t.id === screen) + 1) % TABS.length].id)
       else if (!demo && e.key === 'ArrowLeft') go(TABS[(TABS.findIndex((t) => t.id === screen) + TABS.length - 1) % TABS.length].id)
       else if (!demo && (e.key === 'r' || e.key === 'R')) setRunKey((k) => k + 1)
@@ -162,7 +128,7 @@ export default function App() {
                   exit={{ opacity: 0, x: -40 }}
                   transition={{ duration: 0.25 }}
                 >
-                  <ScreenView id={screen} demo={demo} />
+                  {tab.render({ demo })}
                 </motion.div>
               </AnimatePresence>
               <AnimatePresence mode="wait">
@@ -186,7 +152,7 @@ export default function App() {
         <footer className="flex h-[26px] shrink-0 items-center justify-between border-t border-line bg-black px-6 font-mono text-[11px] tracking-widest text-white/35">
           <span>ROT BOT · 6 GROK BOTS · TIKTOK + X</span>
           <span>sample data · metrics simulated · no API keys</span>
-          <span>{demo ? 'SPACE/→ NEXT · ← BACK · ESC EXIT' : '1-7 SCREENS · ←/→ · R REPLAY · D DEMO'}</span>
+          <span>{demo ? 'SPACE/→ NEXT · ← BACK · ESC EXIT' : '1-9 SCREENS · ←/→ · R REPLAY · D DEMO'}</span>
         </footer>
       </div>
     </Stage>
