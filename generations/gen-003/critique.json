@@ -1,6 +1,6 @@
 {
   "generation": 3,
-  "final": "absolutely not",
+  "final": "fine. ship it.",
   "rounds": [
     {
       "round": 1,
@@ -14,6 +14,18 @@
       },
       "reroll": "structure",
       "note": "it ends. memes must not end."
+    },
+    {
+      "round": 2,
+      "genome": "krasnal-ceo-series-a",
+      "verdict": "fine. ship it.",
+      "scores": {
+        "funny": 9,
+        "fresh": 9,
+        "loopable": 9,
+        "brandSafe": 9
+      },
+      "note": "i watched it four times. this changes nothing between us."
     }
   ]
 }
