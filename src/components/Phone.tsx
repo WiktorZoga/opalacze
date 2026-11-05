@@ -50,7 +50,7 @@ export function Phone({ meme, caption, width = 300, handle = '@rotbot.lab', dela
         <div className="absolute inset-x-3 top-9 z-10 h-1 rounded bg-white/25">
           <div className="h-full rounded bg-white" style={{ width: `${progress}%` }} />
         </div>
-        <div className="absolute inset-x-4 top-[58%] z-10 text-center">
+        <div className="absolute left-3 right-14 top-[16%] z-10 text-center">
           <span className="meme-text inline rounded px-1 text-[26px] leading-tight" style={{ fontSize: width * 0.085 }}>
             {words.slice(0, shownWords).join(' ')}
           </span>

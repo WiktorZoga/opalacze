@@ -20,7 +20,10 @@ export function Studio() {
             SHORT-VIDEO <span className="text-acid glow-acid">STUDIO</span>
           </h1>
         </div>
-        <div className="font-mono text-[13px] tracking-widest text-white/45">3 CUTS · 9:16 · CAPTIONS BURNED IN</div>
+        <div className="flex items-center gap-3">
+          <SpeechBubble id="mutator" text={ms < 2000 ? 'rendering 3 cuts, 9:16, captions burned in…' : 'all cuts ready → publisher 📦'} />
+          <Mascot id="mutator" size={76} active />
+        </div>
       </div>
       <div className="mt-4 flex flex-1 items-start justify-center gap-12">
         {CUTS.map((c, i) => {
@@ -48,10 +51,6 @@ export function Studio() {
             </motion.div>
           )
         })}
-      </div>
-      <div className="absolute bottom-8 left-10 flex items-end gap-3">
-        <Mascot id="mutator" size={84} active />
-        <SpeechBubble id="mutator" text="3 cuts, 9:16, captions burned in. hand-off to publisher 📦" />
       </div>
     </div>
   )

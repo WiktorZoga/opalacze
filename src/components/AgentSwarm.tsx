@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { AGENTS, AGENT_LIST } from '../data/agents'
 import { DIALOGUE, type ScreenId } from '../data/dialogue'
@@ -38,17 +38,14 @@ export function AgentSwarm({ screen, runKey }: { screen: ScreenId; runKey: numbe
         ))}
       </div>
       <div className="flex flex-1 flex-col justify-end gap-3 overflow-hidden px-4 py-4">
-        <AnimatePresence initial={false}>
-          {shown.slice(-7).map((l) => {
+        {shown.slice(-7).map((l) => {
             const a = AGENTS[l.agent]
             const border = l.tone === 'reject' ? '#ff2d3d' : l.tone === 'approve' ? '#b6ff00' : `${a.color}66`
             return (
               <motion.div
                 key={`${screen}-${l.at}`}
-                layout
                 initial={{ opacity: 0, x: 40, scale: 0.9 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 380, damping: 28 }}
                 className="flex items-start gap-3"
               >
@@ -71,7 +68,6 @@ export function AgentSwarm({ screen, runKey }: { screen: ScreenId; runKey: numbe
               </motion.div>
             )
           })}
-        </AnimatePresence>
         <div className="h-8">
           {typing && (
             <div className="flex items-center gap-2 font-mono text-[13px]" style={{ color: AGENTS[typing.agent].color }}>

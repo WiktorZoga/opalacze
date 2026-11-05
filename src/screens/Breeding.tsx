@@ -19,14 +19,14 @@ export const BREED_T = {
   cert: 9000,
 }
 
-function Stamp({ text, color, rotate }: { text: string; color: string; rotate: number }) {
+function Stamp({ text, color, rotate, top = '50%' }: { text: string; color: string; rotate: number; top?: string }) {
   return (
     <motion.div
       initial={{ scale: 3, opacity: 0, rotate: rotate - 20 }}
       animate={{ scale: 1, opacity: 1, rotate }}
       transition={{ type: 'spring', stiffness: 500, damping: 18 }}
-      className="pointer-events-none absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg border-[6px] px-5 py-2 font-meme text-[54px] uppercase leading-none"
-      style={{ color, borderColor: color, textShadow: `0 0 20px ${color}`, boxShadow: `0 0 30px ${color}88, inset 0 0 20px ${color}55`, background: '#000a' }}
+      className="pointer-events-none absolute left-1/2 z-30 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg border-[6px] px-5 py-2 font-meme text-[54px] uppercase leading-none"
+      style={{ top, color, borderColor: color, textShadow: `0 0 20px ${color}`, boxShadow: `0 0 30px ${color}88, inset 0 0 20px ${color}55`, background: '#000a' }}
     >
       {text}
     </motion.div>
@@ -40,6 +40,7 @@ function Certificate() {
     ['MOTHER', 'Corporate Pigeon'],
     ['FATHER', 'Sigma Capybara'],
     ['MUTATION', '+ Wrocław krasnal gene'],
+    ['TREND DNA', 'door-prank hook (TikTok)'],
     ['VIRALITY FORECAST', '97 / 100'],
   ]
   return (
@@ -169,7 +170,7 @@ export function Breeding({ runKey = 0 }: { runKey?: number }) {
                   ? { scale: [1, 1.05, 0.95, 1], x: [0, -10, 10, -6, 0], filter: ['hue-rotate(0deg)', 'hue-rotate(180deg)', 'hue-rotate(360deg)'] }
                   : { scale: 1, y: 0 }
               }
-              exit={{ scale: 0, rotate: 30, opacity: 0 }}
+              exit={{ scale: 0, rotate: 30, opacity: 0, transition: { duration: 0.25 } }}
               transition={mutating ? { duration: 0.35, repeat: Infinity } : { type: 'spring', stiffness: 220, damping: 14 }}
             >
               <MemeCard meme={MEMES.mutant1} width={340} gen={7} />
@@ -179,6 +180,7 @@ export function Breeding({ runKey = 0 }: { runKey?: number }) {
           {final && (
             <motion.div
               key="final"
+              layout
               className="relative"
               initial={{ scale: 0, y: 120, rotate: -10 }}
               animate={{ scale: 1, y: 0, rotate: 0 }}
@@ -191,7 +193,7 @@ export function Breeding({ runKey = 0 }: { runKey?: number }) {
                 transition={{ duration: 1.6, repeat: Infinity }}
               />
               <MemeCard meme={MEMES.krasnal} width={380} gen={7} glow="acid" />
-              {ms >= T.approve && <Stamp text="approved" color="#b6ff00" rotate={-8} />}
+              {ms >= T.approve && <Stamp text="approved" color="#b6ff00" rotate={-8} top="72%" />}
             </motion.div>
           )}
         </AnimatePresence>
