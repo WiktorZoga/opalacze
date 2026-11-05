@@ -3,6 +3,18 @@ import { CHILD, CRITIQUE, GENERATIONS, GENOME, LIVE_IMAGE, PARENTS } from '../da
 import { MEMES } from '../data/memes'
 import { MemeCard } from '../components/MemeCard'
 import { Badge, Panel } from '../components/ui'
+import { Helix } from '../components/Helix'
+
+const GENE_COLOR: Record<string, string> = {
+  hook: '#b6ff00',
+  hero: '#ffb800',
+  setting: '#00f0ff',
+  humor: '#ff2bd6',
+  audio: '#8b5cff',
+  visual: '#ff5a36',
+  catchphrase: '#3dffa8',
+  structure: '#7ab8ff',
+}
 
 const CHILD_MEME: Record<string, string> = {
   'scientists-reveal-the-clap': 'scientistsHi',
@@ -23,21 +35,29 @@ function GenomeTable() {
         <span className="flex items-center gap-2"><Badge>F</Badge>{PARENTS.father}</span>
         <span className="flex items-center gap-2"><Badge tone="accent">mutation</Badge>rewritten this generation</span>
       </div>
-      <div>
+      <div className="flex">
+        <div className="flex w-[150px] shrink-0 justify-center border-r border-line py-3">
+          <Helix width={96} height={380} rungs={20} speed={1.8} colors={GENOME.map((g) => GENE_COLOR[g.gene] ?? '#b6ff00')} />
+        </div>
+        <div className="min-w-0 flex-1">
         {GENOME.map((g, i) => (
           <motion.div
             key={g.gene}
-            className="grid grid-cols-[120px_1fr_180px_96px] items-center gap-5 border-b border-line px-5 py-3 last:border-0"
+            className="grid grid-cols-[130px_1fr_170px_92px] items-center gap-5 border-b border-line px-5 py-3 last:border-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.05 * i }}
           >
-            <span className="font-mono text-[13px] text-text">{g.gene}</span>
+            <span className="flex items-center gap-2 font-mono text-[13px] text-text">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ background: GENE_COLOR[g.gene], boxShadow: `0 0 8px ${GENE_COLOR[g.gene]}` }} />
+              {g.gene}
+            </span>
             <span className="truncate text-[13px] text-muted" title={g.allele}>{g.allele}</span>
             <div className="flex items-center gap-3">
               <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-line">
                 <motion.div
-                  className={`h-full rounded-full ${g.origin === 'mutation' ? 'bg-accent' : 'bg-muted'}`}
+                  className="h-full rounded-full"
+                  style={{ background: GENE_COLOR[g.gene], boxShadow: g.origin === 'mutation' ? `0 0 10px ${GENE_COLOR[g.gene]}` : undefined, opacity: g.origin === 'mutation' ? 1 : 0.75 }}
                   initial={{ width: 0 }}
                   animate={{ width: `${g.dominance * 100}%` }}
                   transition={{ delay: 0.2 + 0.05 * i, duration: 0.6, ease: 'easeOut' }}
@@ -50,6 +70,7 @@ function GenomeTable() {
             </span>
           </motion.div>
         ))}
+        </div>
       </div>
     </Panel>
   )
@@ -68,7 +89,11 @@ function CritiqueTable() {
         <div key={r.round} className="grid grid-cols-[64px_150px_1fr_1.2fr] items-center gap-4 border-b border-line px-5 py-3 text-[13px] last:border-0">
           <span className="font-mono text-muted">{r.round}</span>
           <span>
-            <Badge tone={r.round === 1 ? 'danger' : 'accent'}>{r.verdict}</Badge>
+            {r.round === 1 ? (
+              <span className="inline-block -rotate-6 rounded border-2 border-danger px-1.5 font-meme text-[15px] uppercase leading-tight text-danger [text-shadow:0_0_10px_#ff3d5a88]">{r.verdict}</span>
+            ) : (
+              <Badge tone="accent">{r.verdict}</Badge>
+            )}
           </span>
           <span className="tabular font-mono text-[12px] text-muted">
             {Object.entries(r.scores)
@@ -108,7 +133,7 @@ function Tree() {
                   ))}
                 </div>
                 <div className="ml-3 h-3 w-px bg-line-strong" />
-                <div className={`flex items-center gap-4 rounded-lg border p-3 ${i === GENERATIONS.length - 1 ? 'border-accent/50 bg-raised' : 'border-line bg-raised/60'}`}>
+                <div className={`flex items-center gap-4 rounded-lg border p-3 ${i === GENERATIONS.length - 1 ? 'glow-acid border-accent/50 bg-raised' : 'border-line bg-raised/60'}`}>
                   <Thumb id={g.id} live={g.live} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 text-[15px] font-medium text-text">{g.name}{g.live && <Badge tone="accent">live · grok-4.7</Badge>}</div>
