@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpaceXAI × Grok Bot — Wrocław Hackathon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Sora:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0b1220;
+      --ink-soft: #1a2438;
+      --fog: #e8eef7;
+      --mist: #b8c5d9;
+      --signal: #00c2a8;
+      --signal-hot: #ff5a36;
+      --sky: #4ea8ff;
+      --slide-pad: clamp(1.25rem, 4vw, 4.5rem);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--ink);
+      color: var(--fog);
+      font-family: "Sora", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 55% at 12% 18%, rgba(78, 168, 255, 0.18), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 88% 78%, rgba(0, 194, 168, 0.14), transparent 50%),
+        radial-gradient(ellipse 50% 40% at 50% 100%, rgba(255, 90, 54, 0.08), transparent 45%),
+        linear-gradient(160deg, #071018 0%, #0f1a2e 45%, #0a1524 100%);
+      animation: atmosphere 18s ease-in-out infinite alternate;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+      background-image:
+        linear-gradient(rgba(232, 238, 247, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232, 238, 247, 0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 75% 70% at 50% 45%, black 20%, transparent 75%);
+    }
+
+    @keyframes atmosphere {
+      from { transform: scale(1) translate(0, 0); }
+      to { transform: scale(1.06) translate(-1.5%, 1%); }
+    }
+
+    .deck {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--slide-pad);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(18px) scale(0.985);
+      transition:
+        opacity 0.55s var(--ease),
+        transform 0.55s var(--ease),
+        visibility 0.55s;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .slide.active .reveal {
+      animation: rise 0.7s var(--ease) both;
+    }
+
+    .slide.active .reveal-d1 { animation-delay: 0.08s; }
+    .slide.active .reveal-d2 { animation-delay: 0.18s; }
+    .slide.active .reveal-d3 { animation-delay: 0.28s; }
+    .slide.active .reveal-d4 { animation-delay: 0.38s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .brand {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--signal);
+      margin-bottom: clamp(0.75rem, 2vh, 1.5rem);
+    }
+
+    .brand span { color: var(--mist); font-weight: 600; margin: 0 0.45em; }
+
+    h1 {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.1rem, 6.2vw, 4.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 16ch;
+      margin-bottom: clamp(1rem, 2.5vh, 1.75rem);
+    }
+
+    h2 {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.85rem, 4.8vw, 3.4rem);
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      max-width: 18ch;
+      margin-bottom: clamp(0.85rem, 2vh, 1.4rem);
+    }
+
+    .lede {
+      font-size: clamp(1rem, 2.1vw, 1.35rem);
+      line-height: 1.45;
+      color: var(--mist);
+      max-width: 38ch;
+      font-weight: 400;
+    }
+
+    .lede strong { color: var(--fog); font-weight: 600; }
+
+    .meta {
+      margin-top: clamp(1.25rem, 3vh, 2rem);
+      font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+      color: var(--fog);
+      letter-spacing: 0.02em;
+    }
+
+    .meta em {
+      font-style: normal;
+      color: var(--signal);
+      font-weight: 600;
+    }
+
+    .track-num {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      line-height: 0.9;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(78, 168, 255, 0.55);
+      margin-bottom: 0.35rem;
+      letter-spacing: -0.04em;
+    }
+
+    .track-list {
+      list-style: none;
+      margin-top: clamp(1rem, 2.5vh, 1.75rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      max-width: 42ch;
+    }
+
+    .track-list li {
+      font-size: clamp(0.95rem, 1.7vw, 1.15rem);
+      color: var(--mist);
+      padding-left: 1rem;
+      border-left: 2px solid var(--signal);
+    }
+
+    .schedule {
+      list-style: none;
+      margin-top: clamp(1rem, 2.5vh, 1.6rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-width: 36rem;
+    }
+
+    .schedule li {
+      display: grid;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      font-size: clamp(0.95rem, 1.7vw, 1.15rem);
+    }
+
+    .schedule time {
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      color: var(--signal);
+      letter-spacing: 0.02em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.25rem;
+      margin-top: clamp(1.1rem, 2.5vh, 1.75rem);
+      max-width: 40rem;
+    }
+
+    .chips p {
+      font-size: clamp(0.95rem, 1.65vw, 1.1rem);
+      color: var(--mist);
+      max-width: 22ch;
+    }
+
+    .chips p b {
+      display: block;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      color: var(--fog);
+      margin-bottom: 0.2rem;
+      font-size: 0.95em;
+    }
+
+    .people {
+      margin-top: clamp(1.1rem, 2.8vh, 1.8rem);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      font-size: clamp(0.95rem, 1.7vw, 1.15rem);
+      color: var(--mist);
+    }
+
+    .people b { color: var(--fog); font-weight: 600; }
+
+    .prize {
+      font-family: "Syne", sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin: 0.4rem 0 0.85rem;
+      background: linear-gradient(105deg, var(--fog) 0%, var(--signal) 55%, var(--sky) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .footer-hint {
+      position: fixed;
+      z-index: 3;
+      left: var(--slide-pad);
+      bottom: 1.1rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(184, 197, 217, 0.55);
+      pointer-events: none;
+    }
+
+    .progress {
+      position: fixed;
+      z-index: 3;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: rgba(232, 238, 247, 0.08);
+    }
+
+    .progress > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--signal), var(--sky));
+      transition: width 0.45s var(--ease);
+    }
+
+    .counter {
+      position: fixed;
+      z-index: 3;
+      right: var(--slide-pad);
+      bottom: 1.05rem;
+      font-family: "Syne", sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+      color: rgba(184, 197, 217, 0.7);
+      pointer-events: none;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nav-hot {
+      position: fixed;
+      z-index: 2;
+      top: 0;
+      bottom: 0;
+      width: 28%;
+    }
+
+    .nav-hot.prev { left: 0; cursor: w-resize; }
+    .nav-hot.next { right: 0; cursor: e-resize; }
+
+    @media (max-width: 640px) {
+      .schedule li {
+        grid-template-columns: 1fr;
+        gap: 0.15rem;
+      }
+      h1, h2 { max-width: none; }
+      .nav-hot { width: 22%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before { animation: none; }
+      .slide, .slide.active .reveal { transition: none; animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck" aria-live="polite">
+
+    <!-- 1 · Title -->
+    <section class="slide active" data-secs="18">
+      <p class="brand reveal">SpaceXAI <span>×</span> Grok Bot</p>
+      <h1 class="reveal reveal-d1">One evening to build what comes after copilots.</h1>
+      <p class="lede reveal reveal-d2">A three-hour sprint in Wrocław. Agent-native products. From scratch.</p>
+    </section>
+
+    <!-- 2 · Hook -->
+    <section class="slide" data-secs="16">
+      <p class="brand reveal">The night</p>
+      <h2 class="reveal reveal-d1">Seventy builders. One stack. Pure SpaceXAI.</h2>
+      <p class="lede reveal reveal-d2">Join fellow engineers in Wrocław for a hackathon powered entirely by SpaceXAI. Form teams of <strong>3–4</strong>. Design, code, and ship with Grok Bot.</p>
+    </section>
+
+    <!-- 3 · Sprint -->
+    <section class="slide" data-secs="14">
+      <p class="brand reveal">The sprint</p>
+      <h2 class="reveal reveal-d1">Pick a track. Push velocity. Ship a demo.</h2>
+      <p class="lede reveal reveal-d2">Three hours. An idea becomes a working product. Agent-native from the first commit.</p>
+    </section>
+
+    <!-- 4 · Track 1 -->
+    <section class="slide" data-secs="18">
+      <p class="brand reveal">Track</p>
+      <p class="track-num reveal reveal-d1">01</p>
+      <h2 class="reveal reveal-d2">Multiplayer AI</h2>
+      <p class="lede reveal reveal-d3">What happens when AI becomes a teammate?</p>
+      <ul class="track-list reveal reveal-d4">
+        <li>People and AI create, play, or solve together</li>
+        <li>Shared workspaces · collaborative tools · games with AI players</li>
+      </ul>
+    </section>
+
+    <!-- 5 · Track 2 -->
+    <section class="slide" data-secs="18">
+      <p class="brand reveal">Track</p>
+      <p class="track-num reveal reveal-d1">02</p>
+      <h2 class="reveal reveal-d2">Multi-agent systems</h2>
+      <p class="lede reveal reveal-d3">What can a team of agents accomplish together?</p>
+      <ul class="track-list reveal reveal-d4">
+        <li>Collaborate, divide tasks, debate, check each other’s work</li>
+        <li>Research teams · coding crews · agent swarms</li>
+      </ul>
+    </section>
+
+    <!-- 6 · Own take -->
+    <section class="slide" data-secs="10">
+      <p class="brand reveal">Open brief</p>
+      <h2 class="reveal reveal-d1">Tracks are starting points.</h2>
+      <p class="lede reveal reveal-d2">Bring your own take. Ship the version only your team would build.</p>
+    </section>
+
+    <!-- 7 · When / where / schedule -->
+    <section class="slide" data-secs="22">
+      <p class="brand reveal">Wrocław</p>
+      <h2 class="reveal reveal-d1">Thursday, Nov 5 · 17:00–23:00</h2>
+      <p class="lede reveal reveal-d2">Hosted by <strong>Callstack</strong>. DJ if all goes to plan.</p>
+      <ul class="schedule reveal reveal-d3">
+        <li><time>17:00–18:00</time><span>Doors · networking · team formation</span></li>
+        <li><time>18:00–21:00</time><span>Hackathon sprint — three hours to build</span></li>
+        <li><time>21:00–22:00</time><span>Networking &amp; submission review</span></li>
+        <li><time>22:00–23:00</time><span>Results &amp; prize handover</span></li>
+      </ul>
+    </section>
+
+    <!-- 8 · Who / bring -->
+    <section class="slide" data-secs="14">
+      <p class="brand reveal">Builders</p>
+      <h2 class="reveal reveal-d1">Come ready to ship.</h2>
+      <div class="chips reveal reveal-d2">
+        <p><b>Who</b> Engineers, technical founders, product builders, researchers building with LLMs.</p>
+        <p><b>Bring</b> Laptop + charger. Cursor IDE ready. Optionally GrokBot. Fresh ideas for a track.</p>
+      </div>
+    </section>
+
+    <!-- 9 · Prizes + people -->
+    <section class="slide" data-secs="14">
+      <p class="brand reveal">Stakes</p>
+      <p class="prize reveal reveal-d1">Top 3 projects.</p>
+      <div class="people reveal reveal-d2">
+        <p><b>Host</b> — Kornel Dubieniecki, Ambassador, SpaceXAI</p>
+        <p><b>Partners</b> — Callstack · AI Tinkerers</p>
+      </div>
+    </section>
+
+    <!-- 10 · Close -->
+    <section class="slide" data-secs="12">
+      <p class="brand reveal">SpaceXAI <span>×</span> Grok Bot</p>
+      <h1 class="reveal reveal-d1">Build what comes after copilots.</h1>
+      <p class="meta reveal reveal-d2">Wrocław · Nov 5 · <em>17:00</em> · Callstack</p>
+    </section>
+  </div>
+
+  <div class="nav-hot prev" id="prevZone" title="Previous"></div>
+  <div class="nav-hot next" id="nextZone" title="Next"></div>
+  <p class="footer-hint">Space / → next · ← prev · F fullscreen</p>
+  <div class="counter" id="counter">01 / 10</div>
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+  <script>
+    (function () {
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const bar = document.getElementById("bar");
+      const counter = document.getElementById("counter");
+      let i = 0;
+      let touchX = null;
+
+      function show(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach((s, idx) => s.classList.toggle("active", idx === i));
+        bar.style.width = ((i + 1) / slides.length) * 100 + "%";
+        counter.textContent = String(i + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+      }
+
+      function next() { show(i + 1); }
+      function prev() { show(i - 1); }
+
+      document.getElementById("nextZone").addEventListener("click", (e) => { e.stopPropagation(); next(); });
+      document.getElementById("prevZone").addEventListener("click", (e) => { e.stopPropagation(); prev(); });
+      document.body.addEventListener("click", (e) => {
+        if (e.target.closest(".nav-hot")) return;
+        next();
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (["ArrowRight", "ArrowDown", " ", "PageDown", "Enter"].includes(e.key)) {
+          e.preventDefault();
+          next();
+        } else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) {
+          e.preventDefault();
+          prev();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          show(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          show(slides.length - 1);
+        } else if (e.key === "f" || e.key === "F") {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+          else document.exitFullscreen?.();
+        }
+      });
+
+      window.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+      window.addEventListener("touchend", (e) => {
+        if (touchX == null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0) next();
+        else prev();
+      }, { passive: true });
+
+      show(0);
+    })();
+  </script>
+</body>
+</html>
