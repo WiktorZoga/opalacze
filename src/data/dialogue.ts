@@ -8,9 +8,9 @@ export interface Line {
   tone?: 'normal' | 'reject' | 'approve' | 'handoff'
 }
 
-export type ScreenId = string
+export type ScreenId = 'radar' | 'genome' | 'breed' | 'studio' | 'publish' | 'tree' | 'brand'
 
-export const DIALOGUE: Partial<Record<ScreenId, Line[]>> = {
+export const DIALOGUE: Record<ScreenId, Line[]> = {
   radar: [
     { agent: 'scout', at: 300, text: 'scanning TikTok + X… 14,000 posts/min. coo.' },
     { agent: 'scout', at: 1700, text: '🚨 Closing the Door Prank +522% this week on TikTok.' },

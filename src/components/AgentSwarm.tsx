@@ -19,7 +19,7 @@ export function useElapsed(resetKey: unknown, tick = 100) {
 
 export function AgentSwarm({ screen, runKey }: { screen: ScreenId; runKey: number }) {
   const ms = useElapsed(`${screen}-${runKey}`)
-  const lines = DIALOGUE[screen] ?? []
+  const lines = DIALOGUE[screen]
   const shown = lines.filter((l) => ms >= l.at)
   const typing = lines.find((l) => ms >= l.at - TYPING_MS && ms < l.at)
   const speaking = typing?.agent ?? shown[shown.length - 1]?.agent
