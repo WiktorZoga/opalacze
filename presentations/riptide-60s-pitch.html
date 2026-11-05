@@ -10,11 +10,14 @@
   <style>
     :root {
       --void: #04121f;
-      --fog: #e7f4f2;
+      --panel: #0a1f2e;
+      --fog: #e8f6f3;
       --mist: #8fb3b0;
       --acid: #2dd4bf;
       --hot: #38bdf8;
+      --warn: #fb7185;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --pad: clamp(1.5rem, 5vw, 4.5rem);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,78 +35,150 @@
 
     body {
       background:
-        radial-gradient(ellipse 70% 50% at 15% 10%, rgba(45, 212, 191, 0.16), transparent 55%),
-        radial-gradient(ellipse 55% 45% at 90% 85%, rgba(56, 189, 248, 0.12), transparent 50%),
+        radial-gradient(ellipse 75% 55% at 12% 8%, rgba(45, 212, 191, 0.14), transparent 55%),
+        radial-gradient(ellipse 60% 45% at 88% 90%, rgba(56, 189, 248, 0.1), transparent 50%),
         linear-gradient(165deg, #031018 0%, #061a28 48%, #04121f 100%);
     }
 
-    .stage { position: relative; z-index: 1; height: 100%; width: 100%; overflow: hidden; }
+    .deck {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+    }
 
-    .scene {
+    .slide {
       position: absolute;
       inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--pad);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(14px) scale(0.985);
-      transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), visibility 0.45s;
+      transform: translateY(22px) scale(0.985);
+      transition:
+        opacity 0.55s var(--ease),
+        transform 0.55s var(--ease),
+        visibility 0.55s;
     }
 
-    .scene.on {
+    .slide.active {
       opacity: 1;
       visibility: visible;
-      transform: none;
       pointer-events: auto;
+      transform: none;
     }
 
-    .chrome {
-      position: absolute;
-      inset: clamp(0.75rem, 2vw, 1.4rem);
-      border: 1px solid rgba(232, 244, 242, 0.12);
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(10, 28, 44, 0.72), rgba(4, 18, 31, 0.55));
-      backdrop-filter: blur(10px);
-      overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    .slide.exit {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-14px) scale(0.99);
     }
 
-    .chrome-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.7rem 1rem;
-      border-bottom: 1px solid rgba(232, 244, 242, 0.08);
+    .slide.active .reveal {
+      animation: rise 0.7s var(--ease) both;
+    }
+
+    .slide.active .reveal-d1 { animation-delay: 0.08s; }
+    .slide.active .reveal-d2 { animation-delay: 0.18s; }
+    .slide.active .reveal-d3 { animation-delay: 0.28s; }
+    .slide.active .reveal-d4 { animation-delay: 0.4s; }
+    .slide.active .reveal-d5 { animation-delay: 0.52s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.06em;
+      font-size: clamp(0.72rem, 1.3vw, 0.85rem);
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: var(--acid);
+      margin-bottom: clamp(0.7rem, 1.8vh, 1.25rem);
+    }
+
+    h1 {
+      font-family: "Archivo Black", sans-serif;
+      font-weight: 400;
+      font-size: clamp(2.4rem, 7vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      max-width: 14ch;
+      margin-bottom: clamp(0.85rem, 2vh, 1.4rem);
+    }
+
+    h2 {
+      font-family: "Archivo Black", sans-serif;
+      font-weight: 400;
+      font-size: clamp(1.85rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 18ch;
+      margin-bottom: clamp(0.75rem, 1.8vh, 1.2rem);
+    }
+
+    h2 em, h1 em, .lede strong {
+      font-style: normal;
+      color: var(--acid);
+    }
+
+    .lede {
+      font-size: clamp(1.05rem, 2.1vw, 1.4rem);
+      line-height: 1.4;
       color: var(--mist);
+      max-width: 36ch;
+      font-weight: 400;
     }
 
-    .dot {
-      width: 0.55rem;
-      height: 0.55rem;
-      border-radius: 50%;
-      background: var(--acid);
-      box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.55);
-      animation: pulse 1.6s ease-out infinite;
-    }
-
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.45); }
-      70% { box-shadow: 0 0 0 10px rgba(45, 212, 191, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
-    }
-
-    .chrome-body {
-      position: absolute;
-      inset: 2.4rem 0 0;
+    .layout {
       display: grid;
-      place-items: center;
-      overflow: hidden;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(1.5rem, 4vw, 3.5rem);
+      align-items: center;
+      width: 100%;
+      height: 100%;
     }
 
-    .media-fill, .media-fill video, .media-fill img {
+    .layout.flip { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
+    .layout.solo { grid-template-columns: 1fr; max-width: 52rem; }
+
+    .phone {
+      width: min(100%, 280px);
+      aspect-ratio: 9 / 16;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(232, 246, 243, 0.16);
+      box-shadow:
+        0 28px 70px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(45, 212, 191, 0.08);
+      background: #000;
+      position: relative;
+    }
+
+    .phone video, .phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .frame {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(232, 246, 243, 0.12);
+      background: rgba(4, 18, 31, 0.55);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      aspect-ratio: 16 / 10;
+    }
+
+    .frame img, .frame video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -111,288 +186,168 @@
     }
 
     .wall {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: rgba(232, 244, 242, 0.08);
-    }
-
-    .wall figure {
-      position: relative;
-      overflow: hidden;
-      background: #061018;
-      margin: 0;
-    }
-
-    .wall img, .wall video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .wall figcaption {
-      position: absolute;
-      left: 0.55rem;
-      bottom: 0.55rem;
-      z-index: 2;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--void);
-      background: var(--acid);
-      padding: 0.22rem 0.4rem;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-
-    .phone {
-      width: min(28vw, 280px);
-      aspect-ratio: 9 / 16;
-      border-radius: 22px;
-      overflow: hidden;
-      border: 1px solid rgba(232, 244, 242, 0.18);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      background: #000;
-    }
-
-    .phone img, .phone video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .split {
-      width: 100%;
-      height: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: rgba(232, 244, 242, 0.08);
-    }
-
-    .split > div {
-      position: relative;
-      background: #061018;
-      overflow: hidden;
-    }
-
-    .split label {
-      position: absolute;
-      left: 0.85rem;
-      top: 0.85rem;
-      z-index: 2;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--void);
-      background: var(--acid);
-      padding: 0.28rem 0.5rem;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-
-    .split img, .split video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .agent-rail {
-      position: absolute;
-      left: 1rem;
-      right: 1rem;
-      bottom: 1rem;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: 0.55rem;
-      z-index: 3;
+      width: 100%;
     }
 
-    .agent {
-      padding: 0.7rem 0.75rem;
+    .wall .phone {
+      width: 100%;
+      margin: 0;
+      border-radius: 14px;
+    }
+
+    .agents {
+      list-style: none;
+      display: grid;
+      gap: 0.55rem;
+      margin-top: clamp(1rem, 2.5vh, 1.6rem);
+      max-width: 34rem;
+    }
+
+    .agents li {
+      display: grid;
+      grid-template-columns: 6.5rem 1fr;
+      gap: 0.85rem;
+      align-items: baseline;
+      padding: 0.7rem 0.85rem;
       border-radius: 12px;
-      background: rgba(4, 18, 31, 0.78);
-      border: 1px solid rgba(232, 244, 242, 0.12);
-      backdrop-filter: blur(8px);
-      transform: translateY(10px);
-      opacity: 0.35;
-      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), border-color 0.35s;
+      border: 1px solid rgba(232, 246, 243, 0.1);
+      background: rgba(4, 18, 31, 0.45);
     }
 
-    .agent.lit {
-      opacity: 1;
-      transform: none;
-      border-color: rgba(45, 212, 191, 0.55);
-    }
-
-    .agent .who {
+    .agents .who {
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.05em;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
       color: var(--acid);
-      margin-bottom: 0.2rem;
-    }
-
-    .agent .job {
-      font-size: 0.82rem;
       font-weight: 600;
-      line-height: 1.2;
     }
 
-    .agent .sub {
-      margin-top: 0.2rem;
-      font-size: 0.72rem;
+    .agents .job {
+      font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+      color: var(--fog);
+      font-weight: 500;
+    }
+
+    .agents .job span {
+      display: block;
+      margin-top: 0.15rem;
       color: var(--mist);
+      font-size: 0.86em;
+      font-weight: 400;
     }
 
-    .copy {
-      position: absolute;
-      left: clamp(1.2rem, 4vw, 3rem);
-      right: clamp(1.2rem, 4vw, 3rem);
-      bottom: clamp(4.5rem, 10vh, 7rem);
-      z-index: 5;
-      max-width: 42rem;
-      pointer-events: none;
-    }
-
-    .brand {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: clamp(0.72rem, 1.3vw, 0.85rem);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--acid);
-      margin-bottom: 0.55rem;
-    }
-
-    .line {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.55rem, 4.2vw, 3rem);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
-      max-width: 18ch;
-    }
-
-    .line em { font-style: normal; color: var(--acid); }
-
-    .subline {
-      margin-top: 0.7rem;
-      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
-      color: var(--mist);
-      max-width: 38ch;
-      line-height: 1.4;
-      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
-    }
-
-    .money {
+    .compare {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
-      width: min(860px, 92%);
-      margin: 0 auto;
+      margin-top: clamp(1.1rem, 2.8vh, 1.8rem);
+      max-width: 42rem;
     }
 
-    .money article {
-      padding: 1.25rem 1.35rem;
-      border-radius: 16px;
-      border: 1px solid rgba(232, 244, 242, 0.12);
-      background: rgba(4, 18, 31, 0.72);
+    .compare article {
+      padding: 1.15rem 1.25rem;
+      border-radius: 14px;
+      border: 1px solid rgba(232, 246, 243, 0.1);
+      background: rgba(4, 18, 31, 0.5);
     }
 
-    .money .k {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--mist);
-      margin-bottom: 0.45rem;
-    }
-
-    .money .v {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-      letter-spacing: -0.02em;
-    }
-
-    .money .d {
-      margin-top: 0.35rem;
-      color: var(--mist);
-      font-size: 0.95rem;
-    }
-
-    .money .win { border-color: rgba(45, 212, 191, 0.45); }
-    .money .win .v { color: var(--acid); }
-
-    .scrim {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(4, 18, 31, 0.15) 0%, rgba(4, 18, 31, 0.2) 40%, rgba(4, 18, 31, 0.88) 100%);
-      pointer-events: none;
-    }
-
-    .vo {
-      position: fixed;
-      z-index: 8;
-      left: clamp(1rem, 3vw, 2rem);
-      right: clamp(1rem, 3vw, 2rem);
-      bottom: 1.55rem;
-      display: flex;
-      align-items: flex-end;
-      gap: 1rem;
-      pointer-events: none;
-    }
-
-    .vo-pill {
-      flex: 1;
-      padding: 0.7rem 0.9rem;
-      border-radius: 12px;
-      background: rgba(4, 18, 31, 0.82);
-      border: 1px solid rgba(232, 244, 242, 0.12);
-      font-size: clamp(0.85rem, 1.5vw, 1rem);
-      line-height: 1.35;
-      color: var(--fog);
-      min-height: 2.8rem;
-    }
-
-    .vo-pill b {
-      color: var(--acid);
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72em;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
-    .hud {
-      position: fixed;
-      z-index: 9;
-      top: 0.9rem;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 1.1rem;
+    .compare .k {
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(143, 179, 176, 0.85);
+      color: var(--mist);
+      margin-bottom: 0.4rem;
+    }
+
+    .compare .v {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.55rem, 3.4vw, 2.4rem);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .compare .d {
+      margin-top: 0.4rem;
+      color: var(--mist);
+      font-size: 0.95rem;
+    }
+
+    .compare .win {
+      border-color: rgba(45, 212, 191, 0.45);
+      background: rgba(45, 212, 191, 0.06);
+    }
+
+    .compare .win .v { color: var(--acid); }
+
+    .proof {
+      margin-top: 1rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--mist);
+    }
+
+    .proof b { color: var(--fog); font-weight: 600; }
+
+    .motto {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.7rem, 4.5vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      max-width: 16ch;
+      color: var(--acid);
+      margin-top: 0.35rem;
+    }
+
+    .hud {
+      position: fixed;
+      z-index: 5;
+      left: var(--pad);
+      right: var(--pad);
+      bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
       pointer-events: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(143, 179, 176, 0.7);
+    }
+
+    .dots {
+      display: flex;
+      gap: 0.35rem;
+      align-items: center;
+    }
+
+    .dots i {
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      background: rgba(232, 246, 243, 0.18);
+      transition: transform 0.3s var(--ease), background 0.3s;
+    }
+
+    .dots i.on {
+      background: var(--acid);
+      transform: scale(1.35);
     }
 
     .progress {
       position: fixed;
-      z-index: 10;
+      z-index: 6;
       left: 0;
       right: 0;
       bottom: 0;
       height: 3px;
-      background: rgba(232, 244, 242, 0.08);
+      background: rgba(232, 246, 243, 0.06);
     }
 
     .progress > i {
@@ -400,383 +355,321 @@
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, var(--acid), var(--hot));
+      transition: width 0.45s var(--ease);
     }
 
-    .gate {
-      position: absolute;
-      inset: 0;
-      z-index: 20;
-      display: grid;
-      place-items: center;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(45, 212, 191, 0.14), transparent 60%),
-        rgba(4, 18, 31, 0.92);
-      text-align: center;
-      padding: 2rem;
+    .nav-hot {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      bottom: 0;
+      width: 28%;
     }
 
-    .gate.gone {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity 0.4s var(--ease), visibility 0.4s;
-    }
+    .nav-hot.prev { left: 0; cursor: w-resize; }
+    .nav-hot.next { right: 0; cursor: e-resize; }
 
-    .gate h1 {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(2.4rem, 8vw, 5.5rem);
-      letter-spacing: -0.03em;
-      line-height: 0.95;
-      margin-bottom: 0.7rem;
-    }
-
-    .gate p {
-      color: var(--mist);
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      max-width: 34ch;
-      margin: 0 auto 1.4rem;
-      line-height: 1.4;
-    }
-
-    .gate .cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      padding: 0.85rem 1.25rem;
-      border-radius: 999px;
-      background: var(--acid);
-      color: var(--void);
-      font-weight: 700;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
-    }
-
-    .gate .meta {
-      margin-top: 1rem;
+    .tag {
+      display: inline-block;
+      margin-top: 0.85rem;
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.72rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(143, 179, 176, 0.75);
+      color: var(--void);
+      background: var(--acid);
+      padding: 0.3rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 600;
     }
 
-    .endmark {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 2rem;
-      pointer-events: none;
-    }
-
-    .endmark .brand-big {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(2.8rem, 9vw, 6rem);
-      letter-spacing: -0.04em;
-      line-height: 0.92;
-    }
-
-    .endmark .motto {
-      margin-top: 1rem;
-      font-size: clamp(1.05rem, 2.3vw, 1.55rem);
-      color: var(--acid);
-      max-width: 22ch;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.25;
-    }
-
-    .endmark .product {
-      margin-top: 1.1rem;
-      color: var(--mist);
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 900px) {
-      .wall { grid-template-columns: repeat(2, 1fr); }
-      .agent-rail { grid-template-columns: 1fr 1fr; }
-      .phone { width: min(42vw, 220px); }
-      .money { grid-template-columns: 1fr; }
-      .split { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+    @media (max-width: 860px) {
+      .layout, .layout.flip { grid-template-columns: 1fr; }
+      .phone { width: min(42vw, 220px); margin: 0 auto 1rem; }
+      .agents li { grid-template-columns: 1fr; gap: 0.2rem; }
+      .compare { grid-template-columns: 1fr; }
+      .wall { max-width: 360px; margin: 0 auto; }
+      h1, h2 { max-width: none; }
+      .nav-hot { width: 20%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .scene, .agent, .gate { transition: none; }
-      .dot { animation: none; }
+      .slide, .slide.active .reveal { transition: none; animation: none; }
     }
   </style>
 </head>
 <body>
-  <div class="hud">
-    <span>Riptide · 60s pitch</span>
-    <span id="clock">00.0s</span>
-  </div>
+  <div class="deck" id="deck" aria-live="polite">
 
-  <div class="stage" id="stage">
-    <!-- 0–5s · absurd entertainment hook (Brainrot tone; real UGC) -->
-    <section class="scene" data-start="0" data-end="5" data-vo="Yes — that's a capybara in a robe, spritzing perfume. And a swarm of Grok Bot agents made it.">
-      <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> the ads · tone Brainrot · noir05-brainrot-capybara</div>
-        <div class="chrome-body">
+    <!-- 1 · Title -->
+    <section class="slide active" data-note="Riptide — the AI ad agency that rides virals.">
+      <p class="eyebrow reveal">SpaceXAI × Grok Bot · Wrocław</p>
+      <h1 class="reveal reveal-d1">Riptide</h1>
+      <p class="lede reveal reveal-d2">The AI ad agency that rides virals.<br />A Grok Bot swarm. Minutes, not a week.</p>
+    </section>
+
+    <!-- 2 · Hook -->
+    <section class="slide" data-note="Yes — a pigeon pitching perfume to investor pigeons. Made by AI agents.">
+      <div class="layout">
+        <div>
+          <p class="eyebrow reveal">Hook</p>
+          <h2 class="reveal reveal-d1">Yes. That’s a pigeon pitching perfume.</h2>
+          <p class="lede reveal reveal-d2">And a swarm of Grok Bot agents made it — trend DNA in, brand creative out.</p>
+          <span class="tag reveal reveal-d3">#ad · AI-generated</span>
+        </div>
+        <div class="reveal reveal-d2">
           <div class="phone">
-            <video src="../public/memes/grok/ugc/noir05-brainrot-capybara.mp4" muted loop playsinline poster="../public/memes/grok/ugc/noir05-brainrot-capybara.poster.jpg"></video>
+            <video
+              src="../public/memes/grok/ugc/noir05-pigeon-pitch.mp4"
+              poster="../public/memes/grok/ugc/noir05-pigeon-pitch.poster.jpg"
+              muted loop playsinline
+              data-autoplay
+            ></video>
           </div>
         </div>
       </div>
-      <div class="copy">
-        <p class="brand">Entertainment</p>
-        <p class="line">Absurd on purpose.<br /><em>Agent-made.</em></p>
-      </div>
     </section>
 
-    <!-- 5–15s · problem + Riptide -->
-    <section class="scene" data-start="5" data-end="15" data-vo="Agencies need a week to ride a trend. Trends live three days. Riptide is the AI ad agency that ships trend-native UGC in minutes.">
-      <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> trend radar · rising TikTok / X</div>
-        <div class="chrome-body media-fill">
-          <img src="../docs/media/rotbot-radar-sources.gif" alt="Riptide trend radar scanning rising sources" />
-          <div class="scrim"></div>
-        </div>
-      </div>
-      <div class="copy">
-        <p class="brand">Problem</p>
-        <p class="line">Trends live <em>3 days</em>. Agencies take a week.</p>
-        <p class="subline">Riptide: brands send a brief; a Grok Bot swarm finds the rising viral and ships the ad while it still climbs.</p>
-      </div>
-    </section>
-
-    <!-- 15–35s · Scout → Geneticist → Creator → Critic -->
-    <section class="scene" data-start="15" data-end="35" data-vo="Scout finds the rising trend and scores brand fit. Geneticist extracts the viral DNA. Creator writes the script and renders 9:16 with Grok Imagine. Critic kills weak drafts — rejections are real git commits." id="pipeline">
-      <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> watch the swarm · Scout → Geneticist → Creator → Critic</div>
-        <div class="chrome-body media-fill">
-          <img id="pipeMedia" src="../docs/media/rotbot-screen-workflow.png" alt="Riptide campaign workflow screen" />
-          <div class="scrim"></div>
-          <div class="agent-rail">
-            <div class="agent" data-lit-at="16">
-              <div class="who">🐦 Scout</div>
-              <div class="job">Trend + brand fit</div>
-              <div class="sub">TikTok / X · e.g. 87% fit</div>
-            </div>
-            <div class="agent" data-lit-at="21">
-              <div class="who">🦫 Geneticist</div>
-              <div class="job">Viral DNA</div>
-              <div class="sub">hook · pacing · insert</div>
-            </div>
-            <div class="agent" data-lit-at="26">
-              <div class="who">🐊 Creator</div>
-              <div class="job">Persona + render</div>
-              <div class="sub">script · 9:16 A/B</div>
-            </div>
-            <div class="agent" data-lit-at="31">
-              <div class="who">🐱 Critic</div>
-              <div class="job">Safety · claims</div>
-              <div class="sub">#ad · AI-generated</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="copy">
-        <p class="brand">Technology</p>
-        <p class="line">Four agents.<br /><em>One campaign.</em></p>
-      </div>
-    </section>
-
-    <!-- 35–48s · payoff: wall + live run -->
-    <section class="scene" data-start="35" data-end="48" data-vo="Same swarm, any tone — UGC, polished, or brainrot. This is gen-live-002: NOIR/05, Ren Hale, real grok-4.7 — Critic nine, nine, ten, ten.">
-      <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> the ads · NOIR/05 UGC + live run</div>
-        <div class="chrome-body">
-          <div class="split">
-            <div>
-              <label>ads wall</label>
-              <div class="wall" style="height:100%">
-                <figure><img src="../docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale live deceive" /><figcaption>Ren Hale · live</figcaption></figure>
-                <figure><img src="../docs/media/ugc/noir05-unboxing.gif" alt="Maja unboxing NOIR/05" /><figcaption>Maja · unboxing</figcaption></figure>
-                <figure><img src="../docs/media/ugc/noir05-grwm.gif" alt="Maja GRWM" /><figcaption>GRWM</figcaption></figure>
-                <figure><img src="../docs/media/ugc/noir05-brainrot-capybara.gif" alt="Capybara Brainrot NOIR/05" /><figcaption>Brainrot</figcaption></figure>
-              </div>
-            </div>
-            <div>
-              <label>gen-live-002</label>
-              <video src="../generations/gen-live-002/media/noir-05-deceive.mp4" muted loop playsinline poster="../docs/live-002-poster.jpg"></video>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="copy">
-        <p class="brand">Payoff</p>
-        <p class="line">Trend in.<br /><em>Creative out.</em></p>
-      </div>
-    </section>
-
-    <!-- 48–60s · money + motto -->
-    <section class="scene" data-start="48" data-end="60" data-vo="For agencies and brands that can't wait a week: minutes to an on-trend ad. We don't follow trends. We mutate them.">
-      <div class="chrome">
-        <div class="chrome-bar"><span class="dot"></span> business · time to on-trend ad</div>
-        <div class="chrome-body" style="padding: 2rem;">
-          <div class="money">
+    <!-- 3 · Problem -->
+    <section class="slide" data-note="Trends live three days. Agencies still take a week.">
+      <div class="layout">
+        <div>
+          <p class="eyebrow reveal">Problem</p>
+          <h2 class="reveal reveal-d1">Trends live <em>three days</em>.</h2>
+          <p class="lede reveal reveal-d2">A brand’s content cycle — brief, agency, approvals, shoot — still takes a week. The ad lands after the format is dead.</p>
+          <div class="compare reveal reveal-d3">
             <article>
-              <div class="k">Agency cycle</div>
+              <div class="k">Agency</div>
               <div class="v">~1 week</div>
-              <div class="d">Brief → shoot → approvals</div>
+              <div class="d">One concept, late</div>
             </article>
             <article class="win">
               <div class="k">Riptide</div>
               <div class="v">minutes</div>
-              <div class="d">A/B variants while the trend still rises</div>
+              <div class="d">A/B while it still rises</div>
             </article>
           </div>
         </div>
-      </div>
-      <div class="endmark">
-        <div>
-          <div class="brand-big">Riptide</div>
-          <p class="motto">We don't follow trends.<br />We mutate them.</p>
-          <p class="product">the AI ad agency that rides virals · Grok Bot swarm</p>
+        <div class="reveal reveal-d2">
+          <div class="frame">
+            <img src="../docs/media/rotbot-radar-sources.gif" alt="Riptide trend radar scanning rising TikTok and X sources" />
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- 4 · Product -->
+    <section class="slide" data-note="Brand brief in. Rising trend matched. Trend-native UGC out.">
+      <p class="eyebrow reveal">Product</p>
+      <h2 class="reveal reveal-d1">Brief in. Viral DNA. Ads out.</h2>
+      <p class="lede reveal reveal-d2">Brands send a brief. A Grok Bot swarm finds the rising TikTok / X trend, extracts its DNA, and ships trend-native UGC — UGC, polished, or brainrot.</p>
+      <p class="proof reveal reveal-d3">Live: <b>@grok/agent-sdk</b> · Grok Imagine · xAI X search</p>
+    </section>
+
+    <!-- 5 · Pipeline -->
+    <section class="slide" data-note="Scout → Geneticist → Creator → Critic — then Publisher and Analyst.">
+      <div class="layout">
+        <div>
+          <p class="eyebrow reveal">The swarm</p>
+          <h2 class="reveal reveal-d1">Six agents. One campaign loop.</h2>
+          <ul class="agents">
+            <li class="reveal reveal-d1"><span class="who">🐦 Scout</span><span class="job">Rising trends + brand fit<span>TikTok / X · e.g. 87% fit</span></span></li>
+            <li class="reveal reveal-d2"><span class="who">🦫 Geneticist</span><span class="job">Viral DNA<span>hook · pacing · product insert</span></span></li>
+            <li class="reveal reveal-d3"><span class="who">🐊 Creator</span><span class="job">Persona, script, 9:16 A/B<span>Grok Imagine render</span></span></li>
+            <li class="reveal reveal-d4"><span class="who">🐱 Critic</span><span class="job">Fidelity · safety · claims<span>#ad · AI-generated · can reject</span></span></li>
+          </ul>
+          <p class="proof reveal reveal-d5">Then <b>Publisher</b> schedules · <b>Analyst</b> reads hook rate / CTR → next variant</p>
+        </div>
+        <div class="reveal reveal-d2">
+          <div class="frame">
+            <img src="../docs/media/rotbot-screen-workflow.png" alt="Riptide campaign workflow console" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Proof of real agents -->
+    <section class="slide" data-note="Every handoff is real. Critic rejections are git commits.">
+      <div class="layout flip">
+        <div class="reveal reveal-d1">
+          <div class="frame">
+            <img src="../docs/media/grokbot/04-trace-critic-absolutely-not-then-reroll.png" alt="Grok Bot trace: Critic rejects, Creator rerolls" />
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow reveal">Proof</p>
+          <h2 class="reveal reveal-d1">The Critic said <em>“absolutely not.”</em></h2>
+          <p class="lede reveal reveal-d2">Then the swarm rerolled. Every artifact is committed by the agent that made it — the git graph is the campaign lineage.</p>
+          <p class="proof reveal reveal-d3">gen-live-001 · Critic rejection → approval · 2,552 events</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 · Payoff creatives -->
+    <section class="slide" data-note="NOIR/05 UGC wall + live Ren Hale clip from gen-live-002.">
+      <div class="layout">
+        <div>
+          <p class="eyebrow reveal">Payoff</p>
+          <h2 class="reveal reveal-d1">Trend in.<br /><em>Creative out.</em></h2>
+          <p class="lede reveal reveal-d2">NOIR/05 · Maja UGC · Ren Hale live run. Same swarm, any tone — including brainrot.</p>
+          <p class="proof reveal reveal-d3">gen-live-002 · grok-4.7 · Critic <b>9 · 9 · 10 · 10</b></p>
+        </div>
+        <div class="reveal reveal-d2">
+          <div class="wall">
+            <div class="phone">
+              <img src="../docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale live UGC" />
+            </div>
+            <div class="phone">
+              <video
+                src="../generations/gen-live-002/media/noir-05-deceive.mp4"
+                poster="../docs/live-002-poster.jpg"
+                muted loop playsinline
+                data-autoplay
+              ></video>
+            </div>
+            <div class="phone">
+              <img src="../docs/media/ugc/noir05-unboxing.gif" alt="Maja unboxing" />
+            </div>
+            <div class="phone">
+              <img src="../docs/media/ugc/noir05-brainrot-capybara.gif" alt="Brainrot capybara" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 · Business close -->
+    <section class="slide" data-note="For agencies and brands that cannot wait a week.">
+      <p class="eyebrow reveal">Business</p>
+      <h2 class="reveal reveal-d1">Ride the viral before it’s gone.</h2>
+      <p class="lede reveal reveal-d2">Customers: DTC brands, local businesses, agencies that need a trend desk. Moat: a trend-DNA library that learns which genes sell.</p>
+      <div class="compare reveal reveal-d3">
+        <article>
+          <div class="k">Time to on-trend ad</div>
+          <div class="v">~1 week</div>
+          <div class="d">Agency cycle</div>
+        </article>
+        <article class="win">
+          <div class="k">With Riptide</div>
+          <div class="v">minutes</div>
+          <div class="d">A/B · while rising</div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 9 · Motto -->
+    <section class="slide" data-note="We don't follow trends. We mutate them.">
+      <p class="eyebrow reveal">Riptide</p>
+      <h1 class="reveal reveal-d1">Riptide</h1>
+      <p class="motto reveal reveal-d2">We don’t follow trends.<br />We mutate them.</p>
+      <p class="lede reveal reveal-d3" style="margin-top:1.1rem">the AI ad agency that rides virals</p>
+    </section>
   </div>
 
-  <div class="vo"><div class="vo-pill" id="vo"><b>VO</b> Press play — ~60 seconds</div></div>
+  <div class="nav-hot prev" id="prevZone" title="Previous"></div>
+  <div class="nav-hot next" id="nextZone" title="Next"></div>
+  <div class="hud">
+    <span>Space / → next · ← prev · F fullscreen</span>
+    <span class="dots" id="dots" aria-hidden="true"></span>
+    <span id="counter">01 / 09</span>
+  </div>
   <div class="progress" aria-hidden="true"><i id="bar"></i></div>
-
-  <div class="gate" id="gate">
-    <div>
-      <h1>Riptide</h1>
-      <p>One-minute pitch. Real media from this repo. Auto-timed interface commentary — entertainment → technology → money.</p>
-      <div class="cta">▶ Play 60s</div>
-      <p class="meta">Space / click · R restart · F fullscreen</p>
-    </div>
-  </div>
 
   <script>
     (function () {
-      const DURATION = 60;
-      const scenes = Array.from(document.querySelectorAll(".scene"));
-      const gate = document.getElementById("gate");
+      const slides = Array.from(document.querySelectorAll(".slide"));
       const bar = document.getElementById("bar");
-      const clock = document.getElementById("clock");
-      const vo = document.getElementById("vo");
-      const pipeMedia = document.getElementById("pipeMedia");
-      const agents = Array.from(document.querySelectorAll(".agent"));
+      const counter = document.getElementById("counter");
+      const dots = document.getElementById("dots");
+      let i = 0;
+      let touchX = null;
+      let transitioning = false;
 
-      const PIPE_FRAMES = [
-        { t: 15, src: "../docs/media/rotbot-screen-workflow.png" },
-        { t: 20, src: "../docs/media/grokbot/02-trace-overlord-to-scout-handoff.png" },
-        { t: 24, src: "../docs/media/grokbot/03-trace-geneticist-mutator-handoffs.png" },
-        { t: 28, src: "../docs/media/rotbot-agent-flow.gif" },
-        { t: 31, src: "../docs/media/grokbot/04-trace-critic-absolutely-not-then-reroll.png" },
-        { t: 33, src: "../docs/media/rotbot-screen-workflow-critic.png" },
-      ];
-
-      let playing = false;
-      let startMs = 0;
-      let raf = 0;
-      let lastScene = -1;
-
-      function fmt(t) {
-        return t.toFixed(1).padStart(4, "0") + "s";
-      }
-
-      function setScene(t) {
-        let idx = 0;
-        scenes.forEach((s, i) => {
-          const a = +s.dataset.start;
-          const b = +s.dataset.end;
-          const on = t >= a && t < b;
-          s.classList.toggle("on", on);
-          if (on) idx = i;
-        });
-
-        if (idx !== lastScene) {
-          lastScene = idx;
-          const s = scenes[idx];
-          vo.innerHTML = "<b>VO · " + s.dataset.start + "–" + s.dataset.end + "s</b>" + (s.dataset.vo || "");
-          s.querySelectorAll("video").forEach((v) => {
-            v.currentTime = 0;
-            v.play().catch(() => {});
-          });
-          scenes.forEach((other, j) => {
-            if (j === idx) return;
-            other.querySelectorAll("video").forEach((v) => v.pause());
-          });
-        }
-
-        agents.forEach((el) => {
-          const litAt = +el.dataset.litAt;
-          el.classList.toggle("lit", t >= litAt && t < 35);
-        });
-
-        let frame = PIPE_FRAMES[0].src;
-        for (const f of PIPE_FRAMES) {
-          if (t >= f.t) frame = f.src;
-        }
-        if (pipeMedia && t >= 15 && t < 35 && pipeMedia.getAttribute("src") !== frame) {
-          pipeMedia.setAttribute("src", frame);
-        }
-
-        bar.style.width = Math.min(100, (t / DURATION) * 100) + "%";
-        clock.textContent = fmt(Math.min(t, DURATION));
-      }
-
-      function tick(now) {
-        if (!playing) return;
-        const t = (now - startMs) / 1000;
-        if (t >= DURATION) {
-          setScene(DURATION - 0.001);
-          playing = false;
-          vo.innerHTML = "<b>END</b>Press R to restart · motto from Overlord / gen-live-002";
-          return;
-        }
-        setScene(t);
-        raf = requestAnimationFrame(tick);
-      }
-
-      function play() {
-        gate.classList.add("gone");
-        playing = true;
-        startMs = performance.now();
-        lastScene = -1;
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(tick);
-      }
-
-      function restart() {
-        playing = false;
-        cancelAnimationFrame(raf);
-        gate.classList.remove("gone");
-        setScene(0);
-        scenes.forEach((s) => s.classList.remove("on"));
-        lastScene = -1;
-        bar.style.width = "0%";
-        clock.textContent = "00.0s";
-        vo.innerHTML = "<b>VO</b>Press play — ~60 seconds";
-      }
-
-      gate.addEventListener("click", (e) => {
-        e.stopPropagation();
-        play();
+      slides.forEach((_, idx) => {
+        const d = document.createElement("i");
+        if (idx === 0) d.classList.add("on");
+        dots.appendChild(d);
       });
+      const dotNodes = Array.from(dots.children);
 
-      document.body.addEventListener("click", () => {
-        if (!playing && !gate.classList.contains("gone")) play();
+      function playMedia(slide) {
+        slides.forEach((s) => {
+          s.querySelectorAll("video").forEach((v) => {
+            if (s === slide) {
+              v.currentTime = 0;
+              v.play().catch(() => {});
+            } else {
+              v.pause();
+            }
+          });
+        });
+      }
+
+      function show(n) {
+        if (transitioning) return;
+        const next = (n + slides.length) % slides.length;
+        if (next === i && slides[i].classList.contains("active")) return;
+        transitioning = true;
+        const prev = slides[i];
+        prev.classList.add("exit");
+        prev.classList.remove("active");
+        i = next;
+        const cur = slides[i];
+        cur.classList.remove("exit");
+        // force reflow so entrance animation retriggers
+        void cur.offsetWidth;
+        cur.classList.add("active");
+        bar.style.width = ((i + 1) / slides.length) * 100 + "%";
+        counter.textContent = String(i + 1).padStart(2, "0") + " / " + String(slides.length).padStart(2, "0");
+        dotNodes.forEach((d, idx) => d.classList.toggle("on", idx === i));
+        playMedia(cur);
+        window.setTimeout(() => {
+          prev.classList.remove("exit");
+          transitioning = false;
+        }, 520);
+      }
+
+      function next() { show(i + 1); }
+      function prev() { show(i - 1); }
+
+      document.getElementById("nextZone").addEventListener("click", (e) => { e.stopPropagation(); next(); });
+      document.getElementById("prevZone").addEventListener("click", (e) => { e.stopPropagation(); prev(); });
+      document.body.addEventListener("click", (e) => {
+        if (e.target.closest(".nav-hot")) return;
+        next();
       });
 
       window.addEventListener("keydown", (e) => {
-        if (e.key === " " || e.key === "Enter") {
+        if (["ArrowRight", "ArrowDown", " ", "PageDown", "Enter"].includes(e.key)) {
           e.preventDefault();
-          if (!playing) play();
-        } else if (e.key === "r" || e.key === "R") {
+          next();
+        } else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) {
           e.preventDefault();
-          restart();
+          prev();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          show(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          show(slides.length - 1);
         } else if (e.key === "f" || e.key === "F") {
           if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
           else document.exitFullscreen?.();
         }
       });
+
+      window.addEventListener("touchstart", (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+      window.addEventListener("touchend", (e) => {
+        if (touchX == null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) < 40) return;
+        if (dx < 0) next();
+        else prev();
+      }, { passive: true });
+
+      playMedia(slides[0]);
+      bar.style.width = (1 / slides.length) * 100 + "%";
     })();
   </script>
 </body>
