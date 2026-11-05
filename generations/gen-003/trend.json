@@ -1,0 +1,46 @@
+{
+  "generation": 3,
+  "run": "scout-2026-11-05",
+  "candidates": [
+    {
+      "id": "why-would-i-deceive-you",
+      "platform": "tiktok",
+      "velocity": 3.6,
+      "url": "https://newengen.com/insights/tiktok-trends/"
+    },
+    {
+      "id": "permission-to-cry-soldier",
+      "platform": "tiktok",
+      "velocity": 4.1,
+      "url": "https://trendhaus.ai/tiktok-trends"
+    },
+    {
+      "id": "closing-the-door-prank",
+      "platform": "tiktok",
+      "velocity": 5.2,
+      "url": "https://virlo.ai/trends/"
+    },
+    {
+      "id": "ding-ding-ding-candy-match-3",
+      "platform": "tiktok",
+      "velocity": 4.6,
+      "url": "https://virlo.ai/trends/"
+    },
+    {
+      "id": "data-centers-in-space",
+      "platform": "x",
+      "velocity": 3.8,
+      "url": "https://www.businessinsider.com/data-center-memes-flood-x-after-democrats-2026-midterm-wins-2026-11"
+    }
+  ],
+  "picked": {
+    "mother": "krasnal-ceo",
+    "father": "why-would-i-deceive-you"
+  },
+  "why": "a CEO needs a pitch, a pitch needs a lie, and this audio is the lie. coo.",
+  "skipped": {
+    "closing-the-door-prank": "needs a real person's reaction",
+    "permission-to-cry-soldier": "persona is creator-owned",
+    "data-centers-in-space": "election-adjacent"
+  }
+}
