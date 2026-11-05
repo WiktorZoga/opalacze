@@ -19,18 +19,23 @@
   <b><a href="docs/media/rotbot-demo-45s.mp4">▶ Watch the 45s demo</a></b> &nbsp;·&nbsp; <b><a href="https://wiktorzoga.github.io/opalacze/">🚀 Try it live</a></b>
 </p>
 
+## The ads it made
+
+<table>
+<tr>
+<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale · Why would I deceive you? · UGC" width="100%"><br><sub><b>🔴 live run</b><br>Ren Hale · “Why would I deceive you?” · UGC<br><code>#ad · AI-generated</code></sub></td>
+<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-unboxing.gif" alt="Maja · unboxing · UGC" width="100%"><br><sub>Maja · unboxing · UGC<br><code>#ad · AI-generated</code></sub></td>
+<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-grwm.gif" alt="Maja · get ready with me · UGC" width="100%"><br><sub>Maja · get ready with me · UGC<br><code>#ad · AI-generated</code></sub></td>
+<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-brainrot-capybara.gif" alt="Capybara mascot · dramatic spritz · Brainrot" width="100%"><br><sub>Capybara mascot · dramatic spritz · Brainrot<br><code>#ad · AI-generated</code></sub></td>
+<td align="center" valign="top" width="20%"><img src="docs/media/ugc/cafe-first-time-fancy.gif" alt="Kuba · first time in a fancy café · UGC" width="100%"><br><sub>Kuba · first time in a fancy café · UGC<br><code>#ad · AI-generated</code></sub></td>
+</tr>
+</table>
+
+<sub>NOIR/05 is a fictional perfume brand; all creators are AI personas rendered with Grok Imagine.</sub>
+
+## How the swarm works
+
 **Why:** agencies need a week to jump on a trend that lives 3 days. Riptide ships trend-matched ads while the trend is still rising.
-
-**The app:** a Briefs inbox, and per brief three views: **Campaign** (the swarm working the brief live), **Creative** (the A/B variants per tone) and **History** (the R&D lineage).
-
-## What it does
-
-- 📝 **Brief in:** brand, product, audience, goal, tone. The **Scout** finds rising TikTok / X trends and scores brand fit ("87% fit").
-- 🧬 **Trend DNA:** the **Geneticist** extracts hook, format, pacing, audio and caption style, plus where the product fits in.
-- 🎬 **UGC variants:** the **Creator** picks an AI creator persona, writes the script and renders 9:16 A/B variants with Grok Imagine.
-- ✅ **Ship & learn:** the **Critic** checks trend fidelity, brand safety, claims and the `#ad · AI-generated` disclosure; the **Publisher** schedules; the **Analyst** reads hook rate, watch time and CTR to steer the next variant.
-
-**Tones:** UGC · Polished ad · Brainrot
 
 ```mermaid
 flowchart LR
@@ -51,9 +56,6 @@ flowchart LR
     class B,T hot
     class O acid
 ```
-
-**Integrations.** Live: Grok Bot (`@grok/agent-sdk`), xAI Grok Imagine (image + video), xAI X search.
-Roadmap: Higgsfield (AI video / UGC avatars), TikTok Creative Center, Meta + TikTok Ads APIs, ElevenLabs voice.
 
 ## 🔴 Live runs: real, not simulated
 
@@ -82,6 +84,9 @@ trend fidelity 9 · brand safety 9 · claims 10 · disclosure 10.
 </tr>
 </table>
 
+<details>
+<summary><b>gen-live-001: the first R&D run</b></summary>
+
 <table>
 <tr>
 <td width="30%" valign="top">
@@ -104,6 +109,24 @@ trend fidelity 9 · brand safety 9 · claims 10 · disclosure 10.
 </tr>
 </table>
 
+</details>
+
+<details>
+<summary><b>📋 What each step does · tones · integrations</b></summary>
+
+- 📝 **Brief in:** brand, product, audience, goal, tone. The **Scout** finds rising TikTok / X trends and scores brand fit ("87% fit").
+- 🧬 **Trend DNA:** the **Geneticist** extracts hook, format, pacing, audio and caption style, plus where the product fits in.
+- 🎬 **UGC variants:** the **Creator** picks an AI creator persona, writes the script and renders 9:16 A/B variants with Grok Imagine.
+- ✅ **Ship & learn:** the **Critic** checks trend fidelity, brand safety, claims and the `#ad · AI-generated` disclosure; the **Publisher** schedules; the **Analyst** reads hook rate, watch time and CTR to steer the next variant.
+
+**Tones:** UGC · Polished ad · Brainrot
+
+**The app:** a Briefs inbox, and per brief three views: **Campaign** (the swarm working the brief live), **Creative** (the A/B variants per tone) and **History** (the R&D lineage).
+
+**Integrations.** Live: Grok Bot (`@grok/agent-sdk`), xAI Grok Imagine (image + video), xAI X search.
+Roadmap: Higgsfield (AI video / UGC avatars), TikTok Creative Center, Meta + TikTok Ads APIs, ElevenLabs voice.
+
+</details>
 
 <details>
 <summary><b>🔍 Inside Grok Bot: playground and trace</b></summary>
@@ -236,7 +259,8 @@ Reproduce: `git log --graph --format='%an: %s' -- generations/`. Real sources: [
 
 </details>
 
-## Quickstart
+<details>
+<summary><b>⚡ Quickstart</b></summary>
 
 ```bash
 cd agents && npm install && npx agent-sdk validate --dir .
@@ -246,5 +270,7 @@ npx agent-sdk dev                  # Grok Bot playground
 
 npm install && npm run dev         # Riptide: Briefs inbox → Campaign / Creative / History
 ```
+
+</details>
 
 <sub>Riptide is run by a Grok Bot swarm; ROT BOT is its R&D codename (commit authors, history). `gen-live-002` and `gen-live-001` are real end-to-end runs; generations 001–003 are recorded agent runs over real, linked trends; publishing and ad metrics are simulated and labeled. All creators are AI personas, labeled AI-generated. Team: [TEAM.md](TEAM.md).</sub>
