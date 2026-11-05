@@ -1,0 +1,38 @@
+{
+  "genome": "krasnal-ceo",
+  "generation": 2,
+  "source": "simulated",
+  "method": "projected from the parents' recorded public signal (sources.json)",
+  "formula": "0.35·watchThrough + 0.25·shareRate·10 + 0.2·saveRate·10 + 0.2·remixRate·20",
+  "platforms": {
+    "tiktok": {
+      "views": 640000,
+      "likes": 88000,
+      "shares": 57600,
+      "saves": 32000,
+      "comments": 2900,
+      "watchThrough": 0.79,
+      "shareRate": 0.09,
+      "saveRate": 0.05,
+      "remixRate": 0.035,
+      "fitness": 0.74
+    },
+    "x": {
+      "views": 118000,
+      "likes": 9100,
+      "shares": 7100,
+      "saves": 2400,
+      "comments": 380,
+      "watchThrough": 0.7,
+      "shareRate": 0.06,
+      "saveRate": 0.02,
+      "remixRate": 0.02,
+      "fitness": 0.51
+    }
+  },
+  "fitness": 0.63,
+  "carriedBy": "hero",
+  "draggedBy": "audio",
+  "elite": true,
+  "note": "the dwarf is the product. everything else is packaging."
+}
