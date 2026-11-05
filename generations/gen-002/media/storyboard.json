@@ -1,0 +1,8 @@
+{
+  "genomeId": "krasnal-ceo",
+  "kind": "video",
+  "model": "grok-imagine-video",
+  "aspectRatio": "9:16",
+  "durationSeconds": 8,
+  "prompt": "8s vertical. Beat 1 (0-2s): low-angle golden-hour shot across Wrocław Rynek cobblestones, lower-third 'SCIENTISTS REVEAL THE'. Beat 2 (2-6s): a 30 cm bronze krasnal in a tiny fleece vest at a tiny standing desk, laptop open, looks up into camera; caption completes 'CEO'. Beat 3 (6-8s): in the background a black cat with human hands slowly claps. Audio: tram bell, newsroom sting, three claps."
+}
