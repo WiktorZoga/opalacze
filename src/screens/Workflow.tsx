@@ -8,8 +8,8 @@ import { useClock } from '../components/hooks'
 import { AgentName, Avatar, Badge, CountUp, Json, Panel, StatusDot, fmtMs } from '../components/ui'
 import { BrandLogo } from '../components/Logo'
 
-const GRAPH_W = 1572
-const NODE_W = 200
+export const GRAPH_W = 1792
+const NODE_W = 236
 const NODE_H = 108
 const NODE_Y = 92
 const GRAPH_H = 262
@@ -29,7 +29,7 @@ function nodeState(run: Run, agent: AgentId, t: number): { state: NodeState; spa
   return { state: 'idle' }
 }
 
-function Graph({ run, t }: { run: Run; t: number }) {
+export function Graph({ run, t }: { run: Run; t: number }) {
   const { spans } = run
   const mid = NODE_Y + NODE_H / 2
   const xm = xOf('mutator')
@@ -70,12 +70,12 @@ function Graph({ run, t }: { run: Run; t: number }) {
         </defs>
         {xs.slice(0, -1).map((x, i) => {
           const lit = spans.some((s) => t >= s.start && PIPELINE.findIndex((p) => p.agent === s.agent) > i && !run.skipped.includes(PIPELINE[i + 1].agent))
-          return <line key={i} x1={x + NODE_W / 2} x2={xs[i + 1] - NODE_W / 2} y1={mid} y2={mid} stroke={lit ? 'url(#edge-live)' : '#2e2e33'} strokeOpacity={lit ? 0.7 : 1} strokeWidth={lit ? 2 : 1.5} />
+          return <line key={i} x1={x + NODE_W / 2} x2={xs[i + 1] - NODE_W / 2} y1={mid} y2={mid} stroke={lit ? 'url(#edge-live)' : '#d5dae1'} strokeOpacity={lit ? 0.7 : 1} strokeWidth={lit ? 2 : 1.5} />
         })}
         <path
           d={`M${xc - 60},${NODE_Y} C${xc - 80},${NODE_Y - 44} ${xm + 80},${NODE_Y - 44} ${xm + 60},${NODE_Y}`}
           fill="none"
-          stroke={rerollSeen ? '#3b82f6' : '#2e2e33'}
+          stroke={rerollSeen ? '#3b82f6' : '#d5dae1'}
           strokeOpacity={rerollSeen ? 0.8 : 1}
           strokeDasharray="4 4"
           strokeWidth={1.5}
@@ -83,7 +83,7 @@ function Graph({ run, t }: { run: Run; t: number }) {
         <path
           d={`M${xs[xs.length - 1]},${NODE_Y + NODE_H} C${xs[xs.length - 1]},${NODE_Y + NODE_H + 54} ${xs[0]},${NODE_Y + NODE_H + 54} ${xs[0]},${NODE_Y + NODE_H}`}
           fill="none"
-          stroke={loopSeen ? '#2dd4bf' : '#2e2e33'}
+          stroke={loopSeen ? '#2dd4bf' : '#d5dae1'}
           strokeOpacity={loopSeen ? 0.5 : 1}
           strokeDasharray="4 4"
           strokeWidth={1.5}
@@ -100,7 +100,7 @@ function Graph({ run, t }: { run: Run; t: number }) {
         const { state, span } = nodeState(run, p.agent, t)
         const a = AGENTS[p.agent]
         const live = state === 'running' || state === 'rejected'
-        const ring = state === 'rejected' ? 'glow-danger border-danger/70' : state === 'running' ? 'glow-acid border-accent/70' : state === 'done' ? 'border-accent/25' : 'border-line-strong'
+        const ring = state === 'rejected' ? 'glow-danger border-danger/70' : state === 'running' ? 'glow-acid border-accent/70' : state === 'done' ? 'border-accent/30' : 'border-line-strong'
         const said = [...run.spans].reverse().find((sp) => sp.agent === p.agent && t >= sp.start && t < sp.end + 900)
         const line = said?.quote ? { at: said.start, text: said.quote } : undefined
         return (
@@ -109,7 +109,7 @@ function Graph({ run, t }: { run: Run; t: number }) {
               {line && !run.skipped.includes(p.agent) && (
                 <motion.div
                   key={line.at}
-                  className="absolute z-20 w-[250px] -translate-x-1/2 rounded-xl border bg-bg/95 px-3 py-2 text-[13px] leading-snug text-text shadow-lg shadow-black/50"
+                  className="absolute z-20 w-[250px] -translate-x-1/2 rounded-xl border bg-white px-3 py-2 text-[13px] leading-snug text-text shadow-[0_12px_30px_-12px_rgba(16,24,40,.35)]"
                   style={{ left: xs[i], top: 6, borderColor: p.agent === 'critic' && line.text.startsWith('absolutely') ? '#ff3d5a' : `${a.color}99` }}
                   initial={{ opacity: 0, y: 8, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -117,12 +117,12 @@ function Graph({ run, t }: { run: Run; t: number }) {
                   transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 >
                   <span className="line-clamp-2">{line.text}</span>
-                  <span className="absolute -bottom-[7px] left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r bg-bg" style={{ borderColor: 'inherit' }} />
+                  <span className="absolute -bottom-[7px] left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r bg-white" style={{ borderColor: 'inherit' }} />
                 </motion.div>
               )}
             </AnimatePresence>
             <div
-              className={`absolute rounded-xl border bg-raised px-4 py-3 transition-all duration-300 ${ring} ${state === 'skipped' ? 'opacity-40' : ''}`}
+              className={`absolute rounded-2xl border bg-white px-4 py-3 shadow-[0_1px_2px_rgba(16,24,40,.05),0_12px_28px_-18px_rgba(16,24,40,.25)] transition-all duration-300 ${ring} ${state === 'skipped' ? 'opacity-40' : ''}`}
               style={{ left: xs[i] - NODE_W / 2, top: NODE_Y, width: NODE_W, height: NODE_H }}
             >
               <div className="flex items-center gap-3">
@@ -133,7 +133,7 @@ function Graph({ run, t }: { run: Run; t: number }) {
                     height: 48,
                     fontSize: 18,
                     color: a.color,
-                    background: `linear-gradient(135deg, ${a.color}33, #111113 80%)`,
+                    background: `linear-gradient(135deg, ${a.color}22, #ffffff 80%)`,
                     boxShadow: live ? `0 0 0 2px ${state === 'rejected' ? '#ff3d5a' : a.color}, 0 0 22px ${state === 'rejected' ? '#ff3d5a' : a.color}88` : `0 0 0 1px ${a.color}44`,
                   }}
                   animate={live ? { scale: [1, 1.04, 1] } : { scale: 1 }}
@@ -161,10 +161,10 @@ function Graph({ run, t }: { run: Run; t: number }) {
 
       {packet && (
         <div
-          className={`pointer-events-none absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[12px] font-medium text-black ${packet.label.startsWith('reroll') ? 'glow-hot bg-hot' : 'glow-acid bg-gradient-to-r from-accent to-[#99f6e4]'}`}
+          className={`pointer-events-none absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[12px] font-medium text-white ${packet.label.startsWith('reroll') || packet.label.startsWith('fix') ? 'glow-hot bg-hot' : 'glow-acid bg-gradient-to-r from-accent to-[#14b8a6]'}`}
           style={{ left: packet.x, top: packet.y }}
         >
-          <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
+          <span className="h-1.5 w-1.5 rounded-full bg-white/80" />
           {packet.label}
         </div>
       )}
