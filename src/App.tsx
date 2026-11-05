@@ -23,7 +23,7 @@ function ScreenView({ id, demo, runKey }: { id: ScreenId; demo: boolean; runKey:
     case 'lineage':
       return <Lineage />
     case 'output':
-      return <Output finaleAt={demo ? 9500 : undefined} />
+      return <Output finaleAt={demo ? 11500 : undefined} />
   }
 }
 
@@ -187,7 +187,7 @@ export default function App() {
 
         <footer className="flex h-9 shrink-0 items-center justify-between border-t border-line px-6 text-[12px]">
           <AgentNotes screen={screen} runKey={runKey} />
-          <span className="font-mono text-faint">replay of generations/gen-003 · real trends · metrics simulated · no API keys</span>
+          <span className="font-mono text-faint">replays of real agent runs from generations/ · no API keys needed</span>
         </footer>
       </div>
     </Stage>

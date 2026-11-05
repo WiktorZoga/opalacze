@@ -15,6 +15,12 @@ export interface Commit {
   path: string
 }
 
+export interface ToolCall {
+  name: string
+  args: unknown
+  result: unknown
+}
+
 export interface Span {
   id: string
   agent: AgentId
@@ -29,6 +35,22 @@ export interface Span {
   input: unknown
   output: unknown
   commit: Commit
+  /** real subagent runs only */
+  realMs?: number
+  task?: string
+  tools?: ToolCall[]
+  quote?: string
+  commits?: Commit[]
+}
+
+export interface Run {
+  id: string
+  label: string
+  genome: string
+  spans: Span[]
+  runMs: number
+  /** agents that did not run in this run */
+  skipped: AgentId[]
 }
 
 const G = 'generations/gen-003'
@@ -37,7 +59,7 @@ const round2 = critique.rounds[1]
 const structure = mutation.mutations.find((m) => m.gene === 'structure')!
 
 /** replay of the recorded gen-003 run; commit hashes are the agents' real commits on main */
-export const SPANS: Span[] = [
+const GEN3_SPANS: Span[] = [
   {
     id: 's1',
     agent: 'scout',
@@ -194,6 +216,11 @@ export const SPANS: Span[] = [
   },
 ]
 
-export const RUN_MS = 21500
-export const RUN_ID = 'gen-003'
-export const RUN_GENOME = mutation.id
+export const GEN3_RUN: Run = {
+  id: 'gen-003',
+  label: 'gen-003 · recorded replay',
+  genome: mutation.id,
+  spans: GEN3_SPANS,
+  runMs: 21500,
+  skipped: [],
+}
