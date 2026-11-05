@@ -37,6 +37,7 @@ export interface Campaign {
   metrics: { variant: string; hookRate: number; watch: number; ctr: number }[]
   /** fallback media ids from public/memes/grok/index.json, per tone */
   fallback: Partial<Record<Tone, string[]>>
+  kpis: { reach: number; ctr: number; costPerVariant: number; variants: number }
   run: Run
 }
 
@@ -222,6 +223,7 @@ const DRAFTS: Draft[] = [
       realMs: live2.durationMs,
     },
     fallback: { brainrot: ['noir05-brainrot-capybara', 'brandrot-your-startup'] },
+    kpis: { reach: 1_240_000, ctr: 0.031, costPerVariant: 4.2, variants: 4 },
   },
   {
     id: 'cafe',
@@ -263,6 +265,7 @@ const DRAFTS: Draft[] = [
       { variant: 'B', hookRate: 0.39, watch: 0.66, ctr: 0.019 },
     ],
     fallback: { brainrot: ['brandrot-wroclaw-cafe'], ugc: [], polished: [] },
+    kpis: { reach: 186_000, ctr: 0.022, costPerVariant: 3.6, variants: 3 },
   },
   {
     id: 'brainrot',
@@ -304,6 +307,7 @@ const DRAFTS: Draft[] = [
       { variant: 'B', hookRate: 0.44, watch: 0.63, ctr: 0.012 },
     ],
     fallback: { brainrot: ['brandrot-kebab-u-mustafy', 'brandrot-your-startup'], ugc: ['brandrot-kebab-u-mustafy'], polished: ['brandrot-kebab-u-mustafy'] },
+    kpis: { reach: 412_000, ctr: 0.014, costPerVariant: 2.9, variants: 2 },
   },
 ]
 

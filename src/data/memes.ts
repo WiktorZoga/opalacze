@@ -172,7 +172,7 @@ export const MEMES: Record<string, Meme> = {
     top: 'raised $40M pre-seed',
     bottom: 'product: vibes from wrocław',
     art: 'krasnal',
-    bg: 'radial-gradient(circle at 50% 35%,#ff2bd6 0%,#5a0b6b 45%,#0b0220 100%)',
+    bg: 'radial-gradient(circle at 50% 35%,#3b82f6 0%,#5a0b6b 45%,#0b0220 100%)',
   },
   krasnalAlt: {
     id: 'krasnalAlt',
@@ -180,7 +180,7 @@ export const MEMES: Record<string, Meme> = {
     top: '"we are an ai company"',
     bottom: 'the ai: 300 krasnale in a trenchcoat',
     art: 'krasnal',
-    bg: 'radial-gradient(circle at 50% 35%,#b6ff00 0%,#2b6b0b 45%,#021b08 100%)',
+    bg: 'radial-gradient(circle at 50% 35%,#2dd4bf 0%,#2b6b0b 45%,#021b08 100%)',
   },
 }
 

@@ -6,10 +6,10 @@ import { Badge, Panel } from '../components/ui'
 import { Helix } from '../components/Helix'
 
 const GENE_COLOR: Record<string, string> = {
-  hook: '#b6ff00',
+  hook: '#2dd4bf',
   hero: '#ffb800',
   setting: '#00f0ff',
-  humor: '#ff2bd6',
+  humor: '#3b82f6',
   audio: '#8b5cff',
   visual: '#ff5a36',
   catchphrase: '#3dffa8',
@@ -32,7 +32,7 @@ function GenomeTable() {
       </div>
       <div className="flex">
         <div className="flex w-[150px] shrink-0 justify-center border-r border-line py-3">
-          <Helix width={96} height={380} rungs={20} speed={1.8} colors={GENOME.map((g) => GENE_COLOR[g.gene] ?? '#b6ff00')} />
+          <Helix width={96} height={380} rungs={20} speed={1.8} colors={GENOME.map((g) => GENE_COLOR[g.gene] ?? '#2dd4bf')} />
         </div>
         <div className="min-w-0 flex-1">
         {GENOME.map((g, i) => (
@@ -170,6 +170,7 @@ export function Lineage() {
     <div className="flex h-full flex-col gap-4 p-6">
       <div className="flex items-baseline gap-4">
         <h1 className="text-[22px] font-semibold tracking-tight text-text">History</h1>
+        <span className="rounded-full border border-line-strong px-2.5 py-0.5 text-[12px] text-faint">R&D codename ROT BOT</span>
         <span className="text-[13px] text-muted">Earlier R&D run (gen-live-001, grok-4.7): how the swarm bred {CHILD.name}, gene by gene, before the agency pivot</span>
       </div>
       <div className="grid min-h-0 flex-1 grid-cols-[1fr_720px] gap-4">

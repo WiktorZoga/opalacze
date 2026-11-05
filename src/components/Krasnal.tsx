@@ -22,10 +22,10 @@ export function Krasnal({ className = '' }: { className?: string }) {
       </text>
       <path d="M52 228 L66 152 Q100 140 134 152 L148 228 Z" fill="url(#suit)" />
       <path d="M86 150 L114 150 L100 192 Z" fill="#f4f4f4" />
-      <path d="M96 156 L104 156 L107 196 L100 206 L93 196 Z" fill="#ff2bd6" />
+      <path d="M96 156 L104 156 L107 196 L100 206 L93 196 Z" fill="#3b82f6" />
       <path d="M66 152 L86 150 L98 200 L80 188 Z" fill="#2d3150" />
       <path d="M134 152 L114 150 L102 200 L120 188 Z" fill="#2d3150" />
-      <rect x="114" y="176" width="20" height="13" rx="2" fill="#b6ff00" />
+      <rect x="114" y="176" width="20" height="13" rx="2" fill="#2dd4bf" />
       <text x="124" y="186" textAnchor="middle" fontSize="8" fontWeight="800" fontFamily="JetBrains Mono" fill="#000">
         AI
       </text>

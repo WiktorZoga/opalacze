@@ -29,12 +29,12 @@ export function useTime() {
 export function Helix({
   width = 160,
   height = 520,
-  colors = ['#b6ff00', '#ff2bd6', '#00f0ff', '#ffb800', '#8b5cff', '#ff5a36', '#3dffa8'],
+  colors = ['#2dd4bf', '#3b82f6', '#00f0ff', '#ffb800', '#8b5cff', '#ff5a36', '#3dffa8'],
   speed = 1.6,
   rungs = 22,
   amplitude,
-  strandA = '#b6ff00',
-  strandB = '#ff2bd6',
+  strandA = '#2dd4bf',
+  strandB = '#3b82f6',
 }: Props) {
   const t = useTime()
   const cx = width / 2

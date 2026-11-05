@@ -176,7 +176,7 @@ function Distribution() {
             <span className="text-[14px] font-medium text-text">Metrics</span>
             <Badge>{metrics.source}</Badge>
             <span className="ml-auto text-right">
-              <span className="tabular font-mono text-[26px] text-accent [text-shadow:0_0_14px_#b6ff0066]">{metrics.fitness.toFixed(2)}</span>
+              <span className="tabular font-mono text-[26px] text-accent [text-shadow:0_0_14px_#2dd4bf66]">{metrics.fitness.toFixed(2)}</span>
               <span className="ml-2 text-[12px] text-faint">fitness</span>
             </span>
           </div>

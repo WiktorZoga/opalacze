@@ -5,13 +5,14 @@ import { AGENTS, PIPELINE, type AgentId } from '../data/agents'
 import type { Run, Span } from '../data/run'
 import { TikTokEmbed } from '../components/TikTokEmbed'
 import { useClock } from '../components/hooks'
-import { AgentName, Avatar, Badge, Json, Panel, StatusDot, fmtMs } from '../components/ui'
+import { AgentName, Avatar, Badge, CountUp, Json, Panel, StatusDot, fmtMs } from '../components/ui'
+import { BrandLogo } from '../components/Logo'
 
 const GRAPH_W = 1572
 const NODE_W = 200
-const NODE_H = 116
-const NODE_Y = 104
-const GRAPH_H = 290
+const NODE_H = 108
+const NODE_Y = 92
+const GRAPH_H = 262
 const xs = PIPELINE.map((_, i) => 40 + NODE_W / 2 + i * ((GRAPH_W - 80 - NODE_W) / (PIPELINE.length - 1)))
 const xOf = (a: AgentId) => xs[PIPELINE.findIndex((p) => p.agent === a)]
 const ease = (p: number) => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2)
@@ -63,8 +64,8 @@ function Graph({ run, t }: { run: Run; t: number }) {
       <svg width={GRAPH_W} height={GRAPH_H} className="absolute inset-0">
         <defs>
           <linearGradient id="edge-live" x1="0" x2="1">
-            <stop offset="0" stopColor="#b6ff00" />
-            <stop offset="1" stopColor="#ff2bd6" />
+            <stop offset="0" stopColor="#2dd4bf" />
+            <stop offset="1" stopColor="#3b82f6" />
           </linearGradient>
         </defs>
         {xs.slice(0, -1).map((x, i) => {
@@ -74,15 +75,15 @@ function Graph({ run, t }: { run: Run; t: number }) {
         <path
           d={`M${xc - 60},${NODE_Y} C${xc - 80},${NODE_Y - 44} ${xm + 80},${NODE_Y - 44} ${xm + 60},${NODE_Y}`}
           fill="none"
-          stroke={rerollSeen ? '#ff2bd6' : '#2e2e33'}
+          stroke={rerollSeen ? '#3b82f6' : '#2e2e33'}
           strokeOpacity={rerollSeen ? 0.8 : 1}
           strokeDasharray="4 4"
           strokeWidth={1.5}
         />
         <path
-          d={`M${xs[xs.length - 1]},${NODE_Y + NODE_H} C${xs[xs.length - 1]},${NODE_Y + NODE_H + 70} ${xs[0]},${NODE_Y + NODE_H + 70} ${xs[0]},${NODE_Y + NODE_H}`}
+          d={`M${xs[xs.length - 1]},${NODE_Y + NODE_H} C${xs[xs.length - 1]},${NODE_Y + NODE_H + 54} ${xs[0]},${NODE_Y + NODE_H + 54} ${xs[0]},${NODE_Y + NODE_H}`}
           fill="none"
-          stroke={loopSeen ? '#b6ff00' : '#2e2e33'}
+          stroke={loopSeen ? '#2dd4bf' : '#2e2e33'}
           strokeOpacity={loopSeen ? 0.5 : 1}
           strokeDasharray="4 4"
           strokeWidth={1.5}
@@ -160,7 +161,7 @@ function Graph({ run, t }: { run: Run; t: number }) {
 
       {packet && (
         <div
-          className={`pointer-events-none absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[12px] font-medium text-black ${packet.label.startsWith('reroll') ? 'glow-hot bg-hot' : 'glow-acid bg-gradient-to-r from-accent to-[#e6ff8a]'}`}
+          className={`pointer-events-none absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[12px] font-medium text-black ${packet.label.startsWith('reroll') ? 'glow-hot bg-hot' : 'glow-acid bg-gradient-to-r from-accent to-[#99f6e4]'}`}
           style={{ left: packet.x, top: packet.y }}
         >
           <span className="h-1.5 w-1.5 rounded-full bg-black/70" />
@@ -192,7 +193,7 @@ function Trace({ run, t, selected, onSelect }: { run: Run; t: number; selected?:
         {rows.map((s) => {
           const done = t >= s.end
           const sel = selected?.id === s.id
-          const bar = s.status === 'rejected' ? (done ? 'bg-danger glow-danger' : 'bg-danger/60') : done ? 'bg-gradient-to-r from-accent to-[#7dff9a]' : 'bar-running'
+          const bar = s.status === 'rejected' ? (done ? 'bg-danger glow-danger' : 'bg-danger/60') : done ? 'bg-gradient-to-r from-accent to-[#5eead4]' : 'bar-running'
           return (
             <button
               key={s.id}
@@ -268,7 +269,7 @@ function ScoutFeed({ campaign }: { campaign: Campaign }) {
           @{tr.author} · {Intl.NumberFormat('en', { notation: 'compact' }).format(tr.views)} views · TikTok
         </div>
         <div className="mt-3 flex items-baseline gap-2">
-          <span className="tabular font-mono text-[34px] leading-none text-accent [text-shadow:0_0_16px_#b6ff0066]">{campaign.fit}%</span>
+          <span className="tabular font-mono text-[34px] leading-none text-accent [text-shadow:0_0_16px_#2dd4bf66]">{campaign.fit}%</span>
           <span className="text-[12px] text-muted">brand fit</span>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-line">
@@ -403,7 +404,8 @@ export function Workflow({ runKey = 0 }: { runKey?: number }) {
   return (
     <div className="flex h-full flex-col gap-4 p-6">
       <div className="flex items-center gap-4">
-        <h1 className="text-[22px] font-semibold tracking-tight text-text">{campaign.brand}</h1>
+        <BrandLogo id={campaign.id} size={40} />
+        <h1 className="text-[24px] font-semibold tracking-[-0.02em] text-text">{campaign.brand}</h1>
         <span className="text-[14px] text-muted">{campaign.product}</span>
         {campaign.live ? (
           <span className="rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 text-[12px] text-accent">{campaign.live.label} · {fmtMs(campaign.live.realMs)} real · {campaign.live.events.toLocaleString('en')} events</span>
@@ -415,16 +417,46 @@ export function Workflow({ runKey = 0 }: { runKey?: number }) {
           {running ? 'Agents working' : 'Campaign ready'}
           <span className="tabular font-mono text-faint">{fmtMs(t)}</span>
         </span>
-        <span className="font-mono text-[12px] text-faint">goal · {campaign.goal}</span>
+        <span className="ml-auto" />
+        <button
+          disabled
+          title="Roadmap: TikTok Ads API"
+          className="cursor-not-allowed rounded-md border border-line-strong px-3 py-1 text-[13px] text-faint"
+        >
+          Export to TikTok Ads · roadmap
+        </button>
         <button
           onClick={() => {
             setPinned(null)
             setReplay((r) => r + 1)
           }}
-          className="ml-auto rounded-md border border-line-strong px-3 py-1 text-[13px] text-muted hover:border-faint hover:text-text"
+          className="rounded-md border border-line-strong px-3 py-1 text-[13px] text-muted hover:border-faint hover:text-text"
         >
           Replay
         </button>
+      </div>
+      <div className="grid grid-cols-5 gap-4">
+        {[
+          { k: 'Projected reach', v: <CountUp to={campaign.kpis.reach} format={(n) => Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n)} />, sim: true },
+          { k: 'CTR (best variant)', v: <CountUp to={campaign.kpis.ctr * 100} format={(n) => `${n.toFixed(1)}%`} delay={80} />, sim: true },
+          { k: 'Cost per variant', v: <CountUp to={campaign.kpis.costPerVariant} format={(n) => `$${n.toFixed(2)}`} delay={160} />, sim: true },
+          { k: 'Variants', v: <CountUp to={campaign.kpis.variants + (campaign.live ? 1 : 0)} format={(n) => `${Math.round(n)}`} delay={240} />, sim: false },
+          { k: 'Brief → first cut', v: campaign.live ? `${Math.floor(campaign.live.realMs / 60000)}m ${Math.round((campaign.live.realMs % 60000) / 1000)}s` : '≈ 7 min', sim: !campaign.live },
+        ].map((x, i) => (
+          <motion.div
+            key={x.k}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.05, duration: 0.3 }}
+            className="rounded-lg border border-line bg-surface px-4 py-3"
+          >
+            <div className="flex items-center justify-between text-[12px] text-faint">
+              {x.k}
+              {x.sim ? <span className="text-[10px] uppercase tracking-wider">sim</span> : <span className="text-[10px] uppercase tracking-wider text-accent">live</span>}
+            </div>
+            <div className="tabular mt-1 text-[24px] font-semibold tracking-[-0.02em] text-text">{x.v}</div>
+          </motion.div>
+        ))}
       </div>
       <div className="panel-sheen rounded-lg border border-line">
         <Graph run={run} t={t} />

@@ -19,5 +19,5 @@ export const DEMO_STEPS: DemoStep[] = [
   { screen: 'creative', ms: 6500, pl: 'Wynik: klip z przebiegu na żywo plus warianty A/B, oznaczone #ad · AI-generated.', en: 'The result: the live-run clip plus A/B variants, labelled #ad · AI-generated.' },
   { screen: 'creative', tone: 'brainrot', ms: 4500, pl: 'Ten sam brief, inny ton: UGC, Polished ad albo Brainrot.', en: 'Same brief, another tone: UGC, polished ad, or brainrot.' },
   { screen: 'creative', campaign: 'cafe', tone: 'ugc', ms: 5000, pl: 'Kolejny brief: kawiarnia z Wrocławia na trendzie „Fancy Cafe” (10,8 mln).', en: 'Next brief: a Wrocław café riding “Your First Time in a Fancy Cafe” (10.8M).' },
-  { screen: 'creative', ms: 10000, pl: 'ROT Studio: agencja AI, która jedzie na viralach.', en: 'ROT Studio: the AI ad agency that rides virals.' },
+  { screen: 'creative', ms: 10000, pl: 'Riptide: agencja reklamowa AI, która jedzie na viralach.', en: 'Riptide: the AI ad agency that rides virals.' },
 ]

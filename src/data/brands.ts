@@ -79,7 +79,7 @@ export const BRANDS: BrandPreset[] = [
         bottom: 'krasnal ceo: "we are so back"',
         art: 'krasnal',
         accent: '🔥',
-        bg: 'radial-gradient(circle at 50% 35%,#ff2bd6 0%,#3a0b6b 50%,#06020f 100%)',
+        bg: 'radial-gradient(circle at 50% 35%,#3b82f6 0%,#3a0b6b 50%,#06020f 100%)',
       },
     ],
   },

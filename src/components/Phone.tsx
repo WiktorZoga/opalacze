@@ -21,7 +21,7 @@ export function Phone({ meme, caption, width = 300, handle = '@rotbot.lab', dela
   const progress = ((t % 6000) / 6000) * 100
 
   return (
-    <div className="relative rounded-[38px] border-[3px] border-white/20 bg-black p-2 shadow-[0_0_40px_#ff2bd633]" style={{ width: width + 16 }}>
+    <div className="relative rounded-[38px] border-[3px] border-white/20 bg-black p-2 shadow-[0_0_40px_#3b82f633]" style={{ width: width + 16 }}>
       <div className="relative overflow-hidden rounded-[30px]" style={{ width, height: h, background: meme.bg }}>
         <div className="absolute left-1/2 top-2 z-20 h-5 w-24 -translate-x-1/2 rounded-full bg-black" />
         <motion.div

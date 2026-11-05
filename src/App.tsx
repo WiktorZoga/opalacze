@@ -5,6 +5,7 @@ import { AGENTS } from './data/agents'
 import { Stage } from './components/Stage'
 import { useElapsed } from './components/hooks'
 import { Avatar } from './components/ui'
+import { Logo, WaveMark } from './components/Logo'
 import { Workflow } from './screens/Workflow'
 import { Lineage } from './screens/Lineage'
 import { Creative } from './screens/Creative'
@@ -139,16 +140,13 @@ export default function App() {
       <CampaignContext.Provider value={{ campaign, tone, setTone }}>
       <div className="flex h-full flex-col">
         <header className="flex h-14 shrink-0 items-center gap-8 border-b border-line px-6">
-          <div className="flex items-baseline gap-3">
-            <span className="wordmark text-[18px] font-semibold tracking-tight">ROT Studio</span>
-            <span className="text-[13px] text-faint">AI ad agency · run by the ROT BOT swarm</span>
-          </div>
+          <Logo />
           <nav className="flex h-full items-stretch gap-6">
             {TABS.map((t) => (
               <button
                 key={t.id}
                 onClick={() => !demo && go(t.id)}
-                className={`border-b-2 text-[14px] transition-colors ${screen === t.id ? 'border-accent text-text [text-shadow:0_0_12px_#b6ff0055]' : 'border-transparent text-muted hover:text-text'}`}
+                className={`border-b-2 text-[14px] transition-colors ${screen === t.id ? 'border-accent text-text [text-shadow:0_0_12px_#2dd4bf55]' : 'border-transparent text-muted hover:text-text'}`}
               >
                 {t.label}
               </button>
@@ -195,10 +193,11 @@ export default function App() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6 }}
               >
-                <div className="absolute inset-0 bg-[radial-gradient(600px_300px_at_50%_45%,#b6ff0014,transparent_70%),radial-gradient(700px_300px_at_55%_60%,#ff2bd612,transparent_70%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(600px_300px_at_50%_45%,#2dd4bf14,transparent_70%),radial-gradient(700px_300px_at_55%_60%,#3b82f612,transparent_70%)]" />
                 <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 120, damping: 14 }} className="relative text-center">
-                  <div className="text-[120px] font-semibold leading-none tracking-tight text-text">
-                    <span className="wordmark">ROT</span> Studio
+                  <div className="flex items-center justify-center gap-6">
+                    <WaveMark size={104} />
+                    <div className="text-[120px] font-semibold leading-none tracking-[-0.04em] text-text">Riptide</div>
                   </div>
                   <div className="mt-6 text-[32px] text-muted">The AI ad agency that rides virals.</div>
                   <div className="mt-10 flex items-center justify-center gap-2">
@@ -206,7 +205,7 @@ export default function App() {
                       <Avatar key={a} id={a} size={40} />
                     ))}
                   </div>
-                  <div className="mt-6 font-mono text-[14px] text-faint">brief → trend → DNA → AI creator → critic → publish → metrics · six Grok Bot agents</div>
+                  <div className="mt-6 font-mono text-[14px] text-faint">brief → trend → DNA → AI creator → critic → publish → metrics · run by a Grok Bot swarm</div>
                 </motion.div>
               </motion.div>
             )}

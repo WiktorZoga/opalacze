@@ -7,7 +7,7 @@ interface Props {
   color?: string
 }
 
-export function Sparkline({ data, width = 220, height = 60, color = '#b6ff00' }: Props) {
+export function Sparkline({ data, width = 220, height = 60, color = '#2dd4bf' }: Props) {
   const max = Math.max(...data)
   const min = Math.min(...data)
   const pts = data.map((v, i) => {
