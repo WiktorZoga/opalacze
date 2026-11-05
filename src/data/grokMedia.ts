@@ -14,6 +14,9 @@ export interface GrokMedia {
   model?: string
   generatedAt?: string
   tone?: string
+  hook?: string
+  persona?: string
+  poster?: string
   variant?: string
   ugc?: boolean
   /** resolved URL under the app's base path */

@@ -12,10 +12,11 @@ interface Props {
   pendingLabel?: string
   /** meme caption overlaid on the media (only for media without a baked-in caption) */
   caption?: string
+  captionStyle?: 'meme' | 'tiktok'
 }
 
 /** real media (image or clip) in a clean frame, or a neutral pending tile */
-export function MediaFrame({ src, kind = 'image', alt, width, height, reveal = true, className = '', pendingLabel = 'render pending', caption }: Props) {
+export function MediaFrame({ src, kind = 'image', alt, width, height, reveal = true, className = '', pendingLabel = 'render pending', caption, captionStyle = 'meme' }: Props) {
   if (!src) {
     return (
       <div
@@ -42,9 +43,14 @@ export function MediaFrame({ src, kind = 'image', alt, width, height, reveal = t
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
       {inner}
-      {caption && width >= 120 && (
+      {caption && width >= 120 && captionStyle === 'meme' && (
         <div className="meme-text absolute inset-x-0 top-0 px-2 pt-3 text-center" style={{ fontSize: Math.max(13, width * 0.085) }}>
           {caption}
+        </div>
+      )}
+      {caption && width >= 120 && captionStyle === 'tiktok' && (
+        <div className="absolute inset-x-0 top-[22%] flex justify-center px-4">
+          <span className="rounded-md bg-black/75 px-2.5 py-1 text-center text-[15px] font-semibold leading-snug text-white">{caption}</span>
         </div>
       )}
     </motion.div>

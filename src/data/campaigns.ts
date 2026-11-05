@@ -141,7 +141,7 @@ const DRAFTS: Draft[] = [
       { gene: 'caption', value: 'lowercase, one emoji' },
       { gene: 'insertion', value: 'beat 2: spray on wrist, close-up', insert: true },
     ],
-    persona: { name: 'Lena', handle: '@lena.smells.things', style: 'GRWM, soft daylight, deadpan', voice: 'dry, quick, honest' },
+    persona: { name: 'Maja', handle: '@maja.smells.things', style: 'GRWM, soft daylight, deadpan', voice: 'dry, quick, honest' },
     scripts: {
       ugc: { hook: 'okay this smells expensive', beats: ['unbox on the bed', 'spray on wrist, close-up', 'deadpan look to camera'], caption: 'okay this smells expensive #ad' },
       polished: { hook: 'Night, bottled.', beats: ['macro bottle on black glass', 'mist in backlight', 'logo lock-up'], caption: 'NOIR/05. Night, bottled. #ad' },
@@ -158,7 +158,7 @@ const DRAFTS: Draft[] = [
       { variant: 'A', hookRate: 0.41, watch: 0.68, ctr: 0.031 },
       { variant: 'B', hookRate: 0.36, watch: 0.61, ctr: 0.024 },
     ],
-    fallback: { brainrot: ['brandrot-your-startup'] },
+    fallback: { brainrot: ['noir05-brainrot-capybara', 'brandrot-your-startup'] },
   },
   {
     id: 'cafe',

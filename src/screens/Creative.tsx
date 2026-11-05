@@ -5,7 +5,7 @@ import { MediaFrame } from '../components/MediaFrame'
 import { Avatar, Badge, Panel } from '../components/ui'
 
 function pickVariants(lib: GrokLibrary, c: Campaign, tone: Tone): (GrokMedia | undefined)[] {
-  const mine = lib.items.filter((m) => m.ugc && m.node === c.id)
+  const mine = lib.items.filter((m) => m.ugc && m.node === c.id && m.hook !== 'persona card')
   const toned = mine.filter((m) => (m.tone ?? 'ugc').toLowerCase().startsWith(tone === 'polished' ? 'pol' : tone))
   const pool = toned.length ? toned : tone === 'brainrot' ? [] : mine
   const fallback = (c.fallback[tone] ?? []).map((id) => lib.byId(id)).filter(Boolean) as GrokMedia[]
@@ -13,7 +13,7 @@ function pickVariants(lib: GrokLibrary, c: Campaign, tone: Tone): (GrokMedia | u
   return [list[0], list[1] ?? list[0]]
 }
 
-function Phone({ media, label, caption }: { media?: GrokMedia; label: string; caption?: string }) {
+function Phone({ media, label, caption, tone }: { media?: GrokMedia; label: string; caption?: string; tone: Tone }) {
   return (
     <div className="relative rounded-[30px] border border-line-strong bg-black p-2 shadow-2xl shadow-black/60">
       <div className="absolute left-1/2 top-3.5 z-10 h-4 w-20 -translate-x-1/2 rounded-full bg-black" />
@@ -26,6 +26,7 @@ function Phone({ media, label, caption }: { media?: GrokMedia; label: string; ca
         height={412}
         className="!rounded-[22px]"
         caption={media && !media.captionBaked ? caption : undefined}
+        captionStyle={tone === 'brainrot' ? 'meme' : 'tiktok'}
         pendingLabel="UGC render queued · grok-imagine-video"
       />
       <span className="absolute bottom-5 left-5 z-10 rounded bg-black/70 px-1.5 py-0.5 font-mono text-[10px] text-white/85">#ad · AI-generated</span>
@@ -38,6 +39,7 @@ export function Creative() {
   const lib = useGrokMedia()
   const variants = pickVariants(lib, c, tone)
   const script = c.scripts[tone]
+  const personaImg = lib.items.find((m) => m.node === c.id && m.hook === 'persona card')
   const winner = c.metrics[0].ctr >= c.metrics[1].ctr ? 'A' : 'B'
 
   return (
@@ -65,9 +67,13 @@ export function Creative() {
         <div className="flex min-h-0 flex-col gap-4">
           <Panel title="AI creator persona" meta="AI-generated">
             <div className="flex gap-4 p-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent/40 to-hot/40 text-[20px] font-semibold text-text">
-                {c.persona.name[0]}
-              </div>
+              {personaImg ? (
+                <img src={personaImg.url} alt={c.persona.name} className="h-24 w-[54px] shrink-0 rounded-md border border-line-strong object-cover" />
+              ) : (
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent/40 to-hot/40 text-[20px] font-semibold text-text">
+                  {c.persona.name[0]}
+                </div>
+              )}
               <div className="min-w-0">
                 <div className="text-[15px] font-medium text-text">{c.persona.name}</div>
                 <div className="font-mono text-[12px] text-muted">{c.persona.handle}</div>
@@ -100,7 +106,7 @@ export function Creative() {
                   <span className="text-[13px] font-medium text-text">Variant {v}</span>
                   {v === winner && <Badge tone="accent">leading · CTR</Badge>}
                 </div>
-                <Phone media={variants[i]} label={`${c.id}-${v}`} caption={i === 0 ? script.hook : script.caption.replace(' #ad', '')} />
+                <Phone media={variants[i]} tone={tone} label={`${c.id}-${v}`} caption={i === 0 ? script.hook : (tone === 'ugc' && variants[1]?.hook && variants[1] !== variants[0] ? variants[1].hook : script.caption.replace(' #ad', ''))} />
                 <div className="mt-3 text-[13px] text-text">“{i === 0 ? script.hook : script.beats[0]}”</div>
                 <ol className="mt-1 space-y-0.5 text-[12px] text-muted">
                   {script.beats.map((b, j) => (
