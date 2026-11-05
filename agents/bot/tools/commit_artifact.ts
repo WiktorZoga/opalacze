@@ -35,7 +35,7 @@ export default defineTool({
       .array(z.object({ path: z.string(), content: z.union([z.string(), z.record(z.string(), z.unknown())]) }))
       .default([]),
     paths: z.array(z.string()).default([]).describe("Already-written files to include, e.g. from save_genome."),
-    branch: z.string().regex(/^lineage\/[a-z0-9-]+$/).optional(),
+    branch: z.string().regex(/^(main|lineage\/[a-z0-9-]+)$/).optional().describe("'main' is the bloodline."),
     base: z.string().optional().describe("Start point when creating the branch. Defaults to HEAD."),
     mergeFrom: z.string().regex(/^lineage\/[a-z0-9-]+$/).optional(),
   }),
@@ -63,7 +63,7 @@ export default defineTool({
     for (const p of paths) staged.push(relative(REPO_ROOT, safeArtifactPath(p)));
     if (staged.length) await git(["add", "--", ...staged]);
 
-    const subject = `${author.name.split(" ").pop()} ${message}`;
+    const subject = `${author.name.split(" ").pop()} ${agent}: ${message}`;
     const body = [`Rotbot-Agent: ${agent}`, `Rotbot-Generation: ${generation}`].join("\n");
     await git(["commit", "--no-verify", "-m", subject, "-m", body], author);
     const sha = await git(["rev-parse", "--short", "HEAD"]);
