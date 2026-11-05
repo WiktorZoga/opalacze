@@ -16,11 +16,11 @@ export function Panel({ title, meta, children, className = '' }: { title: string
 export function Avatar({ id, size = 24 }: { id: AgentId; size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-full border border-line-strong bg-raised"
-      style={{ width: size, height: size, fontSize: size * 0.55 }}
-      title={AGENTS[id].name}
+      className="inline-flex shrink-0 items-center justify-center rounded-md font-semibold"
+      style={{ width: size, height: size, fontSize: size * 0.42, color: AGENTS[id].color, background: `${AGENTS[id].color}1a`, boxShadow: `inset 0 0 0 1px ${AGENTS[id].color}55` }}
+      title={AGENTS[id].label}
     >
-      {AGENTS[id].emoji}
+      {AGENTS[id].mono}
     </span>
   )
 }
@@ -29,7 +29,7 @@ export function AgentName({ id }: { id: AgentId }) {
   return (
     <span className="inline-flex items-center gap-2">
       <Avatar id={id} size={20} />
-      <span className="text-[13px] font-medium capitalize text-text">{id}</span>
+      <span className="text-[13px] font-medium text-text">{AGENTS[id].label}</span>
     </span>
   )
 }

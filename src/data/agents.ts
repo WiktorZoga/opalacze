@@ -6,6 +6,9 @@ export interface Agent {
   species: string
   role: string
   emoji: string
+  /** display name in the agency console */
+  label: string
+  mono: string
   prop: string
   color: string
 }
@@ -13,54 +16,66 @@ export interface Agent {
 export const AGENTS: Record<AgentId, Agent> = {
   scout: {
     id: 'scout',
+    label: 'Scout',
+    mono: 'Sc',
     name: 'SCOUT',
     species: 'Pigeon w/ binoculars',
-    role: 'trend hunter',
+    role: 'trend match',
     emoji: '🐦',
     prop: '🔭',
     color: '#00f0ff',
   },
   geneticist: {
     id: 'geneticist',
+    label: 'Geneticist',
+    mono: 'Ge',
     name: 'GENETICIST',
     species: 'Capybara in a lab coat',
-    role: 'DNA sequencing',
+    role: 'creative DNA',
     emoji: '🦫',
     prop: '🥼',
     color: '#b6ff00',
   },
   mutator: {
     id: 'mutator',
+    label: 'Creator',
+    mono: 'Cr',
     name: 'MUTATOR',
     species: 'Mad-scientist crocodile',
-    role: 'crossbreeding',
+    role: 'persona + script + render',
     emoji: '🐊',
     prop: '🧪',
     color: '#ff2bd6',
   },
   critic: {
     id: 'critic',
+    label: 'Critic',
+    mono: 'Cq',
     name: 'CRITIC',
     species: 'Judge cat',
-    role: 'quality control',
+    role: 'fidelity · safety · claims',
     emoji: '🐱',
     prop: '⚖️',
     color: '#ffb800',
   },
   publisher: {
     id: 'publisher',
+    label: 'Publisher',
+    mono: 'Pu',
     name: 'PUBLISHER',
     species: 'Hype parrot',
-    role: 'posts to TikTok + X',
+    role: 'TikTok · X · Reels',
     emoji: '🦜',
     prop: '📣',
     color: '#ff5a36',
   },
   analyst: {
     id: 'analyst',
+    label: 'Analyst',
+    mono: 'An',
     name: 'ANALYST',
     species: 'Spreadsheet owl',
-    role: 'reads metrics',
+    role: 'hook rate · CTR',
     emoji: '🦉',
     prop: '📊',
     color: '#8b5cff',
