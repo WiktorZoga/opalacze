@@ -14,7 +14,7 @@ export interface DemoStep {
 
 /** guided walkthrough: one brief in, trend-native ads out, 45 s */
 export const DEMO_STEPS: DemoStep[] = [
-  { screen: 'campaign', section: 'hero', campaign: 'perfume', tone: 'ugc', ms: 4500, pl: 'Marka wysyła brief. Scout (Grok Bot, na żywo) dopasowuje trend: 84% zgodności z marką.', en: 'A brand sends a brief. The live Scout matches a trend: 84% brand fit.' },
+  { screen: 'campaign', section: 'swarm', campaign: 'perfume', tone: 'ugc', ms: 4500, pl: 'Marka wysyła brief. Scout (Grok Bot, na żywo) dopasowuje trend: 84% zgodności z marką.', en: 'A brand sends a brief. The live Scout matches a trend: 84% brand fit.' },
   { screen: 'campaign', section: 'swarm', ms: 3800, pl: 'Geneticist wyciąga DNA trendu i miejsce na produkt. Creator pisze skrypt.', en: 'Geneticist extracts the trend DNA and the product slot. Creator writes the script.' },
   { screen: 'campaign', section: 'swarm', ms: 5200, pl: 'Creator tworzy personę AI i skrypt. Critic sprawdza claimy i oznaczenie #ad: 9 · 9 · 10 · 10.', en: 'Creator casts an AI persona and writes the script. Critic checks claims and the #ad label: 9 · 9 · 10 · 10.' },
   { screen: 'campaign', section: 'swarm', ms: 6200, pl: 'Creator renderuje klip w grok-imagine. Każdy krok to prawdziwy commit agenta.', en: 'Creator renders the clip with grok-imagine. Every step is a real agent commit.' },

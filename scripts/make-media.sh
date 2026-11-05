@@ -21,8 +21,7 @@ gif rotbot-agent-flow 7 5
 gif rotbot-breeding-hatch 21 5
 gif rotbot-publish-metrics 13 5.5
 
-# hero stays 1200px and under 8MB: short slices, small palette, no dither
-PAL="fps=6,scale=1200:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=32:stats_mode=single[p];[b][p]paletteuse=dither=none"
-ffmpeg -y -v error -ss 0.5 -t 2.6 -i "$OUT/rotbot-demo-45s.mp4" -ss 21.5 -t 2.8 -i "$OUT/rotbot-demo-45s.mp4" \
-  -filter_complex "[0:v][1:v]concat=n=2:v=1[c];[c]$PAL" "$OUT/rotbot-hero.gif"
+# hero is the workflow, 1200px, under 8MB. Opening of the demo is the swarm.
+PAL="fps=10,scale=1200:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle"
+ffmpeg -y -v error -ss 4 -t 6.5 -i "$OUT/rotbot-demo-45s.mp4" -vf "$PAL" "$OUT/rotbot-hero.gif"
 ls -la "$OUT"
