@@ -118,13 +118,17 @@ flowchart LR
 </tr>
 </table>
 
-**Under the hood.** A judge can check each of these in about 30 seconds.
+### For marketing agencies
 
-- [`agents/`](agents/) is a real `@grok/agent-sdk` project. `npx agent-sdk validate --dir agents` passes.
-- [`trace.ndjson`](generations/gen-live-002/trace.ndjson) is the raw SDK stream: `subagent.called`, `subagent.completed`, and every tool call.
-- Commits are authored by Scout, Geneticist, Creator and Critic. [See the authors.](https://github.com/WiktorZoga/opalacze/commits/main)
-- The clip and the stills come from `grok-imagine`, not a stock folder.
-- The playground, mid-run: [docs/media/grokbot/](docs/media/grokbot/).
+A brand sends a brief. The swarm finds a format that is rising on TikTok, X and Instagram, extracts its DNA, and ships trend-native UGC before the trend dies. Agencies need a week to jump on a format. Trends live three days. Riptide is the desk that does not wait.
+
+### Under the hood
+
+One Overlord, on `grok-4.7` through [`@grok/agent-sdk`](agents/), delegates to six subagents with the SDK `task` tool. Scout calls `x_trends`. Geneticist calls `save_genome`. Creator calls `generate_media`. Critic, Publisher and Analyst call `commit_artifact`, and each agent commits the file under its own git name.
+
+Every handoff is an event in [`trace.ndjson`](generations/gen-live-002/trace.ndjson): `subagent.called`, `subagent.completed`, and the tool call between them. [gen-live-002](generations/gen-live-002/RUN.md) is 4,167 of those events. The Critic scored that run 9 / 9 / 10 / 10 and approved it on the first pass. The clip and the stills are `grok-imagine`. The same session, in the playground, is in [docs/media/grokbot/](docs/media/grokbot/).
+
+Metrics and posting are simulated. The runs, the traces and the clips are real.
 
 <details>
 <summary><b>📋 What each step does · tones · integrations</b></summary>
