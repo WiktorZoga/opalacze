@@ -83,20 +83,21 @@ function TrendCard({ trend, spotted, index }: { trend: Trend; spotted: boolean; 
     >
       <div className="flex items-center justify-between">
         <PlatformBadge platform={trend.platform} />
-        <span className="font-mono text-[13px] text-white/60">{trend.handle}</span>
+        <a href={trend.url} target="_blank" rel="noreferrer" className="font-mono text-[12px] text-white/50 underline decoration-white/20 hover:text-acid">
+          src · {trend.source} ↗
+        </a>
       </div>
       <div className="flex items-start gap-4">
         <MemeCard meme={MEMES[trend.memeId]} width={92} />
         <div className="min-w-0 flex-1">
           <div className="font-mono text-[14px] font-bold text-white/50">{trend.ticker}</div>
-          <div className="truncate font-display text-[24px] font-bold leading-tight text-white">{trend.name}</div>
+          <div className="line-clamp-2 font-display text-[21px] font-bold leading-tight text-white">{trend.name}</div>
           <div className="mt-1 line-clamp-2 font-mono text-[12px] leading-snug text-white/55">{trend.caption}</div>
         </div>
       </div>
       <div className="flex justify-between font-mono text-[13px] text-white/70">
         <span>▶ {trend.views}</span>
-        <span>♥ {trend.likes}</span>
-        <span>↻ {trend.shares}</span>
+        <span>{trend.stat}</span>
       </div>
       <div className="flex items-end justify-between">
         <div className="font-mono text-[40px] font-extrabold leading-none" style={{ color, textShadow: `0 0 18px ${color}88` }}>
@@ -143,13 +144,14 @@ export function Radar() {
           <h1 className="font-display text-[54px] font-bold leading-none text-white">
             TREND <span className="text-acid glow-acid">RADAR</span>
           </h1>
-          <p className="mt-2 font-mono text-[15px] text-white/55">Scout watches TikTok + X and catches memes before they're memes</p>        </div>
+          <p className="mt-2 font-mono text-[15px] text-white/55">Scout watches TikTok + X and catches memes before they're memes</p>
+          <p className="mt-2 font-mono text-[12px] tracking-widest text-cyan">FEED · WEEK OF 2–5 NOV 2026</p>        </div>
         <RadarSweep />
         <div className="space-y-3 font-mono">
           {[
             ['POSTS SCANNED', <Counter key="a" base={14_203_118} rate={233} />, 'text-acid'],
             ['SIGNALS / HR', <Counter key="b" base={1_042} rate={1.3} />, 'text-cyan'],
-            ['EARLY SIGNALS', '2', 'text-hot'],
+            ["EARLY SIGNALS", "3", "text-hot"],
           ].map(([k, v, c]) => (
             <div key={k as string} className="flex items-baseline justify-between border-b border-line pb-2">
               <span className="text-[13px] tracking-widest text-white/45">{k}</span>
