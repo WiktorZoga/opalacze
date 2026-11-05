@@ -13,7 +13,7 @@ function pickVariants(lib: GrokLibrary, c: Campaign, tone: Tone): (GrokMedia | u
   return [list[0], list[1] ?? list[0]]
 }
 
-function Phone({ media, label, caption, tone }: { media?: GrokMedia; label: string; caption?: string; tone: Tone }) {
+function Phone({ media, label, caption, tone, width = 232 }: { media?: GrokMedia; label: string; caption?: string; tone: Tone; width?: number }) {
   return (
     <div className="relative rounded-[30px] border border-line-strong bg-black p-2 shadow-2xl shadow-black/60">
       <div className="absolute left-1/2 top-3.5 z-10 h-4 w-20 -translate-x-1/2 rounded-full bg-black" />
@@ -22,8 +22,8 @@ function Phone({ media, label, caption, tone }: { media?: GrokMedia; label: stri
         src={media?.url}
         kind={media?.kind}
         alt={label}
-        width={232}
-        height={412}
+        width={width}
+        height={Math.round((width * 16) / 9)}
         className="!rounded-[22px]"
         caption={media && !media.captionBaked ? caption : undefined}
         captionStyle={tone === 'brainrot' ? 'meme' : 'tiktok'}
@@ -39,6 +39,8 @@ export function Creative() {
   const lib = useGrokMedia()
   const variants = pickVariants(lib, c, tone)
   const script = c.scripts[tone]
+  const showC = !!c.live && tone === 'ugc'
+  const liveMedia: GrokMedia | undefined = c.live ? { id: 'noir-05-deceive', file: c.live.clip, kind: 'video', node: c.id, url: c.live.clip, captionBaked: true } : undefined
   const personaImg = lib.items.find((m) => m.node === c.id && m.hook === 'persona card')
   const winner = c.metrics[0].ctr >= c.metrics[1].ctr ? 'A' : 'B'
 
@@ -46,7 +48,7 @@ export function Creative() {
     <div className="flex h-full flex-col gap-4 p-6">
       <div className="flex items-center gap-4">
         <h1 className="text-[22px] font-semibold tracking-tight text-text">{c.brand}</h1>
-        <span className="text-[14px] text-muted">creative · {c.trend.trendName}</span>
+        <span className="text-[14px] text-muted">creative · {c.live?.trendName ?? c.trend.trendName}</span>
         <div className="ml-auto flex items-center gap-3">
           <span className="text-[12px] text-faint">Tone</span>
           <div className="flex rounded-md border border-line-strong p-0.5">
@@ -79,6 +81,7 @@ export function Creative() {
                 <div className="font-mono text-[12px] text-muted">{c.persona.handle}</div>
                 <div className="mt-2 text-[12px] text-muted">{c.persona.style}</div>
                 <div className="text-[12px] text-faint">voice · {c.persona.voice}</div>
+                {c.live && <div className="mt-1 text-[12px] text-faint">live run persona · {c.live.persona} (AI) → variant C</div>}
                 <div className="mt-2 flex gap-1.5">
                   <Badge tone="accent">AI persona</Badge>
                   <Badge>no real likeness</Badge>
@@ -86,7 +89,7 @@ export function Creative() {
               </div>
             </div>
           </Panel>
-          <Panel title="Creative DNA" meta={c.trend.trendName} className="flex-1">
+          <Panel title="Creative DNA" meta={c.live?.trendName ?? c.trend.trendName} className="flex-1">
             <div className="p-2">
               {c.dna.map((d) => (
                 <div key={d.gene} className={`grid grid-cols-[86px_1fr] gap-3 rounded px-2 py-2 text-[12px] ${d.insert ? 'bg-accent/8 ring-1 ring-accent/40' : ''}`}>
@@ -99,14 +102,25 @@ export function Creative() {
         </div>
 
         <Panel title="UGC variants" meta={`${TONES.find((t) => t.id === tone)?.label} · 9:16 · A/B`}>
-          <div className="flex h-full justify-center gap-10 p-5">
+          <div className={`flex h-full justify-center p-5 ${showC ? 'gap-5' : 'gap-10'}`}>
+            {showC && (
+              <motion.div key={`${tone}-C`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="w-[196px]">
+                <div className="mb-2 flex items-center justify-between">
+                  <span className="text-[13px] font-medium text-text">Variant C</span>
+                  <Badge tone="accent">live run</Badge>
+                </div>
+                <Phone media={liveMedia} tone={tone} label="live-C" width={180} />
+                <div className="mt-3 text-[13px] text-text">“Why would I deceive you?”</div>
+                <div className="mt-1 text-[12px] text-muted">{c.live!.persona} (AI) · grok-imagine · 7 s</div>
+              </motion.div>
+            )}
             {(['A', 'B'] as const).map((v, i) => (
-              <motion.div key={`${tone}-${v}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="w-[248px]">
+              <motion.div key={`${tone}-${v}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: (i + 1) * 0.08 }} className={showC ? 'w-[196px]' : 'w-[248px]'}>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-[13px] font-medium text-text">Variant {v}</span>
                   {v === winner && <Badge tone="accent">leading · CTR</Badge>}
                 </div>
-                <Phone media={variants[i]} tone={tone} label={`${c.id}-${v}`} caption={i === 0 ? script.hook : (tone === 'ugc' && variants[1]?.hook && variants[1] !== variants[0] ? variants[1].hook : script.caption.replace(' #ad', ''))} />
+                <Phone media={variants[i]} tone={tone} width={showC ? 180 : 232} label={`${c.id}-${v}`} caption={i === 0 ? script.hook : (tone === 'ugc' && variants[1]?.hook && variants[1] !== variants[0] ? variants[1].hook : script.caption.replace(' #ad', ''))} />
                 <div className="mt-3 text-[13px] text-text">“{i === 0 ? script.hook : script.beats[0]}”</div>
                 <ol className="mt-1 space-y-0.5 text-[12px] text-muted">
                   {script.beats.map((b, j) => (
@@ -121,12 +135,19 @@ export function Creative() {
         </Panel>
 
         <div className="flex min-h-0 flex-col gap-4">
-          <Panel title="Critic checks" meta="round 2 · approved">
+          <Panel title="Critic checks" meta={c.reject ? 'round 2 · approved' : 'round 1 · approved'}>
             <div className="p-4">
-              <div className="mb-3 rounded-md border border-danger/40 bg-danger/5 px-3 py-2 text-[12px]">
-                <span className="font-semibold uppercase tracking-wider text-danger">round 1 · absolutely not</span>
-                <span className="text-muted"> · {c.reject.check}: {c.reject.note}</span>
-              </div>
+              {c.reject ? (
+                <div className="mb-3 rounded-md border border-danger/40 bg-danger/5 px-3 py-2 text-[12px]">
+                  <span className="font-semibold uppercase tracking-wider text-danger">round 1 · absolutely not</span>
+                  <span className="text-muted"> · {c.reject.check}: {c.reject.note}</span>
+                </div>
+              ) : (
+                <div className="mb-3 rounded-md border border-accent/40 bg-accent/5 px-3 py-2 text-[12px]">
+                  <span className="font-semibold uppercase tracking-wider text-accent">round 1 · fine. ship it.</span>
+                  <span className="text-muted"> · live run, approved first pass</span>
+                </div>
+              )}
               {c.checks.map((k) => (
                 <div key={k.label} className="flex items-center gap-2.5 border-b border-line py-2 text-[13px] last:border-0">
                   <span className="flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[9px] text-black">✓</span>

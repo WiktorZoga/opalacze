@@ -237,6 +237,27 @@ function Trace({ run, t, selected, onSelect }: { run: Run; t: number; selected?:
 
 function ScoutFeed({ campaign }: { campaign: Campaign }) {
   const tr = campaign.trend
+  if (campaign.live) {
+    const lv = campaign.live
+    return (
+      <div className="flex flex-col gap-3">
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-faint">Trend match</span>
+          <Badge>recorded trend snapshot</Badge>
+        </div>
+        <div className="text-[18px] font-medium text-text">{lv.trendName}</div>
+        <div className="flex items-baseline gap-2">
+          <span className="tabular font-mono text-[34px] leading-none text-accent">{campaign.fit}%</span>
+          <span className="text-[12px] text-muted">brand fit · TikTok · velocity 3.6</span>
+        </div>
+        <div className="h-1.5 overflow-hidden rounded-full bg-line">
+          <div className="h-full bg-gradient-to-r from-accent to-hot" style={{ width: `${campaign.fit}%` }} />
+        </div>
+        <p className="text-[13px] leading-relaxed text-muted">{lv.trendFormat}</p>
+        <p className="line-clamp-4 text-[12px] leading-relaxed text-faint">{lv.whyItFits}</p>
+      </div>
+    )
+  }
   return (
     <div className="flex gap-4">
       <TikTokEmbed source={tr} width={196} showMeta={false} loadTimeoutMs={6000} />
@@ -384,6 +405,11 @@ export function Workflow({ runKey = 0 }: { runKey?: number }) {
       <div className="flex items-center gap-4">
         <h1 className="text-[22px] font-semibold tracking-tight text-text">{campaign.brand}</h1>
         <span className="text-[14px] text-muted">{campaign.product}</span>
+        {campaign.live ? (
+          <span className="rounded-full border border-accent/50 bg-accent/10 px-2.5 py-0.5 text-[12px] text-accent">{campaign.live.label} · {fmtMs(campaign.live.realMs)} real · {campaign.live.events.toLocaleString('en')} events</span>
+        ) : (
+          <span className="rounded-full border border-line-strong px-2.5 py-0.5 text-[12px] text-faint">simulated replay</span>
+        )}
         <span className="flex items-center gap-2 rounded-full border border-line-strong px-2.5 py-0.5 text-[12px] text-muted">
           <StatusDot state={running ? 'running' : 'done'} />
           {running ? 'Agents working' : 'Campaign ready'}
