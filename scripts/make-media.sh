@@ -13,16 +13,16 @@ ffmpeg -y -v error -ss $LEAD -i "$REC/raw-demo.webm" -t 45.5 -c:v libx264 -prese
 
 gif() { # name start duration
   ffmpeg -y -v error -ss "$2" -t "$3" -i "$OUT/rotbot-demo-45s.mp4" \
-    -vf "fps=12,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle" \
+    -vf "fps=8,scale=960:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=64:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle" \
     "$OUT/$1.gif"
 }
-gif rotbot-radar-sources 0.3 4.0
-gif rotbot-agent-flow 6.2 6
-gif rotbot-breeding-hatch 20.2 6.5
-gif rotbot-publish-metrics 12.8 6
+gif rotbot-radar-sources 0.4 4
+gif rotbot-agent-flow 7 5
+gif rotbot-breeding-hatch 21 5
+gif rotbot-publish-metrics 13 5.5
 
-# hero: the video wall, then the work grid
-PAL="fps=10,scale=1200:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle"
-ffmpeg -y -v error -ss 0.4 -t 4.5 -i "$OUT/rotbot-demo-45s.mp4" -ss 20.4 -t 5.5 -i "$OUT/rotbot-demo-45s.mp4" \
+# hero stays 1200px and under 8MB: short slices, small palette, no dither
+PAL="fps=6,scale=1200:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=32:stats_mode=single[p];[b][p]paletteuse=dither=none"
+ffmpeg -y -v error -ss 0.5 -t 2.6 -i "$OUT/rotbot-demo-45s.mp4" -ss 21.5 -t 2.8 -i "$OUT/rotbot-demo-45s.mp4" \
   -filter_complex "[0:v][1:v]concat=n=2:v=1[c];[c]$PAL" "$OUT/rotbot-hero.gif"
 ls -la "$OUT"
