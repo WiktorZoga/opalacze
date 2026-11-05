@@ -1,0 +1,25 @@
+{
+  "genome": "krasnal-ceo-series-a",
+  "status": "queued",
+  "approval": "awaiting human approval (publish_post needsApproval)",
+  "tiktok": {
+    "hookText": "we are not a dwarf.",
+    "caption": "krasnal AI just closed its series A. 600 employees, all 30 cm tall.",
+    "hashtags": [
+      "wroclaw",
+      "krasnale",
+      "aistartup",
+      "whywouldideceiveyou",
+      "brainrot"
+    ],
+    "audio": "'Why would I deceive you?' (trending sound)",
+    "slotCET": "20:00"
+  },
+  "x": {
+    "text": "Krasnal AI closes Series A. \"We are not a dwarf, we are a Small Language Model.\" Why would a dwarf deceive you?",
+    "hashtags": [
+      "AI"
+    ],
+    "replyCredit": "descended from Krasnal CEO × Why Would I Deceive You?"
+  }
+}
