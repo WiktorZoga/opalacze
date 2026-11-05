@@ -42,7 +42,7 @@ export const DEMO_STEPS: DemoStep[] = [
   {
     screen: 'output',
     ms: 15500,
-    pl: 'Na końcu: gotowy mem i wideo. Turn any brand into brainrot.',
-    en: 'The output: a ready meme and video. Turn any brand into brainrot.',
+    pl: 'Na końcu: gotowy mem wyrenderowany przez grok-imagine. Turn any brand into brainrot.',
+    en: 'The output: a finished meme rendered by grok-imagine. Turn any brand into brainrot.',
   },
 ]
