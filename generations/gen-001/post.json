@@ -1,0 +1,24 @@
+{
+  "genome": "scientists-reveal-the-clap",
+  "status": "queued",
+  "approval": "awaiting human approval (publish_post needsApproval)",
+  "tiktok": {
+    "hookText": "SCIENTISTS REVEAL THE…",
+    "caption": "breaking: the institute of cat sciences has applauded itself",
+    "hashtags": [
+      "scientistsrevealthehi",
+      "blackcatclapping",
+      "catsoftiktok",
+      "brainrot"
+    ],
+    "audio": "newsroom sting + claps (original)",
+    "slotCET": "19:30"
+  },
+  "x": {
+    "text": "BREAKING: Scientists reveal the clap 👏",
+    "hashtags": [
+      "memes"
+    ],
+    "replyCredit": "descended from Scientists Reveal the Hi × Black Cat Clapping"
+  }
+}
