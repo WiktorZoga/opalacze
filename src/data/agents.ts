@@ -43,7 +43,7 @@ export const AGENTS: Record<AgentId, Agent> = {
     name: 'CRITIC',
     species: 'Judge cat',
     role: 'quality control',
-    emoji: '😼',
+    emoji: '🐱',
     prop: '⚖️',
     color: '#ffb800',
   },

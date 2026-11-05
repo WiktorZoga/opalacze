@@ -14,7 +14,7 @@ export function Stage({ children }: { children: ReactNode }) {
   return (
     <div className="flex h-full w-full items-center justify-center bg-black">
       <div
-        className="scanlines vignette relative shrink-0 overflow-hidden bg-ink"
+        className="relative shrink-0 overflow-hidden bg-bg"
         style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale})`, transformOrigin: 'center' }}
       >
         {children}
