@@ -92,8 +92,8 @@ export function TikTokEmbed({
     <div className={`flex flex-col gap-2 ${className}`} style={{ width }}>
       <div
         ref={box}
-        className="relative overflow-hidden rounded-[22px] border border-white/15 bg-black shadow-[0_0_30px_#ff2bd622]"
-        style={{ position: 'relative', overflow: 'hidden', borderRadius: 22, background: '#000', width, height }}
+        className="relative overflow-hidden rounded-lg border border-line bg-black"
+        style={{ position: 'relative', overflow: 'hidden', borderRadius: 8, background: '#000', width, height }}
       >
         {status === 'failed' ? (
           <FallbackCard source={source} />
@@ -133,7 +133,7 @@ function safeParse(s: string): Record<string, unknown> | null {
 function Thumb({ source }: { source: TikTokSource }) {
   const [broken, setBroken] = useState(!source.thumbnailUrl)
   if (broken) {
-    return <div style={{ ...fill, background: 'linear-gradient(135deg, #25f4ee55, #000 50%, #fe2c5555)' }} />
+    return <div style={{ ...fill, background: '#18181b' }} />
   }
   return (
     <img
@@ -168,16 +168,16 @@ function FallbackCard({ source }: { source: TikTokSource }) {
       className="group block text-white"
     >
       <Thumb source={source} />
-      <div style={fill} className="flex flex-col justify-end bg-gradient-to-t from-black/95 via-black/40 to-black/10 p-4 font-mono">
-        <div className="mb-auto self-start rounded-full bg-black/60 px-2 py-1 text-[11px] uppercase tracking-wider text-white/80">
+      <div style={fill} className="flex flex-col justify-end bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3">
+        <div className="mb-auto self-start rounded bg-black/60 px-1.5 py-0.5 font-mono text-[10px] text-white/70">
           {source.trendTag}
         </div>
-        <div className="text-[18px] font-bold leading-tight">{source.trendName}</div>
+        <div className="text-[15px] font-medium leading-tight">{source.trendName}</div>
         <div className="mt-1 line-clamp-2 text-[12px] text-white/75">{source.title}</div>
         <div className="mt-2 text-[12px] text-white/90">
           @{source.author} · {formatCount(source.views)} views · {formatCount(source.likes)} likes
         </div>
-        <div className="mt-3 rounded-full bg-[#fe2c55] px-3 py-2 text-center text-[13px] font-bold group-hover:bg-[#ff4f73]">
+        <div className="mt-3 rounded-md border border-white/25 px-3 py-1.5 text-center text-[12px] text-white/90 group-hover:border-white/60">
           Watch on TikTok ↗
         </div>
       </div>
@@ -188,9 +188,9 @@ function FallbackCard({ source }: { source: TikTokSource }) {
 function MetaStrip({ source }: { source: TikTokSource }) {
   const posted = new Date(source.postedAt).toLocaleDateString('en', { month: 'short', day: 'numeric' })
   return (
-    <div className="font-mono text-[12px] leading-snug text-white/80">
+    <div className="text-[12px] leading-snug text-muted">
       <div className="flex items-baseline justify-between gap-2">
-        <span className="truncate font-bold text-white">{source.trendName}</span>
+        <span className="truncate font-medium text-text">{source.trendName}</span>
         <span className="shrink-0 text-white/60">{posted}</span>
       </div>
       <div className="text-white/60">
