@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROT BOT — 60s pitch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --void: #04121f;
+      --panel: #0a1c2c;
+      --fog: #e7f4f2;
+      --mist: #8fb3b0;
+      --acid: #2dd4bf;
+      --hot: #38bdf8;
+      --warn: #fb7185;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--void);
+      color: var(--fog);
+      font-family: "IBM Plex Sans", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 10%, rgba(45, 212, 191, 0.16), transparent 55%),
+        radial-gradient(ellipse 55% 45% at 90% 85%, rgba(56, 189, 248, 0.12), transparent 50%),
+        linear-gradient(165deg, #031018 0%, #061a28 48%, #04121f 100%);
+    }
+
+    .stage {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(14px) scale(0.985);
+      transition:
+        opacity 0.45s var(--ease),
+        transform 0.45s var(--ease),
+        visibility 0.45s;
+    }
+
+    .scene.on {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .chrome {
+      position: absolute;
+      inset: clamp(0.75rem, 2vw, 1.4rem);
+      border: 1px solid rgba(232, 244, 242, 0.12);
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(10, 28, 44, 0.72), rgba(4, 18, 31, 0.55));
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .chrome-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid rgba(232, 244, 242, 0.08);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    .dot {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.55);
+      animation: pulse 1.6s ease-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.45); }
+      70% { box-shadow: 0 0 0 10px rgba(45, 212, 191, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(45, 212, 191, 0); }
+    }
+
+    .chrome-body {
+      position: absolute;
+      inset: 2.4rem 0 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .media-fill,
+    .media-fill video,
+    .media-fill img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .phone {
+      width: min(28vw, 280px);
+      aspect-ratio: 9 / 16;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(232, 244, 242, 0.18);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      background: #000;
+      transform: translateY(8px);
+    }
+
+    .phone img, .phone video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .split {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(232, 244, 242, 0.08);
+    }
+
+    .split > div {
+      position: relative;
+      background: #061018;
+      overflow: hidden;
+    }
+
+    .split label {
+      position: absolute;
+      left: 0.85rem;
+      top: 0.85rem;
+      z-index: 2;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--void);
+      background: var(--acid);
+      padding: 0.28rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .split img, .split video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .agent-rail {
+      position: absolute;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.55rem;
+      z-index: 3;
+    }
+
+    .agent {
+      padding: 0.7rem 0.75rem;
+      border-radius: 12px;
+      background: rgba(4, 18, 31, 0.78);
+      border: 1px solid rgba(232, 244, 242, 0.12);
+      backdrop-filter: blur(8px);
+      transform: translateY(10px);
+      opacity: 0.35;
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), border-color 0.35s;
+    }
+
+    .agent.lit {
+      opacity: 1;
+      transform: none;
+      border-color: rgba(45, 212, 191, 0.55);
+    }
+
+    .agent .who {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      color: var(--acid);
+      margin-bottom: 0.2rem;
+    }
+
+    .agent .job {
+      font-size: 0.82rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .agent .sub {
+      margin-top: 0.2rem;
+      font-size: 0.72rem;
+      color: var(--mist);
+    }
+
+    .copy {
+      position: absolute;
+      left: clamp(1.2rem, 4vw, 3rem);
+      right: clamp(1.2rem, 4vw, 3rem);
+      bottom: clamp(4.5rem, 10vh, 7rem);
+      z-index: 5;
+      max-width: 42rem;
+      pointer-events: none;
+    }
+
+    .brand {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(0.72rem, 1.3vw, 0.85rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--acid);
+      margin-bottom: 0.55rem;
+    }
+
+    .line {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.55rem, 4.2vw, 3rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.55);
+      max-width: 18ch;
+    }
+
+    .line em {
+      font-style: normal;
+      color: var(--acid);
+    }
+
+    .subline {
+      margin-top: 0.7rem;
+      font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+      color: var(--mist);
+      max-width: 38ch;
+      line-height: 1.4;
+      text-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .tag {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.8rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      max-width: 16ch;
+    }
+
+    .money {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      width: min(860px, 92%);
+      margin: 0 auto;
+    }
+
+    .money article {
+      padding: 1.25rem 1.35rem;
+      border-radius: 16px;
+      border: 1px solid rgba(232, 244, 242, 0.12);
+      background: rgba(4, 18, 31, 0.72);
+    }
+
+    .money .k {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 0.45rem;
+    }
+
+    .money .v {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+      letter-spacing: -0.02em;
+    }
+
+    .money .d {
+      margin-top: 0.35rem;
+      color: var(--mist);
+      font-size: 0.95rem;
+    }
+
+    .money .win { border-color: rgba(45, 212, 191, 0.45); }
+    .money .win .v { color: var(--acid); }
+
+    .scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(4, 18, 31, 0.15) 0%, rgba(4, 18, 31, 0.2) 40%, rgba(4, 18, 31, 0.88) 100%);
+      pointer-events: none;
+    }
+
+    .vo {
+      position: fixed;
+      z-index: 8;
+      left: clamp(1rem, 3vw, 2rem);
+      right: clamp(1rem, 3vw, 2rem);
+      bottom: 1.55rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      pointer-events: none;
+    }
+
+    .vo-pill {
+      flex: 1;
+      padding: 0.7rem 0.9rem;
+      border-radius: 12px;
+      background: rgba(4, 18, 31, 0.82);
+      border: 1px solid rgba(232, 244, 242, 0.12);
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      line-height: 1.35;
+      color: var(--fog);
+      min-height: 2.8rem;
+    }
+
+    .vo-pill b {
+      color: var(--acid);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .hud {
+      position: fixed;
+      z-index: 9;
+      top: 0.9rem;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1.1rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(143, 179, 176, 0.85);
+      pointer-events: none;
+    }
+
+    .progress {
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      background: rgba(232, 244, 242, 0.08);
+    }
+
+    .progress > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--acid), var(--hot));
+    }
+
+    .gate {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(45, 212, 191, 0.14), transparent 60%),
+        rgba(4, 18, 31, 0.92);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .gate.gone {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease), visibility 0.4s;
+    }
+
+    .gate h1 {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(2.4rem, 8vw, 5.5rem);
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+      margin-bottom: 0.7rem;
+    }
+
+    .gate p {
+      color: var(--mist);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      max-width: 34ch;
+      margin: 0 auto 1.4rem;
+      line-height: 1.4;
+    }
+
+    .gate .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 999px;
+      background: var(--acid);
+      color: var(--void);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .gate .meta {
+      margin-top: 1rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(143, 179, 176, 0.75);
+    }
+
+    .endmark {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .endmark .brand-big {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(2.8rem, 9vw, 6rem);
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+    }
+
+    .endmark .motto {
+      margin-top: 1rem;
+      font-size: clamp(1.05rem, 2.3vw, 1.55rem);
+      color: var(--acid);
+      max-width: 22ch;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.25;
+    }
+
+    .endmark .product {
+      margin-top: 1.1rem;
+      color: var(--mist);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 860px) {
+      .agent-rail { grid-template-columns: 1fr 1fr; }
+      .phone { width: min(42vw, 220px); }
+      .money { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scene, .agent, .gate { transition: none; }
+      .dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hud">
+    <span>ROT BOT · 60s pitch</span>
+    <span id="clock">00.0s</span>
+  </div>
+
+  <div class="stage" id="stage">
+    <!-- 0–5s · absurd hook -->
+    <section class="scene" data-start="0" data-end="5" data-vo="Yes — that's a sacred kebab at three in the morning. And it was made by a team of AI agents.">
+      <div class="chrome">
+        <div class="chrome-bar"><span class="dot"></span> live creative · brandrot-kebab-u-mustafy</div>
+        <div class="chrome-body">
+          <div class="phone">
+            <img src="../public/memes/grok/brandrot-kebab-u-mustafy.jpg" alt="3 AM. THE PROPHECY WAS GARLIC SAUCE. — Kebab u Mustafy Grok Imagine still" />
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <p class="brand">Hook</p>
+        <p class="line">Sacred kebab.<br /><em>Agent-made.</em></p>
+      </div>
+    </section>
+
+    <!-- 5–15s · problem + ROT BOT -->
+    <section class="scene" data-start="5" data-end="15" data-vo="Trends peak in three days. Agencies still take a week. So we built ROT BOT — the swarm behind Riptide, the AI ad agency that rides virals.">
+      <div class="chrome">
+        <div class="chrome-bar"><span class="dot"></span> trend radar · docs/media/rotbot-radar-sources.gif</div>
+        <div class="chrome-body media-fill">
+          <img src="../docs/media/rotbot-radar-sources.gif" alt="Riptide trend radar scanning rising sources" />
+          <div class="scrim"></div>
+        </div>
+      </div>
+      <div class="copy">
+        <p class="brand">Problem</p>
+        <p class="line">Trends live <em>3 days</em>. Agencies take a week.</p>
+        <p class="subline">ROT BOT is the R&amp;D swarm that runs Riptide — the AI ad agency that rides virals.</p>
+      </div>
+    </section>
+
+    <!-- 15–35s · Scout → Geneticist → Mutator → Critic -->
+    <section class="scene" data-start="15" data-end="35" data-vo="Scout hunts TikTok and X trends and scores brand fit. Geneticist extracts the DNA — hook, pacing, product insert. Mutator casts a persona, writes the script, renders 9:16 with Grok Imagine. Critic kills bad drafts — rejections are git commits." id="pipeline">
+      <div class="chrome">
+        <div class="chrome-bar"><span class="dot"></span> campaign console · Scout → Geneticist → Mutator → Critic</div>
+        <div class="chrome-body media-fill">
+          <img id="pipeMedia" src="../docs/media/rotbot-screen-workflow.png" alt="Riptide campaign workflow screen" />
+          <div class="scrim"></div>
+          <div class="agent-rail">
+            <div class="agent" data-lit-at="16">
+              <div class="who">🐦 Scout</div>
+              <div class="job">Trend + brand fit</div>
+              <div class="sub">x_trends · TikTok / X</div>
+            </div>
+            <div class="agent" data-lit-at="21">
+              <div class="who">🦫 Geneticist</div>
+              <div class="job">Trend DNA</div>
+              <div class="sub">hook · pacing · insert</div>
+            </div>
+            <div class="agent" data-lit-at="26">
+              <div class="who">🐊 Mutator</div>
+              <div class="job">Creator · render</div>
+              <div class="sub">persona · script · 9:16</div>
+            </div>
+            <div class="agent" data-lit-at="31">
+              <div class="who">🐱 Critic</div>
+              <div class="job">Safety · claims</div>
+              <div class="sub">#ad · AI-generated</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <p class="brand">Technology</p>
+        <p class="line">Four agents.<br /><em>One generation.</em></p>
+      </div>
+    </section>
+
+    <!-- 35–48s · payoff: trend vs generated -->
+    <section class="scene" data-start="35" data-end="48" data-vo="Rising trend in. Trend-native creative out. gen-live-002: NOIR/05, real grok-4.7 run — Critic nine, nine, ten, ten.">
+      <div class="chrome">
+        <div class="chrome-bar"><span class="dot"></span> payoff · trend DNA → gen-live-002 noir-05-deceive</div>
+        <div class="chrome-body">
+          <div class="split">
+            <div>
+              <label>trend DNA</label>
+              <img src="../docs/media/rotbot-breeding-hatch.gif" alt="Breeding / hatch visual from the ROT BOT console" />
+            </div>
+            <div>
+              <label>generated</label>
+              <video src="../generations/gen-live-002/media/noir-05-deceive.mp4" muted loop playsinline poster="../docs/live-002-poster.jpg"></video>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copy">
+        <p class="brand">Payoff</p>
+        <p class="line">Trend in.<br /><em>Creative out.</em></p>
+        <p class="subline">gen-live-002 · grok-4.7 · Critic 9 · 9 · 10 · 10</p>
+      </div>
+    </section>
+
+    <!-- 48–60s · money + motto -->
+    <section class="scene" data-start="48" data-end="60" data-vo="For agencies and brands that can't wait a week: minutes to an on-trend ad, A/B while it still rises. We don't follow trends. We mutate them.">
+      <div class="chrome">
+        <div class="chrome-bar"><span class="dot"></span> business · time to on-trend ad</div>
+        <div class="chrome-body" style="padding: 2rem;">
+          <div class="money">
+            <article>
+              <div class="k">Agency cycle</div>
+              <div class="v">~1 week</div>
+              <div class="d">Brief → shoot → approvals</div>
+            </article>
+            <article class="win">
+              <div class="k">Riptide / ROT BOT</div>
+              <div class="v">minutes</div>
+              <div class="d">A/B variants · while the trend still rises</div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="endmark">
+        <div>
+          <div class="brand-big">ROT BOT</div>
+          <p class="motto">We don't follow trends.<br />We mutate them.</p>
+          <p class="product">Riptide · the AI ad agency that rides virals</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="vo"><div class="vo-pill" id="vo"><b>VO</b> Press play — ~60 seconds · ~125 words</div></div>
+  <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+
+  <div class="gate" id="gate">
+    <div>
+      <h1>ROT BOT</h1>
+      <p>One-minute hackathon pitch. Real media from this repo. Auto-timed interface commentary.</p>
+      <div class="cta">▶ Play 60s</div>
+      <p class="meta">Space / click · R restart · F fullscreen</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const DURATION = 60;
+      const scenes = Array.from(document.querySelectorAll(".scene"));
+      const gate = document.getElementById("gate");
+      const bar = document.getElementById("bar");
+      const clock = document.getElementById("clock");
+      const vo = document.getElementById("vo");
+      const pipeMedia = document.getElementById("pipeMedia");
+      const agents = Array.from(document.querySelectorAll(".agent"));
+
+      const PIPE_FRAMES = [
+        { t: 15, src: "../docs/media/rotbot-screen-workflow.png" },
+        { t: 20, src: "../docs/media/grokbot/02-trace-overlord-to-scout-handoff.png" },
+        { t: 24, src: "../docs/media/grokbot/03-trace-geneticist-mutator-handoffs.png" },
+        { t: 28, src: "../docs/media/rotbot-agent-flow.gif" },
+        { t: 31, src: "../docs/media/grokbot/04-trace-critic-absolutely-not-then-reroll.png" },
+        { t: 33, src: "../docs/media/rotbot-screen-workflow-critic.png" },
+      ];
+
+      let playing = false;
+      let startMs = 0;
+      let raf = 0;
+      let lastScene = -1;
+
+      function fmt(t) {
+        return t.toFixed(1).padStart(4, "0") + "s";
+      }
+
+      function setScene(t) {
+        let idx = 0;
+        scenes.forEach((s, i) => {
+          const a = +s.dataset.start;
+          const b = +s.dataset.end;
+          const on = t >= a && t < b;
+          s.classList.toggle("on", on);
+          if (on) idx = i;
+        });
+
+        if (idx !== lastScene) {
+          lastScene = idx;
+          const s = scenes[idx];
+          vo.innerHTML = "<b>VO · " + s.dataset.start + "–" + s.dataset.end + "s</b>" + (s.dataset.vo || "");
+          s.querySelectorAll("video").forEach((v) => {
+            v.currentTime = 0;
+            v.play().catch(() => {});
+          });
+          scenes.forEach((other, j) => {
+            if (j === idx) return;
+            other.querySelectorAll("video").forEach((v) => v.pause());
+          });
+        }
+
+        agents.forEach((el) => {
+          const litAt = +el.dataset.litAt;
+          el.classList.toggle("lit", t >= litAt && t < 35);
+        });
+
+        let frame = PIPE_FRAMES[0].src;
+        for (const f of PIPE_FRAMES) {
+          if (t >= f.t) frame = f.src;
+        }
+        if (pipeMedia && t >= 15 && t < 35 && pipeMedia.getAttribute("src") !== frame) {
+          pipeMedia.setAttribute("src", frame);
+        }
+
+        bar.style.width = Math.min(100, (t / DURATION) * 100) + "%";
+        clock.textContent = fmt(Math.min(t, DURATION));
+      }
+
+      function tick(now) {
+        if (!playing) return;
+        const t = (now - startMs) / 1000;
+        if (t >= DURATION) {
+          setScene(DURATION - 0.001);
+          playing = false;
+          vo.innerHTML = "<b>END</b>Press R to restart · motto from agents/bot/instructions.md";
+          return;
+        }
+        setScene(t);
+        raf = requestAnimationFrame(tick);
+      }
+
+      function play() {
+        gate.classList.add("gone");
+        playing = true;
+        startMs = performance.now();
+        lastScene = -1;
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(tick);
+      }
+
+      function restart() {
+        playing = false;
+        cancelAnimationFrame(raf);
+        gate.classList.remove("gone");
+        setScene(0);
+        scenes.forEach((s) => s.classList.remove("on"));
+        lastScene = -1;
+        bar.style.width = "0%";
+        clock.textContent = "00.0s";
+        vo.innerHTML = "<b>VO</b>Press play — ~60 seconds · ~125 words";
+      }
+
+      gate.addEventListener("click", (e) => {
+        e.stopPropagation();
+        play();
+      });
+
+      document.body.addEventListener("click", () => {
+        if (!playing && gate.classList.contains("gone") === false) play();
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          if (!playing) play();
+        } else if (e.key === "r" || e.key === "R") {
+          e.preventDefault();
+          restart();
+        } else if (e.key === "f" || e.key === "F") {
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+          else document.exitFullscreen?.();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
