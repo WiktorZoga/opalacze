@@ -18,6 +18,11 @@ gif() { # name start duration
 }
 gif rotbot-radar-sources 0.4 4.2
 gif rotbot-agent-flow 3.6 6
-gif rotbot-breeding-hatch 7.4 8.6
-gif rotbot-publish-metrics 29.8 7.5
+gif rotbot-breeding-hatch 18.5 7
+gif rotbot-publish-metrics 24.5 8
+
+# hero: handoffs + critic stamp, then the hatch
+PAL="fps=12,scale=1200:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=160:stats_mode=diff[p];[b][p]paletteuse=dither=bayer:bayer_scale=4:diff_mode=rectangle"
+ffmpeg -y -v error -ss 5.2 -t 8 -i "$OUT/rotbot-demo-45s.mp4" -ss 18.5 -t 6 -i "$OUT/rotbot-demo-45s.mp4" \
+  -filter_complex "[0:v][1:v]concat=n=2:v=1[c];[c]$PAL" "$OUT/rotbot-hero.gif"
 ls -la "$OUT"
