@@ -48,9 +48,29 @@ agent that made it ([`f16e5c1..e2af1f7`](https://github.com/WiktorZoga/opalacze/
 </tr>
 </table>
 
-<!-- GROK BOT PLAYGROUND: add screenshots / recording from docs/media/grokbot/ here, e.g.
-<p align="center"><img src="docs/media/grokbot/playground.png" alt="The live run in the Grok Bot playground" width="90%"></p>
--->
+## Inside Grok Bot
+
+The swarm running in the `@grok/agent-sdk` playground: the Overlord's chat, every subagent handoff, and every tool call in the trace.
+
+<p align="center">
+  <img src="docs/media/grokbot/grokbot-playground-live-run.gif" alt="Grok Bot playground: the Overlord delegating to subagents, 2x speed" width="90%"><br>
+  <sub>A short demo session at 2× speed. <a href="docs/media/grokbot/grokbot-playground-live-run-2x.mp4">▶ Watch the MP4 (60 s)</a></sub>
+</p>
+
+<table>
+<tr>
+<td width="50%" valign="top"><img src="docs/media/grokbot/01-playground-live-run-report.png" alt="Playground chat view of the gen-live-001 session" width="100%"><br><sub>🐙 <b>Live run report</b>: the gen-live-001 session, 7 handoff cards and the agent panel.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/02-trace-overlord-to-scout-handoff.png" alt="Trace: Overlord hands off to Scout" width="100%"><br><sub>🐦 <b>Overlord → Scout</b>: 2,552 events, 63 tool calls, live <code>x_trends</code> in 48.5 s.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="docs/media/grokbot/03-trace-geneticist-mutator-handoffs.png" alt="Trace: Geneticist and Mutator handoffs" width="100%"><br><sub>🦫🐊 <b>Geneticist → Mutator</b>: genomes sequenced, then crossed.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/04-trace-critic-absolutely-not-then-reroll.png" alt="Trace: Critic rejects, Mutator rerolls" width="100%"><br><sub>🐱 <b>“absolutely not”</b>: the Critic bounces round 1 and the Mutator rerolls the hook.</sub></td>
+</tr>
+<tr>
+<td width="50%" valign="top"><img src="docs/media/grokbot/05-tool-call-critic-commit-artifact.png" alt="Tool call: Critic commits its verdict with commit_artifact" width="100%"><br><sub>🐱 <b><code>commit_artifact</code></b>: the Critic commits its verdict to git under its own name.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/06-tool-call-generate-media-grok-imagine.png" alt="Tool call: generate_media renders with Grok Imagine" width="100%"><br><sub>🐊 <b><code>generate_media</code></b>: the approved child rendered by Grok Imagine.</sub></td>
+</tr>
+</table>
 
 ## The pitch
 
