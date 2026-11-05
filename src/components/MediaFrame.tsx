@@ -10,10 +10,12 @@ interface Props {
   reveal?: boolean
   className?: string
   pendingLabel?: string
+  /** meme caption overlaid on the media (only for media without a baked-in caption) */
+  caption?: string
 }
 
 /** real media (image or clip) in a clean frame, or a neutral pending tile */
-export function MediaFrame({ src, kind = 'image', alt, width, height, reveal = true, className = '', pendingLabel = 'render pending' }: Props) {
+export function MediaFrame({ src, kind = 'image', alt, width, height, reveal = true, className = '', pendingLabel = 'render pending', caption }: Props) {
   if (!src) {
     return (
       <div
@@ -33,13 +35,18 @@ export function MediaFrame({ src, kind = 'image', alt, width, height, reveal = t
     )
   return (
     <motion.div
-      className={`overflow-hidden rounded-md border border-line-strong bg-black ${className}`}
+      className={`relative overflow-hidden rounded-md border border-line-strong bg-black ${className}`}
       style={{ width, height }}
       initial={reveal ? { opacity: 0, scale: 0.97 } : false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.45, ease: 'easeOut' }}
     >
       {inner}
+      {caption && width >= 120 && (
+        <div className="meme-text absolute inset-x-0 top-0 px-2 pt-3 text-center" style={{ fontSize: Math.max(13, width * 0.085) }}>
+          {caption}
+        </div>
+      )}
     </motion.div>
   )
 }
