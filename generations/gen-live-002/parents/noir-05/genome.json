@@ -1,0 +1,45 @@
+{
+  "id": "noir-05",
+  "name": "NOIR/05 brand seed",
+  "generation": 5,
+  "parents": [],
+  "sources": [],
+  "genes": {
+    "hook": {
+      "allele": "Black glass catches a phone flash on a cluttered counter in the first second and a half",
+      "dominance": 0.48
+    },
+    "hero": {
+      "allele": "the black glass NOIR/05 eau de parfum bottle (smoky amber + fig)",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "Phone-shot bathroom or bedroom counter, Gen-Z UGC, bottle standing among ordinary clutter",
+      "dominance": 0.62
+    },
+    "humor": {
+      "allele": "The scent notes come out slightly wrong, as if the bottle misspoke its own lineup",
+      "dominance": 0.5
+    },
+    "audio": {
+      "allele": "Quiet room tone and a soft glass tap on the counter, no spoken claim",
+      "dominance": 0.32
+    },
+    "visual": {
+      "allele": "Vertical phone close-up of the black glass bottle, smoky amber liquid, fig-warm highlight, handheld and slightly off-center",
+      "dominance": 0.55
+    },
+    "catchphrase": {
+      "allele": "smells like a fig that borrowed an amber coat",
+      "dominance": 0.7
+    },
+    "structure": {
+      "allele": "6–10s UGC loop: bottle lands on the counter, one wrong scent line appears, hold on the glass",
+      "dominance": 0.45
+    }
+  },
+  "absurdity": 3,
+  "brandSafety": 9.5,
+  "mutations": [],
+  "fitness": null
+}
