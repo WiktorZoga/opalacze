@@ -1,0 +1,117 @@
+{
+  "generation": 4,
+  "platform": "x",
+  "queriedAt": "2026-11-05T18:08:19.255Z",
+  "items": [
+    {
+      "id": "particularly-powerful-meme",
+      "name": "Particularly Powerful Meme",
+      "title": "Particularly Powerful Meme",
+      "platform": "x",
+      "url": "https://x.com/ReturnofColin2/status/2118249624519492008",
+      "handle": "ReturnofColin2",
+      "views": 284481,
+      "velocity": 9.1,
+      "signal": "xAI x_search",
+      "description": "A freshly posted image meme called out as especially powerful that rapidly accumulated high engagement within hours.",
+      "tags": [
+        "satire",
+        "viral",
+        "image-macro",
+        "meme"
+      ],
+      "alsoOn": [],
+      "firstSeen": "2026-11-05"
+    },
+    {
+      "id": "missing-number-eye-test",
+      "name": "Find the Missing Number Eye Test",
+      "title": "Find the Missing Number Eye Test",
+      "platform": "x",
+      "url": "https://x.com/gizmexe/status/2117614541467000981",
+      "handle": "gizmexe",
+      "views": 13429960,
+      "velocity": 4.7,
+      "signal": "xAI x_search",
+      "description": "A viral attention puzzle image challenging viewers to spot the missing number, drawing millions of views and tens of thousands of replies in under three days.",
+      "tags": [
+        "puzzle",
+        "eye-test",
+        "viral",
+        "meme"
+      ],
+      "alsoOn": [],
+      "firstSeen": "2026-11-05"
+    },
+    {
+      "id": "high-hopes-disappointment",
+      "name": "Such High Hopes Satire Meme",
+      "title": "Such High Hopes Satire Meme",
+      "platform": "x",
+      "url": "https://x.com/RPM_Memes/status/2118051680336113868",
+      "handle": "RPM_Memes",
+      "views": 72575,
+      "velocity": 3.8,
+      "signal": "xAI x_search",
+      "description": "Original satire meme lamenting dashed high hopes, posted by a dedicated meme account and gaining strong early traction.",
+      "tags": [
+        "satire",
+        "original",
+        "disappointment",
+        "meme"
+      ],
+      "alsoOn": [],
+      "firstSeen": "2026-11-05"
+    },
+    {
+      "id": "midnight-vape-sound-check",
+      "name": "Hitting Vape to Investigate Night Sound",
+      "title": "Hitting Vape to Investigate Night Sound",
+      "platform": "x",
+      "url": "https://x.com/_wavyfranklin/status/2117499789231231387",
+      "handle": "_wavyfranklin",
+      "views": 683462,
+      "velocity": 3.4,
+      "signal": "xAI x_search",
+      "description": "Relatable image meme of someone cautiously using a vape in the dark to check on a mysterious nighttime noise.",
+      "tags": [
+        "relatable",
+        "humor",
+        "vape",
+        "meme"
+      ],
+      "alsoOn": [],
+      "firstSeen": "2026-11-05"
+    },
+    {
+      "id": "dillis-smile-post",
+      "name": "Dillis Memes Smile Image",
+      "title": "Dillis Memes Smile Image",
+      "platform": "x",
+      "url": "https://x.com/Dillis_Memes/status/2117287958114128219",
+      "handle": "Dillis_Memes",
+      "views": 617573,
+      "velocity": 2.3,
+      "signal": "xAI x_search",
+      "description": "High-engagement shitpost from a meme account consisting of a smile emoji paired with a widely viewed image.",
+      "tags": [
+        "shitpost",
+        "dank",
+        "meme-account",
+        "humor"
+      ],
+      "alsoOn": [],
+      "firstSeen": "2026-11-05"
+    }
+  ],
+  "pick": {
+    "id": "midnight-vape-sound-check",
+    "name": "Hitting Vape to Investigate Night Sound",
+    "url": "https://x.com/_wavyfranklin/status/2117499789231231387",
+    "handle": "_wavyfranklin",
+    "views": 683462,
+    "velocity": 3.4,
+    "signal": "xAI x_search",
+    "why": "Velocity 3.4 on 683k views, and the gag is a 6–10s loop: night noise, hit the vape, creep toward the sound."
+  }
+}
