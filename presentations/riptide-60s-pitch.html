@@ -3,21 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Riptide — 60s pitch</title>
+  <title>Riptide — 3-minute pitch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --void: #04121f;
-      --panel: #0a1f2e;
       --fog: #e8f6f3;
       --mist: #8fb3b0;
       --acid: #2dd4bf;
       --hot: #38bdf8;
       --warn: #fb7185;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      --pad: clamp(1.5rem, 5vw, 4.5rem);
+      --pad: clamp(1.5rem, 4.5vw, 4.25rem);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,17 +34,12 @@
 
     body {
       background:
-        radial-gradient(ellipse 75% 55% at 12% 8%, rgba(45, 212, 191, 0.14), transparent 55%),
-        radial-gradient(ellipse 60% 45% at 88% 90%, rgba(56, 189, 248, 0.1), transparent 50%),
-        linear-gradient(165deg, #031018 0%, #061a28 48%, #04121f 100%);
+        radial-gradient(ellipse 70% 50% at 10% 0%, rgba(45, 212, 191, 0.14), transparent 55%),
+        radial-gradient(ellipse 55% 40% at 95% 100%, rgba(56, 189, 248, 0.1), transparent 50%),
+        linear-gradient(165deg, #031018 0%, #061a28 50%, #04121f 100%);
     }
 
-    .deck {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      width: 100%;
-    }
+    .deck { position: relative; z-index: 1; height: 100%; width: 100%; }
 
     .slide {
       position: absolute;
@@ -57,11 +51,8 @@
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(22px) scale(0.985);
-      transition:
-        opacity 0.55s var(--ease),
-        transform 0.55s var(--ease),
-        visibility 0.55s;
+      transform: translateY(20px) scale(0.985);
+      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease), visibility 0.55s;
     }
 
     .slide.active {
@@ -74,91 +65,79 @@
     .slide.exit {
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-14px) scale(0.99);
+      transform: translateY(-12px) scale(0.99);
     }
 
-    .slide.active .reveal {
-      animation: rise 0.7s var(--ease) both;
-    }
-
+    .slide.active .reveal { animation: rise 0.7s var(--ease) both; }
     .slide.active .reveal-d1 { animation-delay: 0.08s; }
     .slide.active .reveal-d2 { animation-delay: 0.18s; }
-    .slide.active .reveal-d3 { animation-delay: 0.28s; }
-    .slide.active .reveal-d4 { animation-delay: 0.4s; }
-    .slide.active .reveal-d5 { animation-delay: 0.52s; }
+    .slide.active .reveal-d3 { animation-delay: 0.3s; }
+    .slide.active .reveal-d4 { animation-delay: 0.42s; }
+    .slide.active .reveal-d5 { animation-delay: 0.54s; }
 
     @keyframes rise {
-      from { opacity: 0; transform: translateY(24px); }
+      from { opacity: 0; transform: translateY(22px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .eyebrow {
       font-family: "IBM Plex Mono", monospace;
-      font-size: clamp(0.72rem, 1.3vw, 0.85rem);
+      font-size: clamp(0.7rem, 1.2vw, 0.82rem);
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--acid);
-      margin-bottom: clamp(0.7rem, 1.8vh, 1.25rem);
+      margin-bottom: clamp(0.65rem, 1.6vh, 1.1rem);
     }
 
     h1 {
       font-family: "Archivo Black", sans-serif;
       font-weight: 400;
-      font-size: clamp(2.4rem, 7vw, 5.2rem);
-      line-height: 0.98;
-      letter-spacing: -0.03em;
-      max-width: 14ch;
-      margin-bottom: clamp(0.85rem, 2vh, 1.4rem);
+      font-size: clamp(2.6rem, 8vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      margin-bottom: 0.85rem;
     }
 
     h2 {
       font-family: "Archivo Black", sans-serif;
       font-weight: 400;
-      font-size: clamp(1.85rem, 5vw, 3.6rem);
+      font-size: clamp(1.7rem, 4.6vw, 3.3rem);
       line-height: 1.05;
       letter-spacing: -0.025em;
       max-width: 18ch;
-      margin-bottom: clamp(0.75rem, 1.8vh, 1.2rem);
+      margin-bottom: 0.75rem;
     }
 
-    h2 em, h1 em, .lede strong {
-      font-style: normal;
-      color: var(--acid);
-    }
+    h1 em, h2 em, .lede strong { font-style: normal; color: var(--acid); }
 
     .lede {
-      font-size: clamp(1.05rem, 2.1vw, 1.4rem);
+      font-size: clamp(1rem, 1.9vw, 1.3rem);
       line-height: 1.4;
       color: var(--mist);
-      max-width: 36ch;
-      font-weight: 400;
+      max-width: 38ch;
     }
 
     .layout {
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: clamp(1.5rem, 4vw, 3.5rem);
+      gap: clamp(1.25rem, 3.5vw, 3rem);
       align-items: center;
       width: 100%;
       height: 100%;
     }
 
-    .layout.flip { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); }
-    .layout.solo { grid-template-columns: 1fr; max-width: 52rem; }
+    .layout.flip { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+    .layout.solo { grid-template-columns: 1fr; max-width: 48rem; }
 
     .phone {
-      width: min(100%, 280px);
+      width: min(100%, 260px);
       aspect-ratio: 9 / 16;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 22px;
+      margin: 0 auto;
+      border-radius: 20px;
       overflow: hidden;
       border: 1px solid rgba(232, 246, 243, 0.16);
-      box-shadow:
-        0 28px 70px rgba(0, 0, 0, 0.45),
-        0 0 0 1px rgba(45, 212, 191, 0.08);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
       background: #000;
-      position: relative;
     }
 
     .phone video, .phone img {
@@ -168,139 +147,225 @@
       display: block;
     }
 
+    .pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+      width: 100%;
+      max-width: 460px;
+      margin-left: auto;
+    }
+
+    .pair .phone { width: 100%; }
+
     .frame {
       width: 100%;
-      border-radius: 16px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid rgba(232, 246, 243, 0.12);
       background: rgba(4, 18, 31, 0.55);
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
       aspect-ratio: 16 / 10;
     }
 
-    .frame img, .frame video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .wall {
+    .clock-card, .trend-card, .stat, .pill-row, .flow, .biz, .bak {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.55rem;
-      width: 100%;
+      gap: 0.65rem;
     }
 
-    .wall .phone {
-      width: 100%;
-      margin: 0;
-      border-radius: 14px;
-    }
-
-    .agents {
-      list-style: none;
-      display: grid;
-      gap: 0.55rem;
-      margin-top: clamp(1rem, 2.5vh, 1.6rem);
-      max-width: 34rem;
-    }
-
-    .agents li {
-      display: grid;
-      grid-template-columns: 6.5rem 1fr;
-      gap: 0.85rem;
-      align-items: baseline;
-      padding: 0.7rem 0.85rem;
-      border-radius: 12px;
-      border: 1px solid rgba(232, 246, 243, 0.1);
-      background: rgba(4, 18, 31, 0.45);
-    }
-
-    .agents .who {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      color: var(--acid);
-      font-weight: 600;
-    }
-
-    .agents .job {
-      font-size: clamp(0.92rem, 1.5vw, 1.05rem);
-      color: var(--fog);
-      font-weight: 500;
-    }
-
-    .agents .job span {
-      display: block;
-      margin-top: 0.15rem;
-      color: var(--mist);
-      font-size: 0.86em;
-      font-weight: 400;
-    }
-
-    .compare {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: clamp(1.1rem, 2.8vh, 1.8rem);
-      max-width: 42rem;
-    }
-
-    .compare article {
-      padding: 1.15rem 1.25rem;
+    .clock-card, .trend-card, .stat, .biz article, .bak li {
+      padding: 1rem 1.1rem;
       border-radius: 14px;
       border: 1px solid rgba(232, 246, 243, 0.1);
-      background: rgba(4, 18, 31, 0.5);
+      background: rgba(4, 18, 31, 0.55);
     }
 
-    .compare .k {
+    .clock-card {
+      text-align: center;
+      min-width: 9rem;
+    }
+
+    .clock-card .big {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--warn);
+    }
+
+    .clock-card .label, .k {
       font-family: "IBM Plex Mono", monospace;
       font-size: 0.7rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--mist);
-      margin-bottom: 0.4rem;
+      margin-top: 0.35rem;
     }
 
-    .compare .v {
+    .problem-side {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.85rem;
+      align-items: stretch;
+    }
+
+    .trend-card .views {
       font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.55rem, 3.4vw, 2.4rem);
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      letter-spacing: -0.02em;
+      color: var(--acid);
+    }
+
+    .trend-card .name {
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    .trend-card .meta {
+      margin-top: 0.35rem;
+      color: var(--mist);
+      font-size: 0.9rem;
+    }
+
+    .flow {
+      margin-top: 1.1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.55rem;
+      max-width: 40rem;
+    }
+
+    .flow div {
+      padding: 0.85rem 0.9rem;
+      border-radius: 12px;
+      border: 1px solid rgba(232, 246, 243, 0.1);
+      background: rgba(4, 18, 31, 0.5);
+    }
+
+    .flow .step {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--acid);
+      margin-bottom: 0.25rem;
+    }
+
+    .flow b { font-size: 1.02rem; }
+
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1rem;
+    }
+
+    .platforms span {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(45, 212, 191, 0.35);
+      color: var(--fog);
+      background: rgba(45, 212, 191, 0.08);
+    }
+
+    .platforms span.road {
+      border-color: rgba(232, 246, 243, 0.14);
+      color: var(--mist);
+      background: transparent;
+    }
+
+    .agents {
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      max-width: 34rem;
+    }
+
+    .agents li {
+      display: grid;
+      grid-template-columns: 7rem 1fr;
+      gap: 0.75rem;
+      align-items: baseline;
+      padding: 0.65rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(232, 246, 243, 0.1);
+      background: rgba(4, 18, 31, 0.48);
+    }
+
+    .agents .who {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.76rem;
+      color: var(--acid);
+      font-weight: 600;
+    }
+
+    .agents .job { font-size: 0.95rem; font-weight: 500; }
+    .agents .job span {
+      display: block;
+      margin-top: 0.12rem;
+      color: var(--mist);
+      font-size: 0.84em;
+      font-weight: 400;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.55rem;
+      margin-top: 1rem;
+      max-width: 28rem;
+    }
+
+    .stat .v {
+      font-family: "Archivo Black", sans-serif;
+      font-size: clamp(1.35rem, 2.8vw, 1.9rem);
       letter-spacing: -0.02em;
       line-height: 1;
+      margin-top: 0.25rem;
     }
 
-    .compare .d {
-      margin-top: 0.4rem;
-      color: var(--mist);
-      font-size: 0.95rem;
+    .biz {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1.15rem;
+      max-width: 52rem;
     }
 
-    .compare .win {
-      border-color: rgba(45, 212, 191, 0.45);
-      background: rgba(45, 212, 191, 0.06);
-    }
-
-    .compare .win .v { color: var(--acid); }
-
-    .proof {
-      margin-top: 1rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      color: var(--mist);
-    }
-
-    .proof b { color: var(--fog); font-weight: 600; }
-
-    .motto {
+    .biz .v {
       font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.7rem, 4.5vw, 3.2rem);
-      line-height: 1.12;
-      letter-spacing: -0.025em;
-      max-width: 16ch;
-      color: var(--acid);
-      margin-top: 0.35rem;
+      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+      letter-spacing: -0.02em;
+      margin: 0.35rem 0 0.3rem;
+      line-height: 1.15;
+    }
+
+    .biz p { color: var(--mist); font-size: 0.92rem; line-height: 1.35; }
+
+    .links {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+      color: var(--fog);
+    }
+
+    .links a { color: var(--acid); text-decoration: none; }
+
+    .bak { list-style: none; margin-top: 1rem; max-width: 40rem; }
+    .bak li { font-size: 1.02rem; line-height: 1.35; }
+    .bak b { color: var(--acid); }
+
+    .mono {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--mist);
+      margin-top: 0.85rem;
     }
 
     .hud {
@@ -315,41 +380,29 @@
       gap: 1rem;
       pointer-events: none;
       font-family: "IBM Plex Mono", monospace;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(143, 179, 176, 0.7);
+      color: rgba(143, 179, 176, 0.68);
     }
 
-    .dots {
-      display: flex;
-      gap: 0.35rem;
-      align-items: center;
-    }
-
+    .dots { display: flex; gap: 0.35rem; align-items: center; }
     .dots i {
-      width: 0.4rem;
-      height: 0.4rem;
+      width: 0.38rem;
+      height: 0.38rem;
       border-radius: 50%;
       background: rgba(232, 246, 243, 0.18);
       transition: transform 0.3s var(--ease), background 0.3s;
     }
-
-    .dots i.on {
-      background: var(--acid);
-      transform: scale(1.35);
-    }
+    .dots i.on { background: var(--acid); transform: scale(1.35); }
 
     .progress {
       position: fixed;
       z-index: 6;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      left: 0; right: 0; bottom: 0;
       height: 3px;
       background: rgba(232, 246, 243, 0.06);
     }
-
     .progress > i {
       display: block;
       height: 100%;
@@ -358,39 +411,18 @@
       transition: width 0.45s var(--ease);
     }
 
-    .nav-hot {
-      position: fixed;
-      z-index: 4;
-      top: 0;
-      bottom: 0;
-      width: 28%;
-    }
-
+    .nav-hot { position: fixed; z-index: 4; top: 0; bottom: 0; width: 26%; }
     .nav-hot.prev { left: 0; cursor: w-resize; }
     .nav-hot.next { right: 0; cursor: e-resize; }
 
-    .tag {
-      display: inline-block;
-      margin-top: 0.85rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--void);
-      background: var(--acid);
-      padding: 0.3rem 0.55rem;
-      border-radius: 4px;
-      font-weight: 600;
-    }
-
-    @media (max-width: 860px) {
-      .layout, .layout.flip { grid-template-columns: 1fr; }
-      .phone { width: min(42vw, 220px); margin: 0 auto 1rem; }
-      .agents li { grid-template-columns: 1fr; gap: 0.2rem; }
-      .compare { grid-template-columns: 1fr; }
-      .wall { max-width: 360px; margin: 0 auto; }
-      h1, h2 { max-width: none; }
-      .nav-hot { width: 20%; }
+    @media (max-width: 900px) {
+      .layout, .layout.flip, .problem-side, .biz, .flow, .stats, .pair {
+        grid-template-columns: 1fr;
+      }
+      .pair { max-width: 280px; margin: 0 auto; }
+      .agents li { grid-template-columns: 1fr; gap: 0.15rem; }
+      h2 { max-width: none; }
+      .nav-hot { width: 18%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -402,167 +434,165 @@
   <div class="deck" id="deck" aria-live="polite">
 
     <!-- 1 · Title -->
-    <section class="slide active" data-note="Riptide — the AI ad agency that rides virals.">
-      <p class="eyebrow reveal">SpaceXAI × Grok Bot · Wrocław</p>
-      <h1 class="reveal reveal-d1">Riptide</h1>
-      <p class="lede reveal reveal-d2">The AI ad agency that rides virals.<br />A Grok Bot swarm. Minutes, not a week.</p>
+    <section class="slide active" data-note="Riptide — AI ad agency that rides the trend.">
+      <p class="eyebrow reveal">SpaceXAI × Grok Bot · Wrocław hackathon</p>
+      <h1 class="reveal reveal-d1">RIPTIDE</h1>
+      <p class="lede reveal reveal-d2">The AI ad agency that <strong>rides the trend</strong>.<br />Built for marketing agencies shipping to TikTok &amp; Instagram.</p>
+      <p class="mono reveal reveal-d3">Team opalacze · @grok/agent-sdk · grok-4.7</p>
     </section>
 
-    <!-- 2 · Hook -->
-    <section class="slide" data-note="Yes — a pigeon pitching perfume to investor pigeons. Made by AI agents.">
+    <!-- 2 · Problem -->
+    <section class="slide" data-note="Agencies need a week. Trends live 3 days.">
       <div class="layout">
         <div>
-          <p class="eyebrow reveal">Hook</p>
-          <h2 class="reveal reveal-d1">Yes. That’s a pigeon pitching perfume.</h2>
-          <p class="lede reveal reveal-d2">And a swarm of Grok Bot agents made it — trend DNA in, brand creative out.</p>
-          <span class="tag reveal reveal-d3">#ad · AI-generated</span>
+          <p class="eyebrow reveal">0:00–0:20 · Problem</p>
+          <h2 class="reveal reveal-d1">Agencies need a week.<br /><em>Trends live 3 days.</em></h2>
+          <p class="lede reveal reveal-d2">Brief → creative → approvals → shoot. By the time the ad ships, the format on TikTok and Instagram is already cold.</p>
+        </div>
+        <div class="problem-side reveal reveal-d2">
+          <div class="clock-card">
+            <div class="big">7d</div>
+            <div class="label">agency cycle</div>
+          </div>
+          <div class="trend-card">
+            <div class="k">Rising now · TikTok</div>
+            <div class="views">10.8M</div>
+            <div class="name">Your First Time in a Fancy Cafe</div>
+            <div class="meta">Peak window ≈ 72 hours · still climbing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3 · What it is -->
+    <section class="slide" data-note="Brief → Swarm → UGC. Ready for TikTok & Instagram. Human gate on publish.">
+      <div class="layout">
+        <div>
+          <p class="eyebrow reveal">0:20–0:50 · Product</p>
+          <h2 class="reveal reveal-d1">Brief in. Swarm works. UGC out.</h2>
+          <p class="lede reveal reveal-d2">Riptide is an AI ad agency for social teams: trend-native 9:16 creatives, labeled <strong>#ad · AI-generated</strong>, packaged for the channels agencies already buy.</p>
+          <div class="flow">
+            <div class="reveal reveal-d2"><div class="step">01</div><b>Brief</b><br /><span style="color:var(--mist);font-size:0.9rem">brand · tone · channel</span></div>
+            <div class="reveal reveal-d3"><div class="step">02</div><b>Swarm</b><br /><span style="color:var(--mist);font-size:0.9rem">trend → DNA → render</span></div>
+            <div class="reveal reveal-d4"><div class="step">03</div><b>UGC</b><br /><span style="color:var(--mist);font-size:0.9rem">A/B · human publish gate</span></div>
+          </div>
+          <div class="platforms reveal reveal-d5">
+            <span>TikTok · target</span>
+            <span>Instagram Reels · target</span>
+            <span>X · live search</span>
+            <span class="road">Ads APIs · roadmap</span>
+          </div>
+          <p class="mono reveal reveal-d5">Live: wiktorzoga.github.io/opalacze</p>
         </div>
         <div class="reveal reveal-d2">
+          <div class="frame">
+            <img src="../docs/media/rotbot-radar-sources.gif" alt="Riptide trend radar" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · Swarm -->
+    <section class="slide" data-note="Scout → Geneticist → Creator → Critic. Real @grok/agent-sdk handoffs.">
+      <div class="layout">
+        <div>
+          <p class="eyebrow reveal">0:50–1:50 · Swarm</p>
+          <h2 class="reveal reveal-d1">Four agents that matter on stage.</h2>
+          <ul class="agents">
+            <li class="reveal reveal-d1"><span class="who">🐦 Scout</span><span class="job">Finds rising formats<span>TikTok / X · brand-fit score</span></span></li>
+            <li class="reveal reveal-d2"><span class="who">🦫 Geneticist</span><span class="job">Extracts viral DNA<span>hook · pacing · product insert</span></span></li>
+            <li class="reveal reveal-d3"><span class="who">🐊 Creator</span><span class="job">Persona + 9:16 render<span>Grok Imagine · A/B variants</span></span></li>
+            <li class="reveal reveal-d4"><span class="who">🐱 Critic</span><span class="job">Safety · claims · disclosure<span>can reject · commits the verdict</span></span></li>
+          </ul>
+          <p class="mono reveal reveal-d5">@grok/agent-sdk · Publisher queues TikTok / X / Reels · Analyst scores next cut</p>
+        </div>
+        <div class="reveal reveal-d2">
+          <div class="frame">
+            <img src="../docs/media/rotbot-screen-workflow.png" alt="Riptide campaign workflow" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · Artifact -->
+    <section class="slide" data-note="gen-live-002: NOIR/05, grok-4.7, 7 min, 5 handoffs. Human gate. UGC vs Brainrot.">
+      <div class="layout flip">
+        <div class="pair reveal reveal-d1">
           <div class="phone">
             <video
-              src="../public/memes/grok/ugc/noir05-pigeon-pitch.mp4"
-              poster="../public/memes/grok/ugc/noir05-pigeon-pitch.poster.jpg"
-              muted loop playsinline
-              data-autoplay
+              src="../generations/gen-live-002/media/noir-05-deceive.mp4"
+              poster="../docs/live-002-poster.jpg"
+              muted loop playsinline data-autoplay
             ></video>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3 · Problem -->
-    <section class="slide" data-note="Trends live three days. Agencies still take a week.">
-      <div class="layout">
-        <div>
-          <p class="eyebrow reveal">Problem</p>
-          <h2 class="reveal reveal-d1">Trends live <em>three days</em>.</h2>
-          <p class="lede reveal reveal-d2">A brand’s content cycle — brief, agency, approvals, shoot — still takes a week. The ad lands after the format is dead.</p>
-          <div class="compare reveal reveal-d3">
-            <article>
-              <div class="k">Agency</div>
-              <div class="v">~1 week</div>
-              <div class="d">One concept, late</div>
-            </article>
-            <article class="win">
-              <div class="k">Riptide</div>
-              <div class="v">minutes</div>
-              <div class="d">A/B while it still rises</div>
-            </article>
-          </div>
-        </div>
-        <div class="reveal reveal-d2">
-          <div class="frame">
-            <img src="../docs/media/rotbot-radar-sources.gif" alt="Riptide trend radar scanning rising TikTok and X sources" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4 · Product -->
-    <section class="slide" data-note="Brand brief in. Rising trend matched. Trend-native UGC out.">
-      <p class="eyebrow reveal">Product</p>
-      <h2 class="reveal reveal-d1">Brief in. Viral DNA. Ads out.</h2>
-      <p class="lede reveal reveal-d2">Brands send a brief. A Grok Bot swarm finds the rising TikTok / X trend, extracts its DNA, and ships trend-native UGC — UGC, polished, or brainrot.</p>
-      <p class="proof reveal reveal-d3">Live: <b>@grok/agent-sdk</b> · Grok Imagine · xAI X search</p>
-    </section>
-
-    <!-- 5 · Pipeline -->
-    <section class="slide" data-note="Scout → Geneticist → Creator → Critic — then Publisher and Analyst.">
-      <div class="layout">
-        <div>
-          <p class="eyebrow reveal">The swarm</p>
-          <h2 class="reveal reveal-d1">Six agents. One campaign loop.</h2>
-          <ul class="agents">
-            <li class="reveal reveal-d1"><span class="who">🐦 Scout</span><span class="job">Rising trends + brand fit<span>TikTok / X · e.g. 87% fit</span></span></li>
-            <li class="reveal reveal-d2"><span class="who">🦫 Geneticist</span><span class="job">Viral DNA<span>hook · pacing · product insert</span></span></li>
-            <li class="reveal reveal-d3"><span class="who">🐊 Creator</span><span class="job">Persona, script, 9:16 A/B<span>Grok Imagine render</span></span></li>
-            <li class="reveal reveal-d4"><span class="who">🐱 Critic</span><span class="job">Fidelity · safety · claims<span>#ad · AI-generated · can reject</span></span></li>
-          </ul>
-          <p class="proof reveal reveal-d5">Then <b>Publisher</b> schedules · <b>Analyst</b> reads hook rate / CTR → next variant</p>
-        </div>
-        <div class="reveal reveal-d2">
-          <div class="frame">
-            <img src="../docs/media/rotbot-screen-workflow.png" alt="Riptide campaign workflow console" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6 · Proof of real agents -->
-    <section class="slide" data-note="Every handoff is real. Critic rejections are git commits.">
-      <div class="layout flip">
-        <div class="reveal reveal-d1">
-          <div class="frame">
-            <img src="../docs/media/grokbot/04-trace-critic-absolutely-not-then-reroll.png" alt="Grok Bot trace: Critic rejects, Creator rerolls" />
+          <div class="phone">
+            <img src="../docs/media/ugc/noir05-brainrot-capybara.gif" alt="NOIR/05 Brainrot A/B" />
           </div>
         </div>
         <div>
-          <p class="eyebrow reveal">Proof</p>
-          <h2 class="reveal reveal-d1">The Critic said <em>“absolutely not.”</em></h2>
-          <p class="lede reveal reveal-d2">Then the swarm rerolled. Every artifact is committed by the agent that made it — the git graph is the campaign lineage.</p>
-          <p class="proof reveal reveal-d3">gen-live-001 · Critic rejection → approval · 2,552 events</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7 · Payoff creatives -->
-    <section class="slide" data-note="NOIR/05 UGC wall + live Ren Hale clip from gen-live-002.">
-      <div class="layout">
-        <div>
-          <p class="eyebrow reveal">Payoff</p>
-          <h2 class="reveal reveal-d1">Trend in.<br /><em>Creative out.</em></h2>
-          <p class="lede reveal reveal-d2">NOIR/05 · Maja UGC · Ren Hale live run. Same swarm, any tone — including brainrot.</p>
-          <p class="proof reveal reveal-d3">gen-live-002 · grok-4.7 · Critic <b>9 · 9 · 10 · 10</b></p>
-        </div>
-        <div class="reveal reveal-d2">
-          <div class="wall">
-            <div class="phone">
-              <img src="../docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale live UGC" />
-            </div>
-            <div class="phone">
-              <video
-                src="../generations/gen-live-002/media/noir-05-deceive.mp4"
-                poster="../docs/live-002-poster.jpg"
-                muted loop playsinline
-                data-autoplay
-              ></video>
-            </div>
-            <div class="phone">
-              <img src="../docs/media/ugc/noir05-unboxing.gif" alt="Maja unboxing" />
-            </div>
-            <div class="phone">
-              <img src="../docs/media/ugc/noir05-brainrot-capybara.gif" alt="Brainrot capybara" />
-            </div>
+          <p class="eyebrow reveal">1:50–2:20 · Artifact</p>
+          <h2 class="reveal reveal-d1">Live run. Real handoffs.</h2>
+          <p class="lede reveal reveal-d2"><strong>gen-live-002</strong> · NOIR/05 · Ren Hale. Critic cleared 9 · 9 · 10 · 10. Same brief, A/B: UGC vs Brainrot.</p>
+          <div class="stats">
+            <div class="stat reveal reveal-d2"><div class="k">Model</div><div class="v">grok-4.7</div></div>
+            <div class="stat reveal reveal-d3"><div class="k">Runtime</div><div class="v">7 min</div></div>
+            <div class="stat reveal reveal-d4"><div class="k">Handoffs</div><div class="v">5</div></div>
+            <div class="stat reveal reveal-d5"><div class="k">Publish</div><div class="v">Human gate</div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 8 · Business close -->
-    <section class="slide" data-note="For agencies and brands that cannot wait a week.">
-      <p class="eyebrow reveal">Business</p>
-      <h2 class="reveal reveal-d1">Ride the viral before it’s gone.</h2>
-      <p class="lede reveal reveal-d2">Customers: DTC brands, local businesses, agencies that need a trend desk. Moat: a trend-DNA library that learns which genes sell.</p>
-      <div class="compare reveal reveal-d3">
-        <article>
-          <div class="k">Time to on-trend ad</div>
-          <div class="v">~1 week</div>
-          <div class="d">Agency cycle</div>
+    <!-- 6 · Business -->
+    <section class="slide" data-note="Social agencies + e-com. Subscription + per-variant. Trend-DNA moat. TikTok/IG distribution.">
+      <p class="eyebrow reveal">2:20–2:45 · Business</p>
+      <h2 class="reveal reveal-d1">Built for the teams that buy TikTok &amp; IG.</h2>
+      <p class="lede reveal reveal-d2">A trend desk that ships while the format is still rising — with creatives ready for the platforms agencies already run.</p>
+      <div class="biz">
+        <article class="reveal reveal-d2">
+          <div class="k">Customers</div>
+          <div class="v">Social agencies · e-com · local</div>
+          <p>Anyone who needs on-trend UGC faster than a shoot cycle.</p>
         </article>
-        <article class="win">
-          <div class="k">With Riptide</div>
-          <div class="v">minutes</div>
-          <div class="d">A/B · while rising</div>
+        <article class="reveal reveal-d3">
+          <div class="k">Model</div>
+          <div class="v">Brand sub + per-variant</div>
+          <p>Campaigns / month, then scale the cuts that win.</p>
+        </article>
+        <article class="reveal reveal-d4">
+          <div class="k">Differentiator</div>
+          <div class="v">Trend-DNA library</div>
+          <p>Every brief teaches which genes sell for which brand.</p>
         </article>
       </div>
+      <div class="platforms reveal reveal-d5">
+        <span>TikTok + Instagram · distribution targets</span>
+        <span>Publisher · human approval</span>
+        <span class="road">TikTok Creative Center · Meta / TikTok Ads · roadmap</span>
+      </div>
     </section>
 
-    <!-- 9 · Motto -->
-    <section class="slide" data-note="We don't follow trends. We mutate them.">
-      <p class="eyebrow reveal">Riptide</p>
-      <h1 class="reveal reveal-d1">Riptide</h1>
-      <p class="motto reveal reveal-d2">We don’t follow trends.<br />We mutate them.</p>
-      <p class="lede reveal reveal-d3" style="margin-top:1.1rem">the AI ad agency that rides virals</p>
+    <!-- 7 · Close -->
+    <section class="slide" data-note="Today: brainrot perfume ads. Tomorrow: your performance team.">
+      <p class="eyebrow reveal">2:45–3:00 · Close</p>
+      <h2 class="reveal reveal-d1">Today: brainrot perfume.<br /><em>Tomorrow: your performance team.</em></h2>
+      <p class="lede reveal reveal-d2">Riptide rides the trend before it’s gone — then learns for the next cut.</p>
+      <div class="links reveal reveal-d3">
+        <div>▶ Live · <a href="https://wiktorzoga.github.io/opalacze/" target="_blank" rel="noopener">wiktorzoga.github.io/opalacze</a></div>
+        <div>⌘ Repo · <a href="https://github.com/WiktorZoga/opalacze" target="_blank" rel="noopener">github.com/WiktorZoga/opalacze</a></div>
+      </div>
+      <p class="mono reveal reveal-d4">We don’t follow trends. We mutate them.</p>
+    </section>
+
+    <!-- 8 · Backup -->
+    <section class="slide" data-note="Honesty slide: recorded snapshot, no auto-publish, simulated metrics labeled.">
+      <p class="eyebrow reveal">Backup · if asked</p>
+      <h2 class="reveal reveal-d1">What is real. What is labeled.</h2>
+      <ul class="bak">
+        <li class="reveal reveal-d1"><b>Trend snapshot</b> — live X search can miss; Scout may use a recorded list of real rising trends (documented in-repo).</li>
+        <li class="reveal reveal-d2"><b>No auto-publish</b> — Publisher needs human approval. TikTok / Instagram distribution is the layer we’re wiring; we don’t post yet.</li>
+        <li class="reveal reveal-d3"><b>Metrics</b> — hook rate / CTR in the console are <b>simulated and labeled</b>. Live today: Grok Bot, Grok Imagine, X search.</li>
+      </ul>
     </section>
   </div>
 
@@ -571,7 +601,7 @@
   <div class="hud">
     <span>Space / → next · ← prev · F fullscreen</span>
     <span class="dots" id="dots" aria-hidden="true"></span>
-    <span id="counter">01 / 09</span>
+    <span id="counter">01 / 08</span>
   </div>
   <div class="progress" aria-hidden="true"><i id="bar"></i></div>
 
@@ -598,9 +628,7 @@
             if (s === slide) {
               v.currentTime = 0;
               v.play().catch(() => {});
-            } else {
-              v.pause();
-            }
+            } else v.pause();
           });
         });
       }
@@ -616,7 +644,6 @@
         i = next;
         const cur = slides[i];
         cur.classList.remove("exit");
-        // force reflow so entrance animation retriggers
         void cur.offsetWidth;
         cur.classList.add("active");
         bar.style.width = ((i + 1) / slides.length) * 100 + "%";
@@ -635,24 +662,18 @@
       document.getElementById("nextZone").addEventListener("click", (e) => { e.stopPropagation(); next(); });
       document.getElementById("prevZone").addEventListener("click", (e) => { e.stopPropagation(); prev(); });
       document.body.addEventListener("click", (e) => {
-        if (e.target.closest(".nav-hot")) return;
+        if (e.target.closest(".nav-hot") || e.target.closest("a")) return;
         next();
       });
 
       window.addEventListener("keydown", (e) => {
         if (["ArrowRight", "ArrowDown", " ", "PageDown", "Enter"].includes(e.key)) {
-          e.preventDefault();
-          next();
+          e.preventDefault(); next();
         } else if (["ArrowLeft", "ArrowUp", "PageUp", "Backspace"].includes(e.key)) {
-          e.preventDefault();
-          prev();
-        } else if (e.key === "Home") {
-          e.preventDefault();
-          show(0);
-        } else if (e.key === "End") {
-          e.preventDefault();
-          show(slides.length - 1);
-        } else if (e.key === "f" || e.key === "F") {
+          e.preventDefault(); prev();
+        } else if (e.key === "Home") { e.preventDefault(); show(0); }
+        else if (e.key === "End") { e.preventDefault(); show(slides.length - 1); }
+        else if (e.key === "f" || e.key === "F") {
           if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
           else document.exitFullscreen?.();
         }
@@ -664,8 +685,7 @@
         const dx = e.changedTouches[0].clientX - touchX;
         touchX = null;
         if (Math.abs(dx) < 40) return;
-        if (dx < 0) next();
-        else prev();
+        if (dx < 0) next(); else prev();
       }, { passive: true });
 
       playMedia(slides[0]);
