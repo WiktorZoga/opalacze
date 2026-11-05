@@ -56,8 +56,8 @@
       "dominance": 0.9
     },
     "structure": {
-      "allele": "promise → beat of silence → audio drop",
-      "dominance": 0.75
+      "allele": "pitch slide → 'why would a dwarf deceive you?' → black cat claps → hard cut to the first slide (seamless loop)",
+      "dominance": 0.85
     }
   },
   "absurdity": 9,
@@ -74,6 +74,12 @@
       "from": "Why would I deceive you?",
       "to": "Why would a dwarf deceive you?",
       "reason": "one-word species swap, the house style since gen-001"
+    },
+    {
+      "gene": "structure",
+      "from": "promise → beat of silence → audio drop",
+      "to": "pitch slide → 'why would a dwarf deceive you?' → black cat claps → hard cut to the first slide (seamless loop)",
+      "reason": "Critic: 'it ends. memes must not end.' the great-grandfather's applause closes the loop"
     }
   ],
   "fitness": null
