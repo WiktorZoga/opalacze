@@ -1,0 +1,19 @@
+{
+  "generation": 3,
+  "final": "absolutely not",
+  "rounds": [
+    {
+      "round": 1,
+      "genome": "krasnal-ceo-series-a",
+      "verdict": "absolutely not",
+      "scores": {
+        "funny": 9,
+        "fresh": 8,
+        "loopable": 5,
+        "brandSafe": 9
+      },
+      "reroll": "structure",
+      "note": "it ends. memes must not end."
+    }
+  ]
+}
