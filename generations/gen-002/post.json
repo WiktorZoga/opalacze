@@ -1,0 +1,24 @@
+{
+  "genome": "krasnal-ceo",
+  "status": "queued",
+  "approval": "awaiting human approval (publish_post needsApproval)",
+  "tiktok": {
+    "hookText": "SCIENTISTS REVEAL THE CEO",
+    "caption": "wrocław's smallest founder just opened a standing desk on the rynek",
+    "hashtags": [
+      "wroclaw",
+      "krasnale",
+      "startup",
+      "scientistsrevealthehi"
+    ],
+    "audio": "tram bell + newsroom sting (original)",
+    "slotCET": "18:00"
+  },
+  "x": {
+    "text": "Wrocław has 600+ bronze dwarfs. One of them just raised a pre-seed.",
+    "hashtags": [
+      "Wroclaw"
+    ],
+    "replyCredit": "descended from Scientists Reveal the Clap × Wrocław krasnal"
+  }
+}
