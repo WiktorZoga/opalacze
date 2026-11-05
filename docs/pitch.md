@@ -1,4 +1,6 @@
-# ROT Studio: pitch
+# Riptide: pitch
+
+*The AI ad agency that rides virals. Run by a Grok Bot swarm.*
 
 **The AI ad agency that rides virals.** Brands send a brief; a swarm of Grok Bot agents finds the rising trend,
 extracts its DNA and ships trend-native UGC ads in minutes.
@@ -13,7 +15,7 @@ extracts its DNA and ships trend-native UGC ads in minutes.
 | 20–30 s | Creator renders the hero ad: an AI creator unboxes NOIR/05, sprays, *"okay, this smells expensive"*; A/B variant beside it | "Our Creator agent picks an AI creator, writes the script and renders two UGC variants with Grok Imagine." |
 | 30–36 s | Critic: trend fidelity ✓, claims ✓, `#ad · AI-generated` ✓; first draft rejected, second approved | "The Critic checks brand safety, claims and disclosure. It rejected the first draft. That's real; it's in our git history." |
 | 36–41 s | Same pipeline, two more campaigns: Wrocław café on *"Your First Time in a Fancy Cafe"*, then Tone = Brainrot | "Same swarm, any tone: UGC, polished ad, or full brainrot." |
-| 41–45 s | Publish + metrics: hook rate, watch time, CTR → next variant. Logo | "It publishes, learns and does it again. ROT Studio: ride the viral before it's gone." |
+| 41–45 s | Publish + metrics: hook rate, watch time, CTR → next variant. Logo | "It publishes, learns and does it again. Riptide: ride the viral before it's gone." |
 
 ## Problem
 
@@ -30,7 +32,7 @@ Publisher (schedule, human approval) → Analyst (hook rate, watch time, CTR →
 
 ## Business
 
-| | Agency | ROT Studio |
+| | Agency | Riptide |
 | --- | --- | --- |
 | Time to an on-trend ad | ~1 week | minutes |
 | Output | 1 concept | A/B variants per trend, per tone |
