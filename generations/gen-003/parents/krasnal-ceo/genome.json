@@ -1,0 +1,80 @@
+{
+  "id": "krasnal-ceo",
+  "name": "Krasnal CEO",
+  "generation": 2,
+  "parents": [
+    "krasnal-wroclaw",
+    "scientists-reveal-the-clap"
+  ],
+  "sources": [
+    {
+      "platform": "tiktok",
+      "url": "https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month",
+      "views": 215500,
+      "signal": "Know Your Meme Meme of the Month Oct 2026, #2 (13% of votes); TikTok edit at 215.5K views; KYM entry views 35,086 → 44,409 in 6 days"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month",
+      "views": null,
+      "signal": "Know Your Meme Meme of the Month Oct 2026, #4 (7% of votes); green-screen template used across TikTok and Reels"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "applause exactly where silence is required",
+      "dominance": 0.7
+    },
+    "hero": {
+      "allele": "bronze krasnal CEO in a tiny fleece vest, founder of an AI startup",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "standing desk on the Rynek cobblestones; a black cat claps in the background",
+      "dominance": 0.7
+    },
+    "humor": {
+      "allele": "anticlimax: grand scientific announcement, two-letter result",
+      "dominance": 0.85
+    },
+    "audio": {
+      "allele": "slow, wet, single claps",
+      "dominance": 0.65
+    },
+    "visual": {
+      "allele": "golden-hour bronze, low-angle hero shot",
+      "dominance": 0.6
+    },
+    "catchphrase": {
+      "allele": "Scientists reveal the CEO",
+      "dominance": 0.85
+    },
+    "structure": {
+      "allele": "green-screen overlay loop, 5–7 s",
+      "dominance": 0.7
+    }
+  },
+  "absurdity": 8,
+  "brandSafety": 10,
+  "mutations": [
+    {
+      "gene": "hero",
+      "from": "Wrocław bronze dwarf (krasnal), 30 cm tall, extremely serious",
+      "to": "bronze krasnal CEO in a tiny fleece vest, founder of an AI startup",
+      "reason": "brand seed keeps the hero; startup costume is the mutation"
+    },
+    {
+      "gene": "catchphrase",
+      "from": "Scientists reveal the clap",
+      "to": "Scientists reveal the CEO",
+      "reason": "the hi-lineage cadence survives a second generation"
+    },
+    {
+      "gene": "setting",
+      "from": "Wrocław Rynek cobblestones, tourists for scale",
+      "to": "standing desk on the Rynek cobblestones; a black cat claps in the background",
+      "reason": "keep the grandfather's applause as an easter egg"
+    }
+  ],
+  "fitness": 0.63
+}
