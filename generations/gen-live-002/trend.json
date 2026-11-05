@@ -1,0 +1,79 @@
+{
+  "id": "why-would-i-deceive-you",
+  "name": "Why Would I Deceive You?",
+  "platform": "tiktok",
+  "format": "Deadpan “Why would I deceive you?” audio over on-screen text about something that is definitely about to let you down.",
+  "structure": "1.5s audio hook, one line of on-screen text, then a held visual punchline. Loops in 6–10s with no face.",
+  "whyItFits": "The whole mechanic is a phone caption plus one object. A 7-second bathroom-counter shot can state the smoky amber + fig claim as the “letdown” text and leave the black glass bottle as the punchline, which reads as UGC rather than a polished ad.",
+  "velocity": 3.6,
+  "brandFitPercent": 84,
+  "brandFitReason": "Deadpan letdown text already fits a 7-second phone caption, and the black bottle can be the only thing in frame that refuses to disappoint.",
+  "source": {
+    "url": "https://newengen.com/insights/tiktok-trends/",
+    "handle": null,
+    "signal": "NewEngen TikTok trends to watch, November 2026; first seen 2026-11-01; velocity 3.6"
+  },
+  "productInsertion": "Beat: after the deadpan line, on-screen text names the smoky amber + fig claim; the hold is the black glass bottle on a counter in phone light.",
+  "candidates": [
+    {
+      "id": "closing-the-door-prank",
+      "name": "Closing the Door Prank",
+      "platform": "tiktok",
+      "velocity": 5.2,
+      "url": "https://virlo.ai/trends/",
+      "signal": "199 creators in 7 days, +522% week over week; top example 7M views",
+      "picked": false,
+      "note": "Needs a real person sprinting; prank reaction, not a product loop."
+    },
+    {
+      "id": "ding-ding-ding-candy-match-3",
+      "name": "Ding Ding Ding Candy Match-3",
+      "platform": "tiktok",
+      "velocity": 4.6,
+      "url": "https://virlo.ai/trends/",
+      "signal": "263 creators in 7 days (new this week); top examples 3.9M / 3.6M / 3.4M views",
+      "picked": false,
+      "note": "Grid-slide loop is short, but the hand is the hero and it plays as a toy, not a perfume UGC ad."
+    },
+    {
+      "id": "permission-to-cry-soldier",
+      "name": "Permission to Cry Soldier",
+      "platform": "tiktok",
+      "velocity": 4.1,
+      "url": "https://trendhaus.ai/tiktok-trends",
+      "signal": "Trendhaus new this week, first seen 4 Nov 2026, 6 verified examples",
+      "picked": false,
+      "note": "Persona-on-camera format; conflicts with no real people."
+    },
+    {
+      "id": "data-centers-in-space",
+      "name": "Data Centers in Space",
+      "platform": "x",
+      "velocity": 3.8,
+      "url": "https://www.businessinsider.com/data-center-memes-flood-x-after-democrats-2026-midterm-wins-2026-11",
+      "signal": "Data-center memes flooded X on 4 Nov 2026 (Business Insider)",
+      "picked": false,
+      "note": "Election-adjacent; skipped."
+    },
+    {
+      "id": "why-would-i-deceive-you",
+      "name": "Why Would I Deceive You?",
+      "platform": "tiktok",
+      "velocity": 3.6,
+      "url": "https://newengen.com/insights/tiktok-trends/",
+      "signal": "NewEngen TikTok trends to watch, November 2026",
+      "picked": true,
+      "note": "Text-led 6–10s loop, no face, bottle can be the punchline object."
+    },
+    {
+      "id": "black-cat-clapping",
+      "name": "Black Cat Clapping",
+      "platform": "tiktok",
+      "velocity": 2.9,
+      "url": "https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month",
+      "signal": "Know Your Meme Meme of the Month Oct 2026, #4; green-screen template on TikTok and Reels",
+      "picked": false,
+      "note": "No real person, but the cat takes the hero slot the bottle needs."
+    }
+  ]
+}
