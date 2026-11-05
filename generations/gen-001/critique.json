@@ -1,0 +1,19 @@
+{
+  "generation": 1,
+  "final": "absolutely not",
+  "rounds": [
+    {
+      "round": 1,
+      "genome": "scientists-reveal-the-clap",
+      "verdict": "absolutely not",
+      "scores": {
+        "funny": 7,
+        "fresh": 4,
+        "loopable": 7,
+        "brandSafe": 9
+      },
+      "reroll": "hero",
+      "note": "it is the orange cat in a newsroom. that is a parent in a hat."
+    }
+  ]
+}
