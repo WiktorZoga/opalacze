@@ -1,0 +1,56 @@
+{
+  "persona": {
+    "name": "Ren Hale",
+    "ageRange": "18-26",
+    "vibe": "deadpan phone UGC, quiet bathroom, never a sales voice",
+    "aiPersona": true,
+    "note": "Fictional AI creator, not a real person."
+  },
+  "durationSeconds": 7,
+  "beats": [
+    {
+      "t": "0.0-1.4",
+      "onScreenText": "okay but",
+      "voiceover": "",
+      "action": "Phone propped on a bathroom counter. Ren looks into the lens, face still, no smile."
+    },
+    {
+      "t": "1.4-3.2",
+      "onScreenText": "Why would I deceive you?",
+      "voiceover": "Why would I deceive you?",
+      "action": "Holds the deadpan. One blink. Hands stay off frame."
+    },
+    {
+      "t": "3.2-4.0",
+      "onScreenText": "Why would I deceive you?",
+      "voiceover": "",
+      "action": "Punchline hangs. The counter is empty except a wet ring."
+    },
+    {
+      "t": "4.0-5.4",
+      "onScreenText": "NOIR/05",
+      "voiceover": "",
+      "action": "Black glass NOIR/05 bottle enters onto the bathroom counter, phone-shot, slightly off-center. No splash, no pour."
+    },
+    {
+      "t": "5.4-6.4",
+      "onScreenText": "smoky amber and fig",
+      "voiceover": "Smoky amber and fig.",
+      "action": "Bottle stays in frame. Ren glances at it once, then back to the lens."
+    },
+    {
+      "t": "6.4-7.0",
+      "onScreenText": "#ad · AI-generated",
+      "voiceover": "",
+      "action": "Hold on the bottle and the disclosure. End on the same deadpan face."
+    }
+  ],
+  "caption": "Why would I deceive you? Smoky amber and fig on the bathroom counter. #ad · AI-generated",
+  "hashtags": [
+    "#NOIR05",
+    "#smokyamber",
+    "#fig"
+  ],
+  "productInsertion": "4.0s",
+  "genomeId": "noir-05-deceive"
+}

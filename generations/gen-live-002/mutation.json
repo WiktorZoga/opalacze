@@ -1,0 +1,73 @@
+{
+  "id": "noir-05-deceive",
+  "name": "NOIR/05 Deceive",
+  "generation": 5,
+  "parents": [
+    "noir-05",
+    "why-would-i-deceive-you"
+  ],
+  "sources": [
+    {
+      "platform": "tiktok",
+      "url": "https://newengen.com/insights/tiktok-trends/",
+      "signal": "crossed with NOIR/05 brand seed"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "deadpan phone stare that holds one blink too long before the line",
+      "dominance": 0.84
+    },
+    "hero": {
+      "allele": "matte black glass NOIR/05 bottle",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "phone-shot bathroom counter with one wet ring",
+      "dominance": 0.72
+    },
+    "humor": {
+      "allele": "deadpan sincerity that refuses to pitch",
+      "dominance": 0.88
+    },
+    "audio": {
+      "allele": "flat room-tone voice saying Why would I deceive you, then a single bottle clink",
+      "dominance": 0.86
+    },
+    "visual": {
+      "allele": "overhead phone flash, black bottle entering at 4.0s slightly off-center",
+      "dominance": 0.8
+    },
+    "catchphrase": {
+      "allele": "Why would I deceive you?",
+      "dominance": 0.92
+    },
+    "structure": {
+      "allele": "deadpan Why would I deceive you held through 4.0s, then the black bottle enters on the punchline",
+      "dominance": 0.9
+    }
+  },
+  "absurdity": 3,
+  "brandSafety": 9,
+  "mutations": [
+    {
+      "gene": "setting",
+      "from": "black marble vanity under catalog light",
+      "to": "phone-shot bathroom counter with one wet ring",
+      "reason": "The brand vanity reads as an ad; the trend lives on a real counter."
+    },
+    {
+      "gene": "visual",
+      "from": "studio beauty lighting locked on the bottle from frame one",
+      "to": "overhead phone flash, black bottle entering at 4.0s slightly off-center",
+      "reason": "The punchline needs the bottle late and a little wrong, not a packshot."
+    },
+    {
+      "gene": "audio",
+      "from": "whispered brand sting over a soft beat",
+      "to": "flat room-tone voice saying Why would I deceive you, then a single bottle clink",
+      "reason": "Music would bury the held line; the clink is the only product sound."
+    }
+  ],
+  "fitness": null
+}
