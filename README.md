@@ -24,10 +24,18 @@
 
 <table>
 <tr>
-<td align="center" width="25%"><img src="docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale, NOIR/05, UGC, live run" width="100%"><br><sub><b>live run</b> · Ren Hale · NOIR/05 · UGC</sub></td>
-<td align="center" width="25%"><img src="docs/media/ugc/noir05-unboxing.gif" alt="Maja, NOIR/05, UGC" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
-<td align="center" width="25%"><img src="docs/media/ugc/noir05-grwm.gif" alt="Maja, NOIR/05, UGC" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
-<td align="center" width="25%"><img src="docs/media/ugc/noir05-brainrot-capybara.gif" alt="Capybara, NOIR/05, Brainrot" width="100%"><br><sub>Capybara · NOIR/05 · Brainrot</sub></td>
+<td align="center" width="20%"><img src="docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale, NOIR/05, UGC, live run" width="100%"><br><sub><b>live</b> · Ren Hale · NOIR/05</sub></td>
+<td align="center" width="20%"><img src="docs/media/ugc/noir05-unboxing.gif" alt="Maja unboxes NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+<td align="center" width="20%"><img src="docs/media/ugc/noir05-grwm.gif" alt="Maja get ready with me, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+<td align="center" width="20%"><img src="docs/media/ugc/noir05-mirror-check.gif" alt="Maja mirror check, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+<td align="center" width="20%"><img src="docs/media/ugc/noir05-tram-sniff.gif" alt="Maja on a tram, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="docs/media/ugc/noir05-cafe-unbox.gif" alt="Maja unboxes NOIR/05 at a cafe" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+<td align="center"><img src="docs/media/ugc/stride-sneaker-drop.gif" alt="Leo unboxes STRIDE sneakers" width="100%"><br><sub>Leo · STRIDE · UGC</sub></td>
+<td align="center"><img src="docs/media/ugc/cafe-first-time-fancy-notext.gif" alt="Kuba at a fancy cafe, no caption" width="100%"><br><sub>Kuba · café · UGC</sub></td>
+<td align="center"><img src="docs/media/ugc/noir05-brainrot-capybara.gif" alt="Capybara with NOIR/05, brainrot" width="100%"><br><sub>Capybara · NOIR/05 · Brainrot</sub></td>
+<td align="center"><img src="docs/media/ugc/noir05-pigeon-pitch.gif" alt="Pigeon pitches NOIR/05, brainrot" width="100%"><br><sub>Pigeon · NOIR/05 · Brainrot</sub></td>
 </tr>
 </table>
 
