@@ -118,11 +118,36 @@ function Artifact() {
   )
 }
 
+function Clips() {
+  const lib = useGrokMedia()
+  const clips = lib.items.filter((m) => m.kind === 'video')
+  if (!clips.length) return null
+  return (
+    <div className="px-5 py-4">
+      <div className="mb-3 flex items-center gap-2">
+        <span className="text-[14px] font-medium text-text">Video outputs</span>
+        <Badge>grok-imagine · 9:16</Badge>
+      </div>
+      <div className="flex gap-4">
+        {clips.slice(0, 3).map((c) => (
+          <div key={c.id}>
+            <MediaFrame src={c.url} kind="video" alt={c.id} width={144} height={256} caption={lib.captionFor(c)} />
+            <div className="mt-1.5 font-mono text-[11px] text-faint">
+              {c.node} · {c.durationSeconds ?? 6}s
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function Distribution() {
   const rows = (['tiktok', 'x'] as const).map((p) => ({ p, m: metrics.platforms[p] }))
   return (
     <Panel title="Distribution" meta={`gen-003 · ${post.status}`}>
       <div className="divide-y divide-line">
+        <Clips />
         <div className="px-5 py-3 text-[12px] text-faint">Publishing and analytics were not part of the live run. Shown: the last distributed generation, gen-003.</div>
         <div className="px-5 py-4">
           <div className="flex items-center gap-2">
@@ -184,6 +209,12 @@ function Distribution() {
   )
 }
 
+const BRAND_MEDIA: Record<string, string> = {
+  kebab: 'brandrot-kebab-u-mustafy',
+  cafe: 'brandrot-wroclaw-cafe',
+  startup: 'brandrot-your-startup',
+}
+
 const BRAND_STEPS = (_id: string) => [
   { label: 'splice brand seed → krasnal line', at: 0 },
   { label: 'critic review · on-brand', at: 400 },
@@ -209,7 +240,7 @@ function Brandrot({ autoPick = 'kebab' }: { autoPick?: string }) {
     return () => clearTimeout(id)
   }, [autoPick])
 
-  const m = brand ? media[`brandrot-${brand.id}`] : undefined
+  const m = brand ? media.byId(BRAND_MEDIA[brand.id] ?? BRAND_MEDIA.startup) : undefined
   const ready = brand && ms >= 1600
 
   return (
@@ -260,6 +291,7 @@ function Brandrot({ autoPick = 'kebab' }: { autoPick?: string }) {
               {ready && (
                 <div className="mt-4 space-y-1">
                   <Badge tone={m ? 'accent' : 'neutral'}>{m ? 'ready' : 'queued'}</Badge>
+                  {m?.caption && <p className="pt-1 text-[13px] text-text">“{m.caption.toLowerCase()}”</p>}
                   {m?.prompt && <p className="line-clamp-4 pt-1 text-[12px] leading-relaxed text-muted">{m.prompt}</p>}
                   {m?.model && <p className="font-mono text-[11px] text-faint">{m.model}</p>}
                 </div>

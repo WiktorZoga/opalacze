@@ -17,9 +17,9 @@ const GENE_COLOR: Record<string, string> = {
 }
 
 function Thumb({ gen, id, live }: { gen: string; id: string; live?: boolean }) {
-  const media = useGrokMedia()
-  const m = media[gen]
-  return <MediaFrame src={live ? LIVE_IMAGE : m?.url} kind={m?.kind} alt={id} width={45} height={80} reveal={false} />
+  const lib = useGrokMedia()
+  const m = lib.byNode(gen, 'video') ?? lib.byNode(gen)
+  return <MediaFrame src={live ? LIVE_IMAGE : m?.url} kind={live ? 'image' : m?.kind} alt={id} width={54} height={96} reveal={false} />
 }
 
 function GenomeTable() {
