@@ -1,4 +1,4 @@
-# TEAM — kto co robi (PIVOT 19:50: ROT Studio, AI UGC ad agency · merge freeze 20:30 CET)
+# TEAM — kto co robi (Riptide — AI UGC ad agency, run by a Grok Bot swarm · merge freeze 20:30 CET)
 
 > Ocenia się **najpierw sam GitHub**: README, historia commitów, PR-y, porządek. Pracujemy czysto i małymi krokami.
 
@@ -33,7 +33,7 @@ Wyjątki = tylko "sloty" opisane niżej przy każdej osobie. Wszystko inne → n
 ## 1. Wiktor — pitch & polish GitHuba (`feat/pitch`)
 
 Ręcznie (tylko właściciel repo może):
-- [ ] Description: `ROT Studio — the AI ad agency that rides virals. A Grok Bot swarm turns a brand brief into trend-native UGC ads in minutes.`
+- [ ] Description: `Riptide — the AI ad agency that rides virals. Run by a Grok Bot swarm.`
 - [ ] Website: https://wiktorzoga.github.io/opalacze/
 - [ ] Topics: `grok`, `ai-agents`, `multi-agent`, `ugc`, `adtech`, `hackathon`
 - [ ] Social preview (Settings → General) — kadr z konsoli (brief → warianty UGC)
@@ -41,7 +41,7 @@ Ręcznie (tylko właściciel repo może):
 
 Prompt dla agenta Cursor:
 ```
-Repo opalacze (ROT Studio). git checkout main && git pull --rebase origin main && git checkout -b feat/pitch.
+Repo opalacze (Riptide). git checkout main && git pull --rebase origin main && git checkout -b feat/pitch.
 Pracujesz WYŁĄCZNIE w folderze pitch/. Nie dotykaj src/, agents/, generations/, README.md, docs/.
 Przeczytaj README.md i docs/pitch.md (tam jest nowy scenariusz 45 s — to jest źródło prawdy).
 Stwórz:
@@ -60,7 +60,7 @@ Osobny commit na każdy plik. git pull --rebase origin main, push, otwórz PR do
 
 Prompt dla agenta Cursor:
 ```
-Repo opalacze (ROT Studio). git checkout main && git pull --rebase origin main && git checkout -b feat/media.
+Repo opalacze (Riptide). git checkout main && git pull --rebase origin main && git checkout -b feat/media.
 Cel: 4-6 kadrów UGC (+1-2 krótkie klipy 9:16, jeśli starczy czasu) z xAI: grok-imagine-image-2.0 / grok-imagine-video.
 Klucz z env (XAI_API_KEY) — NIGDY nie zapisuj go w repo ani w skrypcie.
 Wzór wywołania API: agents/bot/lib/xai.ts i agents/bot/tools/generate_media.ts (tylko czytaj, nie edytuj).
@@ -80,7 +80,7 @@ git pull --rebase origin main, push, PR do main (merge commit).
 
 Prompt dla agenta Cursor:
 ```
-Repo opalacze (ROT Studio). git checkout main && git pull --rebase origin main && git checkout -b feat/arena.
+Repo opalacze (Riptide). git checkout main && git pull --rebase origin main && git checkout -b feat/arena.
 Zbuduj ekran "A/B Arena" (4. zakładka obok Campaign / Creative / History) w samodzielnym folderze src/screens/arena/:
 - src/screens/arena/Arena.tsx (export function Arena) + src/screens/arena/arenaData.ts (własne dane:
   2+ pary wariantów reklamy, np. NOIR/05 wariant A "unboxing" vs B "spray reaction", każdy z hookiem, tonem,
