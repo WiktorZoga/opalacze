@@ -30,34 +30,33 @@ export function BriefPicker({ onOpen }: { onOpen: (id: string) => void }) {
 export function Swarm({ runKey = 0, onOpen, embedded = false }: { runKey?: number; onOpen: (id: string) => void; embedded?: boolean }) {
   const { campaign: c } = useCampaign()
   const run = c.run
-  const t = useClock(`${runKey}-${c.id}`, run.runMs)
-  const shown = run.spans.filter((s) => t >= s.start)
+  const raw = useClock(`${runKey}-${c.id}`)
+  const t = raw % Math.max(run.runMs, 1)
 
   return (
-    <div className={`flex flex-col px-16 pb-6 pt-5 ${embedded ? 'h-full gap-5 overflow-hidden' : 'h-full gap-8'}`}>
-      <div className="flex items-end justify-between gap-10">
+    <div className={`flex flex-col px-12 pb-5 pt-4 ${embedded ? 'h-full gap-4 overflow-hidden' : 'h-full gap-6'}`}>
+      <div className="flex shrink-0 items-end justify-between gap-10">
         <div>
           <div className="flex items-center gap-2 text-[14px] text-muted">
             <span className={`h-2 w-2 rounded-full ${c.live ? 'bg-accent' : 'bg-faint'}`} />
             {c.live ? `Live run · grok-4.7 · ${c.brand}` : `Replay · ${c.brand}`}
           </div>
-          <h1 className="mt-4 text-[76px] font-semibold leading-[0.98] tracking-[-0.045em] text-text">
+          <h1 className="mt-2 text-[64px] font-semibold leading-[0.98] tracking-[-0.045em] text-text">
             Watch the swarm work.
           </h1>
         </div>
         <BriefPicker onOpen={onOpen} />
       </div>
 
-      <div className="card">
-        <div className="py-8">
-          <Graph run={run} t={t} />
-        </div>
+      <div className="card shrink-0 py-3">
+        <Graph run={run} t={t} />
       </div>
 
-      <div className="mx-auto w-[1100px] flex-1 overflow-hidden">
-        {shown.map((s, i) => {
+      <div className="mx-auto flex w-[1180px] flex-1 flex-col justify-evenly">
+        {run.spans.map((s, i) => {
+          const started = t >= s.start
           const done = t >= s.end
-          const p = Math.min(1, (t - s.start) / (s.end - s.start))
+          const p = started ? Math.min(1, (t - s.start) / (s.end - s.start)) : 0
           const a = AGENTS[s.agent]
           return (
             <motion.div
@@ -66,7 +65,7 @@ export function Swarm({ runKey = 0, onOpen, embedded = false }: { runKey?: numbe
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
               title={`${s.name}() · ${s.commit?.hash ? `commit ${s.commit.hash}` : fmtMs(s.end - s.start)}`}
-              className="grid grid-cols-[28px_150px_1fr] items-center gap-5 py-2.5"
+              className={`grid grid-cols-[28px_150px_1fr] items-center gap-5 py-2 ${started ? '' : 'opacity-40'}`}
             >
               <span className={`tabular flex h-7 w-7 items-center justify-center rounded-full text-[12px] ${done ? (s.status === 'rejected' ? 'bg-danger text-white' : 'bg-accent text-white') : 'border border-accent text-accent'}`}>
                 {done ? (s.status === 'rejected' ? '✕' : '✓') : i + 1}
@@ -77,7 +76,7 @@ export function Swarm({ runKey = 0, onOpen, embedded = false }: { runKey?: numbe
               </span>
               <span className="min-w-0">
                 <span className={`block truncate text-[17px] ${s.status === 'rejected' ? 'text-danger' : 'text-text'}`}>{s.quote}</span>
-                {!done && (
+                {started && !done && (
                   <span className="mt-1 block h-[3px] w-full overflow-hidden rounded-full bg-line">
                     <span className="block h-full bg-accent" style={{ width: `${p * 100}%` }} />
                   </span>

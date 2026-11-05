@@ -4,15 +4,15 @@ import { useCampaign, type Campaign } from '../data/campaigns'
 import { AGENTS, PIPELINE, type AgentId } from '../data/agents'
 import type { Run, Span } from '../data/run'
 import { TikTokEmbed } from '../components/TikTokEmbed'
-import { useClock } from '../components/hooks'
+import { useClock, useElapsed } from '../components/hooks'
 import { AgentName, Avatar, Badge, CountUp, Json, Panel, StatusDot, fmtMs } from '../components/ui'
 import { BrandLogo } from '../components/Logo'
 
 export const GRAPH_W = 1792
-const NODE_W = 236
-const NODE_H = 88
-const NODE_Y = 110
-const GRAPH_H = 270
+const NODE_W = 250
+const NODE_H = 104
+const NODE_Y = 132
+const GRAPH_H = 360
 const xs = PIPELINE.map((_, i) => 40 + NODE_W / 2 + i * ((GRAPH_W - 80 - NODE_W) / (PIPELINE.length - 1)))
 const xOf = (a: AgentId) => xs[PIPELINE.findIndex((p) => p.agent === a)]
 const ease = (p: number) => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2)
@@ -29,7 +29,11 @@ function nodeState(run: Run, agent: AgentId, t: number): { state: NodeState; spa
   return { state: 'idle' }
 }
 
+const HOP_MS = 900
+const HOP_LABELS = ['trend match', 'creative DNA', 'script + persona', 'approved', 'scheduled', 'next variant']
+
 export function Graph({ run, t }: { run: Run; t: number }) {
+  const ambient = useElapsed(run.id, 40)
   const { spans } = run
   const mid = NODE_Y + NODE_H / 2
   const xm = xOf('mutator')
@@ -57,6 +61,19 @@ export function Graph({ run, t }: { run: Run; t: number }) {
   } else if (hasLoop && t >= last.end - 100 && t < last.end + 1400) {
     const e = ease(Math.min(1, (t - (last.end - 100)) / 1500))
     packet = { x: xs[xs.length - 1] + (xs[0] - xs[xs.length - 1]) * e, y: mid + NODE_H / 2 + Math.sin(e * Math.PI) * 40, label: last.packet }
+  }
+  if (!packet) {
+    const n = PIPELINE.length
+    const hop = Math.floor(ambient / HOP_MS) % n
+    const e = ease((ambient % HOP_MS) / HOP_MS)
+    const from = PIPELINE[hop].agent
+    const to = PIPELINE[(hop + 1) % n].agent
+    const back = hop === n - 1
+    packet = {
+      x: xOf(from) + (xOf(to) - xOf(from)) * e,
+      y: back ? mid + Math.sin(e * Math.PI) * 46 : mid,
+      label: HOP_LABELS[hop],
+    }
   }
 
   return (
@@ -109,20 +126,20 @@ export function Graph({ run, t }: { run: Run; t: number }) {
               {line && !run.skipped.includes(p.agent) && (
                 <motion.div
                   key={line.at}
-                  className="absolute z-20 w-[250px] -translate-x-1/2 rounded-xl border bg-white px-3 py-2 text-[13px] leading-snug text-text shadow-[0_12px_30px_-12px_rgba(16,24,40,.35)]"
+                  className="absolute z-20 w-[270px] -translate-x-1/2 rounded-xl border bg-white px-3 py-2 text-[14px] leading-snug text-text shadow-[0_12px_30px_-12px_rgba(16,24,40,.35)]"
                   style={{ left: xs[i], top: 6, borderColor: p.agent === 'critic' && line.text.startsWith('absolutely') ? '#ff3d5a' : `${a.color}99` }}
                   initial={{ opacity: 0, y: 8, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ type: 'spring', stiffness: 420, damping: 26 }}
                 >
-                  <span className="line-clamp-2">{line.text}</span>
+                  <span className="line-clamp-3">{line.text}</span>
                   <span className="absolute -bottom-[7px] left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 border-b border-r bg-white" style={{ borderColor: 'inherit' }} />
                 </motion.div>
               )}
             </AnimatePresence>
             <div
-              className={`absolute rounded-2xl border bg-white px-4 py-3 shadow-[0_1px_2px_rgba(16,24,40,.05),0_12px_28px_-18px_rgba(16,24,40,.25)] transition-all duration-300 ${ring} ${state === 'skipped' ? 'opacity-40' : ''}`}
+              className={`absolute rounded-2xl border bg-white px-4 py-3 shadow-[0_1px_2px_rgba(16,24,40,.05),0_12px_28px_-18px_rgba(16,24,40,.25)] transition-all duration-300 ${ring}`}
               style={{ left: xs[i] - NODE_W / 2, top: NODE_Y, width: NODE_W, height: NODE_H }}
             >
               <div className="flex items-center gap-3">
