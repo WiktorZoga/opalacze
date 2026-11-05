@@ -1,0 +1,8 @@
+{
+  "genomeId": "noir-05-deceive",
+  "kind": "video",
+  "model": "grok-imagine-video-1.5-lite",
+  "aspectRatio": "9:16",
+  "durationSeconds": 5,
+  "prompt": "9:16 phone-shot UGC of a fictional AI creator, a young adult not based on any real person, in a bathroom. Handheld phone camera, creator-native, not a polished ad. Smoky amber light. At the 4 second beat they hold up a matte black glass NOIR/05 perfume bottle, slightly off-center, one wet ring on the counter. Deadpan face, no smile, no logos beyond the bottle itself."
+}
