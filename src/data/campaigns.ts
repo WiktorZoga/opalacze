@@ -2,6 +2,12 @@ import { createContext, useContext } from 'react'
 import type { AgentId } from './agents'
 import type { Run, Span } from './run'
 import { TIKTOK_SOURCES, type TikTokSource } from './tiktokSources'
+import live2 from './liveRun002.json'
+import liveTrend from '../../generations/gen-live-002/trend.json'
+import liveCritique from '../../generations/gen-live-002/critique.json'
+import liveMutation from '../../generations/gen-live-002/mutation.json'
+import liveScript from '../../generations/gen-live-002/script.json'
+import liveClip from '../../generations/gen-live-002/media/noir-05-deceive.mp4'
 
 export type Tone = 'ugc' | 'polished' | 'brainrot'
 export const TONES: { id: Tone; label: string }[] = [
@@ -25,7 +31,9 @@ export interface Campaign {
   persona: { name: string; handle: string; style: string; voice: string }
   scripts: Record<Tone, { hook: string; beats: string[]; caption: string }>
   checks: { label: string; result: string; ok: boolean }[]
-  reject: { check: string; note: string; fix: string }
+  reject?: { check: string; note: string; fix: string }
+  /** real agent run backing this campaign */
+  live?: { label: string; clip: string; persona: string; trendName: string; trendFormat: string; whyItFits: string; session: string; events: number; realMs: number }
   metrics: { variant: string; hookRate: number; watch: number; ctr: number }[]
   /** fallback media ids from public/memes/grok/index.json, per tone */
   fallback: Partial<Record<Tone, string[]>>
@@ -37,6 +45,7 @@ const src = (id: string) => TIKTOK_SOURCES.find((s) => s.id === id) ?? TIKTOK_SO
 type Draft = Omit<Campaign, 'run'>
 
 function buildRun(c: Draft): Run {
+  const reject = c.reject ?? { check: 'claims', note: '', fix: '' }
   const steps: { agent: AgentId; name: string; kind: 'tool' | 'llm'; dur: number; packet: string; to: AgentId; say: string; input: unknown; output: unknown; status?: 'rejected'; commit: string }[] = [
     {
       agent: 'scout', name: 'x_trends', kind: 'tool', dur: 2600, packet: 'trend match', to: 'geneticist',
@@ -60,16 +69,16 @@ function buildRun(c: Draft): Run {
       commit: `script ${c.id} variants A/B`,
     },
     {
-      agent: 'critic', name: 'review', kind: 'llm', dur: 1600, packet: `fix: ${c.reject.check}`, to: 'mutator', status: 'rejected',
-      say: `absolutely not. ${c.reject.note}`,
+      agent: 'critic', name: 'review', kind: 'llm', dur: 1600, packet: `fix: ${reject.check}`, to: 'mutator', status: 'rejected',
+      say: `absolutely not. ${reject.note}`,
       input: { variants: ['A', 'B'], checks: ['trend fidelity', 'brand safety', 'claims', 'disclosure'] },
-      output: { verdict: 'absolutely not', failed: c.reject.check, note: c.reject.note },
-      commit: `reject ${c.id} script (${c.reject.check})`,
+      output: { verdict: 'absolutely not', failed: reject.check, note: reject.note },
+      commit: `reject ${c.id} script (${reject.check})`,
     },
     {
       agent: 'mutator', name: 'generate_media', kind: 'tool', dur: 2400, packet: 'variants A/B', to: 'critic',
-      say: c.reject.fix,
-      input: { kind: 'video', aspectRatio: '9:16', durationSeconds: 8, variants: 2, fix: c.reject.check },
+      say: reject.fix,
+      input: { kind: 'video', aspectRatio: '9:16', durationSeconds: 8, variants: 2, fix: reject.check },
       output: { rendered: 2, model: 'grok-imagine-video', label: '#ad · AI-generated' },
       commit: `render ${c.id} A/B (9:16)`,
     },
@@ -118,6 +127,49 @@ function buildRun(c: Draft): Run {
   return { id: `campaign-${c.id}`, label: `${c.brand} · campaign`, genome: `${c.id}-ugc-v1`, spans, runMs: t + 400, skipped: [] }
 }
 
+const LIVE_SAY = [
+  `${liveTrend.name}: ${liveTrend.brandFitPercent}% brand fit (recorded trend snapshot)`,
+  'both genomes sequenced: trend + NOIR/05 brand seed',
+  `persona ${liveScript.persona.name} (AI) · ${liveScript.durationSeconds}s script`,
+  `${liveCritique.verdict} ${liveCritique.trendFidelity} · ${liveCritique.brandSafe} · ${liveCritique.claimsCheck} · ${liveCritique.disclosure}`,
+  'rendered noir-05-deceive.mp4 · 9:16 · grok-imagine',
+]
+const LIVE_PACKETS = ['trend match', 'creative DNA', 'script + persona', 'approved', 'UGC clip']
+
+function liveRun(): Run {
+  let t = 300
+  const spans: Span[] = live2.spans.map((s, i) => {
+    const agent = s.agent as AgentId
+    const dur = Math.min(3400, Math.max(1300, (s.end - s.start) / 14))
+    const primary = s.tools.find((x) => x.name !== 'commit_artifact') ?? s.tools[0]
+    const commits = s.commits
+      .filter((c, j, arr) => arr.findIndex((x) => x.hash === c.hash) === j)
+      .map((c) => ({ hash: c.hash, agent, message: c.message, path: '' }))
+    const span: Span = {
+      id: `live2-${i + 1}`,
+      agent,
+      name: agent === 'critic' ? 'review' : primary?.name ?? s.description,
+      kind: agent === 'critic' ? 'llm' : 'tool',
+      start: t,
+      end: t + dur,
+      status: 'ok',
+      to: (live2.spans[i + 1]?.agent ?? agent) as AgentId,
+      packet: LIVE_PACKETS[i] ?? 'artifact',
+      input: { from: 'overlord', task: s.description },
+      output: primary?.result ?? null,
+      commit: commits[commits.length - 1],
+      commits,
+      realMs: s.end - s.start,
+      task: s.description,
+      tools: s.tools,
+      quote: LIVE_SAY[i] ?? s.final,
+    }
+    t += dur + 450
+    return span
+  })
+  return { id: 'gen-live-002', label: 'Live run · grok-4.7', genome: liveMutation.id, spans, runMs: t + 600, skipped: ['publisher', 'analyst'] }
+}
+
 const DRAFTS: Draft[] = [
   {
     id: 'perfume',
@@ -128,7 +180,7 @@ const DRAFTS: Draft[] = [
     tone: 'ugc',
     received: '18:42',
     trend: src('read-faster-bestie'),
-    fit: 87,
+    fit: liveTrend.brandFitPercent,
     runnersUp: [
       { name: 'The Last Dance', fit: 64, platform: 'tiktok' },
       { name: 'Your First Time in a Fancy Cafe', fit: 41, platform: 'tiktok' },
@@ -148,16 +200,27 @@ const DRAFTS: Draft[] = [
       brainrot: { hook: 'pov: you smell like a 3am decision', beats: ['spray', 'zoom on face', 'bass boost'], caption: 'my aura is now NOIR #ad' },
     },
     checks: [
-      { label: 'trend fidelity', result: '92%', ok: true },
-      { label: 'brand safety', result: 'pass', ok: true },
-      { label: 'claims', result: 'no longevity claim', ok: true },
-      { label: 'disclosure', result: '#ad · AI-generated', ok: true },
+      { label: 'trend fidelity', result: `${liveCritique.trendFidelity}/10`, ok: true },
+      { label: 'brand safety', result: `${liveCritique.brandSafe}/10`, ok: true },
+      { label: 'claims', result: `${liveCritique.claimsCheck}/10 · scent notes only`, ok: true },
+      { label: 'disclosure', result: `${liveCritique.disclosure}/10 · #ad · AI-generated`, ok: true },
     ],
-    reject: { check: 'claims', note: '“lasts 48 hours” is a claim we cannot prove.', fix: 'cut the 48h line; hook stays the reaction' },
+
     metrics: [
       { variant: 'A', hookRate: 0.41, watch: 0.68, ctr: 0.031 },
       { variant: 'B', hookRate: 0.36, watch: 0.61, ctr: 0.024 },
     ],
+    live: {
+      label: 'Live run · grok-4.7',
+      clip: liveClip,
+      persona: liveScript.persona.name,
+      trendName: liveTrend.name,
+      trendFormat: liveTrend.format,
+      whyItFits: liveTrend.whyItFits,
+      session: live2.session,
+      events: live2.eventCount,
+      realMs: live2.durationMs,
+    },
     fallback: { brainrot: ['noir05-brainrot-capybara', 'brandrot-your-startup'] },
   },
   {
@@ -244,7 +307,7 @@ const DRAFTS: Draft[] = [
   },
 ]
 
-export const CAMPAIGNS: Campaign[] = DRAFTS.map((d) => ({ ...d, run: buildRun(d) }))
+export const CAMPAIGNS: Campaign[] = DRAFTS.map((d) => ({ ...d, run: d.live ? liveRun() : buildRun(d) }))
 
 export const CampaignContext = createContext<{ campaign: Campaign; tone: Tone; setTone: (t: Tone) => void }>({
   campaign: CAMPAIGNS[0],

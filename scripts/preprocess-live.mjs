@@ -81,5 +81,5 @@ const out = {
   spans,
   overlordCommit: log.find((l) => l.author.startsWith('Overlord')) ?? null,
 }
-writeFileSync('src/data/liveRun.json', JSON.stringify(out, null, 1))
+writeFileSync(process.argv[3] ?? 'src/data/liveRun.json', JSON.stringify(out, null, 1))
 for (const s of spans) console.log(s.agent, s.start, s.end, s.tools.map((t) => t.name).join(','), s.commits.map((c) => c.hash).join(','))
