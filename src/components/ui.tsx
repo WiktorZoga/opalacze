@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { AGENTS, type AgentId } from '../data/agents'
 
 export function Panel({ title, meta, children, className = '' }: { title: string; meta?: ReactNode; children: ReactNode; className?: string }) {
@@ -74,3 +74,20 @@ export function Json({ value, maxLines = 14 }: { value: unknown; maxLines?: numb
 }
 
 export const fmtMs = (ms: number) => `${(ms / 1000).toFixed(1)}s`
+
+/** eased count-up for KPI numbers */
+export function CountUp({ to, format, ms = 1200, delay = 0 }: { to: number; format: (n: number) => string; ms?: number; delay?: number }) {
+  const [v, setV] = useState(0)
+  useEffect(() => {
+    let raf = 0
+    const start = performance.now() + delay
+    const loop = (now: number) => {
+      const p = Math.min(1, Math.max(0, (now - start) / ms))
+      setV(to * (1 - Math.pow(1 - p, 3)))
+      if (p < 1) raf = requestAnimationFrame(loop)
+    }
+    raf = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(raf)
+  }, [to, ms, delay])
+  return <>{format(v)}</>
+}

@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0b0b0c;
-  --color-surface: #111113;
-  --color-raised: #18181b;
-  --color-line: #232327;
-  --color-line-strong: #2e2e33;
-  --color-text: #ececee;
-  --color-muted: #8d8f99;
-  --color-faint: #5c5e68;
-  --color-accent: #b6ff00;
-  --color-hot: #ff2bd6;
+  --color-bg: #0a0c0f;
+  --color-surface: #101317;
+  --color-raised: #161a1f;
+  --color-line: #20252c;
+  --color-line-strong: #2b313a;
+  --color-text: #eef1f4;
+  --color-muted: #8b95a3;
+  --color-faint: #5b6470;
+  --color-accent: #2dd4bf;
+  --color-hot: #3b82f6;
   --color-danger: #ff3d5a;
-  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "Geist Sans", "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
   --font-meme: Impact, "Anton", "Haettenschweiler", sans-serif;
 }
 
@@ -34,17 +34,17 @@ body,
 }
 
 .wordmark {
-  background: linear-gradient(90deg, #b6ff00, #ff2bd6);
+  background: linear-gradient(90deg, #2dd4bf, #3b82f6);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .glow-acid {
-  box-shadow: 0 0 0 1px #b6ff0080, 0 0 24px #b6ff0040;
+  box-shadow: 0 0 0 1px #2dd4bf80, 0 0 24px #2dd4bf40;
 }
 .glow-hot {
-  box-shadow: 0 0 0 1px #ff2bd680, 0 0 24px #ff2bd640;
+  box-shadow: 0 0 0 1px #3b82f680, 0 0 24px #3b82f640;
 }
 .glow-danger {
   box-shadow: 0 0 0 1px #ff3d5a99, 0 0 28px #ff3d5a55;
@@ -52,8 +52,8 @@ body,
 
 .panel-sheen {
   background:
-    radial-gradient(900px 220px at 20% 0%, #b6ff000d, transparent 70%),
-    radial-gradient(900px 220px at 85% 100%, #ff2bd60f, transparent 70%),
+    radial-gradient(900px 220px at 20% 0%, #2dd4bf0d, transparent 70%),
+    radial-gradient(900px 220px at 85% 100%, #3b82f60f, transparent 70%),
     var(--color-surface);
 }
 
@@ -62,7 +62,7 @@ body,
   to { background-position: 40px 0; }
 }
 .bar-running {
-  background-image: repeating-linear-gradient(90deg, #b6ff00aa 0 10px, #b6ff0055 10px 20px);
+  background-image: repeating-linear-gradient(90deg, #2dd4bfaa 0 10px, #2dd4bf55 10px 20px);
   background-size: 40px 100%;
   animation: shimmer 0.6s linear infinite;
 }
