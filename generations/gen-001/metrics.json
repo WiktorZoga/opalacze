@@ -1,0 +1,38 @@
+{
+  "genome": "scientists-reveal-the-clap",
+  "generation": 1,
+  "source": "simulated",
+  "method": "projected from the parents' recorded public signal (sources.json)",
+  "formula": "0.35·watchThrough + 0.25·shareRate·10 + 0.2·saveRate·10 + 0.2·remixRate·20",
+  "platforms": {
+    "tiktok": {
+      "views": 182000,
+      "likes": 21400,
+      "shares": 10900,
+      "saves": 7300,
+      "comments": 640,
+      "watchThrough": 0.71,
+      "shareRate": 0.06,
+      "saveRate": 0.04,
+      "remixRate": 0.02,
+      "fitness": 0.56
+    },
+    "x": {
+      "views": 41000,
+      "likes": 2300,
+      "shares": 1600,
+      "saves": 410,
+      "comments": 95,
+      "watchThrough": 0.64,
+      "shareRate": 0.039,
+      "saveRate": 0.01,
+      "remixRate": 0.012,
+      "fitness": 0.39
+    }
+  },
+  "fitness": 0.48,
+  "carriedBy": "catchphrase",
+  "draggedBy": "visual",
+  "elite": true,
+  "note": "audiences rewatched for the catchphrase, not the cat. hoo-ever, the cat is fine."
+}
