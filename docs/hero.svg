@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-label="ROT BOT: a swarm of Grok Bot agents that breeds memes">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#05060a"/>
+      <stop offset="1" stop-color="#0d0716"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b6ff00"/>
+      <stop offset="1" stop-color="#ff2bd6"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#b6ff00" stroke-opacity="0.07"/>
+    </pattern>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <style>
+      .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+      .impact { font-family: Impact, 'Anton', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif; }
+      @keyframes blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+      .cursor { animation: blink 1s steps(1) infinite; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="420" fill="url(#bg)"/>
+  <rect width="1280" height="420" fill="url(#grid)"/>
+
+  <!-- DNA helix -->
+  <g transform="translate(930 30)" filter="url(#glow)">
+    <path d="M0 0 C 120 60, 120 120, 0 180 S -120 300, 0 360" fill="none" stroke="#b6ff00" stroke-width="5"/>
+    <path d="M0 0 C -120 60, -120 120, 0 180 S 120 300, 0 360" fill="none" stroke="#ff2bd6" stroke-width="5"/>
+    <g stroke-width="4" stroke-linecap="round">
+      <line x1="-62" y1="40" x2="62" y2="40" stroke="#b6ff00"/>
+      <line x1="-88" y1="80" x2="88" y2="80" stroke="#ff2bd6"/>
+      <line x1="-62" y1="130" x2="62" y2="130" stroke="#b6ff00"/>
+      <line x1="-62" y1="230" x2="62" y2="230" stroke="#ff2bd6"/>
+      <line x1="-88" y1="280" x2="88" y2="280" stroke="#b6ff00"/>
+      <line x1="-62" y1="320" x2="62" y2="320" stroke="#ff2bd6"/>
+    </g>
+  </g>
+  <g class="mono" font-size="13" fill="#b6ff00" fill-opacity="0.85">
+    <text x="1030" y="74">hook &#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9617; 0.85</text>
+    <text x="1030" y="114">hero &#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619; 0.95</text>
+    <text x="1030" y="164">humor &#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619; 0.95</text>
+    <text x="1030" y="264">audio &#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9617; 0.90</text>
+    <text x="1030" y="314">loop &#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9619;&#9617; 0.85</text>
+  </g>
+
+  <!-- Title -->
+  <text x="64" y="92" class="mono" font-size="18" fill="#ff2bd6" letter-spacing="4">GROK BOT SWARM &#183; MEME GENOME LAB</text>
+  <text x="58" y="222" class="impact" font-size="150" fill="url(#title)" filter="url(#glow)" letter-spacing="2">ROT BOT</text>
+  <text x="64" y="270" class="mono" font-size="26" fill="#f2f2f2">We don't follow trends. We mutate them.<tspan class="cursor" fill="#b6ff00">&#9608;</tspan></text>
+
+  <!-- Cast -->
+  <g class="mono" font-size="15" fill="#cfcfcf">
+    <text x="64" y="322">&#128025; overlord  &#128038; scout  &#129451; geneticist  &#128010; mutator  &#128049; critic  &#129436; publisher  &#129417; analyst</text>
+  </g>
+
+  <!-- Ticker -->
+  <rect y="372" width="1280" height="48" fill="#b6ff00"/>
+  <text x="24" y="405" class="impact" font-size="22" fill="#05060a" textLength="1232" lengthAdjust="spacingAndGlyphs">SCIENTISTS REVEAL THE CLAP &#9650; 0.48 &#183; KRASNAL CEO &#9650; 0.63 &#183; KRASNAL CEO: SERIES A &#9650; 0.81 &#183; BRANDROT: TURN ANY BRAND INTO BRAINROT</text>
+</svg>
