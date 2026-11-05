@@ -1,0 +1,18 @@
+{
+  "generation": 2,
+  "final": "fine. ship it.",
+  "rounds": [
+    {
+      "round": 1,
+      "genome": "krasnal-ceo",
+      "verdict": "fine. ship it.",
+      "scores": {
+        "funny": 9,
+        "fresh": 9,
+        "loopable": 8,
+        "brandSafe": 10
+      },
+      "note": "a 30 cm founder with better posture than most founders. fine."
+    }
+  ]
+}
