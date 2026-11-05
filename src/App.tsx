@@ -7,23 +7,25 @@ import { useElapsed } from './components/hooks'
 import { Avatar } from './components/ui'
 import { Workflow } from './screens/Workflow'
 import { Lineage } from './screens/Lineage'
-import { Output } from './screens/Output'
+import { Creative } from './screens/Creative'
+import { Sidebar } from './screens/Sidebar'
+import { CAMPAIGNS, CampaignContext, type Tone } from './data/campaigns'
 import { DEMO_STEPS } from './demo'
 
 const TABS: { id: ScreenId; label: string; stage: number }[] = [
-  { id: 'workflow', label: 'Workflow', stage: 0 },
-  { id: 'lineage', label: 'Genome & Lineage', stage: 1 },
-  { id: 'output', label: 'Output', stage: 4 },
+  { id: 'campaign', label: 'Campaign', stage: 0 },
+  { id: 'creative', label: 'Creative', stage: 2 },
+  { id: 'history', label: 'History', stage: 1 },
 ]
 
 function ScreenView({ id, runKey }: { id: ScreenId; demo?: boolean; runKey: number }) {
   switch (id) {
-    case 'workflow':
+    case 'campaign':
       return <Workflow runKey={runKey} />
-    case 'lineage':
+    case 'creative':
+      return <Creative />
+    case 'history':
       return <Lineage />
-    case 'output':
-      return <Output />
   }
 }
 
@@ -43,7 +45,7 @@ function AgentNotes({ screen, runKey }: { screen: ScreenId; runKey: number }) {
         transition={{ duration: 0.2 }}
       >
         <Avatar id={line.agent} size={18} />
-        <span className="capitalize text-muted">{AGENTS[line.agent].id}</span>
+        <span className="text-muted">{AGENTS[line.agent].label}</span>
         <span className="text-text">{line.text}</span>
       </motion.span>
     </AnimatePresence>
@@ -52,13 +54,24 @@ function AgentNotes({ screen, runKey }: { screen: ScreenId; runKey: number }) {
 
 const params = new URLSearchParams(window.location.search)
 const initialDemo = params.has('demo')
-const initialScreen = (TABS.find((t) => t.id === params.get('screen'))?.id ?? 'workflow') as ScreenId
+const initialScreen = (TABS.find((t) => t.id === params.get('screen'))?.id ?? 'campaign') as ScreenId
+const initialCampaign = CAMPAIGNS.find((c) => c.id === params.get('campaign')) ?? CAMPAIGNS[0]
 
 export default function App() {
   const [screen, setScreen] = useState<ScreenId>(initialScreen)
   const [runKey, setRunKey] = useState(0)
   const [demo, setDemo] = useState(initialDemo)
   const [step, setStep] = useState(0)
+  const [campaign, setCampaign] = useState(initialCampaign)
+  const [tone, setTone] = useState<Tone>((params.get('tone') as Tone) || initialCampaign.tone)
+  const openCampaign = useCallback((id: string) => {
+    const c = CAMPAIGNS.find((x) => x.id === id)
+    if (!c) return
+    setCampaign(c)
+    setTone(c.tone)
+    setScreen('campaign')
+    setRunKey((k) => k + 1)
+  }, [])
 
   const go = useCallback((id: ScreenId) => {
     setScreen(id)
@@ -69,6 +82,9 @@ export default function App() {
     (i: number, force = false) => {
       const s = Math.max(0, Math.min(DEMO_STEPS.length - 1, i))
       setStep(s)
+      const st = DEMO_STEPS[s]
+      if (st.campaign) setCampaign(CAMPAIGNS.find((c) => c.id === st.campaign) ?? CAMPAIGNS[0])
+      if (st.tone) setTone(st.tone)
       setScreen((cur) => {
         if (force || cur !== DEMO_STEPS[s].screen) setRunKey((k) => k + 1)
         return DEMO_STEPS[s].screen
@@ -120,11 +136,12 @@ export default function App() {
 
   return (
     <Stage>
+      <CampaignContext.Provider value={{ campaign, tone, setTone }}>
       <div className="flex h-full flex-col">
         <header className="flex h-14 shrink-0 items-center gap-8 border-b border-line px-6">
           <div className="flex items-baseline gap-3">
-            <span className="wordmark text-[18px] font-semibold tracking-tight">ROT BOT</span>
-            <span className="text-[13px] text-faint">Meme Genome Lab</span>
+            <span className="wordmark text-[18px] font-semibold tracking-tight">ROT Studio</span>
+            <span className="text-[13px] text-faint">AI ad agency · run by the ROT BOT swarm</span>
           </div>
           <nav className="flex h-full items-stretch gap-6">
             {TABS.map((t) => (
@@ -155,10 +172,12 @@ export default function App() {
           </div>
         </header>
 
+        <div className="flex min-h-0 flex-1">
+        <Sidebar selected={campaign.id} onOpen={(id) => !demo && openCampaign(id)} />
         <main className="relative min-h-0 flex-1">
           <AnimatePresence mode="wait">
             <motion.div
-              key={`${screen}-${screen === 'workflow' ? runKey : runKey}`}
+              key={`${screen}-${runKey}-${campaign.id}`}
               className="absolute inset-0"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -179,15 +198,15 @@ export default function App() {
                 <div className="absolute inset-0 bg-[radial-gradient(600px_300px_at_50%_45%,#b6ff0014,transparent_70%),radial-gradient(700px_300px_at_55%_60%,#ff2bd612,transparent_70%)]" />
                 <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 120, damping: 14 }} className="relative text-center">
                   <div className="text-[120px] font-semibold leading-none tracking-tight text-text">
-                    BRAND<span className="wordmark">ROT</span>
+                    <span className="wordmark">ROT</span> Studio
                   </div>
-                  <div className="mt-6 text-[32px] text-muted">Turn any brand into brainrot.</div>
+                  <div className="mt-6 text-[32px] text-muted">The AI ad agency that rides virals.</div>
                   <div className="mt-10 flex items-center justify-center gap-2">
                     {(['scout', 'geneticist', 'mutator', 'critic', 'publisher', 'analyst'] as const).map((a) => (
                       <Avatar key={a} id={a} size={40} />
                     ))}
                   </div>
-                  <div className="mt-6 font-mono text-[14px] text-faint">ROT BOT · six Grok agents · one git repo · every step a commit</div>
+                  <div className="mt-6 font-mono text-[14px] text-faint">brief → trend → DNA → AI creator → critic → publish → metrics · six Grok Bot agents</div>
                 </motion.div>
               </motion.div>
             )}
@@ -215,12 +234,14 @@ export default function App() {
             )}
           </AnimatePresence>
         </main>
+        </div>
 
         <footer className="flex h-9 shrink-0 items-center justify-between border-t border-line px-6 text-[12px]">
           <AgentNotes screen={screen} runKey={runKey} />
-          <span className="font-mono text-faint">replays of real agent runs from generations/ · no API keys needed</span>
+          <span className="font-mono text-faint">AI-generated creators · metrics simulated · no API keys needed</span>
         </footer>
       </div>
+      </CampaignContext.Provider>
     </Stage>
   )
 }

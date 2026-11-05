@@ -169,8 +169,8 @@ export function Lineage() {
   return (
     <div className="flex h-full flex-col gap-4 p-6">
       <div className="flex items-baseline gap-4">
-        <h1 className="text-[22px] font-semibold tracking-tight text-text">Genome & Lineage</h1>
-        <span className="text-[13px] text-muted">How {CHILD.name} (live run) inherited its genes, and what the Critic said</span>
+        <h1 className="text-[22px] font-semibold tracking-tight text-text">History</h1>
+        <span className="text-[13px] text-muted">Earlier R&D run (gen-live-001, grok-4.7): how the swarm bred {CHILD.name}, gene by gene, before the agency pivot</span>
       </div>
       <div className="grid min-h-0 flex-1 grid-cols-[1fr_720px] gap-4">
         <div className="flex min-h-0 flex-col gap-4">
