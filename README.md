@@ -3,113 +3,95 @@
 </p>
 
 <h3 align="center">Riptide: the AI ad agency that rides virals. Run by a Grok Bot swarm.</h3>
-<p align="center">Brands send a brief; a swarm of Grok Bot agents finds the rising trend, extracts its DNA and ships trend-native UGC ads in minutes.</p>
 
 <p align="center">
   <img alt="built with @grok/agent-sdk" src="https://img.shields.io/badge/built%20with-%40grok%2Fagent--sdk%200.6-2dd4bf?style=for-the-badge&labelColor=04121f">
-  <a href="#-live-runs-real-not-simulated"><img alt="2 live runs" src="https://img.shields.io/badge/live%20runs-2%20%C2%B7%20grok--4.7-38bdf8?style=for-the-badge&labelColor=04121f"></a>
+  <a href="#proof-its-real"><img alt="2 live runs" src="https://img.shields.io/badge/live%20runs-2%20%C2%B7%20grok--4.7-38bdf8?style=for-the-badge&labelColor=04121f"></a>
   <a href="https://wiktorzoga.github.io/opalacze/"><img alt="try it live" src="https://img.shields.io/badge/try%20it-live-2dd4bf?style=for-the-badge&labelColor=04121f"></a>
 </p>
 
 <p align="center">
-  <a href="docs/media/rotbot-demo-45s.mp4"><img src="docs/media/rotbot-hero.gif" alt="Riptide console: an advertiser brief becomes trend-native UGC ad variants" width="100%"></a>
+  <a href="docs/media/rotbot-demo-45s.mp4"><img src="docs/media/rotbot-hero.gif" alt="Riptide: a brand brief becomes trend-native UGC ads" width="100%"></a>
 </p>
 
 <p align="center">
-  <b><a href="docs/media/rotbot-demo-45s.mp4">▶ Watch the 45s demo</a></b> &nbsp;·&nbsp; <b><a href="https://wiktorzoga.github.io/opalacze/">🚀 Try it live</a></b>
+  <b><a href="docs/media/rotbot-demo-45s.mp4">▶ 45s demo</a></b>
+  &nbsp;·&nbsp;
+  <b><a href="https://wiktorzoga.github.io/opalacze/">Try it live</a></b>
 </p>
 
 ## The ads it made
 
 <table>
 <tr>
-<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale · Why would I deceive you? · UGC" width="100%"><br><sub><b>🔴 live run</b><br>Ren Hale · “Why would I deceive you?” · UGC<br><code>#ad · AI-generated</code></sub></td>
-<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-unboxing.gif" alt="Maja · unboxing · UGC" width="100%"><br><sub>Maja · unboxing · UGC<br><code>#ad · AI-generated</code></sub></td>
-<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-grwm.gif" alt="Maja · get ready with me · UGC" width="100%"><br><sub>Maja · get ready with me · UGC<br><code>#ad · AI-generated</code></sub></td>
-<td align="center" valign="top" width="20%"><img src="docs/media/ugc/noir05-brainrot-capybara.gif" alt="Capybara mascot · dramatic spritz · Brainrot" width="100%"><br><sub>Capybara mascot · dramatic spritz · Brainrot<br><code>#ad · AI-generated</code></sub></td>
-<td align="center" valign="top" width="20%"><img src="docs/media/ugc/cafe-first-time-fancy.gif" alt="Kuba · first time in a fancy café · UGC" width="100%"><br><sub>Kuba · first time in a fancy café · UGC<br><code>#ad · AI-generated</code></sub></td>
+<td align="center" width="25%"><img src="docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale, NOIR/05, UGC, live run" width="100%"><br><sub><b>live run</b> · Ren Hale · NOIR/05 · UGC</sub></td>
+<td align="center" width="25%"><img src="docs/media/ugc/noir05-unboxing.gif" alt="Maja, NOIR/05, UGC" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+<td align="center" width="25%"><img src="docs/media/ugc/noir05-grwm.gif" alt="Maja, NOIR/05, UGC" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+<td align="center" width="25%"><img src="docs/media/ugc/noir05-brainrot-capybara.gif" alt="Capybara, NOIR/05, Brainrot" width="100%"><br><sub>Capybara · NOIR/05 · Brainrot</sub></td>
 </tr>
 </table>
 
-<sub>NOIR/05 is a fictional perfume brand; all creators are AI personas rendered with Grok Imagine.</sub>
+## How it works
 
-## How the swarm works
-
-**Why:** agencies need a week to jump on a trend that lives 3 days. Riptide ships trend-matched ads while the trend is still rising.
+<table>
+<tr align="center">
+<td width="16%">📝<br><b>Send the brief</b></td>
+<td width="16%">🔥<br><b>Match a trend</b></td>
+<td width="16%">🧬<br><b>Extract viral DNA</b></td>
+<td width="16%">🎬<br><b>Render UGC ads</b></td>
+<td width="16%">✅<br><b>Check disclosure</b></td>
+<td width="16%">📈<br><b>Publish and learn</b></td>
+</tr>
+</table>
 
 ```mermaid
 flowchart LR
-    B["📝 Advertiser brief<br/>brand · product · tone"] --> O(("Overlord"))
-    T["🔥 TikTok + X<br/>rising trends"] -->|x_trends| S["Scout<br/>brand fit"]
-    O --> S
-    S --> G["Geneticist<br/>trend DNA"]
-    G --> M["Creator<br/>UGC script + A/B"]
-    M --> R["🎬 Grok Imagine<br/>9:16 render"]
-    R --> C{"Critic<br/>brand safety · claims<br/>#ad · AI-generated"}
-    C -->|rework| M
-    C -->|approved| P["Publisher<br/>✋ human approves"]
-    P --> A["Analyst<br/>hook rate · CTR"]
-    A -->|next variant| M
-
-    classDef hot fill:#38bdf8,stroke:#38bdf8,color:#04121f
-    classDef acid fill:#2dd4bf,stroke:#2dd4bf,color:#04121f
-    class B,T hot
-    class O acid
+    B["Brief"] --> S["Scout"]
+    T["TikTok + X"] --> S
+    S --> G["Geneticist"]
+    G --> C["Creator"]
+    C --> R["Grok Imagine"]
+    R --> K{"Critic"}
+    K -->|rework| C
+    K -->|approved| P["Publisher"]
+    P --> A["Analyst"]
+    A -->|next variant| C
 ```
 
-## 🔴 Live runs: real, not simulated
+## Proof it's real
 
 <table>
 <tr>
-<td width="30%" valign="top">
-  <a href="generations/gen-live-002/media/noir-05-deceive.mp4"><img src="docs/live-002-poster.jpg" alt="Grok Imagine video frame: AI creator Ren Hale holds up the black NOIR/05 bottle, deadpan" width="100%"></a><br>
-  <sub><a href="generations/gen-live-002/media/noir-05-deceive.mp4">▶ Play the clip</a> · Grok Imagine video, 9:16 · <code>#ad · AI-generated</code></sub>
+<td width="50%" valign="top">
+<a href="generations/gen-live-002/media/noir-05-deceive.mp4"><img src="docs/live-002-poster.jpg" alt="Live run: Ren Hale holds the NOIR/05 bottle" width="42%"></a>
+
+**gen-live-002** · NOIR/05 brief · grok-4.7 · 4,167 events
+
+> "All four scores clear 8, so I'm committing the approval."
+
+[RUN.md](generations/gen-live-002/RUN.md) · [trace](generations/gen-live-002/trace.ndjson) · [clip](generations/gen-live-002/media/noir-05-deceive.mp4) · [commits](https://github.com/WiktorZoga/opalacze/compare/2d31370~1...93a7265)
 </td>
-<td valign="top">
+<td width="50%" valign="top">
+<img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Live run: a bronze dwarf on night cobblestones" width="42%">
 
-**gen-live-002: NOIR/05 eau de parfum, UGC brief.** `grok-4.7` · 7 min · 5 subagent handoffs · 4,167 events.
-Trend *"Why Would I Deceive You?"* at **84% brand fit** (picked from the Scout's recorded snapshot of real trends;
-live X search returned nothing usable). AI creator persona **Ren Hale**. Critic approved on the first round:
-trend fidelity 9 · brand safety 9 · claims 10 · disclosure 10.
+**gen-live-001** · first R&D run · grok-4.7 · 2,552 events
 
-> 🐦 *"Deadpan letdown text already fits a 7-second phone caption, and the black bottle can be the only thing in frame that refuses to disappoint."*
->
-> 🐱 *"The script hits the deadpan line, the late bottle, scent notes only, and the exact disclosure on screen and in the caption. All four scores clear 8, so I'm committing the approval."*
->
-> 🐙 *"Eight arms, one bottle, zero polish. We don't follow trends. We mutate them."*
+> "The thumb is gone and the hook is the dwarf."
 
-📄 [RUN.md](generations/gen-live-002/RUN.md) · 🧾 [trace.ndjson](generations/gen-live-002/trace.ndjson) · 📝 [brief](generations/gen-live-002/brief.json) · 🎬 [script](generations/gen-live-002/script.json) · 🌱 [agent commits](https://github.com/WiktorZoga/opalacze/compare/2d31370~1...93a7265)
-
+[RUN.md](generations/gen-live-001/RUN.md) · [trace](generations/gen-live-001/trace.ndjson) · [commits](https://github.com/WiktorZoga/opalacze/compare/f16e5c1~1...e2af1f7)
 </td>
 </tr>
 </table>
 
-<details>
-<summary><b>gen-live-001: the first R&D run</b></summary>
+| Judge checklist | | |
+| --- | :---: | --- |
+| Grok Bot, `@grok/agent-sdk` | ✅ | [`agents/`](agents/) |
+| Swarm of 6 agents | ✅ | [scout · geneticist · creator · critic · publisher · analyst](agents/bot/subagents) |
+| Live runs | ✅ | [gen-live-002](generations/gen-live-002/RUN.md) · [gen-live-001](generations/gen-live-001/RUN.md) |
+| Agent-authored commits | ✅ | [commit history](https://github.com/WiktorZoga/opalacze/commits/main) |
+| Real trends | ✅ | [sources.json](generations/sources.json) |
+| UGC output | ✅ | [the ads](#the-ads-it-made) · [live clip](generations/gen-live-002/media/noir-05-deceive.mp4) |
 
-<table>
-<tr>
-<td width="30%" valign="top">
-  <img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Grok Imagine render from the first live run: a bronze Wrocław dwarf crossing night cobblestones" width="100%">
-</td>
-<td valign="top">
-
-**gen-live-001: the first R&D run.** `grok-4.7` · 6 min · 7 subagent handoffs · 2,552 events. A live X trend
-*"Hitting Vape to Investigate Night Sound"* (683k views) × a brand mascot, rendered by Grok Imagine.
-
-> 🐱 *"The hook is still the father's thumb on a statue that has none. First draft fails freshness, so this does not ship."*
->
-> 🐱 *"The thumb is gone and the hook is the dwarf."*
->
-> 🐙 *"Eight hundred bosses, one doorway, zero permission asked."*
-
-📄 [RUN.md](generations/gen-live-001/RUN.md) · 🧾 [trace.ndjson](generations/gen-live-001/trace.ndjson) · 🌱 [agent commits](https://github.com/WiktorZoga/opalacze/compare/f16e5c1~1...e2af1f7)
-
-</td>
-</tr>
-</table>
-
-</details>
 
 <details>
 <summary><b>📋 What each step does · tones · integrations</b></summary>
@@ -273,4 +255,5 @@ npm install && npm run dev         # Riptide: Briefs inbox → Campaign / Creati
 
 </details>
 
-<sub>Riptide is run by a Grok Bot swarm; ROT BOT is its R&D codename (commit authors, history). `gen-live-002` and `gen-live-001` are real end-to-end runs; generations 001–003 are recorded agent runs over real, linked trends; publishing and ad metrics are simulated and labeled. All creators are AI personas, labeled AI-generated. Team: [TEAM.md](TEAM.md).</sub>
+
+<sub>Riptide is run by a Grok Bot swarm. ROT BOT is the R&amp;D codename in older commits. Live runs are real; generations 001–003 are recorded runs over real trends; ad metrics are simulated. Creators are AI personas. [Team](TEAM.md) · [Presentation brief](docs/presentation-brief.md)</sub>
