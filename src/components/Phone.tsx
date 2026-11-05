@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { assetUrl, type Meme } from '../data/memes'
 import { Krasnal } from './Krasnal'
-import { useElapsed } from './AgentSwarm'
+import { useElapsed } from './hooks'
 
 interface Props {
   meme: Meme
