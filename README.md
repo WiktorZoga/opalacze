@@ -1,25 +1,25 @@
 <p align="center">
-  <img src="docs/hero.svg" alt="ROT Studio: the AI ad agency that rides virals" width="100%">
+  <img src="docs/hero.svg" alt="Riptide: the AI ad agency that rides virals. Run by a Grok Bot swarm." width="100%">
 </p>
 
-<h3 align="center">ROT Studio: the AI ad agency that rides virals.</h3>
+<h3 align="center">Riptide: the AI ad agency that rides virals. Run by a Grok Bot swarm.</h3>
 <p align="center">Brands send a brief; a swarm of Grok Bot agents finds the rising trend, extracts its DNA and ships trend-native UGC ads in minutes.</p>
 
 <p align="center">
-  <img alt="built with @grok/agent-sdk" src="https://img.shields.io/badge/built%20with-%40grok%2Fagent--sdk%200.6-b6ff00?style=for-the-badge&labelColor=05060a">
-  <a href="#-live-runs-real-not-simulated"><img alt="2 live runs" src="https://img.shields.io/badge/live%20runs-2%20%C2%B7%20grok--4.7-ff2bd6?style=for-the-badge&labelColor=05060a"></a>
-  <a href="https://wiktorzoga.github.io/opalacze/"><img alt="try it live" src="https://img.shields.io/badge/try%20it-live-b6ff00?style=for-the-badge&labelColor=05060a"></a>
+  <img alt="built with @grok/agent-sdk" src="https://img.shields.io/badge/built%20with-%40grok%2Fagent--sdk%200.6-2dd4bf?style=for-the-badge&labelColor=04121f">
+  <a href="#-live-runs-real-not-simulated"><img alt="2 live runs" src="https://img.shields.io/badge/live%20runs-2%20%C2%B7%20grok--4.7-38bdf8?style=for-the-badge&labelColor=04121f"></a>
+  <a href="https://wiktorzoga.github.io/opalacze/"><img alt="try it live" src="https://img.shields.io/badge/try%20it-live-2dd4bf?style=for-the-badge&labelColor=04121f"></a>
 </p>
 
 <p align="center">
-  <a href="docs/media/rotbot-demo-45s.mp4"><img src="docs/media/rotbot-hero.gif" alt="ROT Studio console: an advertiser brief becomes trend-native UGC ad variants" width="100%"></a>
+  <a href="docs/media/rotbot-demo-45s.mp4"><img src="docs/media/rotbot-hero.gif" alt="Riptide console: an advertiser brief becomes trend-native UGC ad variants" width="100%"></a>
 </p>
 
 <p align="center">
   <b><a href="docs/media/rotbot-demo-45s.mp4">▶ Watch the 45s demo</a></b> &nbsp;·&nbsp; <b><a href="https://wiktorzoga.github.io/opalacze/">🚀 Try it live</a></b>
 </p>
 
-**Why:** agencies need a week to jump on a trend that lives 3 days. ROT Studio ships trend-matched ads while the trend is still rising.
+**Why:** agencies need a week to jump on a trend that lives 3 days. Riptide ships trend-matched ads while the trend is still rising.
 
 **The app:** a Briefs inbox, and per brief three views: **Campaign** (the swarm working the brief live), **Creative** (the A/B variants per tone) and **History** (the R&D lineage).
 
@@ -46,8 +46,8 @@ flowchart LR
     P --> A["Analyst<br/>hook rate · CTR"]
     A -->|next variant| M
 
-    classDef hot fill:#ff2bd6,stroke:#ff2bd6,color:#05060a
-    classDef acid fill:#b6ff00,stroke:#b6ff00,color:#05060a
+    classDef hot fill:#38bdf8,stroke:#38bdf8,color:#04121f
+    classDef acid fill:#2dd4bf,stroke:#2dd4bf,color:#04121f
     class B,T hot
     class O acid
 ```
@@ -176,7 +176,7 @@ More: [`agents/README.md`](agents/README.md).
 <details>
 <summary><b>🧪 R&D history</b>: how the swarm learned to read trend DNA (meme family tree)</summary>
 
-Before ROT Studio, the swarm bred memes from real virals of the week ([`generations/sources.json`](generations/sources.json)).
+Before Riptide, the swarm (R&D codename ROT BOT) bred memes from real virals of the week ([`generations/sources.json`](generations/sources.json)).
 Each crossover is a `git merge`; the Critic's rejections are commits.
 
 | Gen | Parents | Child | Critic | Fitness |
@@ -244,7 +244,7 @@ export CURSOR_API_KEY=...  XAI_API_KEY=...
 npx agent-sdk run --dir . --message "Brief: NOIR/05 eau de parfum, women 18-30, TikTok, tone UGC. Ship 2 variants."
 npx agent-sdk dev                  # Grok Bot playground
 
-npm install && npm run dev         # ROT Studio: Briefs inbox → Campaign / Creative / History
+npm install && npm run dev         # Riptide: Briefs inbox → Campaign / Creative / History
 ```
 
-<sub>ROT Studio is run by the ROT BOT swarm. `gen-live-002` and `gen-live-001` are real end-to-end runs; generations 001–003 are recorded agent runs over real, linked trends; publishing and ad metrics are simulated and labeled. All creators are AI personas, labeled AI-generated. Team: [TEAM.md](TEAM.md).</sub>
+<sub>Riptide is run by a Grok Bot swarm; ROT BOT is its R&D codename (commit authors, history). `gen-live-002` and `gen-live-001` are real end-to-end runs; generations 001–003 are recorded agent runs over real, linked trends; publishing and ad metrics are simulated and labeled. All creators are AI personas, labeled AI-generated. Team: [TEAM.md](TEAM.md).</sub>
