@@ -135,8 +135,8 @@ function Graph({ run, t }: { run: Run; t: number }) {
                     background: `radial-gradient(circle at 35% 30%, ${a.color}40, #111113 72%)`,
                     boxShadow: live ? `0 0 0 2px ${state === 'rejected' ? '#ff3d5a' : a.color}, 0 0 22px ${state === 'rejected' ? '#ff3d5a' : a.color}88` : `0 0 0 1px ${a.color}44`,
                   }}
-                  animate={live ? { y: [0, -5, 0], rotate: state === 'rejected' ? [0, -8, 8, -6, 0] : [0, -3, 3, 0] } : { y: 0, rotate: 0 }}
-                  transition={{ duration: state === 'rejected' ? 0.5 : 0.9, repeat: live ? Infinity : 0 }}
+                  animate={live ? { scale: [1, 1.04, 1] } : { scale: 1 }}
+                  transition={{ duration: 1.4, repeat: live ? Infinity : 0, ease: 'easeInOut' }}
                 >
                   {a.emoji}
                 </motion.span>
@@ -217,11 +217,11 @@ function Trace({ run, t, selected, onSelect }: { run: Run; t: number; selected?:
                 )}
                 {done && s.status === 'rejected' && (
                   <motion.span
-                    className="pointer-events-none absolute top-1/2 z-10 whitespace-nowrap rounded-md border-[3px] border-danger bg-bg/80 px-2.5 py-0.5 font-meme text-[22px] uppercase leading-none tracking-wide text-danger"
-                    style={{ left: scale(s.end) + 56, textShadow: '0 0 12px #ff3d5a88' }}
-                    initial={{ opacity: 0, scale: 2.4, rotate: -20, y: '-50%' }}
-                    animate={{ opacity: 1, scale: 1, rotate: -7, y: '-50%' }}
-                    transition={{ type: 'spring', stiffness: 520, damping: 17 }}
+                    className="glow-danger pointer-events-none absolute top-1/2 z-10 whitespace-nowrap rounded border border-danger bg-danger/15 px-2 py-0.5 text-[12px] font-semibold uppercase tracking-wider text-danger"
+                    style={{ left: scale(s.end) + 56 }}
+                    initial={{ opacity: 0, scale: 1.25, y: '-50%' }}
+                    animate={{ opacity: 1, scale: 1, y: '-50%' }}
+                    transition={{ type: 'spring', stiffness: 520, damping: 26 }}
                   >
                     absolutely not
                   </motion.span>

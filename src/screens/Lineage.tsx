@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { CHILD, CRITIQUE, GENERATIONS, GENOME, LIVE_IMAGE, PARENTS } from '../data/lineage'
-import { MEMES } from '../data/memes'
-import { MemeCard } from '../components/MemeCard'
+import { useGrokMedia } from '../data/grokMedia'
+import { MediaFrame } from '../components/MediaFrame'
 import { Badge, Panel } from '../components/ui'
 import { Helix } from '../components/Helix'
 
@@ -16,15 +16,10 @@ const GENE_COLOR: Record<string, string> = {
   structure: '#7ab8ff',
 }
 
-const CHILD_MEME: Record<string, string> = {
-  'scientists-reveal-the-clap': 'scientistsHi',
-  'krasnal-ceo': 'krasnal',
-  'krasnal-ceo-series-a': 'krasnalAlt',
-}
-
-function Thumb({ id, live }: { id: string; live?: boolean }) {
-  if (live) return <img src={LIVE_IMAGE} alt={id} className="h-[72px] w-[40px] rounded object-cover" />
-  return <MemeCard meme={MEMES[CHILD_MEME[id]]} width={64} />
+function Thumb({ gen, id, live }: { gen: string; id: string; live?: boolean }) {
+  const media = useGrokMedia()
+  const m = media[gen]
+  return <MediaFrame src={live ? LIVE_IMAGE : m?.url} kind={m?.kind} alt={id} width={45} height={80} reveal={false} />
 }
 
 function GenomeTable() {
@@ -90,7 +85,7 @@ function CritiqueTable() {
           <span className="font-mono text-muted">{r.round}</span>
           <span>
             {r.round === 1 ? (
-              <span className="inline-block -rotate-6 rounded border-2 border-danger px-1.5 font-meme text-[15px] uppercase leading-tight text-danger [text-shadow:0_0_10px_#ff3d5a88]">{r.verdict}</span>
+              <span className="inline-block rounded border border-danger/70 bg-danger/10 px-1.5 py-px text-[11px] font-semibold uppercase tracking-wider text-danger">{r.verdict}</span>
             ) : (
               <Badge tone="accent">{r.verdict}</Badge>
             )}
@@ -134,7 +129,7 @@ function Tree() {
                 </div>
                 <div className="ml-3 h-3 w-px bg-line-strong" />
                 <div className={`flex items-center gap-4 rounded-lg border p-3 ${i === GENERATIONS.length - 1 ? 'glow-acid border-accent/50 bg-raised' : 'border-line bg-raised/60'}`}>
-                  <Thumb id={g.id} live={g.live} />
+                  <Thumb gen={g.gen} id={g.id} live={g.live} />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 text-[15px] font-medium text-text">{g.name}{g.live && <Badge tone="accent">live · grok-4.7</Badge>}</div>
                     <div className="font-mono text-[12px] text-faint">{g.id}</div>

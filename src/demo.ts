@@ -36,8 +36,8 @@ export const DEMO_STEPS: DemoStep[] = [
   {
     screen: 'output',
     ms: 14000,
-    pl: 'Wykluwa się mem: grok-imagine renderuje go na żywo, Publisher i Analyst go wypuszczają i mierzą.',
-    en: 'A meme hatches: rendered live by grok-imagine, then published and measured.',
+    pl: 'Artefakt gotowy: render grok-imagine, akceptacja Critica, commit i publikacja.',
+    en: 'Artifact ready: grok-imagine render, Critic approval, commit, published and measured.',
   },
   {
     screen: 'lineage',
