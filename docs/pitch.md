@@ -1,46 +1,54 @@
-# ROT BOT / BRANDROT: pitch
+# ROT Studio: pitch
 
-**We don't follow trends. We mutate them.**
+**The AI ad agency that rides virals.** Brands send a brief; a swarm of Grok Bot agents finds the rising trend,
+extracts its DNA and ships trend-native UGC ads in minutes.
+
+## 45-second script
+
+| Time | Screen | Voiceover |
+| --- | --- | --- |
+| 0–5 s | Trend radar, a café clip climbing past 10.8M views | "Agencies need a week to jump on a trend. Trends live three days." |
+| 5–12 s | Brief form: *NOIR/05 eau de parfum · women 18–30 · TikTok · tone UGC* | "So we built an agency that never sleeps. A brand sends a brief." |
+| 12–20 s | Scout card: rising trend, **87% brand fit**; Geneticist splits it into hook, pacing, audio, caption | "Grok Bot agents find the rising trend and extract its DNA: the hook, the pacing, the sound, the exact second the product goes in." |
+| 20–30 s | Creator renders the hero ad: an AI creator unboxes NOIR/05, sprays, *"okay, this smells expensive"*; A/B variant beside it | "Our Creator agent picks an AI creator, writes the script and renders two UGC variants with Grok Imagine." |
+| 30–36 s | Critic: trend fidelity ✓, claims ✓, `#ad · AI-generated` ✓; first draft rejected, second approved | "The Critic checks brand safety, claims and disclosure. It rejected the first draft. That's real; it's in our git history." |
+| 36–41 s | Same pipeline, two more campaigns: Wrocław café on *"Your First Time in a Fancy Cafe"*, then Tone = Brainrot | "Same swarm, any tone: UGC, polished ad, or full brainrot." |
+| 41–45 s | Publish + metrics: hook rate, watch time, CTR → next variant. Logo | "It publishes, learns and does it again. ROT Studio: ride the viral before it's gone." |
 
 ## Problem
 
-The internet produces thousands of memes an hour. A trend lives 3–7 days. A brand's content cycle (brief, agency,
-approvals) takes two weeks. By the time a brand posts the "relatable" video, the format is dead and the comments say so.
+A trend peaks in 3 days. A brand's content cycle (brief, agency, approvals, shoot) takes a week or more. The ad lands
+after the format is dead.
 
 ## Product
 
-**ROT BOT** is a swarm of seven Grok Bot agents that treats memes as organisms:
+Seven Grok Bot agents run the agency workflow: Scout (trend + brand fit) → Geneticist (trend DNA + product insertion)
+→ Creator (AI UGC persona, script, 9:16 A/B renders) → Critic (fidelity, brand safety, claims, disclosure) →
+Publisher (schedule, human approval) → Analyst (hook rate, watch time, CTR → next variant).
 
-1. **Scout** 🐦 watches X and TikTok and ranks trends by velocity, not size.
-2. **Geneticist** 🦫 sequences each trend into a genome: hook, hero, setting, humor, audio, visual, catchphrase, structure.
-3. **Mutator** 🐊 crosses two genomes and mutates the child into a new, original format. No creator footage is reused: we inherit mechanics, not frames.
-4. **Critic** 🐱 rejects until it's funny, fresh, loopable and brand-safe.
-5. **Publisher** 🦜 renders it with Grok Imagine and queues native posts for TikTok and X, and a human approves.
-6. **Analyst** 🦉 scores fitness; the fittest child parents the next generation, every 6 hours.
+**Tones:** UGC · Polished ad · Brainrot.
 
-## Business: BRANDROT
+## Business
 
-*Turn any brand into brainrot.* The brand is a seed genome that is always one parent, so it survives every crossover.
-
-| | Agency | BRANDROT |
+| | Agency | ROT Studio |
 | --- | --- | --- |
-| Time to post | ~2 weeks | ~6 hours |
-| Output | 1 campaign | 1 new on-trend meme per generation |
-| Learning | a PDF report | a genome library: which genes sell, per brand |
+| Time to an on-trend ad | ~1 week | minutes |
+| Output | 1 concept | A/B variants per trend, per tone |
+| Learning | a PDF report | trend DNA library + per-brand performance |
 
-- **Customers:** consumer brands, cities and tourism boards, local businesses with no content team.
-- **Pricing:** subscription per brand (generations per month), plus a performance tier on fitness.
-- **Moat:** every post adds a scored genome. The library makes each next generation fitter, for every client.
+- **Customers:** DTC and consumer brands, local businesses, agencies that want a trend desk.
+- **Pricing:** subscription per brand (campaigns per month) plus a per-variant tier.
+- **Moat:** the trend-DNA library. Every campaign teaches the swarm which genes sell for which brand.
+
+## Integrations
+
+Live: Grok Bot (`@grok/agent-sdk`), xAI Grok Imagine (image + video), xAI X search.
+Roadmap: Higgsfield (AI video / UGC avatars), TikTok Creative Center, Meta + TikTok Ads APIs, ElevenLabs voice.
 
 ## Proof in the repo
 
-- `generations/gen-live-001/`: a real live run on `grok-4.7` (live x_search trend, 7 subagent handoffs, Critic rejection then approval, Grok Imagine render, 2,552-event trace).
 - `agents/`: a real `@grok/agent-sdk` project (orchestrator + 6 subagents, 5 tools, schedule, skill, eval).
-- `generations/`: three generations bred from real trends of the week, each artifact committed by the agent that made it.
-- `git log --graph`: the meme family tree. Crossovers are merges.
-- Worked example: brief **Wrocław** → **Krasnal CEO**, a bronze dwarf who closes his Series A
-  (*"we are not a dwarf, we are a Small Language Model"*).
+- `generations/gen-live-001/`: the first live R&D run on `grok-4.7` (live x_search trend, 7 handoffs, Critic rejection then approval, Grok Imagine render, 2,552-event trace).
+- `generations/gen-001…003`: R&D history. The swarm learned trend DNA by breeding memes from real virals; every artifact is committed by the agent that made it.
 
-## Ask
-
-Pilot brands for BRANDROT. Bring a mascot; we bring the swarm.
+All creators are AI personas, labeled AI-generated. No real people's likeness.
