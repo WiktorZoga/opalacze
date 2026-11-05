@@ -1,0 +1,75 @@
+{
+  "id": "krasnal-night-check",
+  "name": "Krasnal Night Check",
+  "generation": 4,
+  "parents": [
+    "bronze-krasnal",
+    "midnight-vape-sound-check"
+  ],
+  "sources": [
+    {
+      "platform": "x",
+      "url": "https://x.com/_wavyfranklin/status/2117499789231231387",
+      "handle": "_wavyfranklin",
+      "views": 683462,
+      "signal": "xAI x_search velocity 3.4"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "a noise in the dark and the thumb stops",
+      "dominance": 0.8
+    },
+    "hero": {
+      "allele": "bronze krasnal dwarf, about 30cm, pointed hat, extremely serious, one of Wrocław's ~800 bronze dwarf statues",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "Wrocław cobblestone streets and doorways where visitors meet the statues",
+      "dominance": 0.7
+    },
+    "humor": {
+      "allele": "over-prepared courage for a tiny mystery",
+      "dominance": 0.7
+    },
+    "audio": {
+      "allele": "faint night bump, then a tiny solemn inhale of night air, then creeping silence",
+      "dominance": 0.55
+    },
+    "visual": {
+      "allele": "weathered bronze, low-angle night creep along cobblestones, streetlamp and a doorway for scale",
+      "dominance": 0.6
+    },
+    "catchphrase": {
+      "allele": "the smallest boss checks the bump",
+      "dominance": 0.5
+    },
+    "structure": {
+      "allele": "three-beat 6–10s loop — noise, steel yourself, creep",
+      "dominance": 0.85
+    }
+  },
+  "absurdity": 7,
+  "brandSafety": 9,
+  "mutations": [
+    {
+      "gene": "audio",
+      "from": "faint bump, then a vape inhale, then silence",
+      "to": "faint night bump, then a tiny solemn inhale of night air, then creeping silence",
+      "reason": "Strip the vape and keep the three-beat shape: night noise, steel yourself, creep."
+    },
+    {
+      "gene": "visual",
+      "from": "weathered bronze, low-angle hero shot, tourists' shoes for scale",
+      "to": "weathered bronze, low-angle night creep along cobblestones, streetlamp and a doorway for scale",
+      "reason": "Move the hero shot to a night street so the statue investigates the bump, not a tourist or a person."
+    },
+    {
+      "gene": "catchphrase",
+      "from": "the meeting place has 800 bosses",
+      "to": "the smallest boss checks the bump",
+      "reason": "Aim the civic-dignity line at the night check so the joke is the statue, not a real person."
+    }
+  ],
+  "fitness": null
+}
