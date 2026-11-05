@@ -17,7 +17,7 @@
   ],
   "genes": {
     "hook": {
-      "allele": "a noise in the dark and the thumb stops",
+      "allele": "a night bump freezes the tiny bronze dwarf mid-step on the cobblestones, pointed hat tilted toward the dark doorway",
       "dominance": 0.8
     },
     "hero": {
@@ -69,6 +69,12 @@
       "from": "the meeting place has 800 bosses",
       "to": "the smallest boss checks the bump",
       "reason": "Aim the civic-dignity line at the night check so the joke is the statue, not a real person."
+    },
+    {
+      "gene": "hook",
+      "from": "a noise in the dark and the thumb stops",
+      "to": "a night bump freezes the tiny bronze dwarf mid-step on the cobblestones, pointed hat tilted toward the dark doorway",
+      "reason": "Critic: the statue has no thumb. The bump itself freezes the bronze dwarf, so the scroll stops without a phone or a human vaper."
     }
   ],
   "fitness": null
