@@ -11,23 +11,56 @@
   <img alt="Grok Bot" src="https://img.shields.io/badge/built%20with-%40grok%2Fagent--sdk%200.6-b6ff00?style=for-the-badge&labelColor=05060a">
   <img alt="agents" src="https://img.shields.io/badge/swarm-7%20agents-ff2bd6?style=for-the-badge&labelColor=05060a">
   <img alt="generations" src="https://img.shields.io/badge/generations-3-b6ff00?style=for-the-badge&labelColor=05060a">
-  <img alt="best fitness" src="https://img.shields.io/badge/best%20fitness-0.81-ff2bd6?style=for-the-badge&labelColor=05060a">
+  <img alt="live run" src="https://img.shields.io/badge/live%20run-grok--4.7%20%C2%B7%202%2C552%20events-ff2bd6?style=for-the-badge&labelColor=05060a">
   <img alt="agent sdk validate" src="https://img.shields.io/badge/agent--sdk%20validate-passing-b6ff00?style=for-the-badge&labelColor=05060a">
 </p>
 
 ---
 
-<!-- LIVE RUN: feature generations/gen-live-001/ (RUN.md + trace.ndjson) here once it lands -->
+## 🔴 Live run: real, not simulated
+
+<table>
+<tr>
+<td width="34%" valign="top">
+  <img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Grok Imagine render: a bronze Wrocław dwarf creeping across night cobblestones, caption 'the smallest boss checks the bump'" width="100%">
+  <sub>Rendered live by <code>grok-imagine-image-2.0</code> through the swarm's <code>generate_media</code> tool.</sub>
+</td>
+<td valign="top">
+
+**[`gen-live-001`](generations/gen-live-001/)**: one Overlord turn on `grok-4.7` via `@grok/agent-sdk` 0.6.0,
+2026-11-05 18:07–18:13 UTC. Seven subagent handoffs, **2,552 trace events**, and every artifact was committed by the
+agent that made it ([`f16e5c1..e2af1f7`](https://github.com/WiktorZoga/opalacze/compare/f16e5c1~1...e2af1f7)).
+
+- 🐦 **Scout** pulled a live trend with xAI `x_search`: *"Hitting Vape to Investigate Night Sound"* (X, 683k views).
+- 🦫 **Geneticist** sequenced it against the `bronze-krasnal` brand seed.
+- 🐊 **Mutator** bred `krasnal-night-check`: *"the smallest boss checks the bump"*.
+- 🐱 **Critic** rejected round 1, then approved round 2 (8 / 8 / 8 / 9).
+
+> 🐱 *"The hook is still the father's thumb on a statue that has none. First draft fails freshness, so this does not ship."*
+>
+> 🐱 *"The thumb is gone and the hook is the dwarf."*
+>
+> 🐙 *"Eight hundred bosses, one doorway, zero permission asked."*
+
+📄 [**RUN.md**](generations/gen-live-001/RUN.md) · 🧾 [**trace.ndjson**](generations/gen-live-001/trace.ndjson) (full session event stream)
+
+</td>
+</tr>
+</table>
+
+<!-- GROK BOT PLAYGROUND: add screenshots / recording from docs/media/grokbot/ here, e.g.
+<p align="center"><img src="docs/media/grokbot/playground.png" alt="The live run in the Grok Bot playground" width="90%"></p>
+-->
 
 ## The pitch
 
-Memes are living organisms. They have DNA, parents and a generation number. **ROT BOT** is a lab where seven
-[Grok Bot](agents/) agents breed them like Pokémon: **Scout** 🐦 catches a trend before it peaks,
+**ROT BOT is an autonomous content swarm.** It treats memes as organisms with DNA, parents and a generation number,
+and seven [Grok Bot](agents/) agents run the whole lifecycle: **Scout** 🐦 catches a trend before it peaks,
 **Geneticist** 🦫 splits it into eight genes, **Mutator** 🐊 crosses two genomes and mutates the child,
 **Critic** 🐱 says *"absolutely not"* until it's good, **Publisher** 🦜 ships it to TikTok and X, and
 **Analyst** 🦉 scores its fitness so the winner parents the next generation. Every step is a git commit
 signed by the agent that made it, so this repository's history *is* the meme family tree.
-Our first lineage went from an orange cat to **Krasnal CEO**, a Wrocław bronze dwarf who just closed his Series A.
+The memes are the output. The product is the swarm: an agent workflow that goes from trend to post without a human in the loop until the publish button.
 
 ## Demo
 
@@ -40,7 +73,7 @@ Our first lineage went from an orange cat to **Krasnal CEO**, a Wrocław bronze 
 | :---: | :---: | :---: |
 | <img src="docs/media/rotbot-radar-sources.gif" alt="Trend Radar with real TikTok and X sources" width="100%"> | <img src="docs/media/rotbot-breeding-hatch.gif" alt="Two memes cross and a new meme hatches" width="100%"> | <img src="docs/media/rotbot-publish-metrics.gif" alt="Publisher queues posts, Analyst scores fitness" width="100%"> |
 
-The lab UI (Trend Radar → Genome Lab → Breeding → Studio → Publish → Family Tree → BRANDROT) runs locally:
+The control-room UI shows the swarm's workflow step by step: trends → genomes → crossover → critique → render → publish → lineage. Run it locally:
 
 ```bash
 npm install && npm run dev
@@ -167,6 +200,7 @@ Three generations, bred from real trends the Scout recorded this week
 | [001](generations/gen-001/) | Scientists Reveal the Hi 🐈 | Black Cat Clapping 👏 | **Scientists Reveal the Clap** | rejected once (hero), then approved | 0.48 |
 | [002](generations/gen-002/) | Wrocław Krasnal *(BRANDROT seed)* | Scientists Reveal the Clap | **Krasnal CEO** | approved first try | 0.63 |
 | [003](generations/gen-003/) | Krasnal CEO | Why Would I Deceive You? 🎙️ | **Krasnal CEO: Series A** | rejected once (loop), then approved | **0.81** |
+| [🔴 live-001](generations/gen-live-001/) | Bronze Krasnal *(brand seed)* | Midnight Vape Sound Check *(live x_search)* | **Krasnal Night Check** | rejected once (hook), then approved | not published |
 
 ```mermaid
 gitGraph
@@ -250,7 +284,7 @@ More in [`docs/pitch.md`](docs/pitch.md).
 
 ## Real vs simulated
 
-The demo runs on recorded agent runs over real, linked trends; engagement metrics are projected.
+`gen-live-001` is a real end-to-end Grok Bot run. Generations 001–003 are recorded agent runs over real, linked trends, with projected engagement metrics.
 
 ## Quickstart
 
