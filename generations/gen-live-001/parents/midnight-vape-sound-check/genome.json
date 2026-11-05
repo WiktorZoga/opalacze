@@ -1,0 +1,53 @@
+{
+  "id": "midnight-vape-sound-check",
+  "name": "Hitting Vape to Investigate Night Sound",
+  "generation": 4,
+  "parents": [],
+  "sources": [
+    {
+      "platform": "x",
+      "url": "https://x.com/_wavyfranklin/status/2117499789231231387",
+      "handle": "_wavyfranklin",
+      "views": 683462,
+      "signal": "xAI x_search velocity 3.4"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "a noise in the dark and the thumb stops",
+      "dominance": 0.8
+    },
+    "hero": {
+      "allele": "a nervous person hitting a vape before checking the sound",
+      "dominance": 0.4
+    },
+    "setting": {
+      "allele": "a dark apartment at night",
+      "dominance": 0.45
+    },
+    "humor": {
+      "allele": "over-prepared courage for a tiny mystery",
+      "dominance": 0.7
+    },
+    "audio": {
+      "allele": "faint bump, then a vape inhale, then silence",
+      "dominance": 0.55
+    },
+    "visual": {
+      "allele": "phone-light, one glowing vape cloud, creeping POV",
+      "dominance": 0.5
+    },
+    "catchphrase": {
+      "allele": "let me hit this and check",
+      "dominance": 0.4
+    },
+    "structure": {
+      "allele": "three-beat 6–10s loop — noise, inhale, creep",
+      "dominance": 0.85
+    }
+  },
+  "absurdity": 7,
+  "brandSafety": 7,
+  "mutations": [],
+  "fitness": null
+}
