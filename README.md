@@ -24,46 +24,32 @@
 
 <table>
 <tr>
-<td align="center" width="20%"><img src="docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale, NOIR/05, UGC, live run" width="100%"><br><sub><b>live</b> · Ren Hale · NOIR/05</sub></td>
-<td align="center" width="20%"><img src="docs/media/ugc/noir05-unboxing.gif" alt="Maja unboxes NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
-<td align="center" width="20%"><img src="docs/media/ugc/noir05-grwm.gif" alt="Maja get ready with me, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
-<td align="center" width="20%"><img src="docs/media/ugc/noir05-mirror-check.gif" alt="Maja mirror check, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
-<td align="center" width="20%"><img src="docs/media/ugc/noir05-tram-sniff.gif" alt="Maja on a tram, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
+<td align="center" width="33%"><img src="docs/media/ugc/noir05-deceive-live.gif" alt="Ren Hale, NOIR/05, live run" width="100%"><br><sub><b>live</b> · Ren Hale · NOIR/05</sub></td>
+<td align="center" width="33%"><img src="docs/media/ugc/noir05-unboxing.gif" alt="Maja unboxes NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · unbox</sub></td>
+<td align="center" width="33%"><img src="docs/media/ugc/noir05-grwm.gif" alt="Maja get ready with me, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · GRWM</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="docs/media/ugc/noir05-cafe-unbox.gif" alt="Maja unboxes NOIR/05 at a cafe" width="100%"><br><sub>Maja · NOIR/05 · UGC</sub></td>
-<td align="center"><img src="docs/media/ugc/stride-sneaker-drop.gif" alt="Leo unboxes STRIDE sneakers" width="100%"><br><sub>Leo · STRIDE · UGC</sub></td>
-<td align="center"><img src="docs/media/ugc/cafe-first-time-fancy-notext.gif" alt="Kuba at a fancy cafe, no caption" width="100%"><br><sub>Kuba · café · UGC</sub></td>
-<td align="center"><img src="docs/media/ugc/noir05-brainrot-capybara.gif" alt="Capybara with NOIR/05, brainrot" width="100%"><br><sub>Capybara · NOIR/05 · Brainrot</sub></td>
-<td align="center"><img src="docs/media/ugc/noir05-pigeon-pitch.gif" alt="Pigeon pitches NOIR/05, brainrot" width="100%"><br><sub>Pigeon · NOIR/05 · Brainrot</sub></td>
+<td align="center"><img src="docs/media/ugc/noir05-mirror-check.gif" alt="Maja mirror check, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · mirror</sub></td>
+<td align="center"><img src="docs/media/ugc/noir05-tram-sniff.gif" alt="Maja on a tram, NOIR/05" width="100%"><br><sub>Maja · NOIR/05 · tram</sub></td>
+<td align="center"><img src="docs/media/ugc/noir05-cafe-unbox.gif" alt="Maja unboxes NOIR/05 at a cafe" width="100%"><br><sub>Maja · NOIR/05 · café</sub></td>
 </tr>
 </table>
 
 ## From a trend to a client's ad
 
 <table>
-<tr align="center">
-<td width="14%">
-<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="TikTok"><path d="M21 7v15.2a5.2 5.2 0 1 1-3.4-4.9V13.2" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/><path d="M21 9.2c1.2 2.4 3.4 3.8 6 4" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/></svg><br><sub>TikTok</sub>
-</td>
-<td width="14%">
-<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="X"><path d="M9 9l18 18M27 9L9 27" fill="none" stroke="#111" stroke-width="2.4" stroke-linecap="round"/></svg><br><sub>X</sub>
-</td>
-<td width="14%">
-<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="Instagram"><rect x="8" y="8" width="20" height="20" rx="6" fill="none" stroke="#111" stroke-width="2.2"/><circle cx="18" cy="18" r="4.5" fill="none" stroke="#111" stroke-width="2.2"/><circle cx="24.2" cy="11.8" r="1.2" fill="#111"/></svg><br><sub>Instagram</sub>
-</td>
-<td width="8%"><b>→</b></td>
-<td width="22%">
-<svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="the swarm"><path d="M4 24c6-8 10-8 14 0s8 8 14 0" fill="none" stroke="#0d9488" stroke-width="2.4" stroke-linecap="round"/><path d="M4 18c6-8 10-8 14 0s8 8 14 0" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/></svg><br><sub><b>the swarm</b></sub>
-</td>
-<td width="8%"><b>→</b></td>
-<td width="20%">
-<svg width="28" height="44" viewBox="0 0 28 44" role="img" aria-label="client UGC"><rect x="2" y="2" width="24" height="40" rx="4" fill="none" stroke="#111" stroke-width="2"/><rect x="8" y="16" width="12" height="16" rx="1" fill="none" stroke="#0d9488" stroke-width="1.6"/></svg><br><sub><b>NOIR/05</b> · UGC</sub>
-</td>
+<tr>
+<td width="16%" align="center" valign="middle"><svg width="40" height="40" viewBox="0 0 24 24" role="img" aria-label="TikTok"><path fill="#111" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z"/></svg><br><sub>TikTok</sub></td>
+<td width="16%" align="center" valign="middle"><svg width="40" height="40" viewBox="0 0 24 24" role="img" aria-label="X"><path fill="#111" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.727-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><br><sub>X</sub></td>
+<td width="16%" align="center" valign="middle"><svg width="40" height="40" viewBox="0 0 24 24" role="img" aria-label="Instagram"><path fill="#111" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 4.358-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.2-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg><br><sub>Instagram</sub></td>
+<td width="6%" align="center" valign="middle"><b>→</b></td>
+<td width="16%" align="center" valign="middle"><svg width="40" height="40" viewBox="0 0 24 24" role="img" aria-label="the swarm"><path fill="none" stroke="#0d9488" stroke-width="1.8" stroke-linecap="round" d="M2 16c2.5-3 4.2-3 6.2 0s3.6 3 6.2 0 3.7-3 6.4 0"/><path fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round" d="M2 11c2.5-3 4.2-3 6.2 0s3.6 3 6.2 0 3.7-3 6.4 0"/></svg><br><sub><b>the swarm</b></sub></td>
+<td width="6%" align="center" valign="middle"><b>→</b></td>
+<td width="16%" align="center" valign="middle"><svg width="28" height="44" viewBox="0 0 28 44" role="img" aria-label="client UGC"><rect x="1.5" y="1.5" width="25" height="41" rx="5" fill="none" stroke="#111" stroke-width="1.8"/><rect x="9" y="17" width="10" height="14" rx="1.5" fill="#0d9488"/></svg><br><sub><b>NOIR/05</b></sub></td>
 </tr>
 </table>
 
-Scout watches TikTok, X and Instagram until a format starts to climb. This week it was a deadpan phone clip: one confident line, then the one object that refuses to disappoint. Geneticist lifts the DNA: the hook, the pause, the late reveal. The brief hits the desk. NOIR/05, a perfume, Gen Z, tone UGC. Creator keeps the format, casts Ren Hale, and Grok Imagine films the bottle. Critic holds the cut until the claim is safe and the caption carries `#ad · AI-generated`. Then the ad is ready to ship.
+Scout watches TikTok, X and Instagram and catches a format on the rise: a deadpan phone clip, one line, then the product. Geneticist extracts its viral DNA, the hook, the pause, the late reveal. The client brief lands: NOIR/05, an eau de parfum, for Gen Z, in a UGC tone. Creator makes the ad in that format, Ren Hale and the black bottle, rendered by Grok Imagine. Critic checks brand safety and the `#ad` label. The ad is ready to ship.
 
 <sub>Live today: Grok Bot, Grok Imagine, and X search. TikTok and Instagram are the distribution layer we're wiring next. We don't post yet.</sub>
 
@@ -99,26 +85,30 @@ flowchart LR
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td width="50%" align="center" valign="top">
 
-<a href="generations/gen-live-002/media/noir-05-deceive.mp4"><img src="docs/live-002-poster.jpg" alt="Live run: Ren Hale holds the NOIR/05 bottle" width="46%"></a>
+<a href="generations/gen-live-002/media/noir-05-deceive.mp4"><img src="docs/live-002-poster.jpg" alt="Live run: Ren Hale holds the NOIR/05 bottle" width="280"></a>
+
+<br>
 
 **gen-live-002** · NOIR/05 brief
 
-`grok-4.7` · **7 min** · **5 handoffs** · **4,167 events**
+`grok-4.7` · 7 min · 5 handoffs · 4,167 events
 
 > "All four scores clear 8, so I'm committing the approval."
 
 [RUN.md](generations/gen-live-002/RUN.md) · [trace.ndjson](generations/gen-live-002/trace.ndjson) · [agent commits](https://github.com/WiktorZoga/opalacze/compare/2d31370~1...93a7265)
 
 </td>
-<td width="50%" valign="top">
+<td width="50%" align="center" valign="top">
 
-<img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Live run: a bronze dwarf on night cobblestones" width="46%">
+<img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Live run: a bronze dwarf on night cobblestones" width="280">
+
+<br>
 
 **gen-live-001** · first R&D run
 
-`grok-4.7` · **6 min** · **7 handoffs** · **2,552 events**
+`grok-4.7` · 6 min · 7 handoffs · 2,552 events
 
 > "The thumb is gone and the hook is the dwarf."
 
@@ -135,7 +125,6 @@ flowchart LR
 - Commits are authored by Scout, Geneticist, Creator and Critic. [See the authors.](https://github.com/WiktorZoga/opalacze/commits/main)
 - The clip and the stills come from `grok-imagine`, not a stock folder.
 - The playground, mid-run: [docs/media/grokbot/](docs/media/grokbot/).
-
 
 <details>
 <summary><b>📋 What each step does · tones · integrations</b></summary>
