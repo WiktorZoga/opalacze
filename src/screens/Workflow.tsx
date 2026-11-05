@@ -10,9 +10,9 @@ import { BrandLogo } from '../components/Logo'
 
 export const GRAPH_W = 1792
 const NODE_W = 236
-const NODE_H = 108
-const NODE_Y = 92
-const GRAPH_H = 262
+const NODE_H = 88
+const NODE_Y = 110
+const GRAPH_H = 270
 const xs = PIPELINE.map((_, i) => 40 + NODE_W / 2 + i * ((GRAPH_W - 80 - NODE_W) / (PIPELINE.length - 1)))
 const xOf = (a: AgentId) => xs[PIPELINE.findIndex((p) => p.agent === a)]
 const ease = (p: number) => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2)
@@ -90,14 +90,14 @@ export function Graph({ run, t }: { run: Run; t: number }) {
         />
       </svg>
       <div className="absolute font-mono text-[11px] text-faint" style={{ left: (xm + xc) / 2 - 50, top: NODE_Y - 50 }}>
-        <span className={rerollSeen ? 'text-hot' : ''}>↺ reroll · {reject?.packet.replace(/^(reroll|fix): /, '') ?? 'gene'}</span>
+        <span className={rerollSeen ? 'text-hot' : 'hidden'}>↺ reroll</span>
       </div>
       <div className="absolute font-mono text-[11px] text-faint" style={{ left: GRAPH_W / 2 - 110, top: GRAPH_H - 22 }}>
-        <span className={loopSeen ? 'text-accent' : ''}>metrics → next variant</span>
+        <span className="hidden">metrics → next variant</span>
       </div>
 
       {PIPELINE.map((p, i) => {
-        const { state, span } = nodeState(run, p.agent, t)
+        const { state } = nodeState(run, p.agent, t)
         const a = AGENTS[p.agent]
         const live = state === 'running' || state === 'rejected'
         const ring = state === 'rejected' ? 'glow-danger border-danger/70' : state === 'running' ? 'glow-acid border-accent/70' : state === 'done' ? 'border-accent/30' : 'border-line-strong'
@@ -142,18 +142,11 @@ export function Graph({ run, t }: { run: Run; t: number }) {
                   {a.mono}
                 </motion.span>
                 <div className="min-w-0">
-                  <div className="text-[15px] font-semibold text-text">{a.label}</div>
-                  <div className="truncate text-[12px] text-muted">{a.role}</div>
+                  <div className="text-[16px] font-medium text-text">{a.label}</div>
+
                 </div>
               </div>
-              <div className="mt-2.5 flex items-center gap-2 font-mono text-[11px] text-muted">
-                <StatusDot state={state === 'skipped' ? 'idle' : state} />
-                {state === 'idle' || state === 'skipped'
-                  ? state === 'skipped' ? 'not in this run' : 'idle'
-                  : state === 'done'
-                    ? `done · ${span!.name}`
-                    : `${state === 'rejected' ? 'rejecting' : 'running'} · ${span!.name}`}
-              </div>
+
             </div>
           </div>
         )

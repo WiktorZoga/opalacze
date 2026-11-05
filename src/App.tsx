@@ -29,7 +29,7 @@ function ScreenView({ id, runKey, onOpen = () => {} }: { id: ScreenId; demo?: bo
   }
 }
 
-function AgentNotes({ screen, runKey }: { screen: ScreenId; runKey: number }) {
+export function AgentNotes({ screen, runKey }: { screen: ScreenId; runKey: number }) {
   const ms = useElapsed(`${screen}-${runKey}`, 200)
   const lines = DIALOGUE[screen] ?? []
   const line = [...lines].reverse().find((l) => ms >= l.at)
@@ -138,14 +138,14 @@ export default function App() {
     <Stage>
       <CampaignContext.Provider value={{ campaign, tone, setTone }}>
       <div className="flex h-full flex-col">
-        <header className="relative z-10 flex h-[72px] shrink-0 items-center gap-10 px-16">
+        <header className="relative z-10 flex h-[84px] shrink-0 items-center justify-between px-16">
           <Logo />
-          <nav className="flex h-full items-stretch gap-6">
+          <nav className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-1 rounded-full border border-line bg-white/70 p-1 shadow-[0_8px_24px_-16px_rgba(16,24,40,.25)]">
             {TABS.map((t) => (
               <button
                 key={t.id}
                 onClick={() => !demo && go(t.id)}
-                className={`border-b-2 text-[15px] transition-colors ${t.id === 'history' ? 'ml-6 text-[13px] ' : ''}${screen === t.id ? 'border-text text-text' : 'border-transparent text-muted hover:text-text'}`}
+                className={`rounded-full px-4 py-1.5 text-[14px] transition-colors duration-300 ${screen === t.id ? 'bg-text text-white' : 'text-muted hover:text-text'}`}
               >
                 {t.label}
               </button>
@@ -230,8 +230,8 @@ export default function App() {
         </div>
 
         <footer className="relative z-10 flex h-9 shrink-0 items-center justify-between px-16 text-[12px]">
-          <AgentNotes screen={screen} runKey={runKey} />
-          <span className="font-mono text-faint">AI-generated creators · metrics simulated · no API keys needed</span>
+          <span />
+          <span className="text-faint">All creators are AI personas · #ad · AI-generated</span>
         </footer>
       </div>
       </CampaignContext.Provider>

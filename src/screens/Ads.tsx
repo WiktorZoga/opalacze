@@ -14,7 +14,7 @@ interface Ad {
 }
 
 function Phone({ ad, i }: { ad: Ad; i: number }) {
-  const W = 300
+  const W = 320
   const H = Math.round((W * 16) / 9)
   return (
     <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 * i, duration: 0.5, ease: 'easeOut' }} className="flex flex-col items-center">
@@ -36,11 +36,7 @@ function Phone({ ad, i }: { ad: Ad; i: number }) {
           <span className="absolute bottom-4 left-4 rounded-md bg-black/60 px-2 py-0.5 text-[11px] font-medium text-white/90">#ad · AI-generated</span>
         </div>
       </div>
-      <div className="mt-5 text-center">
-        <div className="text-[17px] font-medium text-text">{ad.title}</div>
-        <div className="mt-1 text-[13px] text-muted">{ad.meta}</div>
-        <span className="mt-2 inline-block rounded-full border border-line-strong bg-white px-2.5 py-0.5 text-[12px] text-muted">{ad.tag}</span>
-      </div>
+      <div className="mt-5 text-center text-[17px] text-text">{ad.title}</div>
     </motion.div>
   )
 }
@@ -65,12 +61,10 @@ export function Ads({ onOpen }: { onOpen: (id: string) => void }) {
   }
 
   return (
-    <div className="flex h-full flex-col px-16 pb-8 pt-8">
+    <div className="flex h-full flex-col px-16 pb-8 pt-10">
       <div className="flex items-end justify-between gap-10">
         <div>
-          <div className="text-[14px] text-muted">{c.brand} · {c.product}</div>
-          <h1 className="mt-3 text-[52px] font-semibold leading-[1.04] tracking-[-0.035em] text-text">The ads it made</h1>
-          <p className="mt-3 text-[18px] text-muted">Trend-native, 9:16, disclosed. Every creator is an AI persona.</p>
+          <h1 className="text-[76px] font-semibold leading-[0.98] tracking-[-0.045em] text-text">The ads it made.</h1>
         </div>
         <BriefPicker onOpen={onOpen} />
       </div>
