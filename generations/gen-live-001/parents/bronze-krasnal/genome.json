@@ -1,0 +1,45 @@
+{
+  "id": "bronze-krasnal",
+  "name": "Wrocław Krasnal (brand seed)",
+  "generation": 4,
+  "parents": [],
+  "sources": [],
+  "genes": {
+    "hook": {
+      "allele": "camera finds a tiny bronze figure frozen mid-task on a city street",
+      "dominance": 0.55
+    },
+    "hero": {
+      "allele": "bronze krasnal dwarf, about 30cm, pointed hat, extremely serious, one of Wrocław's ~800 bronze dwarf statues",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "Wrocław cobblestone streets and doorways where visitors meet the statues",
+      "dominance": 0.7
+    },
+    "humor": {
+      "allele": "tiny body, enormous civic dignity",
+      "dominance": 0.65
+    },
+    "audio": {
+      "allele": "tram bell and pigeons, no lyrics",
+      "dominance": 0.3
+    },
+    "visual": {
+      "allele": "weathered bronze, low-angle hero shot, tourists' shoes for scale",
+      "dominance": 0.6
+    },
+    "catchphrase": {
+      "allele": "the meeting place has 800 bosses",
+      "dominance": 0.5
+    },
+    "structure": {
+      "allele": "6–10s tourist-POV discovery loop",
+      "dominance": 0.5
+    }
+  },
+  "absurdity": 6,
+  "brandSafety": 10,
+  "mutations": [],
+  "fitness": null
+}
