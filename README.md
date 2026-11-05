@@ -2,39 +2,59 @@
   <img src="docs/hero.svg" alt="ROT BOT: we don't follow trends, we mutate them" width="100%">
 </p>
 
+<h3 align="center">Seven Grok Bot agents turn today's TikTok + X virals into brand-new content, on their own.</h3>
+
 <p align="center">
-  <b>A swarm of Grok Bot agents that hunts viral memes on TikTok + X, sequences their DNA, and breeds new ones.</b><br>
-  <i>Zbudowaliśmy gatunek AI, który odkrywa, mutuje i ewoluuje kulturę internetu.</i>
+  <img alt="built with @grok/agent-sdk" src="https://img.shields.io/badge/built%20with-%40grok%2Fagent--sdk%200.6-b6ff00?style=for-the-badge&labelColor=05060a">
+  <a href="generations/gen-live-001/RUN.md"><img alt="live run" src="https://img.shields.io/badge/live%20run-grok--4.7%20%C2%B7%202%2C552%20events-ff2bd6?style=for-the-badge&labelColor=05060a"></a>
+  <a href="https://wiktorzoga.github.io/opalacze/"><img alt="try it live" src="https://img.shields.io/badge/try%20it-live-b6ff00?style=for-the-badge&labelColor=05060a"></a>
 </p>
 
 <p align="center">
-  <img alt="Grok Bot" src="https://img.shields.io/badge/built%20with-%40grok%2Fagent--sdk%200.6-b6ff00?style=for-the-badge&labelColor=05060a">
-  <img alt="agents" src="https://img.shields.io/badge/swarm-7%20agents-ff2bd6?style=for-the-badge&labelColor=05060a">
-  <img alt="generations" src="https://img.shields.io/badge/generations-3-b6ff00?style=for-the-badge&labelColor=05060a">
-  <img alt="live run" src="https://img.shields.io/badge/live%20run-grok--4.7%20%C2%B7%202%2C552%20events-ff2bd6?style=for-the-badge&labelColor=05060a">
-  <img alt="agent sdk validate" src="https://img.shields.io/badge/agent--sdk%20validate-passing-b6ff00?style=for-the-badge&labelColor=05060a">
+  <a href="docs/media/rotbot-demo-45s.mp4"><img src="docs/media/rotbot-hero.gif" alt="ROT BOT app: the agent swarm takes a viral trend from radar to published post" width="100%"></a>
 </p>
 
----
+<p align="center">
+  <b><a href="docs/media/rotbot-demo-45s.mp4">▶ Watch the 45s demo</a></b> &nbsp;·&nbsp; <b><a href="https://wiktorzoga.github.io/opalacze/">🚀 Try it live</a></b>
+</p>
+
+## What it does
+
+- 🔥 **Finds** real virals on TikTok and X (live xAI `x_search`).
+- 🧬 **Extracts their viral DNA**: 8 genes per meme (hook, hero, humor, audio…).
+- 🐊 **Breeds** two genomes into a new concept, and a 🐱 Critic rejects it until it's good.
+- 🚀 **Renders, posts and learns**: Grok Imagine → TikTok / X → the fittest child parents the next generation.
+
+```mermaid
+flowchart LR
+    T["🔥 TikTok + X<br/>virals"] -->|x_trends| S["🐦 Scout"]
+    S --> G["🦫 Geneticist<br/>viral DNA"]
+    G --> M["🐊 Mutator<br/>crossover"]
+    M --> C{"🐱 Critic"}
+    C -->|absolutely not| M
+    C -->|ship it| R["🎬 Grok Imagine"]
+    R --> P["🦜 Publisher<br/>✋ human approves"]
+    P --> A["🦉 Analyst<br/>fitness"]
+    A -->|next generation| S
+    O(("🐙 Overlord")) -. delegates .-> S & G & M & C & P & A
+
+    classDef hot fill:#ff2bd6,stroke:#ff2bd6,color:#05060a
+    classDef acid fill:#b6ff00,stroke:#b6ff00,color:#05060a
+    class T hot
+    class O acid
+```
 
 ## 🔴 Live run: real, not simulated
 
 <table>
 <tr>
-<td width="34%" valign="top">
+<td width="30%" valign="top">
   <img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Grok Imagine render: a bronze Wrocław dwarf creeping across night cobblestones, caption 'the smallest boss checks the bump'" width="100%">
-  <sub>Rendered live by <code>grok-imagine-image-2.0</code> through the swarm's <code>generate_media</code> tool.</sub>
 </td>
 <td valign="top">
 
-**[`gen-live-001`](generations/gen-live-001/)**: one Overlord turn on `grok-4.7` via `@grok/agent-sdk` 0.6.0,
-2026-11-05 18:07–18:13 UTC. Seven subagent handoffs, **2,552 trace events**, and every artifact was committed by the
-agent that made it ([`f16e5c1..e2af1f7`](https://github.com/WiktorZoga/opalacze/compare/f16e5c1~1...e2af1f7)).
-
-- 🐦 **Scout** pulled a live trend with xAI `x_search`: *"Hitting Vape to Investigate Night Sound"* (X, 683k views).
-- 🦫 **Geneticist** sequenced it against the `bronze-krasnal` brand seed.
-- 🐊 **Mutator** bred `krasnal-night-check`: *"the smallest boss checks the bump"*.
-- 🐱 **Critic** rejected round 1, then approved round 2 (8 / 8 / 8 / 9).
+**`grok-4.7` · 6 min · 7 subagent handoffs · 2,552 events.** Live X trend *"Hitting Vape to Investigate Night Sound"*
+(683k views) × a Wrocław dwarf → *"the smallest boss checks the bump"*, rendered by Grok Imagine.
 
 > 🐱 *"The hook is still the father's thumb on a statue that has none. First draft fails freshness, so this does not ship."*
 >
@@ -42,289 +62,167 @@ agent that made it ([`f16e5c1..e2af1f7`](https://github.com/WiktorZoga/opalacze/
 >
 > 🐙 *"Eight hundred bosses, one doorway, zero permission asked."*
 
-📄 [**RUN.md**](generations/gen-live-001/RUN.md) · 🧾 [**trace.ndjson**](generations/gen-live-001/trace.ndjson) (full session event stream)
+📄 [RUN.md](generations/gen-live-001/RUN.md) · 🧾 [trace.ndjson](generations/gen-live-001/trace.ndjson) · 🌱 [agent commits](https://github.com/WiktorZoga/opalacze/compare/f16e5c1~1...e2af1f7)
 
 </td>
 </tr>
 </table>
 
-## Inside Grok Bot
+## Every agent commits as itself
 
-The swarm running in the `@grok/agent-sdk` playground: the Overlord's chat, every subagent handoff, and every tool call in the trace.
+The git history is the meme family tree: each artifact is committed by the agent that made it, and every crossover is a `git merge`.
+
+| Gen | Parents | Child | Critic | Fitness |
+| :---: | --- | --- | --- | :---: |
+| [001](generations/gen-001/) | Scientists Reveal the Hi × Black Cat Clapping | **Scientists Reveal the Clap** | ❌ → ✅ | 0.48 |
+| [002](generations/gen-002/) | Wrocław Krasnal *(brand)* × gen-001 | **Krasnal CEO** | ✅ | 0.63 |
+| [003](generations/gen-003/) | Krasnal CEO × Why Would I Deceive You? | **Krasnal CEO: Series A** | ❌ → ✅ | **0.81** |
+| [🔴 live](generations/gen-live-001/) | Wrocław Krasnal × Night Sound Vape *(live x_search)* | **Krasnal Night Check** | ❌ → ✅ | — |
+
+<details>
+<summary><b>🌳 See the git graph</b></summary>
+
+```text
+*   Mutator 🐊: crossover krasnal-ceo × why-would-i-deceive-you → krasnal-ceo-series-a
+|\
+| * Geneticist 🦫: sequence why-would-i-deceive-you genome
+* | Geneticist 🦫: sequence krasnal-ceo genome
+|/
+* Scout 🐦: spot why-would-i-deceive-you for the krasnal-ceo bloodline
+* Analyst 🦉: fitness krasnal-ceo = 0.63
+  ...
+*   Mutator 🐊: crossover krasnal-wroclaw × scientists-reveal-the-clap → krasnal-ceo
+|\
+| * Geneticist 🦫: sequence scientists-reveal-the-clap genome
+* | Geneticist 🦫: sequence krasnal-wroclaw genome
+|/
+* Overlord 🐙: open gen-002: BRANDROT brief for Wrocław
+  ...
+* Critic 🐱: absolutely not (hero)
+*   Mutator 🐊: crossover scientists-reveal-the-hi × black-cat-clapping → scientists-reveal-the-clap
+|\
+| * Geneticist 🦫: sequence black-cat-clapping genome
+* | Geneticist 🦫: sequence scientists-reveal-the-hi genome
+|/
+* Scout 🐦: record run scout-2026-11-05: 10 real trends from TikTok + X
+```
+
+Reproduce: `git log --graph --format='%an: %s' -- generations/`. Real sources: [`generations/sources.json`](generations/sources.json).
+
+</details>
+
+<details>
+<summary><b>🔍 Inside Grok Bot: playground and trace</b></summary>
 
 <p align="center">
   <img src="docs/media/grokbot/grokbot-playground-live-run.gif" alt="Grok Bot playground: the Overlord delegating to subagents, 2x speed" width="90%"><br>
-  <sub>A short demo session at 2× speed. <a href="docs/media/grokbot/grokbot-playground-live-run-2x.mp4">▶ Watch the MP4 (60 s)</a></sub>
+  <sub>Demo session at 2× speed. <a href="docs/media/grokbot/grokbot-playground-live-run-2x.mp4">▶ MP4 (60 s)</a></sub>
 </p>
 
 <table>
 <tr>
-<td width="50%" valign="top"><img src="docs/media/grokbot/01-playground-live-run-report.png" alt="Playground chat view of the gen-live-001 session" width="100%"><br><sub>🐙 <b>Live run report</b>: the gen-live-001 session, 7 handoff cards and the agent panel.</sub></td>
-<td width="50%" valign="top"><img src="docs/media/grokbot/02-trace-overlord-to-scout-handoff.png" alt="Trace: Overlord hands off to Scout" width="100%"><br><sub>🐦 <b>Overlord → Scout</b>: 2,552 events, 63 tool calls, live <code>x_trends</code> in 48.5 s.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/01-playground-live-run-report.png" alt="Playground chat view of the gen-live-001 session" width="100%"><br><sub>🐙 Live run report: 7 handoff cards and the agent panel.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/02-trace-overlord-to-scout-handoff.png" alt="Trace: Overlord hands off to Scout" width="100%"><br><sub>🐦 Overlord → Scout: 63 tool calls, live <code>x_trends</code> in 48.5 s.</sub></td>
 </tr>
 <tr>
-<td width="50%" valign="top"><img src="docs/media/grokbot/03-trace-geneticist-mutator-handoffs.png" alt="Trace: Geneticist and Mutator handoffs" width="100%"><br><sub>🦫🐊 <b>Geneticist → Mutator</b>: genomes sequenced, then crossed.</sub></td>
-<td width="50%" valign="top"><img src="docs/media/grokbot/04-trace-critic-absolutely-not-then-reroll.png" alt="Trace: Critic rejects, Mutator rerolls" width="100%"><br><sub>🐱 <b>“absolutely not”</b>: the Critic bounces round 1 and the Mutator rerolls the hook.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/03-trace-geneticist-mutator-handoffs.png" alt="Trace: Geneticist and Mutator handoffs" width="100%"><br><sub>🦫🐊 Geneticist → Mutator: sequence, then cross.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/04-trace-critic-absolutely-not-then-reroll.png" alt="Trace: Critic rejects, Mutator rerolls" width="100%"><br><sub>🐱 "absolutely not", then the hook is rerolled.</sub></td>
 </tr>
 <tr>
-<td width="50%" valign="top"><img src="docs/media/grokbot/05-tool-call-critic-commit-artifact.png" alt="Tool call: Critic commits its verdict with commit_artifact" width="100%"><br><sub>🐱 <b><code>commit_artifact</code></b>: the Critic commits its verdict to git under its own name.</sub></td>
-<td width="50%" valign="top"><img src="docs/media/grokbot/06-tool-call-generate-media-grok-imagine.png" alt="Tool call: generate_media renders with Grok Imagine" width="100%"><br><sub>🐊 <b><code>generate_media</code></b>: the approved child rendered by Grok Imagine.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/05-tool-call-critic-commit-artifact.png" alt="Tool call: Critic commits its verdict with commit_artifact" width="100%"><br><sub>🐱 <code>commit_artifact</code>: the Critic commits its verdict.</sub></td>
+<td width="50%" valign="top"><img src="docs/media/grokbot/06-tool-call-generate-media-grok-imagine.png" alt="Tool call: generate_media renders with Grok Imagine" width="100%"><br><sub>🐊 <code>generate_media</code>: Grok Imagine render.</sub></td>
 </tr>
 </table>
 
-## The pitch
+</details>
 
-**ROT BOT is an autonomous content swarm.** It treats memes as organisms with DNA, parents and a generation number,
-and seven [Grok Bot](agents/) agents run the whole lifecycle: **Scout** 🐦 catches a trend before it peaks,
-**Geneticist** 🦫 splits it into eight genes, **Mutator** 🐊 crosses two genomes and mutates the child,
-**Critic** 🐱 says *"absolutely not"* until it's good, **Publisher** 🦜 ships it to TikTok and X, and
-**Analyst** 🦉 scores its fitness so the winner parents the next generation. Every step is a git commit
-signed by the agent that made it, so this repository's history *is* the meme family tree.
-The memes are the output. The product is the swarm: an agent workflow that goes from trend to post without a human in the loop until the publish button.
+<details>
+<summary><b>🎭 The cast: 7 agents</b></summary>
 
-## Demo
+| | Agent | Job | Signature move |
+| :---: | --- | --- | --- |
+| 🐙 | [Overlord](agents/bot/instructions.md) | orchestrates the loop via `task` | eight arms, seven employees |
+| 🐦 | [Scout](agents/bot/subagents/scout/instructions.md) | `x_trends`, picks parents by velocity | coos once per report |
+| 🦫 | [Geneticist](agents/bot/subagents/geneticist/instructions.md) | 8-gene genomes, `save_genome` | finds the meme's soul gene |
+| 🐊 | [Mutator](agents/bot/subagents/mutator/instructions.md) | crossover, mutations, git merge, `generate_media` | laughs in three syllables |
+| 🐱 | [Critic](agents/bot/subagents/critic/instructions.md) | funny / fresh / loopable / brand-safe | *"absolutely not"* |
+| 🦜 | [Publisher](agents/bot/subagents/publisher/instructions.md) | TikTok + X posts, `publish_post` (human approval) | squawks while waiting |
+| 🦉 | [Analyst](agents/bot/subagents/analyst/instructions.md) | fitness from watch-through, shares, saves | one owl joke, never two |
 
-<p align="center">
-  <a href="docs/media/rotbot-demo-45s.mp4"><img src="docs/media/rotbot-agent-flow.gif" alt="The ROT BOT swarm passing a meme from agent to agent" width="80%"></a><br>
-  <b><a href="docs/media/rotbot-demo-45s.mp4">▶ Watch the 45-second demo (mp4)</a></b>
-</p>
+</details>
 
-| 🐦 Trend Radar: real TikTok + X sources | 🐊 Breeding: the hatch | 🦜 Publish + 🦉 Metrics |
-| :---: | :---: | :---: |
-| <img src="docs/media/rotbot-radar-sources.gif" alt="Trend Radar with real TikTok and X sources" width="100%"> | <img src="docs/media/rotbot-breeding-hatch.gif" alt="Two memes cross and a new meme hatches" width="100%"> | <img src="docs/media/rotbot-publish-metrics.gif" alt="Publisher queues posts, Analyst scores fitness" width="100%"> |
+<details>
+<summary><b>🧩 Built on Grok Bot: project layout</b></summary>
 
-The control-room UI shows the swarm's workflow step by step: trends → genomes → crossover → critique → render → publish → lineage. Run it locally:
-
-```bash
-npm install && npm run dev
-```
-
-## How the swarm works
-
-```mermaid
-flowchart LR
-    subgraph web["TikTok + X"]
-      T1["🔥 viral trend A"]
-      T2["🔥 viral trend B"]
-    end
-
-    O(("🐙 Overlord<br/>orchestrator"))
-
-    T1 & T2 -->|x_trends| S["🐦 Scout<br/>picks two parents"]
-    S -->|trend.json| G["🦫 Geneticist<br/>save_genome ×2"]
-    G -->|"lineage/* branches"| M["🐊 Mutator<br/>crossover + mutation"]
-    M -->|"git merge = conception"| C{"🐱 Critic"}
-    C -->|"absolutely not<br/>(reroll one gene)"| M
-    C -->|"fine. ship it."| R["🐊 generate_media<br/>Grok Imagine 9:16"]
-    R --> P["🦜 Publisher<br/>publish_post ✋ human approval"]
-    P -->|post.json| A["🦉 Analyst<br/>fitness 0–1"]
-    A -->|"elite genome = next mother"| S
-
-    O -. task .-> S & G & M & C & P & A
-
-    classDef hot fill:#ff2bd6,stroke:#ff2bd6,color:#05060a
-    classDef acid fill:#b6ff00,stroke:#b6ff00,color:#05060a
-    class T1,T2 hot
-    class O acid
-```
-
-One generation = one loop. The **Overlord** delegates each step to a subagent with the Grok Bot `task` tool,
-the **Critic** can bounce a mutation back up to twice, and the fittest child becomes the mother of the next
-generation. A schedule (`bot/schedules/next-generation.md`) breeds a new generation every 6 hours.
-
-## The cast
-
-| | Agent | Animal | Job | Signature move |
-| :---: | --- | --- | --- | --- |
-| 🐙 | [**Overlord**](agents/bot/instructions.md) | octopus conductor | runs the evolution loop, delegates via `task` | eight arms, seven employees |
-| 🐦 | [**Scout**](agents/bot/subagents/scout/instructions.md) | pigeon with binoculars | `x_trends` on X + TikTok, picks parents by velocity | coos exactly once per report |
-| 🦫 | [**Geneticist**](agents/bot/subagents/geneticist/instructions.md) | capybara in a lab coat | sequences memes into 8-gene genomes, `save_genome` | finds the one gene that is the meme's soul |
-| 🐊 | [**Mutator**](agents/bot/subagents/mutator/instructions.md) | crocodile mad scientist | crossover + 1–3 mutations, commits the git merge, `generate_media` | laughs in three syllables |
-| 🐱 | [**Critic**](agents/bot/subagents/critic/instructions.md) | cat in a judge's wig | scores funny / fresh / loopable / brand-safe | *"absolutely not"* |
-| 🦜 | [**Publisher**](agents/bot/subagents/publisher/instructions.md) | parrot with a ring light | platform-native TikTok + X posts, `publish_post` | squawks while waiting for approval |
-| 🦉 | [**Analyst**](agents/bot/subagents/analyst/instructions.md) | owl in reading glasses | fitness from watch-through, shares, saves, remixes | one owl joke. hoo-ever, never two |
-
-## Built on Grok Bot
-
-[`agents/`](agents/) is a real [`@grok/agent-sdk`](https://cursor.com/docs/bdk) project, scaffolded with
-`agent-sdk init` and passing `agent-sdk validate`:
+[`agents/`](agents/) is a real [`@grok/agent-sdk`](https://cursor.com/docs/bdk) project (passes `agent-sdk validate`):
 
 ```text
-agents/
-├── bot/
-│   ├── agent.ts                  # Overlord: grok-4.7, reasoning_effort=high
-│   ├── instructions.md           # the 7-step evolution loop + house rules
-│   ├── subagents/                # scout · geneticist · mutator · critic · publisher · analyst
-│   ├── tools/
-│   │   ├── x_trends.ts           # xAI x_search (Responses API) → trends, recorded-run fallback
-│   │   ├── save_genome.ts        # zod-validated viral DNA → generations/gen-NNN/
-│   │   ├── generate_media.ts     # Grok Imagine image / 9:16 video + storyboard.json
-│   │   ├── commit_artifact.ts    # git commit as the agent; crossover = git merge --no-ff
-│   │   └── publish_post.ts       # X API v2 post, needsApproval: true (a human presses the button)
-│   ├── skills/brandrot.md        # "turn any brand into brainrot" procedure
-│   ├── schedules/next-generation.md   # cron: breed every 6 hours
-│   ├── hooks/memory.ts           # journal of every turn, so Overlord remembers the bloodline
-│   └── lib/                      # cast (git identities), genome schema, xAI client
-└── evals/smoke.eval.ts           # Overlord must scout via x_trends
+agents/bot/
+├── agent.ts, instructions.md     # 🐙 Overlord (grok-4.7)
+├── subagents/                    # scout · geneticist · mutator · critic · publisher · analyst
+├── tools/
+│   ├── x_trends.ts               # xAI x_search
+│   ├── save_genome.ts            # zod-validated viral DNA
+│   ├── generate_media.ts         # Grok Imagine
+│   ├── commit_artifact.ts        # git commit as the agent; crossover = merge
+│   └── publish_post.ts           # X API, needsApproval
+├── skills/brandrot.md            # brand mode
+├── schedules/next-generation.md  # every 6 h
+└── hooks/memory.ts               # remembers the bloodline
 ```
 
-Every agent has its own git identity, and `commit_artifact` signs each artifact with it:
+More: [`agents/README.md`](agents/README.md).
 
-```ts
-export const CAST = {
-  scout:      { name: "Scout 🐦",      email: "scout@rotbot.ai" },
-  geneticist: { name: "Geneticist 🦫", email: "geneticist@rotbot.ai" },
-  mutator:    { name: "Mutator 🐊",    email: "mutator@rotbot.ai" },
-  critic:     { name: "Critic 🐱",     email: "critic@rotbot.ai" },
-  // ...
-};
-```
+</details>
 
-## Viral DNA
+<details>
+<summary><b>🧬 Viral DNA: a sample genome</b></summary>
 
-Every meme is a genome: eight genes, each an **allele** (what you'd film) and a **dominance** (how much the meme
-depends on it). Crossover inherits the more dominant allele; mutations are logged with a reason.
-This is the gen-003 champion, [`generations/gen-003/mutation.json`](generations/gen-003/mutation.json) (trimmed):
+[`generations/gen-003/mutation.json`](generations/gen-003/mutation.json), trimmed:
 
 ```json
 {
   "id": "krasnal-ceo-series-a",
-  "name": "Krasnal CEO: Series A",
-  "generation": 3,
   "parents": ["krasnal-ceo", "why-would-i-deceive-you"],
   "genes": {
-    "hook":        { "allele": "pitch-deck slide: 'Krasnal AI: we are not a dwarf, we are a Small Language Model'", "dominance": 0.85 },
-    "hero":        { "allele": "bronze krasnal CEO in a tiny fleece vest, founder of an AI startup", "dominance": 0.95 },
-    "setting":     { "allele": "standing desk on the Rynek cobblestones; a black cat claps in the background", "dominance": 0.7 },
+    "hook":        { "allele": "pitch slide: 'we are not a dwarf, we are a Small Language Model'", "dominance": 0.85 },
+    "hero":        { "allele": "bronze krasnal CEO in a tiny fleece vest", "dominance": 0.95 },
     "humor":       { "allele": "deadpan irony: confident promise, guaranteed disappointment", "dominance": 0.95 },
-    "audio":       { "allele": "deadpan voice: 'Why would I deceive you?'", "dominance": 0.9 },
     "catchphrase": { "allele": "Why would a dwarf deceive you?", "dominance": 0.9 },
-    "structure":   { "allele": "pitch slide → 'why would a dwarf deceive you?' → black cat claps → hard cut to the first slide (seamless loop)", "dominance": 0.85 }
+    "structure":   { "allele": "pitch → catchphrase → black cat claps → loop", "dominance": 0.85 }
   },
-  "absurdity": 9,
-  "brandSafety": 9,
   "mutations": [
-    { "gene": "catchphrase", "from": "Why would I deceive you?", "to": "Why would a dwarf deceive you?", "reason": "one-word species swap, the house style since gen-001" },
-    { "gene": "structure", "from": "promise → beat of silence → audio drop", "to": "… → black cat claps → hard cut to the first slide (seamless loop)", "reason": "Critic: 'it ends. memes must not end.'" }
+    { "gene": "structure", "to": "… → black cat claps → loop", "reason": "Critic: 'it ends. memes must not end.'" }
   ]
 }
 ```
 
-## Meme family tree
+</details>
 
-Three generations, bred from real trends the Scout recorded this week
-([`generations/sources.json`](generations/sources.json): Know Your Meme's October podium, TikTok's fastest formats).
+<details>
+<summary><b>📱 App screens</b></summary>
 
-| Gen | Mother | Father | Child | Critic | Fitness |
-| :---: | --- | --- | --- | --- | :---: |
-| [001](generations/gen-001/) | Scientists Reveal the Hi 🐈 | Black Cat Clapping 👏 | **Scientists Reveal the Clap** | rejected once (hero), then approved | 0.48 |
-| [002](generations/gen-002/) | Wrocław Krasnal *(BRANDROT seed)* | Scientists Reveal the Clap | **Krasnal CEO** | approved first try | 0.63 |
-| [003](generations/gen-003/) | Krasnal CEO | Why Would I Deceive You? 🎙️ | **Krasnal CEO: Series A** | rejected once (loop), then approved | **0.81** |
-| [🔴 live-001](generations/gen-live-001/) | Bronze Krasnal *(brand seed)* | Midnight Vape Sound Check *(live x_search)* | **Krasnal Night Check** | rejected once (hook), then approved | not published |
+| Trend Radar | Breeding | Publish + Metrics |
+| :---: | :---: | :---: |
+| <img src="docs/media/rotbot-radar-sources.gif" alt="Trend Radar with real TikTok and X sources" width="100%"> | <img src="docs/media/rotbot-breeding-hatch.gif" alt="Two memes cross and a new meme hatches" width="100%"> | <img src="docs/media/rotbot-publish-metrics.gif" alt="Publisher queues posts, Analyst scores fitness" width="100%"> |
 
-```mermaid
-gitGraph
-    commit id: "scout: 10 real trends"
-    commit id: "scout: spot hi x clap"
-    branch black-cat-clapping
-    commit id: "geneticist: clap genome"
-    checkout main
-    commit id: "geneticist: hi genome"
-    merge black-cat-clapping id: "mutator: crossover" tag: "gen-001"
-    commit id: "critic: absolutely not"
-    commit id: "mutator: reroll hero"
-    commit id: "analyst: 0.48"
-    commit id: "overlord: BRANDROT brief"
-    branch scientists-reveal-the-clap
-    commit id: "geneticist: elite genome"
-    checkout main
-    commit id: "geneticist: krasnal seed"
-    merge scientists-reveal-the-clap id: "mutator: KRASNAL CEO" tag: "gen-002"
-    commit id: "analyst: 0.63"
-    branch why-would-i-deceive-you
-    commit id: "geneticist: deceive genome"
-    checkout main
-    commit id: "geneticist: ceo genome"
-    merge why-would-i-deceive-you id: "mutator: SERIES A" tag: "gen-003"
-    commit id: "critic: it ends. no."
-    commit id: "mutator: reroll loop"
-    commit id: "analyst: 0.81"
-```
+</details>
 
-That graph isn't drawn by hand. It's this repo. Run `git log --graph --format='%an: %s' -- generations/`:
+## 💼 BRANDROT: turn any brand into brainrot
 
-```text
-* Analyst 🦉: 🦉 analyst: fitness krasnal-ceo-series-a = 0.81
-* Publisher 🦜: 🦜 publisher: queue krasnal-ceo-series-a for tiktok + x
-* Mutator 🐊: 🐊 mutator: storyboard krasnal-ceo-series-a for grok-imagine-video
-* Critic 🐱: 🐱 critic: approve krasnal-ceo-series-a
-* Mutator 🐊: 🐊 mutator: reroll structure gene after critique
-* Critic 🐱: 🐱 critic: absolutely not (structure)
-*   Mutator 🐊: 🐊 mutator: crossover krasnal-ceo × why-would-i-deceive-you → krasnal-ceo-series-a
-|\
-| * Geneticist 🦫: 🦫 geneticist: sequence why-would-i-deceive-you genome
-* | Geneticist 🦫: 🦫 geneticist: sequence krasnal-ceo genome
-|/
-* Scout 🐦: 🐦 scout: spot why-would-i-deceive-you for the krasnal-ceo bloodline
-* Analyst 🦉: 🦉 analyst: fitness krasnal-ceo = 0.63
-  ...
-*   Mutator 🐊: 🐊 mutator: crossover krasnal-wroclaw × scientists-reveal-the-clap → krasnal-ceo
-|\
-| * Geneticist 🦫: 🦫 geneticist: sequence scientists-reveal-the-clap genome
-* | Geneticist 🦫: 🦫 geneticist: sequence krasnal-wroclaw genome
-|/
-* Overlord 🐙: 🐙 overlord: open gen-002: BRANDROT brief for Wrocław
-  ...
-*   Mutator 🐊: 🐊 mutator: crossover scientists-reveal-the-hi × black-cat-clapping → scientists-reveal-the-clap
-|\
-| * Geneticist 🦫: 🦫 geneticist: sequence black-cat-clapping genome
-* | Geneticist 🦫: 🦫 geneticist: sequence scientists-reveal-the-hi genome
-|/
-* Scout 🐦: 🐦 scout: spot scientists-reveal-the-hi × black-cat-clapping
-* Scout 🐦: 🐦 scout: record run scout-2026-11-05: 10 real trends from TikTok + X
-```
-
-Each generation folder holds the full lab notebook: `trend.json` → `parents/*/genome.json` → `mutation.json` →
-`critique.json` (every round) → `media/storyboard.json` → `post.json` → `metrics.json`.
-
-## BRANDROT: turn any brand into brainrot
-
-Agencies take two weeks to make one "relatable" TikTok. By then the trend is dead.
-
-**BRANDROT** is ROT BOT for brands: the brand becomes a **seed genome** (mascot, place, tagline) and is always the
-mother, so it survives every crossover. The swarm pairs it with whatever is rising *right now*, the Critic enforces a
-brand-safety floor of 8/10, and a human approves every post. Generation 002 is a worked example: the brief was
-**Wrocław** and its 600+ bronze dwarfs; one generation later its mascot is pitching investors.
-
-- **Who pays:** consumer brands, cities and tourism boards, local businesses with no content team.
-- **What they get:** a new on-trend meme every 6 hours, a genome per post, and a fitness score that tells them which genes sell.
-- **Moat:** the genome library. Every post makes the next generation fitter.
-
-More in [`docs/pitch.md`](docs/pitch.md).
-
-## Real vs simulated
-
-`gen-live-001` is a real end-to-end Grok Bot run. Generations 001–003 are recorded agent runs over real, linked trends, with projected engagement metrics.
+Agencies need two weeks for one on-trend video; trends die in five days. BRANDROT makes the brand a seed genome that
+survives every crossover and ships a new on-trend post every 6 hours, with a human approving each one.
+Example: brief *Wrocław* → **Krasnal CEO**. [Pitch →](docs/pitch.md)
 
 ## Quickstart
 
 ```bash
-# the swarm (Node 22.13+)
-cd agents && npm install
-npx agent-sdk validate --dir .                                   # project is valid
-npx agent-sdk tool call x_trends --dir . --input '{"limit":3}'   # no key needed
-
-export CURSOR_API_KEY=...        # Grok Bot model turns
-export XAI_API_KEY=...           # optional: live x_search + Grok Imagine
+cd agents && npm install && npx agent-sdk validate --dir .
+export CURSOR_API_KEY=...  XAI_API_KEY=...
 npx agent-sdk run --dir . --message "Breed the next generation."
-npx agent-sdk dev                # playground at http://127.0.0.1:3000/playground
+npx agent-sdk dev                  # Grok Bot playground
 
-# the lab UI (repo root)
-npm install && npm run dev
+npm install && npm run dev         # the app (repo root)
 ```
 
-Brand mode: `npx agent-sdk run --dir . --message "BRANDROT: Żabka. Turn it into brainrot."`
-
-## Team
-
-**Opalacze**: see [TEAM.md](TEAM.md). Built in one hackathon evening, with a swarm doing a lot of the work.
+<sub>`gen-live-001` is a real end-to-end run; generations 001–003 are recorded agent runs over real, linked trends with projected metrics. Team: [TEAM.md](TEAM.md).</sub>
