@@ -21,6 +21,8 @@
 
 **Why:** agencies need a week to jump on a trend that lives 3 days. ROT Studio ships trend-matched ads while the trend is still rising.
 
+**The app:** a Briefs inbox, and per brief three views: **Campaign** (the swarm working the brief live), **Creative** (the A/B variants per tone) and **History** (the R&D lineage).
+
 ## What it does
 
 - 📝 **Brief in:** brand, product, audience, goal, tone. The **Scout** finds rising TikTok / X trends and scores brand fit ("87% fit").
@@ -218,7 +220,7 @@ export CURSOR_API_KEY=...  XAI_API_KEY=...
 npx agent-sdk run --dir . --message "Brief: NOIR/05 eau de parfum, women 18-30, TikTok, tone UGC. Ship 2 variants."
 npx agent-sdk dev                  # Grok Bot playground
 
-npm install && npm run dev         # the ROT Studio console (repo root)
+npm install && npm run dev         # ROT Studio: Briefs inbox → Campaign / Creative / History
 ```
 
 <sub>ROT Studio is run by the ROT BOT swarm. `gen-live-001` is a real end-to-end run; generations 001–003 are recorded agent runs over real, linked trends; publishing and ad metrics are simulated and labeled. All creators are AI personas, labeled AI-generated. Team: [TEAM.md](TEAM.md).</sub>
