@@ -1,0 +1,8 @@
+{
+  "genomeId": "scientists-reveal-the-clap",
+  "kind": "video",
+  "model": "grok-imagine-video",
+  "aspectRatio": "9:16",
+  "durationSeconds": 8,
+  "prompt": "8s vertical. Beat 1 (0-2s): breaking-news lower-third 'SCIENTISTS REVEAL THE'. Beat 2 (2-5s): cut to an orange cat news anchor at a podium at the Institute of Cat Sciences, staring into the lens. Beat 3 (5-8s): the cat raises human hands and slowly claps; caption completes 'CLAP'. Audio: newsroom sting, then three wet claps. Loop back to beat 1."
+}
