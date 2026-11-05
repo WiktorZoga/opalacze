@@ -1,0 +1,38 @@
+{
+  "genome": "krasnal-ceo-series-a",
+  "generation": 3,
+  "source": "simulated",
+  "method": "projected from the parents' recorded public signal (sources.json)",
+  "formula": "0.35·watchThrough + 0.25·shareRate·10 + 0.2·saveRate·10 + 0.2·remixRate·20",
+  "platforms": {
+    "tiktok": {
+      "views": 2400000,
+      "likes": 391000,
+      "shares": 288000,
+      "saves": 168000,
+      "comments": 14100,
+      "watchThrough": 0.86,
+      "shareRate": 0.12,
+      "saveRate": 0.07,
+      "remixRate": 0.05,
+      "fitness": 0.94
+    },
+    "x": {
+      "views": 530000,
+      "likes": 47000,
+      "shares": 42400,
+      "saves": 15900,
+      "comments": 2200,
+      "watchThrough": 0.81,
+      "shareRate": 0.08,
+      "saveRate": 0.03,
+      "remixRate": 0.035,
+      "fitness": 0.68
+    }
+  },
+  "fitness": 0.81,
+  "carriedBy": "humor",
+  "draggedBy": "visual",
+  "elite": true,
+  "note": "the loop gene added 0.11 fitness. the critic will not be told."
+}
