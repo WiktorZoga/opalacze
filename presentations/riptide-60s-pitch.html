@@ -6,17 +6,18 @@
   <title>Riptide — pitch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --void: #030d16;
-      --fog: #f0faf7;
-      --mist: #9bb8b4;
-      --acid: #2dd4bf;
-      --hot: #38bdf8;
-      --warn: #fb7185;
+      --ink: #021018;
+      --deep: #042032;
+      --foam: #e9f8f4;
+      --mist: #8fb5b0;
+      --tide: #1ec8b0;
+      --spray: #5ad0ff;
+      --ember: #ff6b5a;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      --pad: clamp(1.75rem, 5vw, 4.75rem);
+      --pad: clamp(1.5rem, 4.5vw, 4.5rem);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,19 +25,43 @@
     html, body {
       height: 100%;
       overflow: hidden;
-      background: var(--void);
-      color: var(--fog);
-      font-family: "IBM Plex Sans", sans-serif;
+      background: var(--ink);
+      color: var(--foam);
+      font-family: "Sora", sans-serif;
       -webkit-font-smoothing: antialiased;
       cursor: pointer;
       user-select: none;
     }
 
-    body {
+    /* Atmospheric plane — one living background for the deck */
+    .atmosphere {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
       background:
-        radial-gradient(ellipse 65% 45% at 8% 0%, rgba(45, 212, 191, 0.16), transparent 55%),
-        radial-gradient(ellipse 50% 40% at 100% 100%, rgba(56, 189, 248, 0.1), transparent 50%),
-        linear-gradient(165deg, #020a12 0%, #061824 52%, #030d16 100%);
+        radial-gradient(ellipse 90% 60% at 15% -10%, rgba(30, 200, 176, 0.22), transparent 55%),
+        radial-gradient(ellipse 70% 50% at 95% 110%, rgba(90, 208, 255, 0.14), transparent 50%),
+        radial-gradient(ellipse 40% 35% at 70% 20%, rgba(255, 107, 90, 0.06), transparent 60%),
+        linear-gradient(155deg, #010b12 0%, #042436 45%, #021018 100%);
+      animation: drift 22s ease-in-out infinite alternate;
+    }
+
+    .atmosphere::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(233, 248, 244, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(233, 248, 244, 0.03) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(ellipse 70% 65% at 50% 45%, black 15%, transparent 75%);
+    }
+
+    @keyframes drift {
+      from { transform: scale(1) translate(0, 0); }
+      to { transform: scale(1.05) translate(-1.2%, 1%); }
     }
 
     .deck { position: relative; z-index: 1; height: 100%; width: 100%; }
@@ -48,12 +73,17 @@
       flex-direction: column;
       justify-content: center;
       padding: var(--pad);
-      padding-bottom: calc(var(--pad) + 1.25rem);
+      padding-bottom: calc(var(--pad) + 1.5rem);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
-      transform: translateY(18px) scale(0.988);
-      transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), visibility 0.5s;
+      transform: translateY(22px) scale(0.985);
+      filter: blur(6px);
+      transition:
+        opacity 0.55s var(--ease),
+        transform 0.55s var(--ease),
+        filter 0.55s var(--ease),
+        visibility 0.55s;
     }
 
     .slide.active {
@@ -61,331 +91,453 @@
       visibility: visible;
       pointer-events: auto;
       transform: none;
+      filter: none;
     }
 
     .slide.exit {
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-10px) scale(0.992);
+      transform: translateY(-14px) scale(0.99);
+      filter: blur(4px);
     }
 
-    .slide.active .reveal { animation: rise 0.65s var(--ease) both; }
-    .slide.active .reveal-d1 { animation-delay: 0.07s; }
-    .slide.active .reveal-d2 { animation-delay: 0.16s; }
-    .slide.active .reveal-d3 { animation-delay: 0.26s; }
-    .slide.active .reveal-d4 { animation-delay: 0.36s; }
-    .slide.active .reveal-d5 { animation-delay: 0.46s; }
+    .slide.active .reveal { animation: rise 0.75s var(--ease) both; }
+    .slide.active .reveal-d1 { animation-delay: 0.08s; }
+    .slide.active .reveal-d2 { animation-delay: 0.18s; }
+    .slide.active .reveal-d3 { animation-delay: 0.3s; }
+    .slide.active .reveal-d4 { animation-delay: 0.42s; }
+    .slide.active .reveal-d5 { animation-delay: 0.54s; }
+    .slide.active .reveal-d6 { animation-delay: 0.66s; }
 
     @keyframes rise {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(28px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .eyebrow {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: clamp(0.72rem, 1.25vw, 0.85rem);
-      letter-spacing: 0.16em;
+      font-family: "JetBrains Mono", monospace;
+      font-size: clamp(0.7rem, 1.15vw, 0.82rem);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--acid);
-      margin-bottom: clamp(0.7rem, 1.8vh, 1.15rem);
+      color: var(--tide);
+      margin-bottom: clamp(0.65rem, 1.6vh, 1.1rem);
+      font-weight: 600;
     }
 
     h1 {
-      font-family: "Archivo Black", sans-serif;
-      font-weight: 400;
-      font-size: clamp(3rem, 9vw, 6rem);
-      line-height: 0.94;
-      letter-spacing: -0.04em;
-      margin-bottom: 0.9rem;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.4rem, 11vw, 7.2rem);
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+      margin-bottom: 0.85rem;
     }
 
     h2 {
-      font-family: "Archivo Black", sans-serif;
-      font-weight: 400;
-      font-size: clamp(1.85rem, 4.8vw, 3.5rem);
-      line-height: 1.04;
-      letter-spacing: -0.028em;
-      max-width: 16ch;
-      margin-bottom: 0.8rem;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 5.2vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      max-width: 14ch;
+      margin-bottom: 0.85rem;
     }
 
-    h1 em, h2 em, .lede strong { font-style: normal; color: var(--acid); }
+    h1 em, h2 em, .lede strong {
+      font-style: normal;
+      color: var(--tide);
+    }
 
     .lede {
       font-size: clamp(1.05rem, 2vw, 1.35rem);
-      line-height: 1.4;
+      line-height: 1.45;
       color: var(--mist);
-      max-width: 36ch;
+      max-width: 34ch;
+      font-weight: 400;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-      gap: clamp(1.5rem, 4vw, 3.25rem);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vw, 3.5rem);
       align-items: center;
       width: 100%;
       height: 100%;
     }
 
-    .layout.flip { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+    .layout.wide-left { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); }
+    .layout.wide-right { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
 
-    .phone {
-      width: min(100%, 250px);
-      aspect-ratio: 9 / 16;
-      margin: 0 auto;
-      border-radius: 20px;
-      overflow: hidden;
-      border: 1px solid rgba(240, 250, 247, 0.16);
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
-      background: #000;
+    /* Platform marks */
+    .marks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.35rem;
     }
 
-    .phone video, .phone img {
+    .mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.7rem 1rem 0.7rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(233, 248, 244, 0.14);
+      background: rgba(2, 16, 24, 0.55);
+      backdrop-filter: blur(8px);
+    }
+
+    .mark svg {
+      width: 1.55rem;
+      height: 1.55rem;
+      color: var(--foam);
+      display: block;
+      flex-shrink: 0;
+    }
+
+    .mark b {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .mark span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-left: 0.15rem;
+    }
+
+    /* Problem contrast */
+    .versus {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0.85rem;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .versus article {
+      padding: 1.35rem 1.25rem;
+      border-radius: 18px;
+      border: 1px solid rgba(233, 248, 244, 0.1);
+      background: rgba(2, 16, 24, 0.6);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .versus .vs {
+      align-self: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      color: var(--mist);
+    }
+
+    .versus .num {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+
+    .versus .dead .num { color: var(--ember); }
+    .versus .live .num { color: var(--tide); }
+
+    .versus .cap {
+      margin-top: 0.55rem;
+      font-size: 0.92rem;
+      color: var(--mist);
+      line-height: 1.3;
+    }
+
+    .trend-pill {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(30, 200, 176, 0.28);
+      background: rgba(30, 200, 176, 0.08);
+    }
+
+    .trend-pill .views {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: 1.45rem;
+      color: var(--tide);
+      letter-spacing: -0.02em;
+    }
+
+    .trend-pill .meta { font-size: 0.9rem; color: var(--mist); line-height: 1.3; }
+    .trend-pill .meta b { color: var(--foam); font-weight: 600; display: block; }
+
+    /* Media strip / phones */
+    .phones {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem;
+      align-items: end;
+    }
+
+    .phone {
+      aspect-ratio: 9 / 16;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(233, 248, 244, 0.14);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      background: #000;
+      position: relative;
+    }
+
+    .phone:nth-child(2) { transform: translateY(-1.1rem) scale(1.04); z-index: 2; }
+
+    .phone img, .phone video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
+    .phone figcaption {
+      position: absolute;
+      left: 0.45rem;
+      right: 0.45rem;
+      bottom: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--tide);
+      padding: 0.28rem 0.4rem;
+      border-radius: 6px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* Grok Bot loop — hero visual story */
+    .loop {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.55rem;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .loop article {
+      position: relative;
+      padding: 1.15rem 0.9rem 1.05rem;
+      border-radius: 16px;
+      border: 1px solid rgba(233, 248, 244, 0.12);
+      background: linear-gradient(165deg, rgba(6, 40, 52, 0.85), rgba(2, 16, 24, 0.75));
+      min-height: 9.5rem;
+      overflow: hidden;
+    }
+
+    .loop article::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: var(--tide);
+      opacity: 0.85;
+    }
+
+    .slide.active .loop article {
+      animation: rise 0.7s var(--ease) both;
+    }
+    .slide.active .loop article:nth-child(1) { animation-delay: 0.1s; }
+    .slide.active .loop article:nth-child(2) { animation-delay: 0.2s; }
+    .slide.active .loop article:nth-child(3) { animation-delay: 0.3s; }
+    .slide.active .loop article:nth-child(4) { animation-delay: 0.4s; }
+    .slide.active .loop article:nth-child(5) { animation-delay: 0.5s; }
+
+    .loop .n {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: var(--tide);
+      margin-bottom: 0.55rem;
+      font-weight: 600;
+    }
+
+    .loop h3 {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+      letter-spacing: -0.025em;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+
+    .loop p {
+      font-size: 0.82rem;
+      color: var(--mist);
+      line-height: 1.35;
+    }
+
+    .loop .agent {
+      margin-top: 0.65rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--spray);
+    }
+
+    .loop-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.35rem;
+    }
+
+    .loop-head h2 { max-width: 16ch; margin-bottom: 0; }
+
+    .grok-badge {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: var(--tide);
+      padding: 0.55rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* Stats / business */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 1.1rem;
+      max-width: 26rem;
+    }
+
+    .stat {
+      padding: 0.95rem 1rem;
+      border-radius: 14px;
+      border: 1px solid rgba(233, 248, 244, 0.1);
+      background: rgba(2, 16, 24, 0.55);
+    }
+
+    .stat .k {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    .stat .v {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+      letter-spacing: -0.03em;
+      margin-top: 0.25rem;
+      line-height: 1;
+    }
+
     .pair {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.7rem;
-      width: 100%;
-      max-width: 440px;
+      max-width: 420px;
       margin-left: auto;
     }
 
-    .pair .phone { width: 100%; }
-
-    .frame {
-      width: 100%;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(240, 250, 247, 0.12);
-      background: rgba(3, 13, 22, 0.6);
-      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.4);
-      aspect-ratio: 16 / 10;
-    }
-
-    .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-    .problem-side {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0.9rem;
-      align-items: stretch;
-    }
-
-    .clock-card, .trend-card, .stat, .biz article, .bak li, .flow > div {
-      padding: 1.05rem 1.15rem;
-      border-radius: 14px;
-      border: 1px solid rgba(240, 250, 247, 0.12);
-      background: rgba(3, 13, 22, 0.62);
-    }
-
-    .clock-card { text-align: center; min-width: 9.5rem; }
-
-    .clock-card .big {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(2.6rem, 5.2vw, 3.8rem);
-      letter-spacing: -0.03em;
-      line-height: 1;
-      color: var(--warn);
-    }
-
-    .k, .clock-card .label {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--mist);
-    }
-
-    .clock-card .label { margin-top: 0.4rem; display: block; }
-
-    .trend-card .views {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.6rem, 3.2vw, 2.25rem);
-      letter-spacing: -0.02em;
-      color: var(--acid);
-      margin-top: 0.25rem;
-    }
-
-    .trend-card .name { font-weight: 600; margin-top: 0.25rem; font-size: 1.05rem; }
-    .trend-card .meta { margin-top: 0.35rem; color: var(--mist); font-size: 0.92rem; }
-
-    .flow {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.55rem;
-      margin-top: 1.15rem;
-      max-width: 40rem;
-    }
-
-    .flow .step {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--acid);
-      margin-bottom: 0.25rem;
-    }
-
-    .flow b { font-size: 1.05rem; }
-    .flow .sub { color: var(--mist); font-size: 0.9rem; }
-
-    .brand-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.25rem;
-      align-items: stretch;
-    }
-
-    .brand-chip {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      padding: 0.75rem 1.05rem;
-      border-radius: 14px;
-      border: 1px solid rgba(240, 250, 247, 0.14);
-      background: rgba(3, 13, 22, 0.7);
-      min-width: 11rem;
-    }
-
-    .brand-chip svg {
-      color: var(--fog);
-      width: 1.85rem;
-      height: 1.85rem;
-      flex-shrink: 0;
-      display: block;
-    }
-
-    .brand-chip .name {
-      font-family: "Archivo Black", sans-serif;
-      font-size: 1.05rem;
-      letter-spacing: -0.01em;
-      line-height: 1;
-    }
-
-    .brand-chip .role {
-      margin-top: 0.22rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--mist);
-    }
-
-    .brand-chip.muted {
-      border-color: rgba(240, 250, 247, 0.08);
-      opacity: 0.72;
-    }
-
-    .agents {
-      list-style: none;
-      display: grid;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      max-width: 34rem;
-    }
-
-    .agents li {
-      display: grid;
-      grid-template-columns: 7.25rem 1fr;
-      gap: 0.75rem;
-      align-items: baseline;
-      padding: 0.7rem 0.85rem;
-      border-radius: 12px;
-      border: 1px solid rgba(240, 250, 247, 0.1);
-      background: rgba(3, 13, 22, 0.55);
-    }
-
-    .agents .who {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.78rem;
-      color: var(--acid);
-      font-weight: 600;
-    }
-
-    .agents .job { font-size: 0.98rem; font-weight: 500; }
-    .agents .job span {
-      display: block;
-      margin-top: 0.12rem;
-      color: var(--mist);
-      font-size: 0.84em;
-      font-weight: 400;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.55rem;
-      margin-top: 1rem;
-      max-width: 28rem;
-    }
-
-    .stat .v {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.4rem, 2.9vw, 2rem);
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-top: 0.3rem;
-    }
+    .pair .phone { transform: none; }
+    .pair .phone:nth-child(2) { transform: none; }
 
     .biz {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.75rem;
-      margin-top: 1.2rem;
-      max-width: 54rem;
+      margin-top: 1.35rem;
+      max-width: 56rem;
+    }
+
+    .biz article {
+      padding: 1.25rem 1.2rem;
+      border-radius: 16px;
+      border: 1px solid rgba(233, 248, 244, 0.1);
+      background: rgba(2, 16, 24, 0.55);
+      backdrop-filter: blur(8px);
+    }
+
+    .biz .k {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--tide);
     }
 
     .biz .v {
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
-      letter-spacing: -0.02em;
-      margin: 0.35rem 0 0.35rem;
-      line-height: 1.15;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.2rem, 2.3vw, 1.65rem);
+      letter-spacing: -0.025em;
+      margin: 0.45rem 0 0.4rem;
+      line-height: 1.1;
     }
 
-    .biz p { color: var(--mist); font-size: 0.95rem; line-height: 1.35; }
-
-    .mono {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.85rem;
-      color: var(--mist);
-      margin-top: 0.95rem;
-    }
+    .biz p { color: var(--mist); font-size: 0.92rem; line-height: 1.4; }
 
     .motto {
-      margin-top: 1.35rem;
-      font-family: "Archivo Black", sans-serif;
-      font-size: clamp(1.35rem, 3vw, 2rem);
-      letter-spacing: -0.02em;
-      color: var(--acid);
-      max-width: 18ch;
-      line-height: 1.15;
+      margin-top: 1.5rem;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+      letter-spacing: -0.03em;
+      color: var(--tide);
+      max-width: 16ch;
+      line-height: 1.1;
     }
 
     .bak {
       list-style: none;
       display: grid;
-      gap: 0.65rem;
-      margin-top: 1.1rem;
-      max-width: 42rem;
+      gap: 0.7rem;
+      margin-top: 1.2rem;
+      max-width: 44rem;
     }
 
-    .bak li { font-size: 1.05rem; line-height: 1.4; }
-    .bak b { color: var(--acid); }
+    .bak li {
+      padding: 1rem 1.15rem;
+      border-radius: 14px;
+      border: 1px solid rgba(233, 248, 244, 0.1);
+      background: rgba(2, 16, 24, 0.55);
+      font-size: 1.02rem;
+      line-height: 1.4;
+    }
+
+    .bak b { color: var(--tide); }
+
+    .mono {
+      margin-top: 1rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      color: var(--mist);
+    }
 
     .hud {
       position: fixed;
       z-index: 5;
       left: 0;
       right: 0;
-      bottom: 0.85rem;
+      bottom: 0.9rem;
       display: flex;
       justify-content: center;
       pointer-events: none;
@@ -394,46 +546,54 @@
     .dots {
       display: flex;
       gap: 0.4rem;
-      align-items: center;
-      padding: 0.35rem 0.55rem;
+      padding: 0.4rem 0.6rem;
       border-radius: 999px;
-      background: rgba(3, 13, 22, 0.45);
+      background: rgba(2, 16, 24, 0.5);
+      backdrop-filter: blur(6px);
     }
 
     .dots i {
-      width: 0.42rem;
-      height: 0.42rem;
+      width: 0.4rem;
+      height: 0.4rem;
       border-radius: 50%;
-      background: rgba(240, 250, 247, 0.22);
+      background: rgba(233, 248, 244, 0.22);
       transition: transform 0.3s var(--ease), background 0.3s;
     }
 
     .dots i.on {
-      background: var(--acid);
-      transform: scale(1.35);
+      background: var(--tide);
+      transform: scale(1.4);
     }
 
-    .nav-hot { position: fixed; z-index: 4; top: 0; bottom: 0; width: 24%; }
+    .nav-hot { position: fixed; z-index: 4; top: 0; bottom: 0; width: 22%; }
     .nav-hot.prev { left: 0; cursor: w-resize; }
     .nav-hot.next { right: 0; cursor: e-resize; }
 
-    @media (max-width: 900px) {
-      .layout, .layout.flip, .problem-side, .biz, .flow, .stats, .pair {
+    @media (max-width: 980px) {
+      .layout, .layout.wide-left, .layout.wide-right,
+      .versus, .biz, .loop, .phones, .pair, .stats {
         grid-template-columns: 1fr;
       }
-      .pair { max-width: 280px; margin: 0 auto; }
-      .agents li { grid-template-columns: 1fr; gap: 0.15rem; }
+      .versus { gap: 0.55rem; }
+      .versus .vs { display: none; }
+      .phone:nth-child(2) { transform: none; }
+      .phones { grid-template-columns: repeat(3, 1fr); max-width: 420px; }
+      .loop { grid-template-columns: 1fr 1fr; }
       h2 { max-width: none; }
-      .nav-hot { width: 16%; }
+      .nav-hot { width: 14%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .slide, .slide.active .reveal { transition: none; animation: none; }
+      .atmosphere { animation: none; }
+      .slide, .slide.active .reveal, .slide.active .loop article {
+        transition: none; animation: none; filter: none;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Inline platform marks match README on main (crisp at fullscreen). -->
+  <div class="atmosphere" aria-hidden="true"></div>
+
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
     <symbol id="logo-tiktok" viewBox="0 0 24 24">
       <path fill="currentColor" d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z"/>
@@ -445,106 +605,136 @@
 
   <div class="deck" id="deck" aria-live="polite">
 
-    <!-- 1 · Title -->
+    <!-- 1 · Title — brand hero -->
     <section class="slide active">
       <p class="eyebrow reveal">SpaceXAI × Grok Bot · Wrocław</p>
       <h1 class="reveal reveal-d1">RIPTIDE</h1>
-      <p class="lede reveal reveal-d2">The AI ad agency that <strong>rides the trend</strong>.<br />Built for marketing agencies shipping to TikTok &amp; Instagram.</p>
-      <div class="brand-row reveal reveal-d3">
-        <div class="brand-chip">
-          <svg viewBox="0 0 24 24" role="img" aria-label="TikTok"><use href="#logo-tiktok"/></svg>
-          <div><div class="name">TikTok</div><div class="role">Distribution</div></div>
+      <p class="lede reveal reveal-d2">
+        The AI ad agency that <strong>rides the trend</strong>.<br />
+        A swarm of <strong>Grok Bots</strong> for marketing agencies who live on TikTok &amp; Instagram.
+      </p>
+      <div class="marks reveal reveal-d3">
+        <div class="mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-tiktok"/></svg>
+          <b>TikTok</b><span>trends</span>
         </div>
-        <div class="brand-chip">
-          <svg viewBox="0 0 24 24" role="img" aria-label="Instagram"><use href="#logo-instagram"/></svg>
-          <div><div class="name">Instagram</div><div class="role">Reels</div></div>
+        <div class="mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-instagram"/></svg>
+          <b>Instagram</b><span>Reels</span>
         </div>
       </div>
-      <p class="mono reveal reveal-d4">Team opalacze · @grok/agent-sdk · grok-4.7</p>
     </section>
 
-    <!-- 2 · Problem -->
+    <!-- 2 · Problem — agency buyer -->
     <section class="slide">
-      <div class="layout">
+      <div class="layout wide-left">
         <div>
-          <p class="eyebrow reveal">Problem</p>
-          <h2 class="reveal reveal-d1">Agencies need a week.<br /><em>Trends live 3 days.</em></h2>
-          <p class="lede reveal reveal-d2">Brief → creative → approvals → shoot. By the time the ad ships, the format on TikTok and Instagram is already cold.</p>
+          <p class="eyebrow reveal">The agency problem</p>
+          <h2 class="reveal reveal-d1">Your client needs UGC<br /><em>on yesterday’s trend.</em></h2>
+          <p class="lede reveal reveal-d2">
+            Marketing agencies match brands to formats that die in three days.
+            A week of briefs, shoots, and approvals is already too late.
+          </p>
         </div>
-        <div class="problem-side reveal reveal-d2">
-          <div class="clock-card">
-            <div class="big">7d</div>
-            <span class="label">agency cycle</span>
+        <div class="reveal reveal-d2">
+          <div class="versus">
+            <article class="dead">
+              <div class="num">7d</div>
+              <div class="cap">Agency cycle<br />brief → shoot → approve</div>
+            </article>
+            <div class="vs">VS</div>
+            <article class="live">
+              <div class="num">3d</div>
+              <div class="cap">Trend half-life<br />TikTok / Instagram peak</div>
+            </article>
           </div>
-          <div class="trend-card">
-            <div class="k">Rising now · TikTok</div>
+          <div class="trend-pill reveal reveal-d4">
             <div class="views">10.8M</div>
-            <div class="name">Your First Time in a Fancy Cafe</div>
-            <div class="meta">Peak window ≈ 72 hours · still climbing</div>
+            <div class="meta">
+              <b>Your First Time in a Fancy Cafe</b>
+              Rising now · still climbing
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3 · What it is -->
+    <!-- 3 · Product — find virals, synthesize for brief -->
     <section class="slide">
-      <div class="layout">
+      <div class="layout wide-right">
         <div>
-          <p class="eyebrow reveal">Product</p>
-          <h2 class="reveal reveal-d1">Brief in. Swarm works. UGC out.</h2>
-          <p class="lede reveal reveal-d2">Trend-native 9:16 creatives for social teams — labeled <strong>#ad · AI-generated</strong> — packaged for the channels agencies already buy.</p>
-          <div class="flow">
-            <div class="reveal reveal-d2"><div class="step">01</div><b>Brief</b><div class="sub">brand · tone · channel</div></div>
-            <div class="reveal reveal-d3"><div class="step">02</div><b>Swarm</b><div class="sub">trend → DNA → render</div></div>
-            <div class="reveal reveal-d4"><div class="step">03</div><b>UGC</b><div class="sub">A/B · human publish gate</div></div>
-          </div>
-          <div class="brand-row reveal reveal-d5">
-            <div class="brand-chip">
-              <svg viewBox="0 0 24 24" role="img" aria-label="TikTok"><use href="#logo-tiktok"/></svg>
-              <div><div class="name">TikTok</div><div class="role">Target</div></div>
-            </div>
-            <div class="brand-chip">
-              <svg viewBox="0 0 24 24" role="img" aria-label="Instagram"><use href="#logo-instagram"/></svg>
-              <div><div class="name">Instagram</div><div class="role">Reels target</div></div>
-            </div>
-            <div class="brand-chip muted">
-              <div><div class="name" style="font-size:0.95rem">Ads APIs</div><div class="role">Roadmap</div></div>
-            </div>
-          </div>
+          <p class="eyebrow reveal">What Riptide does</p>
+          <h2 class="reveal reveal-d1">Find the viral.<br /><em>Make the client’s cut.</em></h2>
+          <p class="lede reveal reveal-d2">
+            Grok Bots scan social, extract the format DNA, and synthesize
+            <strong>new</strong> 9:16 ads for the brief — perfume, sneakers, café —
+            built to spread on TikTok &amp; Instagram.
+          </p>
+          <p class="mono reveal reveal-d3">#ad · AI-generated · human publish gate</p>
         </div>
-        <div class="reveal reveal-d2">
-          <div class="frame">
-            <img src="../docs/media/rotbot-radar-sources.gif" alt="Riptide trend radar" />
-          </div>
+        <div class="phones reveal reveal-d2">
+          <figure class="phone">
+            <img src="../docs/media/ugc/noir05-unboxing.gif" alt="NOIR/05 perfume UGC" />
+            <figcaption>Perfume</figcaption>
+          </figure>
+          <figure class="phone">
+            <img src="../docs/media/ugc/stride-sneaker-drop.gif" alt="STRIDE sneaker UGC" />
+            <figcaption>Sneakers</figcaption>
+          </figure>
+          <figure class="phone">
+            <img src="../docs/media/ugc/noir05-pigeon-pitch.gif" alt="Brainrot pigeon pitch" />
+            <figcaption>Brainrot</figcaption>
+          </figure>
         </div>
       </div>
     </section>
 
-    <!-- 4 · Swarm -->
+    <!-- 4 · Grok Bot loop — visual centerpiece -->
     <section class="slide">
-      <div class="layout">
+      <div class="loop-head">
         <div>
-          <p class="eyebrow reveal">Swarm</p>
-          <h2 class="reveal reveal-d1">Four agents that matter on stage.</h2>
-          <ul class="agents">
-            <li class="reveal reveal-d1"><span class="who">🐦 Scout</span><span class="job">Finds rising formats<span>TikTok / X · brand-fit score</span></span></li>
-            <li class="reveal reveal-d2"><span class="who">🦫 Geneticist</span><span class="job">Extracts viral DNA<span>hook · pacing · product insert</span></span></li>
-            <li class="reveal reveal-d3"><span class="who">🐊 Creator</span><span class="job">Persona + 9:16 render<span>Grok Imagine · A/B variants</span></span></li>
-            <li class="reveal reveal-d4"><span class="who">🐱 Critic</span><span class="job">Safety · claims · disclosure<span>can reject · commits the verdict</span></span></li>
-          </ul>
-          <p class="mono reveal reveal-d5">@grok/agent-sdk · Publisher queues TikTok / X / Reels · Analyst scores next cut</p>
+          <p class="eyebrow reveal">The Grok Bot agency</p>
+          <h2 class="reveal reveal-d1">An AI marketing desk<br />that never sleeps.</h2>
         </div>
-        <div class="reveal reveal-d2">
-          <div class="frame">
-            <img src="../docs/media/rotbot-screen-workflow.png" alt="Riptide campaign workflow" />
-          </div>
-        </div>
+        <div class="grok-badge reveal reveal-d2">Powered by Grok Bots</div>
+      </div>
+      <div class="loop">
+        <article>
+          <div class="n">01</div>
+          <h3>Scan</h3>
+          <p>Watch TikTok, X, Instagram for formats that start to climb.</p>
+          <div class="agent">Grok Bot · Scout</div>
+        </article>
+        <article>
+          <div class="n">02</div>
+          <h3>Create</h3>
+          <p>Extract viral DNA. Cast a persona. Render 9:16 for the brief.</p>
+          <div class="agent">Grok Bot · Geneticist · Creator</div>
+        </article>
+        <article>
+          <div class="n">03</div>
+          <h3>Validate</h3>
+          <p>Brand safety, claims, #ad disclosure. Reject and reroll when needed.</p>
+          <div class="agent">Grok Bot · Critic</div>
+        </article>
+        <article>
+          <div class="n">04</div>
+          <h3>Post</h3>
+          <p>Queue for TikTok / Instagram Reels / X — a human presses publish.</p>
+          <div class="agent">Grok Bot · Publisher</div>
+        </article>
+        <article>
+          <div class="n">05</div>
+          <h3>Learn</h3>
+          <p>See what gets likes. Feed the next cut. Close the agency loop.</p>
+          <div class="agent">Grok Bot · Analyst</div>
+        </article>
       </div>
     </section>
 
-    <!-- 5 · Artifact -->
+    <!-- 5 · Artifact proof -->
     <section class="slide">
-      <div class="layout flip">
+      <div class="layout wide-right">
         <div class="pair reveal reveal-d1">
           <div class="phone">
             <video
@@ -554,13 +744,16 @@
             ></video>
           </div>
           <div class="phone">
-            <img src="../docs/media/ugc/noir05-brainrot-capybara.gif" alt="NOIR/05 Brainrot A/B" />
+            <img src="../docs/media/ugc/noir05-brainrot-capybara.gif" alt="Brainrot A/B" />
           </div>
         </div>
         <div>
-          <p class="eyebrow reveal">Artifact</p>
-          <h2 class="reveal reveal-d1">Real run. Real handoffs.</h2>
-          <p class="lede reveal reveal-d2"><strong>gen-live-002</strong> · NOIR/05 · Ren Hale. Critic cleared 9 · 9 · 10 · 10. Same brief, A/B: UGC vs Brainrot.</p>
+          <p class="eyebrow reveal">Proof</p>
+          <h2 class="reveal reveal-d1">Same brief.<br /><em>Two tones.</em></h2>
+          <p class="lede reveal reveal-d2">
+            <strong>gen-live-002</strong> · NOIR/05 · Ren Hale.
+            Grok Bots ran the loop end-to-end. Critic cleared 9 · 9 · 10 · 10.
+          </p>
           <div class="stats">
             <div class="stat reveal reveal-d2"><div class="k">Model</div><div class="v">grok-4.7</div></div>
             <div class="stat reveal reveal-d3"><div class="k">Runtime</div><div class="v">7 min</div></div>
@@ -571,39 +764,39 @@
       </div>
     </section>
 
-    <!-- 6 · Business -->
+    <!-- 6 · Business — sell agencies -->
     <section class="slide">
-      <p class="eyebrow reveal">Business</p>
-      <h2 class="reveal reveal-d1">Built for teams that buy TikTok &amp; IG.</h2>
-      <p class="lede reveal reveal-d2">A trend desk that ships while the format is still rising — creatives ready for the platforms agencies already run.</p>
+      <p class="eyebrow reveal">For agencies</p>
+      <h2 class="reveal reveal-d1">Your trend desk.<br /><em>Staffed by Grok Bots.</em></h2>
+      <p class="lede reveal reveal-d2">
+        Sell speed to clients who already buy TikTok &amp; Instagram —
+        without adding another shoot week to the retainer.
+      </p>
       <div class="biz">
         <article class="reveal reveal-d2">
-          <div class="k">Customers</div>
-          <div class="v">Social agencies · e-com · local</div>
-          <p>On-trend UGC faster than a shoot cycle.</p>
+          <div class="k">Who buys</div>
+          <div class="v">Social &amp; performance agencies</div>
+          <p>Plus e-com and local brands that need UGC while the format still rises.</p>
         </article>
         <article class="reveal reveal-d3">
-          <div class="k">Model</div>
+          <div class="k">How you charge</div>
           <div class="v">Brand sub + per-variant</div>
-          <p>Campaigns / month, then scale the cuts that win.</p>
+          <p>Campaigns per month, then scale the cuts that win likes.</p>
         </article>
         <article class="reveal reveal-d4">
-          <div class="k">Differentiator</div>
+          <div class="k">Why you win</div>
           <div class="v">Trend-DNA library</div>
-          <p>Every brief teaches which genes sell.</p>
+          <p>Every brief teaches the swarm which genes sell for which client.</p>
         </article>
       </div>
-      <div class="brand-row reveal reveal-d5">
-        <div class="brand-chip">
-          <svg viewBox="0 0 24 24" role="img" aria-label="TikTok"><use href="#logo-tiktok"/></svg>
-          <div><div class="name">TikTok</div><div class="role">Distribution target</div></div>
+      <div class="marks reveal reveal-d5">
+        <div class="mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-tiktok"/></svg>
+          <b>TikTok</b><span>distribution</span>
         </div>
-        <div class="brand-chip">
-          <svg viewBox="0 0 24 24" role="img" aria-label="Instagram"><use href="#logo-instagram"/></svg>
-          <div><div class="name">Instagram</div><div class="role">Distribution target</div></div>
-        </div>
-        <div class="brand-chip muted">
-          <div><div class="name" style="font-size:0.95rem">Creative Center · Ads</div><div class="role">Roadmap</div></div>
+        <div class="mark">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#logo-instagram"/></svg>
+          <b>Instagram</b><span>distribution</span>
         </div>
       </div>
     </section>
@@ -611,19 +804,25 @@
     <!-- 7 · Close -->
     <section class="slide">
       <p class="eyebrow reveal">Close</p>
-      <h2 class="reveal reveal-d1">Today: brainrot perfume.<br /><em>Tomorrow: your performance team.</em></h2>
-      <p class="lede reveal reveal-d2">Riptide rides the trend before it’s gone — then learns for the next cut.</p>
-      <p class="motto reveal reveal-d3">We don’t follow trends.<br />We mutate them.</p>
+      <h1 class="reveal reveal-d1" style="font-size:clamp(2.6rem,7vw,5rem)">RIPTIDE</h1>
+      <h2 class="reveal reveal-d2" style="max-width:18ch;font-size:clamp(1.6rem,3.8vw,2.6rem)">
+        Today: brainrot perfume.<br /><em>Tomorrow: your performance team.</em>
+      </h2>
+      <p class="lede reveal reveal-d3">
+        Grok Bots scan, create, validate, post, and learn —
+        so agencies ride the trend before it’s gone.
+      </p>
+      <p class="motto reveal reveal-d4">We don’t follow trends.<br />We mutate them.</p>
     </section>
 
-    <!-- 8 · Backup -->
+    <!-- 8 · Backup honesty -->
     <section class="slide">
-      <p class="eyebrow reveal">Backup</p>
-      <h2 class="reveal reveal-d1">What is real. What is labeled.</h2>
+      <p class="eyebrow reveal">If asked</p>
+      <h2 class="reveal reveal-d1">Honest labels.</h2>
       <ul class="bak">
-        <li class="reveal reveal-d1"><b>Trend snapshot</b> — live X search can miss; Scout may use a recorded list of real rising trends (documented in-repo).</li>
-        <li class="reveal reveal-d2"><b>No auto-publish</b> — Publisher needs human approval. TikTok / Instagram distribution is the layer we’re wiring; we don’t post yet.</li>
-        <li class="reveal reveal-d3"><b>Metrics</b> — hook rate / CTR in the console are <b>simulated and labeled</b>. Live today: Grok Bot, Grok Imagine, X search.</li>
+        <li class="reveal reveal-d1"><b>Trend snapshot</b> — live X search can miss; Scout may use a recorded list of real rising trends.</li>
+        <li class="reveal reveal-d2"><b>No auto-publish</b> — Grok Bot Publisher needs a human. TikTok / Instagram distribution is the layer we’re wiring.</li>
+        <li class="reveal reveal-d3"><b>Metrics</b> — likes / CTR in the console are <b>simulated and labeled</b>. Live today: Grok Bot, Grok Imagine, X search.</li>
       </ul>
     </section>
   </div>
@@ -676,7 +875,7 @@
         window.setTimeout(() => {
           prev.classList.remove("exit");
           transitioning = false;
-        }, 480);
+        }, 500);
       }
 
       function next() { show(i + 1); }
