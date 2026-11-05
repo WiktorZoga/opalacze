@@ -1,0 +1,52 @@
+{
+  "id": "why-would-i-deceive-you",
+  "name": "Why Would I Deceive You?",
+  "generation": 2,
+  "parents": [],
+  "sources": [
+    {
+      "platform": "tiktok",
+      "url": "https://newengen.com/insights/tiktok-trends/",
+      "views": null,
+      "signal": "NewEngen TikTok trends to watch, November 2026"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "on-screen promise that is obviously false",
+      "dominance": 0.8
+    },
+    "hero": {
+      "allele": "creator staring into the front camera, perfectly still",
+      "dominance": 0.4
+    },
+    "setting": {
+      "allele": "anywhere mundane",
+      "dominance": 0.2
+    },
+    "humor": {
+      "allele": "deadpan irony: confident promise, guaranteed disappointment",
+      "dominance": 0.95
+    },
+    "audio": {
+      "allele": "deadpan voice: 'Why would I deceive you?'",
+      "dominance": 0.9
+    },
+    "visual": {
+      "allele": "static front-cam, text overlay",
+      "dominance": 0.4
+    },
+    "catchphrase": {
+      "allele": "Why would I deceive you?",
+      "dominance": 0.85
+    },
+    "structure": {
+      "allele": "promise → beat of silence → audio drop",
+      "dominance": 0.75
+    }
+  },
+  "absurdity": 5,
+  "brandSafety": 9,
+  "mutations": [],
+  "fitness": null
+}
