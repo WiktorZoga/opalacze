@@ -156,3 +156,6 @@ export const MEMES: Record<string, Meme> = {
     bg: 'radial-gradient(circle at 50% 35%,#b6ff00 0%,#2b6b0b 45%,#021b08 100%)',
   },
 }
+
+/** `img: '/memes/x.png'` → URL that also works under the GitHub Pages base path */
+export const assetUrl = (p: string) => (p.startsWith('/') ? `${import.meta.env.BASE_URL}${p.slice(1)}` : p)

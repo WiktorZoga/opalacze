@@ -89,7 +89,7 @@ export default function App() {
         e.preventDefault()
         goStep(step + 1)
       } else if (demo && e.key === 'ArrowLeft') goStep(step - 1)
-      else if (!demo && /^[1-7]$/.test(e.key)) go(TABS[Number(e.key) - 1].id)
+      else if (!demo && /^[1-9]$/.test(e.key) && TABS[Number(e.key) - 1]) go(TABS[Number(e.key) - 1].id)
       else if (!demo && e.key === 'ArrowRight') go(TABS[(TABS.findIndex((t) => t.id === screen) + 1) % TABS.length].id)
       else if (!demo && e.key === 'ArrowLeft') go(TABS[(TABS.findIndex((t) => t.id === screen) + TABS.length - 1) % TABS.length].id)
       else if (!demo && (e.key === 'r' || e.key === 'R')) setRunKey((k) => k + 1)
@@ -186,7 +186,7 @@ export default function App() {
         <footer className="flex h-[26px] shrink-0 items-center justify-between border-t border-line bg-black px-6 font-mono text-[11px] tracking-widest text-white/35">
           <span>ROT BOT · 6 GROK BOTS · TIKTOK + X</span>
           <span>sample data · metrics simulated · no API keys</span>
-          <span>{demo ? 'SPACE/→ NEXT · ← BACK · ESC EXIT' : '1-7 SCREENS · ←/→ · R REPLAY · D DEMO'}</span>
+          <span>{demo ? 'SPACE/→ NEXT · ← BACK · ESC EXIT' : '1-9 SCREENS · ←/→ · R REPLAY · D DEMO'}</span>
         </footer>
       </div>
     </Stage>

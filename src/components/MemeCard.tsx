@@ -1,4 +1,4 @@
-import type { Meme } from '../data/memes'
+import { assetUrl, type Meme } from '../data/memes'
 import { Krasnal } from './Krasnal'
 
 interface Props {
@@ -20,7 +20,7 @@ export function MemeCard({ meme, width = 320, gen, className = '', glow = 'none'
     >
       <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 50% 120%,#000 0%,transparent 60%)' }} />
       {meme.img ? (
-        <img src={meme.img} alt={meme.name} className="absolute inset-0 h-full w-full object-cover" />
+        <img src={assetUrl(meme.img)} alt={meme.name} className="absolute inset-0 h-full w-full object-cover" />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center">
           {meme.art === 'krasnal' ? (

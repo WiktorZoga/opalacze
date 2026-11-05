@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import type { Meme } from '../data/memes'
+import { assetUrl, type Meme } from '../data/memes'
 import { Krasnal } from './Krasnal'
 import { useElapsed } from './AgentSwarm'
 
@@ -30,7 +30,7 @@ export function Phone({ meme, caption, width = 300, handle = '@rotbot.lab', dela
           transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: delay / 1000 }}
         >
           {meme.img ? (
-            <img src={meme.img} alt={meme.name} className="h-full w-full object-cover" />
+            <img src={assetUrl(meme.img)} alt={meme.name} className="h-full w-full object-cover" />
           ) : meme.art === 'krasnal' ? (
             <Krasnal className="w-[85%]" />
           ) : (
