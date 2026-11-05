@@ -8,7 +8,9 @@ export const REPO_ROOT =
 
 export const GENERATIONS_DIR = resolve(REPO_ROOT, "generations");
 
+// ROTBOT_GEN_DIR pins every tool of a run to one named folder, e.g. gen-live-001.
 export function generationDir(generation: number): string {
+  if (process.env.ROTBOT_GEN_DIR) return resolve(GENERATIONS_DIR, process.env.ROTBOT_GEN_DIR);
   return resolve(GENERATIONS_DIR, `gen-${String(generation).padStart(3, "0")}`);
 }
 
