@@ -1,0 +1,52 @@
+{
+  "id": "scientists-reveal-the-hi",
+  "name": "Scientists Reveal the Hi",
+  "generation": 0,
+  "parents": [],
+  "sources": [
+    {
+      "platform": "tiktok",
+      "url": "https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month",
+      "views": 215500,
+      "signal": "Know Your Meme Meme of the Month Oct 2026, #2 (13% of votes); TikTok edit at 215.5K views; KYM entry views 35,086 → 44,409 in 6 days"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "dead-serious breaking-news thumbnail",
+      "dominance": 0.7
+    },
+    "hero": {
+      "allele": "wide-eyed orange cat staring straight into the lens",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "fake broadcast news frame with a lower-third",
+      "dominance": 0.6
+    },
+    "humor": {
+      "allele": "anticlimax: grand scientific announcement, two-letter result",
+      "dominance": 0.85
+    },
+    "audio": {
+      "allele": "silence, then a soft newsroom sting",
+      "dominance": 0.3
+    },
+    "visual": {
+      "allele": "warm dim close-up, huge dark pupils",
+      "dominance": 0.5
+    },
+    "catchphrase": {
+      "allele": "Scientists reveal the hi",
+      "dominance": 0.8
+    },
+    "structure": {
+      "allele": "single still, re-captioned forever",
+      "dominance": 0.4
+    }
+  },
+  "absurdity": 7,
+  "brandSafety": 9,
+  "mutations": [],
+  "fitness": null
+}
