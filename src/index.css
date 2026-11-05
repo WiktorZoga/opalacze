@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0a0c0f;
-  --color-surface: #101317;
-  --color-raised: #161a1f;
-  --color-line: #20252c;
-  --color-line-strong: #2b313a;
-  --color-text: #eef1f4;
-  --color-muted: #8b95a3;
-  --color-faint: #5b6470;
-  --color-accent: #2dd4bf;
-  --color-hot: #3b82f6;
-  --color-danger: #ff3d5a;
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-raised: #f4f6f8;
+  --color-line: #e7eaee;
+  --color-line-strong: #d5dae1;
+  --color-text: #0c1116;
+  --color-muted: #586270;
+  --color-faint: #8b94a1;
+  --color-accent: #0d9488;
+  --color-hot: #2563eb;
+  --color-danger: #e11d48;
   --font-sans: "Geist Sans", "Geist", system-ui, sans-serif;
   --font-mono: "Geist Mono", ui-monospace, monospace;
   --font-meme: Impact, "Anton", "Haettenschweiler", sans-serif;
@@ -22,7 +22,7 @@ body,
 #root {
   height: 100%;
   margin: 0;
-  background: #000;
+  background: #eef1f4;
   color: var(--color-text);
   font-family: var(--font-sans);
   overflow: hidden;
@@ -41,20 +41,40 @@ body,
 }
 
 .glow-acid {
-  box-shadow: 0 0 0 1px #2dd4bf80, 0 0 24px #2dd4bf40;
+  box-shadow: 0 0 0 1px #0d948866, 0 10px 30px -12px #0d948866;
 }
 .glow-hot {
-  box-shadow: 0 0 0 1px #3b82f680, 0 0 24px #3b82f640;
+  box-shadow: 0 0 0 1px #2563eb55, 0 10px 30px -12px #2563eb55;
 }
 .glow-danger {
-  box-shadow: 0 0 0 1px #ff3d5a99, 0 0 28px #ff3d5a55;
+  box-shadow: 0 0 0 1px #e11d4866, 0 10px 30px -12px #e11d4866;
+}
+.card {
+  background: #ffffffd9;
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 18px 40px -24px rgba(16, 24, 40, 0.18);
+  backdrop-filter: blur(8px);
+}
+.mesh-bg {
+  background:
+    radial-gradient(900px 600px at 8% -10%, #ccfbf1 0%, transparent 60%),
+    radial-gradient(800px 520px at 95% 0%, #dbeafe 0%, transparent 60%),
+    radial-gradient(900px 600px at 70% 110%, #ffe4e6 0%, transparent 55%),
+    #f7f8fa;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0.35 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 .panel-sheen {
-  background:
-    radial-gradient(900px 220px at 20% 0%, #2dd4bf0d, transparent 70%),
-    radial-gradient(900px 220px at 85% 100%, #3b82f60f, transparent 70%),
-    var(--color-surface);
+  background: #ffffffd9;
 }
 
 @keyframes shimmer {
@@ -62,7 +82,7 @@ body,
   to { background-position: 40px 0; }
 }
 .bar-running {
-  background-image: repeating-linear-gradient(90deg, #2dd4bfaa 0 10px, #2dd4bf55 10px 20px);
+  background-image: repeating-linear-gradient(90deg, #0d9488cc 0 10px, #0d948866 10px 20px);
   background-size: 40px 100%;
   animation: shimmer 0.6s linear infinite;
 }

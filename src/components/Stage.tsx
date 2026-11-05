@@ -12,9 +12,9 @@ export function Stage({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('resize', fit)
   }, [])
   return (
-    <div className="flex h-full w-full items-center justify-center bg-black">
+    <div className="flex h-full w-full items-center justify-center bg-[#eef1f4]">
       <div
-        className="relative shrink-0 overflow-hidden bg-bg"
+        className="mesh-bg grain relative shrink-0 overflow-hidden"
         style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale})`, transformOrigin: 'center' }}
       >
         {children}

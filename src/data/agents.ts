@@ -23,7 +23,7 @@ export const AGENTS: Record<AgentId, Agent> = {
     role: 'trend match',
     emoji: '🐦',
     prop: '🔭',
-    color: '#5eead4',
+    color: '#0d9488',
   },
   geneticist: {
     id: 'geneticist',
@@ -34,7 +34,7 @@ export const AGENTS: Record<AgentId, Agent> = {
     role: 'creative DNA',
     emoji: '🦫',
     prop: '🥼',
-    color: '#93c5fd',
+    color: '#2563eb',
   },
   mutator: {
     id: 'mutator',
@@ -45,7 +45,7 @@ export const AGENTS: Record<AgentId, Agent> = {
     role: 'persona + script + render',
     emoji: '🐊',
     prop: '🧪',
-    color: '#a5b4fc',
+    color: '#7c3aed',
   },
   critic: {
     id: 'critic',
@@ -56,7 +56,7 @@ export const AGENTS: Record<AgentId, Agent> = {
     role: 'fidelity · safety · claims',
     emoji: '🐱',
     prop: '⚖️',
-    color: '#fcd34d',
+    color: '#d97706',
   },
   publisher: {
     id: 'publisher',
@@ -67,7 +67,7 @@ export const AGENTS: Record<AgentId, Agent> = {
     role: 'TikTok · X · Reels',
     emoji: '🦜',
     prop: '📣',
-    color: '#fda4af',
+    color: '#e11d48',
   },
   analyst: {
     id: 'analyst',
@@ -78,7 +78,7 @@ export const AGENTS: Record<AgentId, Agent> = {
     role: 'hook rate · CTR',
     emoji: '🦉',
     prop: '📊',
-    color: '#c4b5fd',
+    color: '#4f46e5',
   },
 }
 
