@@ -1,0 +1,80 @@
+{
+  "id": "krasnal-ceo-series-a",
+  "name": "Krasnal CEO: Series A",
+  "generation": 3,
+  "parents": [
+    "krasnal-ceo",
+    "why-would-i-deceive-you"
+  ],
+  "sources": [
+    {
+      "platform": "tiktok",
+      "url": "https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month",
+      "views": 215500,
+      "signal": "Know Your Meme Meme of the Month Oct 2026, #2 (13% of votes); TikTok edit at 215.5K views; KYM entry views 35,086 → 44,409 in 6 days"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://knowyourmeme.com/editorials/poll/see-the-winner-of-october-2026s-meme-of-the-month",
+      "views": null,
+      "signal": "Know Your Meme Meme of the Month Oct 2026, #4 (7% of votes); green-screen template used across TikTok and Reels"
+    },
+    {
+      "platform": "tiktok",
+      "url": "https://newengen.com/insights/tiktok-trends/",
+      "views": null,
+      "signal": "NewEngen TikTok trends to watch, November 2026"
+    }
+  ],
+  "genes": {
+    "hook": {
+      "allele": "pitch-deck slide: 'Krasnal AI: we are not a dwarf, we are a Small Language Model'",
+      "dominance": 0.85
+    },
+    "hero": {
+      "allele": "bronze krasnal CEO in a tiny fleece vest, founder of an AI startup",
+      "dominance": 0.95
+    },
+    "setting": {
+      "allele": "standing desk on the Rynek cobblestones; a black cat claps in the background",
+      "dominance": 0.7
+    },
+    "humor": {
+      "allele": "deadpan irony: confident promise, guaranteed disappointment",
+      "dominance": 0.95
+    },
+    "audio": {
+      "allele": "deadpan voice: 'Why would I deceive you?'",
+      "dominance": 0.9
+    },
+    "visual": {
+      "allele": "golden-hour bronze, low-angle hero shot",
+      "dominance": 0.6
+    },
+    "catchphrase": {
+      "allele": "Why would a dwarf deceive you?",
+      "dominance": 0.9
+    },
+    "structure": {
+      "allele": "promise → beat of silence → audio drop",
+      "dominance": 0.75
+    }
+  },
+  "absurdity": 9,
+  "brandSafety": 9,
+  "mutations": [
+    {
+      "gene": "hook",
+      "from": "on-screen promise that is obviously false",
+      "to": "pitch-deck slide: 'Krasnal AI: we are not a dwarf, we are a Small Language Model'",
+      "reason": "the false promise is now a fundraise. it was always a fundraise."
+    },
+    {
+      "gene": "catchphrase",
+      "from": "Why would I deceive you?",
+      "to": "Why would a dwarf deceive you?",
+      "reason": "one-word species swap, the house style since gen-001"
+    }
+  ],
+  "fitness": null
+}
