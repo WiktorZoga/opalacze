@@ -6,7 +6,8 @@ import liveStoryboard from '../../generations/gen-live-001/media/storyboard.json
 import { LIVE_IMAGE } from '../data/lineage'
 import { LIVE_RUN } from '../data/runs'
 import { BRANDS, type BrandPreset } from '../data/brands'
-import { MemeCard } from '../components/MemeCard'
+import { MediaFrame } from '../components/MediaFrame'
+import { useGrokMedia } from '../data/grokMedia'
 import { useElapsed } from '../components/hooks'
 import { Badge, Panel } from '../components/ui'
 
@@ -16,108 +17,96 @@ const RENDER_COMMIT = LIVE_RUN.spans[LIVE_RUN.spans.length - 1].commit?.hash ?? 
 const n = (v: number) => (v >= 1e6 ? `${(v / 1e6).toFixed(1)}M` : `${Math.round(v / 1e3)}K`)
 const pct = (v: number) => `${Math.round(v * 100)}%`
 
-function Certificate() {
-  const rows: [string, string][] = [
-    ['Name', 'Krasnal Night Check'],
-    ['Generation', 'gen-live-001 (4)'],
-    ['Mother', 'bronze-krasnal'],
-    ['Father', 'midnight-vape-sound-check'],
-    ['Mutated', 'hook · audio · visual · catchphrase'],
-    ['Critic', 'round 2 · fine. ship it.'],
-    ['Rendered', liveStoryboard.model],
-    ['Commit', RENDER_COMMIT],
-  ]
+const STEPS = [
+  { label: 'save_genome · krasnal-night-check', at: 0 },
+  { label: 'critic review · fine. ship it.', at: 450 },
+  { label: `generate_media · ${liveStoryboard.model}`, at: 900, until: 1700 },
+  { label: `commit_artifact · ${RENDER_COMMIT}`, at: 1800 },
+]
+export const REVEAL_AT = 1900
+
+function Steps({ ms, steps }: { ms: number; steps: { label: string; at: number; until?: number }[] }) {
   return (
-    <motion.div
-      initial={{ x: 40, opacity: 0, rotate: 3 }}
-      animate={{ x: 0, opacity: 1, rotate: -1 }}
-      transition={{ type: 'spring', stiffness: 160, damping: 18 }}
-      className="glow-acid w-[300px] rounded-xl border border-accent/50 bg-[radial-gradient(circle_at_30%_0%,#b6ff0014,transparent_60%)] p-5"
-    >
-      <div className="text-center font-mono text-[10px] tracking-[0.3em] text-accent/80">ROT BOT GENOME REGISTRY</div>
-      <div className="mt-1 text-center text-[20px] font-semibold leading-tight text-text">Certificate of Meme Birth</div>
-      <div className="my-3 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
-      <div className="space-y-1.5">
-        {rows.map(([k, v]) => (
-          <div key={k} className="flex justify-between gap-3 text-[12px]">
-            <span className="text-faint">{k}</span>
-            <span className="truncate text-right font-mono text-text">{v}</span>
-          </div>
-        ))}
-      </div>
-      <div className="mt-4 flex items-center justify-between">
-        <span className="font-mono text-[10px] text-faint">born 05.11.2026 · Wrocław</span>
-        <span className="-rotate-6 rounded border-2 border-accent px-2 py-0.5 font-meme text-[14px] uppercase text-accent">🐱 approved</span>
-      </div>
-    </motion.div>
+    <ol className="space-y-1.5">
+      {steps.map((st) => {
+        const started = ms >= st.at
+        const done = st.until ? ms >= st.until : started
+        const p = st.until ? Math.min(1, Math.max(0, (ms - st.at) / (st.until - st.at))) : 1
+        return (
+          <li key={st.label} className={`flex items-center gap-2.5 font-mono text-[12px] ${started ? 'text-text' : 'text-faint'}`}>
+            <span className={`flex h-4 w-4 items-center justify-center rounded-full border text-[9px] ${done ? 'border-accent bg-accent text-black' : started ? 'border-accent text-accent' : 'border-line-strong'}`}>
+              {done ? '✓' : ''}
+            </span>
+            <span className="truncate">{st.label}</span>
+            {st.until && started && !done && (
+              <span className="ml-auto h-1 w-16 overflow-hidden rounded-full bg-line">
+                <span className="block h-full bg-gradient-to-r from-accent to-hot" style={{ width: `${p * 100}%` }} />
+              </span>
+            )}
+          </li>
+        )
+      })}
+    </ol>
+  )
+}
+
+function Row({ k, children }: { k: string; children: React.ReactNode }) {
+  return (
+    <div className="grid grid-cols-[96px_1fr] gap-3 border-b border-line py-2 text-[12px] last:border-0">
+      <span className="text-faint">{k}</span>
+      <span className="min-w-0 text-text">{children}</span>
+    </div>
   )
 }
 
 function Artifact() {
-  const ms = useElapsed('hatch', 50)
-  const cracked = ms > 1300
-  const hatched = ms > 1900
+  const ms = useElapsed('artifact', 50)
+  const ready = ms >= REVEAL_AT
   return (
-    <Panel title="Artifact" meta={liveStoryboard.genomeId}>
+    <Panel title="Artifact" meta={ready ? 'ready' : 'rendering…'}>
       <div className="flex items-start gap-5 p-5">
-        <div className="relative h-[480px] w-[270px] shrink-0">
-          <AnimatePresence>
-            {!hatched && (
-              <motion.div
-                key="egg"
-                className="absolute inset-0 flex items-center justify-center rounded-md border border-line bg-[radial-gradient(circle,#b6ff0022,transparent_65%)]"
-                exit={{ opacity: 0, scale: 1.3 }}
-                transition={{ duration: 0.25 }}
-              >
-                <motion.span
-                  className="relative text-[150px] leading-none"
-                  animate={{ rotate: cracked ? [0, -14, 14, -10, 0] : [0, -5, 5, 0] }}
-                  transition={{ duration: cracked ? 0.3 : 0.6, repeat: Infinity }}
-                >
-                  🥚
-                  {cracked && (
-                    <svg viewBox="0 0 100 40" className="absolute left-[18%] top-[42%] w-[64%]">
-                      <path d="M0 20 L15 8 L28 26 L42 6 L56 28 L70 8 L84 24 L100 12" stroke="#111" strokeWidth="4" fill="none" />
-                    </svg>
-                  )}
-                </motion.span>
-                <span className="absolute bottom-4 font-mono text-[11px] text-muted">{cracked ? 'hatching…' : 'incubating krasnal-night-check'}</span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {hatched && (
-            <motion.img
-              src={LIVE_IMAGE}
-              alt={liveStoryboard.genomeId}
-              className="glow-acid absolute inset-0 h-full w-full rounded-md border border-accent/40 object-cover"
-              initial={{ scale: 0.6, opacity: 0, rotate: -4 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
-              transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-            />
+        <div className="relative shrink-0">
+          {ready ? (
+            <MediaFrame src={LIVE_IMAGE} alt={liveStoryboard.genomeId} width={270} height={480} className="glow-acid" />
+          ) : (
+            <div className="flex h-[480px] w-[270px] flex-col items-center justify-center gap-3 rounded-md border border-line-strong bg-[linear-gradient(110deg,#141416_30%,#1c1c20_50%,#141416_70%)] bg-[length:200%_100%]">
+              <span className="font-mono text-[11px] text-muted">9:16 · {liveStoryboard.model}</span>
+              <span className="h-1 w-32 overflow-hidden rounded-full bg-line">
+                <span className="block h-full bg-gradient-to-r from-accent to-hot" style={{ width: `${Math.min(100, (ms / REVEAL_AT) * 100)}%` }} />
+              </span>
+            </div>
           )}
-          <AnimatePresence>
-            {ms > 1800 && ms < 2400 && (
-              <motion.div key="flash" className="absolute -inset-4 z-10 rounded-xl bg-white" initial={{ opacity: 0.9 }} animate={{ opacity: 0 }} transition={{ duration: 0.5 }} />
-            )}
-          </AnimatePresence>
-          {hatched &&
-            ['🧬', '✨', '🍄', '⭐', '🧬', '✨', '🔥', '💸'].map((e, i) => (
-              <motion.span
-                key={i}
-                className="pointer-events-none absolute left-1/2 top-1/2 z-20 text-[26px]"
-                initial={{ x: 0, y: 0, opacity: 1 }}
-                animate={{ x: Math.cos(i * 0.8) * 190, y: Math.sin(i * 0.8) * 230, opacity: 0, rotate: 200 }}
-                transition={{ duration: 1.3, ease: 'easeOut' }}
-              >
-                {e}
-              </motion.span>
-            ))}
         </div>
-        {ms > 2300 ? (
-          <Certificate />
-        ) : (
-          <div className="w-[300px] pt-40 text-center font-mono text-[12px] text-faint">Mutator · generate_media()</div>
-        )}
+        <div className="min-w-0 flex-1">
+          <div className="mb-2 text-[11px] font-medium uppercase tracking-wider text-faint">Pipeline</div>
+          <Steps ms={ms} steps={STEPS} />
+          <div className="mb-1 mt-5 flex items-center justify-between">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-faint">Provenance</span>
+            {ready && <Badge tone="accent">published · main</Badge>}
+          </div>
+          <Row k="Genome">
+            <span className="font-mono">{liveStoryboard.genomeId}</span>
+          </Row>
+          <Row k="Parents">
+            <span className="font-mono text-[11px]">bronze-krasnal × midnight-vape-sound-check</span>
+          </Row>
+          <Row k="Mutated">
+            <span className="flex flex-wrap gap-1">
+              {['hook', 'audio', 'visual', 'catchphrase'].map((g) => (
+                <Badge key={g} tone="accent">{g}</Badge>
+              ))}
+            </span>
+          </Row>
+          <Row k="Critic">
+            <span className="text-danger">absolutely not</span> <span className="text-faint">→</span> <span className="text-accent">fine. ship it.</span>
+          </Row>
+          <Row k="Model">
+            <span className="font-mono">{liveStoryboard.model} · {liveStoryboard.aspectRatio}</span>
+          </Row>
+          <Row k="Commit">
+            <span className="font-mono">{RENDER_COMMIT}</span> <span className="text-faint">· Mutator 🐊</span>
+          </Row>
+        </div>
       </div>
       <div className="border-t border-line px-5 py-3">
         <p className="line-clamp-2 text-[12px] leading-relaxed text-faint">
@@ -195,15 +184,23 @@ function Distribution() {
   )
 }
 
+const BRAND_STEPS = (_id: string) => [
+  { label: 'splice brand seed → krasnal line', at: 0 },
+  { label: 'critic review · on-brand', at: 400 },
+  { label: 'generate_media · grok-imagine', at: 800, until: 1500 },
+]
+
 function Brandrot({ autoPick = 'kebab' }: { autoPick?: string }) {
+  const media = useGrokMedia()
   const [brand, setBrand] = useState<BrandPreset | null>(null)
   const [input, setInput] = useState('')
-  const [progress, setProgress] = useState(1)
+  const [runKey, setRunKey] = useState(0)
+  const ms = useElapsed(`brand-${runKey}`, 50)
 
   const pick = (b: BrandPreset) => {
     setBrand(b)
     setInput(b.name)
-    setProgress(0)
+    setRunKey((k) => k + 1)
   }
 
   useEffect(() => {
@@ -212,16 +209,13 @@ function Brandrot({ autoPick = 'kebab' }: { autoPick?: string }) {
     return () => clearTimeout(id)
   }, [autoPick])
 
-  useEffect(() => {
-    if (progress >= 1) return
-    const id = setTimeout(() => setProgress((p) => Math.min(1, p + 0.05)), 60)
-    return () => clearTimeout(id)
-  }, [progress])
+  const m = brand ? media[`brandrot-${brand.id}`] : undefined
+  const ready = brand && ms >= 1600
 
   return (
     <Panel title="BRANDROT" meta="brand → meme">
       <div className="p-5">
-        <p className="text-[14px] text-muted">Run the same lineage on a brand. The genome stays, the hero and setting change.</p>
+        <p className="text-[13px] text-muted">Same lineage, your brand. The genome stays; the hero and setting change.</p>
         <form
           onSubmit={(e) => {
             e.preventDefault()
@@ -248,26 +242,31 @@ function Brandrot({ autoPick = 'kebab' }: { autoPick?: string }) {
             </button>
           ))}
         </div>
-        <div className="mt-5 h-[340px]">
-          {brand && progress < 1 && (
-            <div className="pt-24">
-              <div className="mb-2 font-mono text-[12px] text-muted">splicing {brand.name} into krasnal-ceo-series-a…</div>
-              <div className="h-1 overflow-hidden rounded-full bg-line">
-                <div className="h-full bg-gradient-to-r from-accent to-hot" style={{ width: `${progress * 100}%` }} />
+        {brand && (
+          <div className="mt-5 flex gap-4">
+            {ready ? (
+              <MediaFrame key={brand.id + runKey} src={m?.url} kind={m?.kind} alt={brand.name} width={200} height={356} pendingLabel={`grok-imagine render queued · brandrot-${brand.id}`} />
+            ) : (
+              <div className="flex h-[356px] w-[200px] items-center justify-center rounded-md border border-line-strong bg-raised/60">
+                <span className="h-1 w-24 overflow-hidden rounded-full bg-line">
+                  <span className="block h-full bg-gradient-to-r from-accent to-hot" style={{ width: `${Math.min(100, (ms / 1600) * 100)}%` }} />
+                </span>
               </div>
+            )}
+            <div className="min-w-0 flex-1">
+              <div className="text-[15px] font-medium text-text">{brand.name}</div>
+              <div className="mb-3 text-[12px] text-faint">{brand.tagline}</div>
+              <Steps ms={ms} steps={BRAND_STEPS(brand.id)} />
+              {ready && (
+                <div className="mt-4 space-y-1">
+                  <Badge tone={m ? 'accent' : 'neutral'}>{m ? 'ready' : 'queued'}</Badge>
+                  {m?.prompt && <p className="line-clamp-4 pt-1 text-[12px] leading-relaxed text-muted">{m.prompt}</p>}
+                  {m?.model && <p className="font-mono text-[11px] text-faint">{m.model}</p>}
+                </div>
+              )}
             </div>
-          )}
-          {brand && progress >= 1 && (
-            <div className="flex gap-4">
-              {brand.memes.map((m, i) => (
-                <motion.div key={m.id} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.12 }}>
-                  <MemeCard meme={m} width={220} />
-                  <div className="mt-2 text-[12px] text-muted">{m.name}</div>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </Panel>
   )
