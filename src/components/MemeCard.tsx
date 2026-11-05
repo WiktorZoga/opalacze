@@ -12,10 +12,11 @@ interface Props {
 export function MemeCard({ meme, width = 320, gen, className = '', glow = 'none' }: Props) {
   const h = width * 1.12
   const fs = Math.max(12, width * 0.085)
-  const glowCls = glow === 'acid' ? 'box-glow-acid' : glow === 'hot' ? 'box-glow-hot' : ''
+  const ring = glow === 'none' ? 'border-black/60' : 'border-white/15'
+  const showText = width >= 100
   return (
     <div
-      className={`relative overflow-hidden rounded-xl border-2 border-black select-none ${glowCls} ${className}`}
+      className={`relative overflow-hidden rounded-md border select-none ${ring} ${className}`}
       style={{ width, height: h, background: meme.bg }}
     >
       <div className="absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 50% 120%,#000 0%,transparent 60%)' }} />
@@ -40,12 +41,12 @@ export function MemeCard({ meme, width = 320, gen, className = '', glow = 'none'
           )}
         </div>
       )}
-      <div className="meme-text absolute inset-x-0 top-0 px-3 pt-3 text-center" style={{ fontSize: fs }}>
+      {showText && <div className="meme-text absolute inset-x-0 top-0 px-3 pt-3 text-center" style={{ fontSize: fs }}>
         {meme.top}
-      </div>
-      <div className="meme-text absolute inset-x-0 bottom-0 px-3 pb-3 text-center" style={{ fontSize: fs }}>
+      </div>}
+      {showText && <div className="meme-text absolute inset-x-0 bottom-0 px-3 pb-3 text-center" style={{ fontSize: fs }}>
         {meme.bottom}
-      </div>
+      </div>}
       {gen !== undefined && (
         <div className="absolute right-2 top-1/2 -translate-y-1/2 rotate-90 origin-right font-mono text-[10px] font-bold tracking-widest text-white/60">
           ROT BOT · GEN {gen}
