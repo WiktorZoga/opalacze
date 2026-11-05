@@ -41,29 +41,30 @@
 
 ## How it works
 
+**One [Overlord](agents/bot/instructions.md) on `grok-4.7` delegates to six subagents. Every handoff is a real SDK `task` event in the [trace](generations/gen-live-002/trace.ndjson).**
+
 <table>
 <tr align="center">
-<td width="16%">📝<br><b>Send the brief</b></td>
-<td width="16%">🔥<br><b>Match a trend</b></td>
-<td width="16%">🧬<br><b>Extract viral DNA</b></td>
-<td width="16%">🎬<br><b>Render UGC ads</b></td>
-<td width="16%">✅<br><b>Check disclosure</b></td>
-<td width="16%">📈<br><b>Publish and learn</b></td>
+<td width="16%">🐦<br><b><a href="agents/bot/subagents/scout/instructions.md">Scout</a></b><br><sub>picks the rising trend</sub><br><code>x_trends</code></td>
+<td width="16%">🦫<br><b><a href="agents/bot/subagents/geneticist/instructions.md">Geneticist</a></b><br><sub>writes the trend DNA</sub><br><code>save_genome</code></td>
+<td width="16%">🐊<br><b><a href="agents/bot/subagents/mutator/instructions.md">Creator</a></b><br><sub>renders the 9:16 ad</sub><br><code>generate_media</code></td>
+<td width="16%">🐱<br><b><a href="agents/bot/subagents/critic/instructions.md">Critic</a></b><br><sub>blocks a bad disclosure</sub><br><code>commit_artifact</code></td>
+<td width="16%">🦜<br><b><a href="agents/bot/subagents/publisher/instructions.md">Publisher</a></b><br><sub>queues TikTok and X</sub><br><code>commit_artifact</code></td>
+<td width="16%">🦉<br><b><a href="agents/bot/subagents/analyst/instructions.md">Analyst</a></b><br><sub>scores the next variant</sub><br><code>commit_artifact</code></td>
 </tr>
 </table>
 
+Each one commits the file it just made, under its own git name. Open [`agents/`](agents/) or the [live trace](generations/gen-live-002/trace.ndjson).
+
 ```mermaid
 flowchart LR
-    B["Brief"] --> S["Scout"]
-    T["TikTok + X"] --> S
-    S --> G["Geneticist"]
-    G --> C["Creator"]
-    C --> R["Grok Imagine"]
-    R --> K{"Critic"}
-    K -->|rework| C
-    K -->|approved| P["Publisher"]
-    P --> A["Analyst"]
-    A -->|next variant| C
+    O(("Overlord<br/>grok-4.7")) -->|task| S["Scout<br/>x_trends"]
+    O -->|task| G["Geneticist<br/>save_genome"]
+    O -->|task| C["Creator<br/>generate_media"]
+    O -->|task| K["Critic"]
+    O -->|task| P["Publisher"]
+    O -->|task| A["Analyst"]
+    S --> G --> C --> K --> P --> A
 ```
 
 ## Proof it's real
@@ -71,34 +72,41 @@ flowchart LR
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="generations/gen-live-002/media/noir-05-deceive.mp4"><img src="docs/live-002-poster.jpg" alt="Live run: Ren Hale holds the NOIR/05 bottle" width="42%"></a>
 
-**gen-live-002** · NOIR/05 brief · grok-4.7 · 4,167 events
+<a href="generations/gen-live-002/media/noir-05-deceive.mp4"><img src="docs/live-002-poster.jpg" alt="Live run: Ren Hale holds the NOIR/05 bottle" width="46%"></a>
+
+**gen-live-002** · NOIR/05 brief
+
+`grok-4.7` · **7 min** · **5 handoffs** · **4,167 events**
 
 > "All four scores clear 8, so I'm committing the approval."
 
-[RUN.md](generations/gen-live-002/RUN.md) · [trace](generations/gen-live-002/trace.ndjson) · [clip](generations/gen-live-002/media/noir-05-deceive.mp4) · [commits](https://github.com/WiktorZoga/opalacze/compare/2d31370~1...93a7265)
+[RUN.md](generations/gen-live-002/RUN.md) · [trace.ndjson](generations/gen-live-002/trace.ndjson) · [agent commits](https://github.com/WiktorZoga/opalacze/compare/2d31370~1...93a7265)
+
 </td>
 <td width="50%" valign="top">
-<img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Live run: a bronze dwarf on night cobblestones" width="42%">
 
-**gen-live-001** · first R&D run · grok-4.7 · 2,552 events
+<img src="generations/gen-live-001/media/krasnal-night-check.jpg" alt="Live run: a bronze dwarf on night cobblestones" width="46%">
+
+**gen-live-001** · first R&D run
+
+`grok-4.7` · **6 min** · **7 handoffs** · **2,552 events**
 
 > "The thumb is gone and the hook is the dwarf."
 
-[RUN.md](generations/gen-live-001/RUN.md) · [trace](generations/gen-live-001/trace.ndjson) · [commits](https://github.com/WiktorZoga/opalacze/compare/f16e5c1~1...e2af1f7)
+[RUN.md](generations/gen-live-001/RUN.md) · [trace.ndjson](generations/gen-live-001/trace.ndjson) · [agent commits](https://github.com/WiktorZoga/opalacze/compare/f16e5c1~1...e2af1f7)
+
 </td>
 </tr>
 </table>
 
-| Judge checklist | | |
-| --- | :---: | --- |
-| Grok Bot, `@grok/agent-sdk` | ✅ | [`agents/`](agents/) |
-| Swarm of 6 agents | ✅ | [scout · geneticist · creator · critic · publisher · analyst](agents/bot/subagents) |
-| Live runs | ✅ | [gen-live-002](generations/gen-live-002/RUN.md) · [gen-live-001](generations/gen-live-001/RUN.md) |
-| Agent-authored commits | ✅ | [commit history](https://github.com/WiktorZoga/opalacze/commits/main) |
-| Real trends | ✅ | [sources.json](generations/sources.json) |
-| UGC output | ✅ | [the ads](#the-ads-it-made) · [live clip](generations/gen-live-002/media/noir-05-deceive.mp4) |
+**Under the hood.** A judge can check each of these in about 30 seconds.
+
+- [`agents/`](agents/) is a real `@grok/agent-sdk` project. `npx agent-sdk validate --dir agents` passes.
+- [`trace.ndjson`](generations/gen-live-002/trace.ndjson) is the raw SDK stream: `subagent.called`, `subagent.completed`, and every tool call.
+- Commits are authored by Scout, Geneticist, Creator and Critic. [See the authors.](https://github.com/WiktorZoga/opalacze/commits/main)
+- The clip and the stills come from `grok-imagine`, not a stock folder.
+- The playground, mid-run: [docs/media/grokbot/](docs/media/grokbot/).
 
 
 <details>
